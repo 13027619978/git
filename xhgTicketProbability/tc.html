@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<style type="text/css">
+			*{
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+			.container{
+				width: 100%;
+				height: 100vh;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				background-color: #1E9FFF;
+			}
+			img{
+				width: 150px;
+				margin: 20px 0 10px;
+			}
+			p{
+				font-size: 14px;
+				color: #333;
+				font-weight: bold;
+				color: red;
+			}
+			.title{
+				font-size: 18px;
+				font-weight: bold;
+				color: #333;
+			}
+		</style>
+		<title>北京国际鲜花港</title>
+	</head>
+	<body>
+		<div class="container">
+			<p class="title">北京国际鲜花港购票</p>
+			<img src="img/tcQrcode2.png" >
+			<p>请长按识别二维码，前往购票</p>
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				var myInter;
+				var closeDate;
+				closeDate = 5;
+				var str = '<div>';
+				str += '<p style="font-size:16px;color:#333;">尊敬的游客朋友:</p>';
+				str += '<p style="font-size:12px;text-indent:2em;color:#333;">您好!为全力做好新冠肺炎疫情防控工作，保障人民群众身体健康，按照上级主管部门要求，即日起游客入园前需注意以下内容:</p>';
+				str += '<p style="font-size:12px;text-indent:2em;color:#333;">1.北京国际鲜花港内部蝴蝶大世界、拾阅书屋等室内场馆暂停开放。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;color:#333;">2.景区执行提前预约制度，游客来园前需提前进行线上预约，请您合理安排来园时间，给您带来的不便敬请理解。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;color:#333;">3.所有游客(包括老人和儿童)须凭48小时内的核酸检测阴性证明，经过“健康宝”“行程码”扫码查验和体温检测无异常者，方可入园。鲜花港客服热线:010-61417123</p>';
+				str += '</div>';
+				layer.open({
+					content: str,
+					closeBtn: 0,
+					btn: ['关闭倒计时(5s)'],
+					cancel: function(){
+						clearInterval(myInter);
+					},
+					success: function(){
+						$('.layui-layer-btn0').addClass('disabled');
+					},
+					btn1: function(){
+						if(closeDate != 0){
+							return false;
+						}
+						location.href = 'https://wx.17u.cn/wxinfo/wxurlscheme/openlink?guid=sc62523u62200123f3c0&refid=1450678777';
+					}
+				})
+				// 倒计时关闭提示框
+				myInter = setInterval(function(){
+					closeDate -= 1;
+					if(closeDate != 0){
+						$('.layui-layer-btn0').text('关闭倒计时(' + closeDate + 's)');
+					}else{
+						$('.layui-layer-btn0').text('点击购票');
+						$('.layui-layer-btn0').removeClass('disabled');
+						clearInterval(myInter);
+					}
+				}, 1000);
+				setTimeout(function(){
+					location.href = 'https://wx.17u.cn/wxinfo/wxurlscheme/openlink?guid=sc62523u62200123f3c0&refid=1450678777';
+				}, 5000)
+			})
+		</script>
+	</body>
+</html>
