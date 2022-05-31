@@ -1,0 +1,36 @@
+{
+  "name": "wechat-bot",
+  "version": "0.1.0",
+  "main": "app.js",
+  "engines": {
+    "node": ">= 10"
+  },
+  "scripts": {
+    "postinstall": "check-node-version --node \">= 10\"",
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "@google-cloud/vision": "^1.5.0",
+    "@jimp/custom": "^0.8.5",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "fs-extra": "^7.0.1",
+    "line-reader": "^0.4.0",
+    "md5-node": "^1.0.1",
+    "mysql": "^2.17.1",
+    "node-gyp": "^6.0.0",
+    "node-schedule": "^1.3.2",
+    "qr-image": "^3.2.0",
+    "qrcode-terminal": "^0.12.0",
+    "request": "^2.88.0",
+    "timm": "^1.6.2",
+    "wechaty": "^0.68.1",
+    "wechaty-puppet-padlocal": "^0.4.2"
+  },
+  "devDependencies": {
+    "check-node-version": "^3.3.0"
+  }
+}

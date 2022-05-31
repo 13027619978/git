@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html crossriderapp2258="true">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<!-- title -->
+		<title>wechat bot</title>
+
+		<!-- meta -->
+		<meta charset="UTF-8">
+
+		<!-- links -->
+		<link rel="stylesheet" type="text/css" media="screen" href="/css/style.css">
+
+		<!-- scripts -->
+		<script type="text/javascript" src="http://cdn-hangzhou.goeasy.io/goeasy.js"></script>
+		<script type="text/javascript" src="/jsLib/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="/jsLib/jquery.qrcode.min.js"></script>
+		
+</head>
+    <body class="home blog">
+     
+    	<!-- header -->
+    	<header>
+    		<div id="light">
+	    		<div class="container_16">
+	    			<h1 class="grid_8"><a href="#">微信机器人</a></h1>
+					<nav class="grid_8">
+						<div style="font-size:18px; color:#e3e5e7; padding-top: 35px;" id="botState">状态：在线</div>
+                    </nav>
+	    		</div>
+			</div>
+    	</header>
+
+		<!-- wrapper -->
+		<div id="wrapper">
+			<div class="container_16">
+				<section id="posts" class="prefix_1 grid_9">
+
+					<div class="navigation">
+						<div class="alignleft" id = "alignleftinfo">
+							二维码
+						</div>
+					</div>
+					<br><br><br><br><br>
+
+					<div>
+						<div id = "loginMsg">
+							<div id="qrcode">
+							</div>
+							<div id = "qrcodeInfo" style="font-size:18px; text-align:center; padding-top: 5px;">
+								请先启动wechat
+							</div>					
+						</div>
+
+						<div align="center" id = "botImg" style="display:none; margin-right:90px;"><img src="/images/bot.png" width="300" height="300" /></div>
+					</div>
+				</section>
+				<aside class="prefix_1 grid_5">			
+					<!-- Categories-->
+					<h4>功能</h4>			
+					<input class="button blue" type="button" value="启动wechat" id="wechatStart"/> 
+					<input class="button blue" type="button" value="关闭wechat" id="wechatStop"/> 
+					<input class="button blue" type="button" value="重启wechat" id="wechatRestart"/> 
+					<input class="button blue" type="button" value="刷新" id="refresh"/> 
+					<input class="button blue" type="button" value="日志" id="loginfo"/> 
+					<div class="clear"></div>
+					<hr>
+                </aside>
+            </div>
+        </div>
+
+		<!-- footer -->
+		<footer>
+			<section id="footer_content">
+				<div class="container_12">
+
+				</div>
+			</section>
+			<section id="powered">
+				<div class="container_12">
+					<p class="grid_10">© 2018  html5 | design by <a href="#">zll</a></p>
+					<p class="grid_2"><a class="top" href="#">▲ Back to top</a></p>
+				</div>
+			</section>
+		</footer>
+</body>
+	<script type="text/javascript">
+		var goEasy = new GoEasy({
+			appkey: 'BC-a7e2fd085cfb457888e772e4c9fe100e'
+		});
+		goEasy.subscribe({
+			channel:'qrcode_channel',
+			onMessage: function(message){
+				console.log(message.content);
+				$("#loginMsg").show();
+				$("#botImg").hide();
+				$("#alignleftinfo")[0].innerHTML = '二维码'
+				$("#qrcode").empty();
+				jQuery('#qrcode').qrcode(message.content);
+				$("#qrcodeInfo")[0].innerHTML = '扫二维码登录'
+			}
+		});
+		goEasy.subscribe({
+			channel:'bot_login_channel',
+			onMessage: function(message){
+				console.log(message.content);
+				$("#botState")[0].innerHTML = '状态：<strong><font color="green">在线</font></strong>'+' 帐号：<strong><font color="blue">'+message.content+'</font></strong>';
+				$("#loginMsg").hide();
+				$("#botImg").show();
+				$("#alignleftinfo")[0].innerHTML = '机器人'
+			}
+		});
+		goEasy.subscribe({
+			channel:'bot_logout_channel',
+			onMessage: function(message){
+				console.log(message.content);
+				$("#botState")[0].innerHTML = '状态：<strong><font color="red">离线</font></strong>';
+				$("#loginMsg").show();
+				$("#botImg").hide();
+				$("#alignleftinfo")[0].innerHTML = '二维码'
+			}
+		});
+		function updatePage(strValue){
+		
+			console.log(strValue);
+			if(strValue.wechatState == true){
+				if(strValue.botState == true){
+					$("#botImg").show();
+					$("#loginMsg").hide();
+					$("#alignleftinfo")[0].innerHTML = '机器人'
+					$("#botState")[0].innerHTML = '状态：<strong><font color="green">在线</font></strong>'+' 帐号：<strong><font color="blue">'+strValue.botName+'</font></strong>';
+				}else{
+					$("#loginMsg").show();
+					$("#botImg").hide();					
+					$("#alignleftinfo")[0].innerHTML = '二维码'
+					$("#qrcode").empty();
+					jQuery('#qrcode').qrcode(strValue.botQrcode);
+					$("#qrcodeInfo")[0].innerHTML = '扫二维码登录'
+					$("#botState")[0].innerHTML = '状态：<strong><font color="red">离线</font></strong>';
+				}
+			}else{
+				$("#loginMsg").show();
+				$("#botImg").hide();
+				$("#qrcode").empty();
+				$("#qrcodeInfo")[0].innerHTML = '请先启动wechat'
+				$("#alignleftinfo")[0].innerHTML = '提示'
+				$("#botState")[0].innerHTML = '状态：<strong><font color="red">离线</font></strong>';
+			}		
+		
+		}
+		
+        $(document).ready(function(){
+			$.ajax
+			({
+				type:"POST",
+				url: "/wxbot/operate/wechaty/state",
+				dataType: "JSON",
+				success: function (strValue) {
+					updatePage(strValue)
+				},
+				error: function(req,status,error){
+					var auth_url = req.getResponseHeader("REQUIRES_AUTH_URL"); 
+					if(auth_url){
+						window.location.href = auth_url;
+					}	
+				}				
+			})
+            $("#wechatStart").click(function(){
+				$.ajax
+				({
+					type:"POST",
+					url: "/wxbot/operate/wechaty/start",
+					dataType: "JSON",
+					success: function (strValue) {
+						console.log(strValue);
+						if(strValue == true){
+							alert('已经启动了！');
+						}
+					},
+					error: function(req,status,error){
+						var auth_url = req.getResponseHeader("REQUIRES_AUTH_URL"); 
+						if(auth_url){
+							window.location.href = auth_url;
+						}	
+					}					
+				})
+            });
+			$("#wechatStop").click(function(){
+				$.ajax
+				({
+					type:"POST",
+					url: "/wxbot/operate/wechaty/stop",
+					dataType: "JSON",
+					success: function (strValue) {
+						console.log(strValue);
+						if(strValue == false){
+							alert('已经关闭了！');
+							$("#loginMsg").show();
+							$("#botImg").hide();
+							$("#qrcode").empty();
+							$("#qrcodeInfo")[0].innerHTML = '请先启动wechat'
+							$("#alignleftinfo")[0].innerHTML = '提示'
+							$("#botState")[0].innerHTML = '状态：<strong><font color="red">离线</font></strong>';
+						}
+					},
+					error: function(req,status,error){
+						var auth_url = req.getResponseHeader("REQUIRES_AUTH_URL"); 
+						if(auth_url){
+							window.location.href = auth_url;
+						}	
+					}					
+				})
+            });
+            $("#wechatRestart").click(function(){
+				$.ajax
+				({ 
+					type:"POST",
+					url: "/wxbot/operate/wechaty/restart", 
+					dataType: "JSON",
+					success: function (strValue) {
+						console.log(strValue);
+						if(strValue == true){
+							alert('重启成功！');
+						}
+					},
+					error: function(req,status,error){
+						var auth_url = req.getResponseHeader("REQUIRES_AUTH_URL"); 
+						if(auth_url){
+							window.location.href = auth_url;
+						}	
+					}
+				})
+            });			
+			$("#refresh").click(function(){
+				$.ajax
+				({
+					type:"POST",
+					url: "/wxbot/operate/wechaty/state", 
+					dataType: "JSON",
+					success: function (strValue) { 
+						updatePage(strValue)
+					},
+					error: function(req,status,error){
+						var auth_url = req.getResponseHeader("REQUIRES_AUTH_URL"); 
+						if(auth_url){
+							window.location.href = auth_url;
+						}	
+					}
+				})
+            });
+        });		
+		
+	</script>
+
+</html>
