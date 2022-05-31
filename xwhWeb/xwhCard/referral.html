@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/index.css?v=1.0.0">
+		<style type="text/css">
+			.container{
+				background-color: #f0f0f0;
+				min-height: 100vh;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				padding: 10px;
+			}
+			.content{
+				background-color: #fff;
+				border-radius: 5px;
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				padding: 20px 0;
+			}
+			.title{
+				font-size: 16px;
+				color: #333;
+				font-weight: bold;
+				line-height: 60px;
+			}
+			.labelItem{
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+				padding: 5px 0;
+			}
+			.labelItem p{
+				width: 100px;
+				font-size: 14px;
+				color: #333;
+				text-align: right;
+			}
+			.labelItem input{
+				border: 1px solid #ddd;
+				border-radius: 5px;
+				background-color: #fff;
+				outline: none;
+				height: 35px;
+				width: 150px;
+				padding: 0 10px;
+				font-size: 14px;
+				color: #333;
+			}
+			.scBtn{
+				display: block;
+				width: 250px;
+				text-align: center;
+				line-height: 35px;
+				background-color: #007AFF;
+				color: #fff;
+				border-radius: 5px;
+				font-size: 14px;
+				margin-top: 20px;
+			}
+		</style>
+		<title>玄武湖景区一卡通</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="content">
+				<p class="title">玄武湖景区一卡通推荐码</p>
+				<div class="labelView">
+					<div class="labelItem">
+						<p>推荐人姓名：</p>
+						<input class="name" type="text">
+					</div>
+					<div class="labelItem">
+						<p>推荐码：</p>
+						<input class="code" type="text">
+					</div>
+				</div>
+				<a class="scBtn" href="javascript:;" onclick="scClick()">生成推荐页面</a>
+			</div>
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app.js?v=1.0.1"></script>
+		<script type="text/javascript">
+			function scClick(){
+				var name = $('.name').val();
+				var code = $('.code').val();
+				if(name && code){
+					app.getAjax('/prod-api/api/h5/query/referrer/check', {
+						name: name,
+						code: code
+					}, function(res){
+						console.log(res);
+						if(res.code == 200){
+							window.location.href = 'referralCode.html?code=' + code;
+						}else{
+							layer.alert(res.msg);
+						}
+					})
+				}else{
+					layer.alert('请先完善信息');
+				}
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/searchView.css">
+		<title></title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="searchView">
+				<p>查询条件</p>
+				<input class="startDate" type="text" readonly="readonly">
+				<input class="endDate" type="text" readonly="readonly">
+				<a class="searchBtn" href="javascript:;" onclick="searchClick()">查询</a>
+			</div>
+			<div class="resulView">
+				<div class="thView">
+					<p>码头</p>
+					<p>充500送250</p>
+					<p>充1000送600</p>
+					<p>合计（元）</p>
+				</div>
+				<div class="tdView">
+					<div class="tdItem">
+					</div>
+				</div>
+				<div class="totalView">
+					<p class="dark">合计</p>
+					<p class="dark rechargeOne">0</p>
+					<p class="dark rechargeTwo">0</p>
+					<p class="dark rechargeTotal">0</p>
+				</div>
+			</div>
+		</div>
+		
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/laydate.js"></script>
+		<script src="js/app.js"></script> 
+		<script type="text/javascript">
+			$(function(){
+				var nowDate = new Date();
+				var nowYear = nowDate.getFullYear();
+				var nowMonth = nowDate.getMonth() + 1;
+				nowMonth = nowMonth>9?nowMonth:'0'+nowMonth;
+				var nowDay = nowDate.getDate();
+				nowDay = nowDay>9?nowDay:'0'+nowDay;
+				var currDate = nowYear + '-' + nowMonth + '-' + nowDay;
+				laydate.render({
+					elem: '.startDate',
+					value: currDate + ' 00:00:00',
+					type: 'datetime'
+				});
+				laydate.render({
+					elem: '.endDate',
+					value: currDate + ' 23:59:59',
+					type: 'datetime'
+				});
+				searchClick();
+			})
+			
+			function searchClick(){
+				$('.tdView').html('');
+				app.getAjax('/api/datav/device/recharge', {
+					beginCreateTime: $('.startDate').val(),
+					endCreateTime: $('.endDate').val()
+				}, function(res){
+					console.log(res);
+					let rechargeInfo;
+					res.data.forEach(function(value, key){
+						if(value.deptName == '水上项目'){
+							rechargeInfo = value.deviceCollectList;
+						}
+					})
+					let rechargeOneTotal = 0;
+					let rechargeTwoTotal = 0;
+					let rechargeTotal = 0;
+					rechargeInfo.forEach(function(value, key){
+						if(value.deviceRemark != '吴东现场测试'){
+							let totalMoney = value.itemCollectList[0].realCashRecharge*1 + value.itemCollectList[1].realCashRecharge*1;
+							rechargeOneTotal += value.itemCollectList[0].countRecharge*1;
+							rechargeTwoTotal += value.itemCollectList[1].countRecharge*1;
+							rechargeTotal += value.itemCollectList[0].realCashRecharge;
+							rechargeTotal += value.itemCollectList[1].realCashRecharge;
+							$('.tdView').append(
+								'<div class="tdItem">' +
+									'<p>'+ value.deviceRemark +'</p>' +
+									'<p>'+ value.itemCollectList[0].countRecharge +'</p>' +
+									'<p>'+ value.itemCollectList[1].countRecharge +'</p>' +
+									'<p class="dark">'+ totalMoney +'</p>' +
+								'</div>'
+							)
+						}
+					})
+					$('.rechargeOne').text(rechargeOneTotal);
+					$('.rechargeTwo').text(rechargeTwoTotal);
+					$('.rechargeTotal').text(rechargeTotal);
+				})
+			}
+		</script>
+	</body>
+</html>

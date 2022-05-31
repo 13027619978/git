@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/index.css?v=1.0.0">
+		<style type="text/css">
+			.container{
+				background-color: #f0f0f0;
+				min-height: 100vh;
+			}
+			.noData{
+				font-size: 14px;
+				color: #666;
+				text-align: center;
+				line-height: 50px;
+				display: none;
+			}
+			.historyList{
+				background-color: #fff;
+			}
+			.historyList .historyItem{
+				padding: 5px 0;
+				border-bottom: 1px solid #f0f0f0;
+			}
+			.historyList .itemBox{
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+			}
+			.historyList .itemBox p{
+				font-size: 13px;
+				color: #007AFF;
+				line-height: 25px;
+			}
+			.historyList .itemBox .boxName{
+				flex: 0 0 100px;
+				text-align: right;
+				color: #333;
+			}
+		</style>
+		<title>玄武湖景区一卡通</title>
+	</head>
+	<body>
+		<div class="container">
+			<p class="noData">--暂无数据--</p>
+			<div class="historyList">
+				
+			</div>
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app.js?v=1.0.1"></script>
+		<script type="text/javascript">
+			let historyType = app.getQueryString('type');
+			let url;
+			if(historyType == '0'){
+				url = 'recharge';
+			}else if(historyType == '1'){
+				url = 'consume';
+			}else if(historyType == '2'){
+				url = 'turn';
+			}else{
+				url = 'iccard';
+			}
+			layer.load('1');
+			$(function(){
+				app.getAjax('/prod-api/api/h5/query/order/' + url, {
+					openId: app.getCookie('openid'),
+					orderBy: 'desc'
+				}, function(res){
+					console.log(res);
+					layer.closeAll();
+					let historyList = res.rows;
+					if(historyList.length == 0){
+						$('.noData').show();
+					}else{
+						$('.nowData').hide();
+						historyList.forEach(function(value, key){
+							if(historyType == '0'){
+								$('.historyList').append(
+									'<div class="historyItem">' + 
+										'<div class="itemBox">' +
+											'<p class="boxName">充值项目：</p>' +
+											'<p>'+ value.itemName +'</p>' +
+										'</div>' +
+										'<div class="itemBox">' +
+											'<p class="boxName">充值类型：</p>' +
+											'<p>微信在线充值</p>' +
+										'</div>' +
+										'<div class="itemBox">' +
+											'<p class="boxName">本金充值：</p>' +
+											'<p>'+ value.rechargeCash +'</p>' +
+										'</div>' +
+										'<div class="itemBox">' +
+											'<p class="boxName">赠送充值：</p>' +
+											'<p>'+ value.rechargeGive +'</p>' +
+										'</div>' +
+										'<div class="itemBox">' +
+											'<p class="boxName">手机号：</p>' +
+											'<p>'+ value.phone +'</p>' +
+										'</div>' +
+										'<div class="itemBox">' +
+											'<p class="boxName">充值时间：</p>' +
+											'<p>'+ value.createTime +'</p>' +
+										'</div>' +
+									'</div>'
+								)
+							}else if(historyType == '1'){
+								if(value.refundInfo){
+									$('.historyList').append(
+										'<div class="historyItem">' +
+											'<div class="itemBox">' +
+												'<p class="boxName">消费项目：</p>' +
+												'<p>'+ value.itemName +'</p>' +
+											'</div>' +
+											'<div class="itemBox">' +
+												'<p class="boxName">消费金额：</p>' +
+												'<p>'+ value.itemPrice +'</p>' +
+											'</div>' +
+											'<div class="itemBox">' +
+												'<p class="boxName">消费本金金额：</p>' +
+												'<p>'+ value.deductCash +'</p>' +
+											'</div>' +
+											'<div class="itemBox">' +
+												'<p class="boxName">消费赠送金额：</p>' +
+												'<p>'+ value.deductGive +'</p>' +
+											'</div>' +
+											'<div class="itemBox">' +
+												'<p class="boxName">消费转卡金额：</p>' +
+												'<p>'+ value.deductOld +'</p>' +
+											'</div>' +
+											'<div class="itemBox">' +
+												'<p class="boxName">退款金额：</p>' +
+												'<p>'+ value.refundInfo.refundTotal +'</p>' +
+											'</div>' +
+											'<div class="itemBox">' +
+												'<p class="boxName">订单状态：</p>' +
+												'<p>已退款</p>' +
+											'</div>' +
+											'<div class="itemBox">' +
+												'<p class="boxName">消费时间：</p>' +
+												'<p>'+ value.createTime +'</p>' +
+											'</div>' +
+										'</div>'
+									)
+								}else{
+									$('.historyList').append(
+										'<div class="historyItem">' +
+											'<div class="itemBox">' +
+												'<p class="boxName">消费项目：</p>' +
+												'<p>'+ value.itemName +'</p>' +
+											'</div>' +
+											'<div class="itemBox">' +
+												'<p class="boxName">消费金额：</p>' +
+												'<p>'+ value.itemPrice +'</p>' +
+											'</div>' +
+											'<div class="itemBox">' +
+												'<p class="boxName">消费本金金额：</p>' +
+												'<p>'+ value.deductCash +'</p>' +
+											'</div>' +
+											'<div class="itemBox">' +
+												'<p class="boxName">消费赠送金额：</p>' +
+												'<p>'+ value.deductGive +'</p>' +
+											'</div>' +
+											'<div class="itemBox">' +
+												'<p class="boxName">消费转卡金额：</p>' +
+												'<p>'+ value.deductOld +'</p>' +
+											'</div>' +
+											'<div class="itemBox">' +
+												'<p class="boxName">消费时间：</p>' +
+												'<p>'+ value.createTime +'</p>' +
+											'</div>' +
+										'</div>'
+									)
+								}
+							}else if(historyType == '2'){
+								var cardNo = value.cardNo?value.cardNo:'无';
+								$('.historyList').append(
+									'<div class="historyItem">' +
+										'<div class="itemBox">' +
+											'<p class="boxName">转卡类型：</p>' +
+											'<p>实体卡转电子卡</p>' +
+										'</div>' +
+										'<div class="itemBox">' +
+											'<p class="boxName">实体卡号：</p>' +
+											'<p>'+ cardNo +'</p>' +
+										'</div>' +
+										'<div class="itemBox">' +
+											'<p class="boxName">电子卡手机号：</p>' +
+											'<p>'+ value.phone +'</p>' +
+										'</div>' +
+										'<div class="itemBox">' +
+											'<p class="boxName">转卡总金额：</p>' +
+											'<p>'+ value.totalAmount +'</p>' +
+										'</div>' +
+										'<div class="itemBox">' +
+											'<p class="boxName">转卡时间：</p>' +
+											'<p>'+ value.createTime +'</p>' +
+										'</div>' +
+									'</div>'
+								)
+							}else if(historyType == '3'){
+								let operateType = value.operateType;
+								operateType = operateType=='0'?'绑卡':operateType=='1'?'解绑':operateType=='2'?'挂失':'解除挂失';
+								$('.historyList').append(
+									'<div class="historyItem">' +
+										'<div class="itemBox">' +
+											'<p class="boxName">IC卡号：</p>' +
+											'<p>'+ value.iccard +'</p>' +
+										'</div>' +
+										'<div class="itemBox">' +
+											'<p class="boxName">用户手机号：</p>' +
+											'<p>'+ value.phone +'</p>' +
+										'</div>' +
+										'<div class="itemBox">' +
+											'<p class="boxName">操作内容：</p>' +
+											'<p>'+ operateType +'</p>' +
+										'</div>' +
+										'<div class="itemBox">' +
+											'<p class="boxName">操作时间：</p>' +
+											'<p>'+ value.createTime +'</p>' +
+										'</div>' +
+									'</div>'
+								)
+							}
+						})
+					}
+				})
+			})
+		</script>
+	</body>
+</html>

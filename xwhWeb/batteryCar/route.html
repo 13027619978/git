@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="css/reset.css?v=10">
+		<link rel="stylesheet" href="css/route.css?v=1.0.1">
+		<title></title>
+	</head>
+	<body>
+		<div class="hoverView">
+			
+		</div>
+		<div class="container">
+			<div class="fullScreen">
+				<div class="topView">
+					<div class="weatherView">
+						<!-- <p class="weatherTxt"></p> -->
+						<img src="img/logo.png" >
+					</div>
+					<div class="titleView">
+						<p>玄武湖观光车智慧运营系统</p>
+					</div>
+					<div class="timeView">
+						<p class="dateTxt"></p>
+						<p class="weatherTxt"></p>
+					</div>
+				</div>
+				<div class="content">
+					<div class="content-left">
+						<!-- 购票流程 -->
+						<div class="progress">
+							<p class="siteNameTitle">当前站点：</p>
+							<div class="nextCar">
+								<p></p>
+							</div>
+						</div>
+						
+						<div class="lineView">
+							<!-- 路线 -->
+							<div class="lineList">
+								<div class="lineItem">
+									<p class="lineTitle">内环线</p>
+									<!-- <div class="leftMap">
+										<img src="img/map1.png" >
+									</div> -->
+									<!-- <span class="icon"></span> -->
+									<div class="routeView">
+										<div>
+											<p class="routeTitle">内环线</p>
+											<p class="routeSecondTitle">单向行驶</p>
+										</div>
+										<div class="routeContent">
+											
+											<div class="routeDetail">
+												<span class="line"></span>
+												<div class="siteList nhx">
+													<img class="jtIcon" src="img/right-icon1.png" >
+													<img class="jtIcon" src="img/right-icon1.png" >
+													<img class="jtIcon" src="img/left-icon1.png" >
+													<img class="jtIcon" src="img/left-icon1.png" >
+													<!-- <div class="siteItem">
+														<div class="site">
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">站点1</p>
+															<p class="carInfo">xx分钟 xx空位</p>
+														</div>
+													</div> -->
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<!-- 路线 -->
+							<div class="lineList qly">
+								<div class="lineItem">
+									<!-- <p class="lineTitle">情侣园环线</p> -->
+									<!-- <div class="leftMap">
+										<img src="img/map1.png" >
+									</div> -->
+									<!-- <span class="icon"></span> -->
+									<div class="routeView">
+										<div>
+											<p class="routeTitle">情侣园环线</p>
+											<p class="routeSecondTitle">单向行驶</p>
+										</div>
+										<div class="routeContent">
+											<!-- <div class="nextCar">
+												<p></p>
+											</div> -->
+											<div class="routeDetail">
+												<span class="line"></span>
+												<div class="siteList">
+													<img class="jtIcon" src="img/right-icon.png" >
+													<img class="jtIcon" src="img/right-icon.png" >
+													<img class="jtIcon" src="img/left-icon.png" >
+													<img class="jtIcon" src="img/left-icon.png" >
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName">景区停车场</p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">花卉大道站</p>
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName">地铁4号线方向</p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">十里长堤站</p>
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName">地铁3号线方向</p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">翠洲门站</p>
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName"></p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName green">白苑站(换乘站)</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- 购票 -->
+						<div class="ticketView">
+							<div class="ticketItem">
+								<div class="gpIcon">
+									点击购票
+								</div>
+								<p class="itemTitle">单次票</p>
+								<p class="ticketTitle">票价：10元/1次</p>
+								<p>购票须知</p>
+								<p>1. 票价10元/人/次，换乘站必须下车</p>
+								<p>2. 车辆每15分钟一班车</p>
+								<p>3. 一票限一人使用</p>
+								<p>4. 凭此票可在运营时间内乘坐1次</p>
+								<p>5. 车票当日有效</p>
+								<p>6. 仅限在内环线使用</p>
+								<p>7.当日未核销车票于当日晚9点自动原路退票</p>
+								<p>8. 运营时间：<font class="yy10time"></font></p>
+								<p>服务电话：025-83615961</p>
+								<p class="flashing">持一卡通实体卡购票的游客请联系客服：025-83615961</p>
+							</div>
+							<div class="ticketItem">
+								<div class="gpIcon">
+									点击购票
+								</div>
+								<p class="itemTitle">多次票</p>
+								<p class="ticketTitle">票价：40元/6次</p>
+								<p>购票须知</p>
+								<p>1. 票价40元/人/6次，换乘站必须下车</p>
+								<p>2. 车辆每15分钟一班车</p>
+								<p>3. 一票限一人使用</p>
+								<p>4. 凭此票可在运营时间内乘坐6次</p>
+								<p>5. 车票当日有效</p>
+								<p>6. 可在内环线和情侣园线同时使用</p>
+								<p>7.当日未核销车票于当日晚9点自动原路退票</p>
+								<p>8. 运营时间：<font class="yy40time"></font></p>
+								<p>投诉电话：025-83615961</p>
+								<p class="flashing">持一卡通实体卡购票的游客请联系客服：025-83615961</p>
+							</div>
+						</div>
+					</div>
+				
+					<div class="content-right">
+						<div class="right-top">
+							<div class="salesList">
+							</div>
+							<div class="mapView">
+								<p class="mapTitle">地图</p>
+								<div class="mapImg">
+									<img src="img/nhMap.jpg" >
+								</div>
+							</div>
+						</div>
+					</div>
+				
+					<p class="bottomTitle">身高1.1米以下儿童可免费乘坐观光车（不占座），身高1.1米及以上需购票乘车。出于对安全乘车的考虑，每名成人只可携带1名身高1.1米以下儿童免费乘车。</p>
+				</div>
+				
+			</div>
+			
+			<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=c1b024a249b04326f11894fd0e35041d"></script>
+			<script src="js/jquery.min.js"></script>
+			<script src="js/app.js"></script>
+			<script type="text/javascript">
+				var dateList = [];
+				var scale =  window.innerHeight / ($('.fullScreen').height() + 20);
+				$('.fullScreen').css({
+					'transform': 'scaleY(.96)'
+				})
+				// 当前站点
+				var siteId = app.getQueryString('siteId');
+				siteId = siteId?siteId:'0';
+				let timeSite = siteId;
+				timeSite = timeSite==5?7:timeSite==7?5:timeSite;
+				
+				switch(siteId){
+					case '1':
+						$('.siteNameTitle').text('当前站点：假山瀑布站');
+						siteId = 6;
+					break;
+					
+					case '2':
+						$('.siteNameTitle').text('当前站点：月季园站')
+						siteId = 7;
+					break;
+					
+					case '3':
+						$('.siteNameTitle').text('当前站点：菱洲站')
+						siteId = 8;
+					break;
+					
+					case '4':
+						$('.siteNameTitle').text('当前站点：樱洲站')
+						siteId = 1;
+					break;
+					
+					case '5':
+						$('.siteNameTitle').text('当前站点：蒲仙岛站')
+						siteId = 4;
+					break;
+					
+					case '6':
+						$('.siteNameTitle').text('当前站点：梁洲渡口码头站')
+						siteId = 3;
+					break;
+					
+					case '7':
+						$('.siteNameTitle').text('当前站点：白苑站')
+						siteId = 2;
+					break;
+					
+					case '8':
+						$('.siteNameTitle').text('当前站点：莲花广场站')
+						siteId = 5;
+					break;
+				}
+				
+				// 创建地图实例
+				// initMap(map);
+				
+				// 获取天气信息
+				$.ajax({
+				    url:'https://restapi.amap.com/v3/weather/weatherInfo?key=773c4e4c196eb78e21f220e7e14160d2&extensions=all&city=320100',
+				    type:"GET",
+				    success:function(data){
+						$('.weatherTxt').text('今日 ' + data.forecasts[0].casts[0].dayweather  + ' ' + data.forecasts[0].casts[0].nighttemp + '~' + data.forecasts[0].casts[0].daytemp + '℃')
+				    }
+				});
+				
+				// 当前显示购票列表
+				var currList = [];
+				// 初始化时间
+				var interSecond = 0;
+				setInterval(function(){
+					interSecond += 1;
+					seconds += 1;
+					var year = new Date().getFullYear();
+					var month = new Date().getMonth() + 1;
+					month = month<10?'0'+month:month;
+					var day = new Date().getDate();
+					day = day<10?'0'+day:day;
+					var hour = new Date().getHours();
+					hour = hour<10?'0'+hour:hour;
+					var minutes = new Date().getMinutes();
+					minutes = minutes<10?'0'+minutes:minutes;
+					var seconds = new Date().getSeconds();
+					seconds = seconds<10?'0'+seconds:seconds;
+					$('.dateTxt').text(year+'/'+month+'/'+day+' '+hour+':'+minutes+':'+seconds);
+					var startDate = new Date(new Date().getTime() - (60*1000));
+					var startYear = startDate.getFullYear();
+					var startMonth = startDate.getMonth() + 1;
+					startMonth = startMonth<10?'0'+startMonth:startMonth;
+					var startDay = startDate.getDate();
+					startDay = startDay<10?'0'+startDay:startDay;
+					var startHour = startDate.getHours();
+					startHour = startHour<10?'0'+startHour:startHour;
+					var startMinutes = startDate.getMinutes();
+					startMinutes = startMinutes<10?'0'+startMinutes:startMinutes;
+					var startSeconds = startDate.getSeconds();
+					startSeconds = startSeconds<10?'0'+startSeconds:startSeconds;
+					var startDateString = startYear + '-' + startMonth + '-' + startDay + ' ' + startHour + ':' + startMinutes + ':' + startSeconds;
+					var endDateString = year+'-'+month+'-'+day+' '+hour+':'+minutes+':'+seconds
+					if(interSecond == 1 || interSecond % 60 == 0){
+						// 获取运营时间
+						app.getAjax('/battery/getOperation?lineTicketId=', {}, function(res){
+							var nowDay = new Date().getDay();
+							if(nowDay == 0){
+								nowDay = 6;
+							}else{
+								nowDay -= 1;
+							}
+							var startDate;
+							var endDate;
+							res.data.forEach(function(value, key){
+								if(value.ticketName == '10元票'){
+									var yyTimeList = value.list;
+									startDate = yyTimeList[nowDay].startTime;
+									endDate = yyTimeList[nowDay].endTime;
+									if(yyTimeList[nowDay].state == '0'){
+										$('.yy10time').text(startDate + '至' + endDate);
+									}else{
+										$('.yy10time').text(yyTimeList[nowDay].tip);
+									}
+								}
+								if(value.ticketName == '40元票'){
+									var yyTimeList = value.list;
+									startDate = yyTimeList[nowDay].startTime;
+									endDate = yyTimeList[nowDay].endTime;
+									if(yyTimeList[nowDay].state == '0'){
+										$('.yy40time').text(startDate + '至' + endDate);
+									}else{
+										$('.yy40time').text(yyTimeList[nowDay].tip);
+									}
+								}
+							})
+						})
+					}
+
+					if(seconds % 10 == 0 || seconds == 0){
+						app.getAjax('/loopDataV/getDeviceBatterySaleInfo?startDate=' + startDateString + '&endDate=' + endDateString,{}, function(res){
+							var salesList = res;
+							var newList = [];
+							salesList.forEach(function(value, key){
+								var hasItem = false;
+								newList.forEach(function(item, itemKey){
+									if(item.createDate == value.createDate && item.siteName == value.siteName && value.ticketName == item.ticketName){
+										item.buyQuantity = parseInt(item.buyQuantity) + 1;
+										hasItem = true;
+									}
+								})
+								if(!hasItem){
+									newList.push(value);
+								}
+							})
+							newList.sort(function(a, b) {
+							  return b.createDate < a.createDate ? 1 : -1
+							})
+							if(currList.length == 0){
+								currList = newList;
+								newList.forEach(function(value, key){
+									$('.salesList').append(
+										'<div class="salesItem">' +
+											value.createDate.split(' ')[1] + '购买' + value.ticketName +'<p>x'+ value.buyQuantity +'</p>' +
+										'</div>'
+									);
+								})
+								$('.salesList').animate({ scrollTop: ($('.salesItem').length - 6) * 45}, 2000);
+							}else{
+								newList.forEach(function(value, key){
+									var hasItem = false;
+									currList.forEach(function(item, itemKey){
+										if(value.createDate == item.createDate){
+											hasItem = true;
+										}
+									})
+									if(!hasItem){
+										currList.push(value);
+										$('.salesList').append(
+											'<div class="salesItem">' +
+												value.createDate.split(' ')[1] + '购买' + value.ticketName +'<p>x'+ value.buyQuantity +'</p>' +
+											'</div>'
+										);
+									}
+								})
+								$('.salesList').animate({ scrollTop: ($('.salesItem').length - 6) * 45}, 2000);
+							}
+						})
+						
+					}
+				}, 1000);
+				
+				
+				// 获取线路站点信息
+				app.getAjax('/battery/name/get', {
+					lineNum: 'LINE20210324110102667'
+				}, function(res){
+					if(res.code == 'SUCCESS'){
+						var siteList = res.data;
+						var siteIdList = [];
+						var newSiteList = [];
+						newSiteList[0] = siteList[5];
+						newSiteList[1] = siteList[6];
+						newSiteList[2] = siteList[7];
+						newSiteList[3] = siteList[0];
+						newSiteList[4] = siteList[1];
+						newSiteList[5] = siteList[2];
+						newSiteList[6] = siteList[3];
+						newSiteList[7] = siteList[4];
+						newSiteList.forEach(function(value, key){
+							siteIdList.push(value.id);
+							var siteName = value.siteName;
+							if(siteName == '梁州站'){
+								siteName = '粱洲渡口码头站';
+							}
+							var otherName = '';
+							var secondName = '';
+							if(siteName == '菱洲站' || siteName == '白苑站'){
+								siteName = siteName + '(换乘站)';
+							}
+							if(siteName == '假山瀑布站'){
+								otherName = '玄武门方向';
+							}else if(siteName == '菱洲站(换乘站)'){
+								otherName = '解放门方向';
+								secondName = '菱洲生态乐园'
+							}else if(siteName == '蒲仙岛站'){
+								otherName = '儿童游乐场';
+							}else if(siteName == '粱洲渡口码头站'){
+								otherName = '可乘船至南京火车站';
+								secondName = '先锋书店'
+							}else if(siteName == '白苑站(换乘站)'){
+								otherName = '情侣园方向';
+							}else if(siteName == '莲花广场站'){
+								otherName = '音乐喷泉';
+							}
+							
+							if(value.id == siteId){
+								if(siteName.indexOf('换乘站') != -1){
+									$('.siteList').eq(0).append(
+										'<div class="siteItem">'+
+											'<div class="site">'+
+												'<p class="siteName active">'+ secondName +'</p>' +
+												'<p class="siteName active">'+ otherName +'</p>' +
+												'<img src="img/currSite.png" >'+
+												'<p class="siteName active green">'+ siteName +'</p>' +
+											'</div>'+
+										'</div>'
+									)
+								}else{
+									$('.siteList').eq(0).append(
+										'<div class="siteItem">'+
+											'<div class="site">'+
+												'<p class="siteName active">'+ secondName +'</p>' +
+												'<p class="siteName active">'+ otherName +'</p>' +
+												'<img src="img/currSite.png" >'+
+												'<p class="siteName active">'+ siteName +'</p>' +
+											'</div>'+
+										'</div>'
+									)
+								}
+								
+							}else{
+								if(siteName.indexOf('换乘站') != -1){
+									$('.siteList').eq(0).append(
+										'<div class="siteItem">'+
+											'<div class="site">'+
+												'<p class="siteName">'+ secondName +'</p>' +
+												'<p class="siteName">'+ otherName +'</p>' +
+												'<img src="img/site-unSelect.png" >'+
+												'<p class="siteName green">'+ siteName +'</p>' +
+											'</div>'+
+										'</div>'
+									)
+								}else{
+									$('.siteList').eq(0).append(
+										'<div class="siteItem">'+
+											'<div class="site">'+
+												'<p class="siteName">'+ secondName +'</p>' +
+												'<p class="siteName">'+ otherName +'</p>' +
+												'<img src="img/site-unSelect.png" >'+
+												'<p class="siteName">'+ siteName +'</p>' +
+											'</div>'+
+										'</div>'
+									)
+								}
+							}
+							
+						})
+						
+						setInterval(function(){
+							// initMap(map);
+							app.getAjax('/loopDataV/getVehicleMountedLocation', {
+								lineId: 1
+							}, function(res){
+								console.log(res);
+								// 预计到站时间
+								let site1;
+								let site2;
+								let site3;
+								let site4;
+								let site5;
+								let site6;
+								let site7;
+								if (res.length > 0) {
+									res.forEach(function(value, key) {
+										if(value.state == '0' && value.id != 70){
+											let currentId = value.id;
+											if (70 <= currentId && currentId < 75) {
+												currentId = currentId - 69;
+											} else if (80 <= currentId && currentId < 84) {
+												currentId = currentId - 74;
+											} else if (90 == currentId) {
+												currentId = 9;
+											} else if (16 <= currentId && currentId < 27) {
+												currentId = currentId - 4;
+											} else if (40 <= currentId && currentId < 43) {
+												currentId = currentId - 17;
+											} else if (50 <= currentId && currentId < 53) {
+												currentId = currentId - 24;
+											} else if (60 <= currentId && currentId < 64) {
+												currentId = currentId - 31;
+											}else{
+												currentId = 1;
+											}
+											let site1Item = 6 - currentId;
+											let site2Item = 9 - currentId;
+											let site3Item = 12 - currentId;
+											let site4Item = 20 - currentId;
+											let site5Item = 23 - currentId;
+											let site6Item = 26 - currentId;
+											let site7Item = 29 - currentId;
+											site1 = getSiteShortTime(site1, site1Item);
+											site2 = getSiteShortTime(site2, site2Item);
+											site3 = getSiteShortTime(site3, site3Item);
+											site4 = getSiteShortTime(site4, site4Item);
+											site5 = getSiteShortTime(site5, site5Item);
+											site6 = getSiteShortTime(site6, site6Item);
+											site7 = getSiteShortTime(site7, site7Item);
+										}
+									})
+									let siteTimeList = [site1,site2,site3,site4,site5,site6,site7];
+									console.log(siteTimeList);
+									let nextTime = Math.ceil(siteTimeList[timeSite - 2]*30/60);
+									console.log(siteTimeList[timeSite - 2]);
+									if(nextTime){
+										$('.nextCar p').text('预计到站' + nextTime + '分钟');
+									}else{
+										$('.nextCar p').text('');
+									}
+								}
+							})
+						}, 5000);
+					}
+				})
+				
+				// 获取到达站点较短时间
+				function getSiteShortTime(site, siteItem){
+					if(siteItem >= 0){
+						if(site || site == 0){
+							site = site>siteItem?siteItem:site;
+						}else{
+							site = siteItem;
+						}
+					}
+					return site;
+				}		
+			</script>
+		</div>
+	</body>
+</html>

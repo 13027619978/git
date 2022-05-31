@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css?v=1.0.0">
+		<style type="text/css">
+			.container{
+				background-color: #f0f0f0;
+				min-height: 100vh;
+			}
+			.searchView{
+				background-color: #fff;
+				padding: 10px 30px;
+				border-bottom: 1px solid #ddd;
+			}
+			.title{
+				font-size: 18px;
+				font-weight: bold;
+				text-align: center;
+				color: #333;
+				line-height: 50px;
+			}
+			.timeView{
+				display: flex;
+				justify-content: flex-end;
+				align-items: center;
+				font-size: 14px;
+				color: #333;
+			}
+			.timeView input{
+				width: 95px;
+				font-size: 14px;
+				color: #333;
+				text-align: center;
+			}
+			.timeView p{
+				margin: 0 10px;
+			}
+			.searchItem{
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+				margin-bottom: 10px;
+			}
+			.searchItem p{
+				flex: 0 0 90px;
+				font-size: 14px;
+				color: #333;
+				text-align: right;
+			}
+			.searchItem input{
+				flex: 1;
+				padding: 0 10px;
+				font-size: 14px;
+				color: #333;
+			}
+			.searchBtn{
+				display: block;
+				width: 100%;
+				background-color: #007AFF;
+				color: #fff;
+				line-height: 35px;
+				border-radius: 5px;
+				text-align: center;
+				margin-top: 20px;
+			}
+			
+			.resultView{
+				display: none;
+			}
+			.totalView{
+				padding: 10px 20px;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				background-color: #fff;
+				border-bottom: 1px solid #ddd;
+			}
+			.totalView p{
+				font-size: 14px;
+				color: #333;
+			}
+			.totalView font{
+				font-size: 21px;
+				color: #e7b14c;
+				font-weight: bold;
+			}
+			.noData{
+				font-size: 13px;
+				color: #333;
+				text-align: center;
+				line-height: 50px;
+			}
+			.useList{
+				background-color: #fff;
+				padding: 10px;
+			}
+			.useItem{
+				border-bottom: 1px solid #ddd;
+				padding: 5px 10px;
+			}
+			.useItem p{
+				font-size: 13px;
+				color: #333;
+				line-height: 25px;
+			}
+		</style>
+		<title>玄武湖景区一卡通</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="searchView">
+				<p class="title">推荐码使用情况查询</p>
+				<div class="searchItem">
+					<p>推荐人姓名：</p>
+					<input class="name" type="text" placeholder="请输入推荐人姓名">
+				</div>
+				<div class="searchItem">
+					<p>推荐码：</p>
+					<input class="code" type="text" placeholder="请输入推荐码">
+				</div>
+				<div class="timeView">
+					<input class="startDate" type="text" readonly="readonly">
+					<p>至</p>
+					<input class="endDate" type="text" readonly="readonly">
+				</div>
+				<a class="searchBtn" href="javascript:;" onclick="searchClick()">查询</a>
+			</div>
+			<div class="resultView">
+				<div class="totalView">
+					<p>总充值次数：<font class="totalNumber">0</font></p>
+					<p>充值总本金：<font class="totalMoney">0</font></p>
+				</div>
+				<p class="noData">--暂无充值数据--</p>
+				<div class="useList">
+					<!-- <div class="useItem">
+						<p>会员ID：1</p>
+						<p>本金充值：1</p>
+						<p>充值时间：2022-04-20 13:13:55</p>
+					</div> -->
+				</div>
+			</div>
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/laydate.js"></script>
+		<script src="js/app.js?v=1.0.1"></script>
+		<script type="text/javascript">
+			$(function(){
+				laydate.render({
+					elem: '.startDate',
+					value: new Date()
+				});
+				laydate.render({
+					elem: '.endDate',
+					value: new Date()
+				});
+			})
+			
+			function searchClick(){
+				layer.load('1');
+				$('.useList').html('');
+				var name = $('.name').val();
+				var code = $('.code').val();
+				var startDate = $('.startDate').val() + ' 00:00:00';
+				var endDate = $('.endDate').val() + ' 23:59:59';
+				if(name && code && startDate && endDate){
+					app.getAjax('/prod-api/api/h5/query/referrer/record', {
+						name: name,
+						code: code,
+						orderBy: 'desc',
+						beginTime: startDate,
+						endTime: endDate
+					}, function(res){
+						layer.closeAll();
+						if(res.code == 200){
+							$('.resultView').show();
+							$('.totalNumber').text(res.data.count);
+							$('.totalMoney').text(res.data.totalCash);
+							var record = res.data.record;
+							if(record.length > 0){
+								$('.noData').hide();
+								$('.useList').show();
+								record.forEach(function(value, key){
+									$('.useList').append(
+										'<div class="useItem">'+
+											'<p>会员ID：'+ value.vipId +'</p>'+
+											'<p>本金充值：'+ value.rechargeCash +'</p>'+
+											'<p>充值时间：'+ value.createTime +'</p>'+
+										'</div>'
+									)
+								})
+							}else{
+								$('.noData').show();
+								$('.useList').hide();
+							}
+						}else{
+							$('.resultView').hide();
+							layer.alert(res.msg);
+						}
+					})
+				}else{
+					layer.alert('请先完善查询信息');
+				}
+			}
+		</script>
+	</body>
+</html>

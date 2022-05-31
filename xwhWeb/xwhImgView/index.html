@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/swiper.min.css">
+		<title></title>
+	</head>
+	<body>
+		<div class="swiper-container">
+		    <div class="swiper-wrapper">
+				
+		    </div>
+		</div>
+		
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/swiper.min.js"></script>
+		<script type="text/javascript">
+			for(var i = 1; i < 34; i++){
+				$('.swiper-wrapper').append(
+					'<div class="swiper-slide">' +
+						'<img class="swiper-no-swiping" src="img/'+ i +'.jpg">' +
+					'</div>'
+				)
+			}
+			var mySwiper = new Swiper ('.swiper-container', {
+				autoplay: {
+					delay: 10000
+				},
+				effect : 'fade',
+			    loop: true
+		    }) 
+		</script>
+	</body>
+</html>

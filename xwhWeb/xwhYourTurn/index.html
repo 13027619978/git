@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/index.css">
+		<title></title>
+	</head>
+	<body>
+		<div class="container">
+			<p class="title">玄武湖叫号</p>
+			<div class="labelView">
+				<p class="labelTxt">码头名称：</p>
+				<select class="scenicId" onchange="scenicChange(this)">
+					<option value ="0">请选择码头</option>
+					<option value ="1">解放门码头</option>
+					<option value ="2">台菱堤码头</option>
+					<option value ="3">玄武门南码头</option>
+					<option value ="4">菱州码头</option>
+				</select>
+			</div>
+			<a class="addBtn" href="javascript:;" onclick="addClick()">叫号+1</a>
+			
+			<div class="queueView">
+				<p class="queueTitle">当前叫号数</p>
+				<p class="queueNumber">0</p>
+			</div>
+		</div>
+		
+		
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/index.js"></script>
+	</body>
+</html>

@@ -1,0 +1,455 @@
+.container{
+	width: 100%;
+	background-color: #011548;
+	padding: 0 10px 10px 10px;
+	min-width: 1900px;
+	height: 100vh;
+	overflow: hidden;
+}
+.fullScreen{
+	transform-origin: top center;
+}
+
+.topView{
+	padding: 0 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+}
+.topView .weatherView, .topView .timeView{
+	width: 230px;
+}
+.topView .weatherView{
+	padding: 10px 0;
+}
+.topView .weatherView img{
+	width: 60px;
+}
+.topView .weatherView p, .topView .timeView p{
+	color: #fff;
+	font-size: 18px;
+	line-height: 25px;
+	width: 230px;
+	padding-bottom: 10px;
+}
+.topView .timeView p{
+	text-align: right;
+}
+.topView .titleView{
+	background: url(../img/titleBg.png) no-repeat left top;
+	background-size: 100% 100%;
+	margin-left: 15px;
+}
+.topView .titleView p{
+	width: 540px;
+	height: 70px;
+	text-align: center;
+	font-size: 30px;
+	color: #0f2d9f;
+	font-weight: bold;
+	line-height: 80px;
+}
+
+.content{
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	background: url(../img/content-bg.png) no-repeat left top;
+	background-size: 100% 100%;
+	padding: 0 30px;
+	padding-top: 25px;
+	padding-bottom: 20px;
+	margin-top: -35px;
+	padding-bottom: 60px;
+}
+.content-left{
+	width: 1055px;
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: flex-start;
+}
+.progress{
+	width: 100%;
+	margin-top: 40px;
+	background: url(../img/siteNameBg.png) no-repeat left top;
+	background-size: 100% 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.progress .siteNameTitle{
+	width: 80%;
+	line-height: 90px;
+	font-size: 40px;
+	font-weight: bold;
+	color: yellow;
+	text-align: center;
+	margin-bottom: 10px;
+}
+.progress .nextCar{
+	width: 30%;
+	font-size: 18px;
+	color: #fff;
+}
+
+.lineView{
+	background: url(../img/lineBg.png) no-repeat left top;
+	background-size: 100% 100%;
+	transform-origin: top center;
+	margin-top: 10px;
+}
+.lineItem{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	position: relative;
+	padding: 10px 20px;
+	padding-top: 70px;
+	margin-bottom: 10px;
+	position: relative;
+}
+.lineTitle{
+	font-size: 26px;
+	font-weight: bold;
+	color: #ccc60d;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 220px;
+	text-align: center;
+	line-height: 75px;
+}
+.leftMap{
+	flex: 0 0 230px;
+	border-radius: 10px;
+}
+.leftMap img{
+	height: 131px;
+}
+
+.icon{
+	background: url(../img/right-icon.png) no-repeat left center;
+	background-size: 100%;
+	flex: 0 0 30px;
+	height: 15px;
+	margin: 0 10px;
+}
+.routeView{
+	flex: 1;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	position: relative;
+}
+.routeTitle{
+	color: #e40013;
+	background-color: #fff;
+	line-height: 20px;
+	border-radius: 20px;
+	font-size: 14px;
+	font-weight: bolder;
+	margin-top: 22px;
+	width: 90px;
+	text-align: center;
+	padding: 5px 0;
+}
+.routeSecondTitle{
+	font-size: 14px;
+	color: #fff;
+	width: 100%;
+	text-align: center;
+	margin-top: 5px;
+}
+.routeContent{
+	flex: 1;
+}
+
+.routeDetail{
+	position: relative;
+	width: 100%;
+	padding: 50px 50px 40px;
+}
+/* .routeDetail .line{
+	background-color: #faef01;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 50%;
+	height: 5px;
+	margin-top: -2.5px;
+} */
+.siteList{
+	width: 825px;
+	height: 260px;
+	border: 5px solid red;
+	border-radius: 400px;
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.nhx .siteItem{
+	position: absolute;
+}
+.nhx .siteItem:nth-of-type(1){
+	left: -53px;
+	top: 50%;
+	margin-top: -43px;
+}
+.nhx .siteItem:nth-of-type(2){
+	left: 200px;
+	top: -55px;
+}
+.nhx .siteItem:nth-of-type(3){
+	left: 500px;
+	top: -55px;
+}
+.nhx .siteItem:nth-of-type(4){
+	left: 825px;
+	margin-left: -58px;
+	margin-top: -9px;
+}
+.nhx .siteItem:nth-of-type(5){
+	left: 500px;
+	bottom: -35px;
+}
+.nhx .siteItem:nth-of-type(6){
+	left: 200px;
+	bottom: -35px;
+}
+.nhx .jtIcon{
+	position: absolute;
+	height: 40px;
+}
+.nhx .jtIcon:nth-of-type(1){
+	left: 365px;
+	top: -23px;
+}
+.nhx .jtIcon:nth-of-type(2){
+	left: 385px;
+	bottom: -23px;
+}
+
+.siteList .siteItem{
+	height: 80px;	
+	width: 100px;
+}
+.siteList .siteItem img{
+	height: 30px;
+}
+.siteList .siteItem p{
+	height: 20px;
+	line-height: 20px;
+	color: #fff;
+	font-size: 18px;
+}
+
+.site{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+.site .carInfo{
+	font-size: 16px;
+	color: #fff;
+	position: absolute;
+	left: 50%;
+	bottom: -25px;
+	width: 120px;
+	margin-left: -60px;
+	text-align: center;
+	display: none;
+}
+.site .siteName{
+	color: #fff;
+	font-size: 14px;
+	text-align: center;
+	white-space: nowrap;
+}
+.site .siteName.green{
+	color: #FFFF00;
+}
+.site .siteName.active{
+	color: yellow;
+}
+
+.ticketView{
+	width: 100%;
+	height: 330px;
+	padding-top: 10px;
+}
+.ticketView .ticketItem{
+	width: 100%;
+	height: 370px;
+	pointer-events: auto;
+	border-radius: 0px;
+	border-style: solid;
+	border-image: url(../img/border.png) 32 37 fill / 32px 37px / 0 stretch;
+	border-width: 1px;
+	background: none;
+	filter: blur(0px);
+	backdrop-filter: blur(0px);
+	padding: 20px;
+	position: relative;
+}
+.ticketView .ticketItem .itemTitle{
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+.ticketView .ticketItem .ticketTitle{
+	color: #FAEF01;
+	line-height: 50px;
+	border-bottom: 1px solid #fff;
+	margin-bottom: 10px;
+	font-size: 25px;
+}
+.ticketView .ticketItem p{
+	font-size: 16px;
+	color: #fff;
+	line-height: 32px;
+}
+
+.content-right{
+	padding-left: 30px;
+	padding-top: 40px;
+}
+.content-right .right-top{
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	position: relative;
+}
+.salesList{
+	position: absolute;
+	top: 85px;
+	right: 20px;
+	z-index: 999;
+	padding: 0 10px;
+	padding-right: 45px;
+	height: 245px;
+	overflow: hidden;
+	border-top-right-radius: 10px;
+}
+.salesList .salesItem{
+	font-size: 14px;
+	color: #fff;
+	line-height: 35px;
+	background-color: rgba(0, 0, 0, .7);
+	margin: 5px 0;
+	border-radius: 35px;
+	padding: 0 10px;
+	position: relative;
+}
+@-webkit-keyframes mymove{
+	/* 0% {transform: scale(0.8);}
+	70% {transform: scale(1.7);}
+	100% {transform: scale(1);} */
+	5% {
+		-webkit-transform: scale3d(1, 1, 1) rotate3d(0, 0, 1, -10deg);
+		transform: scale3d(1, 1, 1) rotate3d(0, 0, 1, -10deg);
+	}
+	6%,
+	8%,
+	10%,
+	12% {
+		-webkit-transform: scale3d(2, 2, 2) rotate3d(0, 0, 1, 10deg);
+		transform: scale3d(2, 2, 2) rotate3d(0, 0, 1, 10deg);
+	}
+
+	7%,
+	9%,
+	11% {
+		-webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -10deg);
+		transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -10deg);
+	}
+	100% {
+		-webkit-transform: scale3d(1, 1, 1);
+		transform: scale3d(1, 1, 1);
+	}
+}
+.salesList .salesItem p{
+	position: absolute;
+	right: -55px;
+	top: 0;
+	height: 35px;
+	width: 55px;
+	color: red;
+	font-size: 18px;
+	font-weight: bold;
+	-webkit-animation:mymove 1s infinite;
+	-webkit-animation-iteration-count: 3;
+	text-align: center;
+}
+.mapView{
+	background: url(../img/mapBg.png) no-repeat left top;
+	background-size: 100% 100%;
+	width: 490px;
+	height: 458px;
+	padding: 0 15px;
+	padding-top: 45px;
+	overflow: hidden;
+	width: 735px;
+	height: 930px;
+	padding-top: 80px;
+	position: relative;
+}
+.mapView .mapTitle{
+	position: absolute;
+	left: 0;
+	top: 0;
+	text-align: center;
+	font-size: 30px;
+	font-weight: bold;
+	color: #fff;
+	width: 215px;
+	line-height: 80px;
+	letter-spacing: 5px;
+}
+.mapView img{
+	width: 100%;
+	height: 861px;
+}
+#container{
+	width: 100%;
+	height: 861px;
+	transform: scale(1);
+}
+
+.bottomTitle{
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	line-height: 60px;
+	font-size: 20px;
+	color: #fff;
+	text-align: center;
+	font-weight: bold;
+}
+
+.priceView{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 10px;
+}
+
+.ticketView .ticketItem .priceView p{
+	border: none;
+	margin-bottom: 0;
+}
+.priceView a{
+	display: block;
+	width: 130px;
+	line-height: 40px;
+	background-color: red;
+	color: #fff;
+	text-align: center;
+	border-radius: 5px;
+	font-size: 18px;
+}

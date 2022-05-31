@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/recharge.css?v=1.0.3">
+		<title>玄武湖景区一卡通</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="card">
+				<div class="cardInfo">
+					<div class="infoView">
+						<div class="infoContent">
+							<p class="cardTitle">玄武湖景区一卡通</p>
+							<div class="cardContent">
+								<div class="priceView">
+									<p class="totalMoney">总余额：<font class="totalBalance">0</font>元</p>
+									<div class="lastPrice">
+										<p class="lastMoney">本金余额<br><font class="cashBalance">0</font>元</p>
+										<span></span>
+										<p class="lastMoney">赠送余额<br><font class="giveBalance">0</font>元</p>
+										<span></span>
+										<p class="lastMoney">转卡余额<br><font class="oldBalance">0</font>元</p>
+									</div>
+								</div>
+								<div class="numberView">
+									<p class="cardNumber phoneNumber">手机号：</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="rechargeList">
+				<!-- <div class="rechargeItem" onclick="itemSnClick(this)">
+					<p>充500增100</p>
+				</div> -->
+			</div>
+			<div class="tjmView">
+				<input class="tjmInput" type="text" placeholder="请输入推荐码">
+				<p class="noticeTxt">如有推荐码，请在充值前输入推荐码</p>
+			</div>
+			<a class="rechargeBtn" href="javascript:;" onclick="showLayer()">在线充值</a>
+		</div>
+		
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jweixin-1.0.0.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app.js?v=1.0.1"></script>
+		<script type="text/javascript">
+			let closeDate = 5;
+			let itemSn;
+			let rechargeMoney;
+			var myInter;
+			$(function(){
+				var code = sessionStorage.getItem('code');
+				if(code){
+					$('.tjmInput').val(code).attr('readonly', 'readonly');
+					sessionStorage.removeItem('code');
+					$('.tjmView').show();
+				}
+				getCardInfo();
+				app.getAjax('/prod-api/api/h5/query/item/recharge', {}, function(res){
+					console.log(res);
+					let rechargeList = res.data;
+					rechargeList.forEach(function(value, key){
+						let active = '';
+						if(key == 0){
+							active = 'active';
+							itemSn = value.itemSn;
+							rechargeMoney = value.cashRecharge;
+							$('.rechargeBtn').attr('onclick', 'rechargeClick('+ itemSn +','+ rechargeMoney +')');
+						}
+						$('.rechargeList').append(
+							'<div class="rechargeItem '+ active +'" onclick="itemSnClick(this, '+ value.itemSn +', '+ value.cashRecharge +')">'+
+								'<p>'+ value.itemName +'</p>'+
+							'</div>'
+						)
+					})
+				})
+			})
+			
+			
+			// 获取一卡通信息
+			function getCardInfo(){
+				layer.load('1');
+				app.getAjax('/prod-api/api/h5/query/vipInfo', {
+					openId: app.getCookie('openid') 
+				}, function(res){
+					layer.closeAll();
+					if(res.code == '500'){
+						layer.alert(res.msg);
+					}else{
+						var cashBalance = res.data.cashBalance;
+						var giveBalance = res.data.giveBalance;
+						var oldBalance = res.data.oldBalance;
+						var totalBalance = parseFloat(cashBalance*1 + giveBalance*1 + oldBalance*1).toFixed(2);
+						var iccardSn = res.data.iccardSn;
+						var phone = res.data.phone;
+						app.setCookie('phone', phone);
+						$('.cashBalance').text(cashBalance);
+						$('.giveBalance').text(giveBalance);
+						$('.oldBalance').text(oldBalance);
+						$('.totalBalance').text(totalBalance);
+						$('.phoneNumber').text('手机号：' + phone);
+					}
+				})
+			}
+			
+			// 选择充值类型
+			function itemSnClick(that, itemSn, rechargeMoney){
+				$(that).addClass('active').siblings().removeClass('active');
+				$('.rechargeBtn').attr('onclick', 'rechargeClick('+ itemSn +','+ rechargeMoney +')');
+			}
+			
+			function rechargeClick(itemSn, rechargeMoney){
+				closeDate = 5;
+				var str = '<div style="height:400px;overflow:auto;">';
+				str += '<p style="font-size:16px;font-weight:bold;text-align:center;">南京市玄武湖公园储值消费卡购卡协议</p><br>';
+				str += '<p style="font-size:12px;text-indent:2em;">甲方（购卡人）：</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">统一信用代码证/身份证：</p><br>';
+				str += '<p style="font-size:12px;text-indent:2em;">乙方（发卡人）：南京市玄武湖公园管理处</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">统一信用代码证： 91320100134896850P</p><br>';
+				str += '<p style="font-size:12px;text-indent:2em;">甲方购买由乙方发行的     南京市玄武湖公园储值消费   卡（下文简称本卡），乙方为持卡人在乙方处购买相应商品或者服务时提供使用    南京市玄武湖公园储值消费   卡进行支付的服务。经甲乙双方友好协商，就有关服务事宜形成约定如下，以资双方共同遵守：</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">第一条  声明与承诺</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">本协议已对与甲方的权益有或可能具有重大关系的条款，及对乙方具有或可能具有免责或限制责任的条款予以列示，请甲方注意。甲方确认，在甲方购买本卡之前，甲方已充分阅读、理解并接受本协议的全部内容。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">第二条  单用途卡的名称、种类、功能及购卡/充值金额</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">1.单用途卡的名称： 南京市玄武湖公园储值消费卡 </p>';
+				str += '<p style="font-size:12px;text-indent:2em;">2.单用途卡的种类：不记名卡</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">3.	单用途卡的功能：预付凭证</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">4.	购卡/充值金额：在甲方将实际付款金额消费完后才可享受乙方赠送消费金额。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">退卡时赠送消费金额不予退还。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">5.	支付方式：□现金支付  □银行转账   □               </p>';
+				str += '<p style="font-size:12px;text-indent:2em;">乙方指定收款账户：</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">户名：</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">账号：</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">开户行：</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">特别说明：甲方为单位，且一次性购卡金额达5000元（含）以上的，或甲方为个人且一次性购卡金额达5万元（含）以上的，以及甲方采用非现场方式（包括但不限于互联网、邮递、电话等方式）购卡的，必须通过银行转账方式购卡，乙方有权拒绝甲方使用现金购卡。使用转账方式购卡的，乙方将对转出、转入账户名称、账号、金额等进行逐笔登记。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">第三条  乙方提供的服务</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">1.	消费服务：乙方应设立业务系统，为甲方提供刷卡消费以获取商品或者服务的消费服务。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">2.	安全保障：乙方确保本卡业务系统以及商户受理终端的正常使用，并确保系统的数据不外泄、不丢失。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">3.	客户服务：乙方在确保甲方持卡正常消费的基础上，还提供以下服务。客服电话：乙方提供025-83614286客服电话以确保甲方在消费时遇到的问题能够及时解决。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">4.	退卡服务：</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">（1）购卡人按照附件《南京市玄武湖公园储值消费卡章程》的约定退卡。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">（2）乙方终止兑付未到期本卡的，乙方应向甲方提供免费退卡服务，并在终止兑付日前至少30日内在备案机关指定的媒体上公示。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">5.	甲方购买不记名卡的，应在有效期内及时使用，超过有效期尚有资金余额的卡片可到乙方办理激活、换卡手续。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">第四条  甲乙双方的权利和义务</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">1.	乙方应确保甲方按照正常手续购买的本卡可以正常使用。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">2.	乙方应以网上公告、书面或其他合理方式告知甲方本卡的使用规则。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">3.	对于违反本协议或章程使用本卡的，乙方有权暂停该卡的使用。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">4.	甲方一次性购买1万元（含）以上不记名卡时，乙方有权要求甲方按照规定提供个人、单位有效身份证件。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">5.	甲方购卡时已享受相关折扣和优惠，甲方使用卡时不再享受其他优惠待遇，如遇价格调整，按新价格执行。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">6.	乙方依法对甲方的信息承担保密义务，未经当事人同意不得向任何单位或个人披露，但法律、法规和规章另有规定的除外。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">7.	甲方应依据本卡的使用规则合法合理的使用该卡片，甲方对本卡、密码等保管不善，导致他人冒用造成的经济损失，应当自行承担。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">8.	甲方应合法合理的使用乙方提供的客服热线、网站等服务。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">第五条  违约责任</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">1.	因任一方过错给对方造成损失的，违约方应向守约方赔偿相应的经济损失。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">2.	甲、乙双方因不可抗力无法履行协议的，根据不可抗力的影响，部分或者全部免除责任，但法律另有规定的除外。当事一方延迟履行协议后发生不可抗力的，不能免除责任。本协议所称不可抗力，是指不能预见、不能避免并不能克服的客观情况。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">第六条  纠纷处理</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">因履行本协议所产生的纠纷，双方可协商解决，协商不成的，任何一方均可向乙方所在地的法院提起诉讼。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">第七条  附则</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">1.	乙方在甲方签署本协议前已充分告知其所购买的本卡的风险及该卡的章程、制度及有关法规，甲方确认已知悉并充分理解本协议及附件章程所包含的所有条款。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">2.	甲乙双方同意按照本协议的约定、附件的规定及相关法律法规的规定履行；没有约定和规定或约定和规定不明确的，各方应按照公平、诚信等原则履行。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">3.	本协议一式两份，自甲乙双方签订之日起生效，具有同等法律效力。</p>';
+				str += '<p style="font-size:16px;font-weight:bold;text-align:center;">南京市玄武湖公园储值消费卡章程</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">1.	 概述</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">1.1 本玄武湖公园储值消费卡章程（以下简称 “本章程”）项下的储值消费卡（定义见下文）由发卡人（定义见下文）发行。储值消费卡可在玄武湖景区内购买相应的商品和服务。为规范储值消费卡的购买、使用和管理，特制定本章程。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">1.2 本章程涉及的部分名词遵从如下定义：</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">“发卡人”指南京市玄武湖公园管理处。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">“购卡人”指符合本章程之规定购买储值消费卡的单位或个人。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">“持卡人”指储值消费卡的实际持有人。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">“特约商户”指发卡人在其官网上不时公布的、可受理储值消费卡的玄武湖景区内商户。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">1.3 发卡人、购卡人、持卡人应遵守本章程之规定，并受本章程之约束。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">2.	储值消费卡可重复充值。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">2.1 玄武湖公园储值消费卡为：由发卡人预制且具有支付功能的实体卡或虚拟卡，可在玄武湖景区内购买相应的商品和服务。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">2.2 储值消费卡以人民币计价，不记名卡面值不超过人民币1,000元。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">2.3不记名卡不可挂失。储值消费卡不用于兑换或提取现金、不具有透支功能。卡内资金不产生利息、红利或任何其他收益，且不可向银行账户或网络支付账户进行转账或转移。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">2.4 发卡人有权对储值消费卡的使用范围、方式或条件等作出补充规定并通过储值消费卡本身（例如卡面、电子通知等方式）向购卡人/持卡人作出说明，购卡人/持卡人亦应遵守该等规定。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">3.	 购买和充值</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">3.1 满足本章程之购卡条件的单位或个人可以现金、借记卡、信用卡、银行转账或其他发卡人接受的支付方式，向发卡人购买储值消费卡。除前述销售渠道之外，发卡人未授权或委托任何机构、网站或个人以任何形式销售储值消费卡。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">3.2 持卡人可以现金、借记卡、信用卡或其他发卡人接受的支付方式，为储值消费卡进行充值。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">3.3 单张实体储值消费卡卡内累计余额不记名卡不得超过1,000元。单次充值金额为人民币100元或100元的整数倍。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">3.4 实名认证</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">3.5.1 如购卡人一次性购卡金额在1万元（含）以上的，应向发卡人进行实名认证。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">3.5.2 为办理实名认证，购卡人/持卡人应提供有效的身份证件，包括但不限于购卡人/持卡人及其代理人姓名或单位名称、有效身份证件号码和联系方式，供发卡人留存。个人有效身份证件包括居民身份证、户口簿、军人身份证件、武警身份证件、港澳台居民通行证、护照等。单位有效身份证件包括营业执照、事业单位法人证书、税务登记证、组织机构代码证等。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">3.5.3 发卡人应保存前述购卡人/持卡人的登记信息5年以上。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">3.6单位一次性购买单用途卡金额达5000元（含）以上或个人一次性购卡或充值金额达5万元（含）以上的，以及单位或个人采用非现场方式购卡或充值的，不可使用现金，应通过银行向发卡人指定银行账户转账。购卡/充值单位或个人应提供银行付款账户的信息（包括：账户名称、账号及金额等）。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">3.7 应发卡人的要求，购卡人应与发卡人签订储值消费卡购买合同。若购卡人要求，发卡人亦应与购卡人签订储值消费卡购买合同。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">4.	 使用</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">4.1 在持卡人持储值消费卡在玄武湖公园内购买商品或服务时，若储值消费卡余额不足的，持卡人可使用现金、信用卡或借记卡等经营点可接受的支付方式补足。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">4.2 储值消费卡购买时即激活。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">4.3储值消费卡的有效期为激活之日起三年，或末次充值之日起三年，具体以储值消费卡卡面标识或以其他形式（包括但不限于电子通知的方式）告知的截止日期为准。持卡人应在有效期内使用储值消费卡。发卡人对超过有效期尚有资金余额的不记名卡应提供激活和延期服务，每次延期一年，持卡人需向发卡人支付延期管理服务费20元/次。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">4.4储值消费卡交易以联网的方式自动化进行实时支付和结算；交易完成时，所购商品或服务的对应金额即时从储值消费卡账户中扣除。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">4.5 除发卡人或特约商户另有规定外，使用储值消费卡时不可再享受特约商户的其他折扣或优惠。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">4.6 交易错误的查询与更正</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">4.6.1 如发卡人在对账过程中发现交易中存在记账或其他交易差错，发卡人有权更正储值消费卡内余额。如对该等更正有疑义，持卡人可致电发卡人客服电话。发卡人将对持卡人的疑义进行调查，更正差错（如有）并及时告知持卡人处理结果。如不存在差错，发卡人将对持卡人作出相应解释。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">4.6.2 如持卡人认为交易过程中存在记账或其他交易差错，持卡人应在交易发生后30日内致电发卡人客服电话；经发卡人证实确有差错的，发卡人应更正储值消费卡内的余额，除此之外，发卡人不对持卡人承担任何其他责任。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">4.7 发卡人将向持卡人提供储值消费卡资金余额查询，向持卡人就储值消费卡使用的相关事项提供咨询，并处理持卡人的投诉。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">4.8 购卡人和/或持卡人不应将储值消费卡以任何形式转售予任何第三方，也不应将储值消费卡用于任何非法目的。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">4.9 储值消费卡仅供购卡人/持卡人在本章程规定的条件下使用，持有或使用储值消费卡不代表购卡人/持卡人获得授权使用“玄武湖”以及其他由发卡人或其关联公司拥有的标识、商标或任何其他与之相关的知识产权。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">4.10 因下述原因导致持卡人不能正常使用储值消费卡的，发卡人/特约商户/售卡企业对持卡人因此受到的损失不承担责任，但发卡人应当协助持卡人解决问题并提供必要的帮助：</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">（1）发卡人或特约商户运营或结算系统停机维修或维护；</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">（2）电力、电信或银行的系统、设备或网站发生故障、不稳定或升级维护，导致停电、或数据传输不稳定、失败或中断；</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">（3）台风、地震、海啸、洪水、战争、疫情、恐怖袭击、暴动、游行示威及其他不可抗力原因，造成发卡人或特约商户不能正常营业，或造成其运营或结算系统障碍不能正常运行。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">5. 退卡</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">5.1 退卡</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">5.1.1 发卡方未按照约定提供商品或服务的；发卡方终止兑付未到期储值消费卡，发卡方和售卡方应向持卡人提供免费退卡服务。持卡人应于卡片有效期内向乙方提出相应退卡申请。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">若持卡人要求退卡的，退卡人应是购买储值消费卡的原购买人，并应在发卡人指定的渠道办理退卡。办理退卡时，个人退卡人应提供与原购卡人一致的有效身份证件及《南京市玄武湖公园储值消费卡购卡协议》，企业退卡人应提供加盖公章的退卡申请、营业执照复印件及《南京市玄武湖公园储值消费卡购卡协议》。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">5.1.2 储值消费卡退卡人应退还购卡的原始发票、充值发票以及相关的付款凭证。如储值消费卡退卡人要求退还其在购买（及充值）时享受过任何折扣或优惠的储值消费卡，在计算退款时将按退卡人在购买（及充值）时实际支付的金额或按储值消费卡全额扣除上述优惠后的金额办理退款，优惠（及赠送）金额不予退款，即：实际退款额=实际支付的金额或按储值消费卡全额扣除上述优惠后的金额-实际已消费金额。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">5.1.3 退卡手续费统一按所退卡片实际退款额2%的标准收取（如果退卡人所退卡片为两张或以上，则退卡手续费按照实际退款总额2%的标准收取），最低人民币20元。在扣除前述手续费后，卡内剩余资金将被退至退卡人同名的银行账户内。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">5.2 自发卡人将储值消费卡交付给购卡人之时起，储值消费卡的丢失、毁损等一切相关风险转移予购卡人。购卡人/持卡人未妥善保管储值消费卡导致储值消费卡污损、遗失、灭失的，应当自行承担损失。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">6.发票</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">6.1 就购卡人购买的储值消费卡或持卡人充值，由购卡人提出申请，发卡人将根据本章程约定的程序，向购卡人或持卡人开具符合国家适用法律、法规规定的发票。对于持卡人根据本章程第5.1款退货取得的新储值消费卡，发卡人不再开具发票。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">6.2 发票的申请与开具</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">6.2.1 购卡人/持卡人在发卡人处购卡/充值时，发卡人可当场向购卡人/持卡人出具发票，也可按照6.2.2项将发票寄送。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">6.2.2 购卡人在通过经发卡人书面授权的网络销售渠道购买储值消费卡或直接向发卡人购卡的、以及持卡人通过前述渠道充值时，应在购卡或充值的同时提出发票申请。购卡人/持卡人在申请发票时应提供有效的中国大陆的邮寄地址。发卡人将把发票以挂号信或快递形式发送至购卡人/持卡人提供的地址。由于地址有误或购卡人/持卡人不收/取件等非发卡人原因导致无法寄送的，购卡人/持卡人应自行承担损失。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">6.3 购卡人/持卡人所申请的发票金额需与销售或充值小票上的购卡金额一致；所申请的发票内容需符合国家适用法律、法规，不可依购卡人/持卡人任意的要求而开具。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">6.4 持卡人持储值消费卡在特约商户购买商品（或服务）时，特约商户将不再就该商品开具发票；但同一笔交易中，若持卡人同时使用储值消费卡之外的付款方式进行付款，则特约商户可就储值消费卡之外的付款方式支付的款项根据国家适用法律、法规和特约商户的财务政策开具发票。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">7. 免责条款</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">在适用法律允许的最大范围内，无论是基于侵权、违约还是其他诉由，发卡人或特约商户不对购卡人、持卡人或任何第三人因储值消费卡引起的任何直接或间接的损失或损害承担任何责任，包括但不限于任何收入损失、利润损失、商誉损失、数据损失、资金使用损失等。本条之规定不排除或限制发卡人或特约商户在如下方面的责任：（1）欺诈行为引起的责任；（2）适用法律规定不应排除或限制的责任。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">8. 附则</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">8.1 购卡人/持卡人存在以下情形的，发卡人有权拒绝交易、暂停或终止对购卡人/持卡人的服务，所有损失应由购卡人/持卡人自行承担：</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">（1）发卡人、售卡企业或特约商户根据国家适用法律、法规核实购卡人/持卡人身份及储值消费卡交易信息等情况，遭拒绝的；</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">（2）冒用他人身份或使用伪造、变造身份证明文件购买或使用储值消费卡或进行充值的；</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">（3）在发卡人公布的售卡或充值渠道之外购买储值消费卡或进行充值的；</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">（4）在购买或使用储值消费卡或进行充值时存在欺诈行为；</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">（5）违反本章程购买或使用储值消费卡或进行充值；</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">（6）违反国家或地方适用法律、法规进行非法交易；</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">（7）使用伪造、变造、残缺不全的储值消费卡；</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">（8）有其他损害发卡人特约商户或其他购卡人/持卡人的合法权益的情形。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">8.2 若发卡人终止兑付未到期储值消费卡的，应向购卡人/持卡人提供免费退卡服务，并在终止兑付日前至少30日在储值消费卡备案机关指定的媒体上进行公示。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">8.3 本章程由发卡人制订，发卡人有权根据需要修改本章程，但将采取适当的形式在玄武湖公园售卡处、发卡人官网或发卡人指定的其他途径提前公告。本章程经修改或调整公布后即生效，不再逐一通知购卡或持卡当事人。购卡人或持卡人有义务定期关注玄武湖售卡处、发卡人官网或发卡人指定的其他途径以了解本章程的修改情况。若购卡人/持卡人在本章程修改之后仍继续购买和/或使用储值消费卡的，即视为当事人接受本章程的修改。如果购卡人/持卡人不同意修改，则应在本章程修改生效前将储值消费卡使用完毕，本章程生效之后应停止使用储值消费卡。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">8.4 发卡人为购卡人/持卡人的交易数据和身份证件资料保密，除国家法律法规另有规定、监管部门另有要求或与客户另有约定外，不得将上述资料随意提供给第三方。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">8.5 争议解决</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">8.5.1 任何由本章程引起的争议，双方应协商解决。若自一方书面通知另一方要求协商之日起15日内未能解决，任何一方均可向发卡人所在地人民法院提起诉讼。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">8.5.2 在争议解决过程中，除正在进行诉讼的部分外，本章程的其他部分仍应继续执行。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">8.6 本章程于2020年7月1日起正式实施。</p>';
+				str += '</div>'
+				layer.open({
+					content: str,
+					btn: ['同意并充值(5s)'],
+					cancel: function(){
+						clearInterval(myInter);
+					},
+					success: function(){
+						$('.layui-layer-btn0').addClass('disabled');
+					},
+					btn1: function(){
+						if(closeDate != 0){
+							return false;
+						}
+						var code = $('.tjmInput').val();
+						var params = {};
+						if(code){
+							params = {
+								orderId: itemSn,
+								openId: app.getCookie('openid'),
+								phone: app.getCookie('phone'),
+								deposit: rechargeMoney,
+								code: code
+							}
+						}else{
+							params = {
+								orderId: itemSn,
+								openId: app.getCookie('openid'),
+								phone: app.getCookie('phone'),
+								deposit: rechargeMoney
+							}
+						}
+						$.ajax({
+						    url:'http://hd.smart-ideas.com.cn/xwhpark/cartoon/getPayInfo',
+						    type:"GET",
+						    data:params,
+						    success:function(data){
+						    	console.log(data);
+								var res_o = JSON.parse(data.data.res);
+								WeixinJSBridge.invoke(
+									'getBrandWCPayRequest', {
+								       "appId":res_o.appId,     //公众号名称，由商户传入
+								       "timeStamp":res_o.timeStamp,  //时间戳，自1970年以来的秒数
+								       "nonceStr":res_o.nonceStr, //随机串
+								       "package":res_o.package,
+								       "signType":res_o.signType,//微信签名方式：
+								       "paySign":res_o.paySign //微信签名
+									},
+									function(res){
+										if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+											window.location.replace("history.html?type=0");
+										}
+									}
+								);
+						    }
+						});
+					}
+				})
+				// 倒计时关闭提示框
+				myInter = setInterval(function(){
+					closeDate -= 1;
+					if(closeDate != 0){
+						$('.layui-layer-btn0').text('同意并充值(' + closeDate + 's)');
+					}else{
+						$('.layui-layer-btn0').text('同意并充值');
+						$('.layui-layer-btn0').removeClass('disabled');
+						clearInterval(myInter);
+					}
+				}, 1000);
+			}
+		</script>
+	</body>
+</html>

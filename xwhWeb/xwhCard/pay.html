@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css">
+		<style type="text/css">
+			.container{
+				background-color: #007AFF;
+				min-height: 100vh;
+				padding: 10px;
+			}
+			.title{
+				font-size: 20px;
+				font-weight: bold;
+				text-align: center;
+				line-height: 40px;
+				margin-bottom: 10px;
+			}
+			.payView{
+				position: relative;
+				background: radial-gradient(circle at 0 70px, transparent 10px, #fff 0) left,
+							radial-gradient(circle at right 70px, transparent 10px, #fff 0) right;
+				background-repeat: no-repeat;
+				background-size: 51% 100%;
+				margin-bottom: 10px;
+				border-radius: 5px;
+				filter: drop-shadow(3px 3px 3px rgba(0,0,0,.3))
+				width: 100%;
+				position: relative;
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-start;
+				align-items: flex-start;
+			}
+			.txtView{
+				height: 70px;
+				border-bottom: 1px dashed #007AFF;
+				width: 100%;
+			}
+			.txtView{
+				padding: 10px 20px;
+			}
+			.txtView p{
+				font-size: 14px;
+				color: #333;
+				line-height: 25px;
+			}
+			.txtView .txtTitle{
+				font-weight: bold;
+				font-size: 17px;
+			}
+			
+			
+			.qrcodeView{
+				width: 100%;
+				padding: 20px;
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-start;
+				align-items: center;
+			}
+			.qrcodeView p{
+				font-size: 17px;
+				color: #333;
+				text-align: center;
+				line-height: 35px;
+				font-weight: bold;
+			}
+			.qrcodeView .qrcodeImg{
+				padding: 10px;
+				background-color: #f5f5f5;
+			}
+			.qrcode{
+				padding: 10px;
+				background-color: #f5f5f5;
+			}
+			.qrcodeView .yxq{
+				font-size: 14px;
+				font-weight: normal;
+			}
+		</style>
+		<title>玄武湖景区一卡通</title>
+	</head>
+	<body>
+		<div class="container">
+			<p class="title">玄武湖景区一卡通</p>
+			<div class="payView">
+				<div class="txtView">
+					<p class="txtTitle">玄武湖景区一卡通支付码</p>
+					<p class="phone">手机号：</p>
+				</div>
+				<div class="qrcodeView">
+					<p>出示以下二维码支付</p>
+					<div class="qrcode"></div>
+					<p class="payCode"></p>
+					<p class="yxq">二维码有效期十分钟</p>
+				</div>
+			</div>
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.qrcode.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app.js?v=1.0.1"></script>
+		<script type="text/javascript">
+			$(function(){
+				$('.phone').text('手机号：' + app.getCookie('phone'));
+				app.getAjax('/prod-api/api/h5/query/payNumber', {
+					openId: app.getCookie('openid')
+				}, function(res){
+					$('.qrcode').html('');
+					var payNumber = res.data.payNumber;
+					$('.qrcode').qrcode({
+						text: res.data.payNumber + '?date=' + new Date().getTime(),
+						background: '#fff',
+						foreground: '#000',
+						width: 180,
+						height: 180
+					});
+					$('.payCode').text(payNumber.substring(payNumber.length-8,payNumber.length));
+					var nowDate = new Date(new Date().getTime() + 60*1000*10);
+					var nowYear = nowDate.getFullYear();
+					var nowMonth = nowDate.getMonth()+1;
+					nowMonth=nowMonth>9?nowMonth:'0'+nowMonth;
+					var nowDay = nowDate.getDate();
+					nowDay=nowDay>9?nowDay:'0'+nowDay;
+					var nowHour = nowDate.getHours();
+					nowHour=nowHour>9?nowHour:'0'+nowHour;
+					var nowMinutes = nowDate.getMinutes();
+					nowMinutes=nowMinutes>9?nowMinutes:'0'+nowMinutes;
+					var nowSeconds = nowDate.getSeconds();
+					nowSeconds=nowSeconds>9?nowSeconds:'0'+nowSeconds;
+					$('.yxq').text('二维码有效期至：' + nowYear + '-' + nowMonth + '-' + nowDay + ' ' + nowHour + ':' + nowMinutes + ':' + nowSeconds);
+				})
+			})
+		</script>
+	</body>
+</html>

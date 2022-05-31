@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/bike.css?v=20">
+		<title>玄武湖</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="box">
+				<p class="title">收费标准：</p>
+				<div class="box-content">
+					<div class="price">
+						<div class="price-item">
+							<div class="price-txt">
+								价格：
+								<p class="chargeTxt">元/3分钟</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="box">
+				<p class="title">手机号：</p>
+				<div class="box-content">
+					<input class="phone" type="text">
+				</div>
+			</div>
+			<div class="box">
+				<p class="title">开放时间：</p>
+				<div class="box-content">
+					<div class="desc">
+						<p>脚踏喷泉开放时间：9:00--17:00</p>
+					</div>
+				</div>
+			</div>
+			<div class="box">
+				<p class="title">游客须知：</p>
+				<div class="box-content">
+					<div class="desc">
+						<p><font class="descPrice"></font>元/3分钟，扫码支付</p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="btnView">
+				<a href="javascript:;" onclick="hoverClick(this)">我已同意，前往充值</a>
+			</div>
+		</div>
+		
+		<div class="hoverView">
+			<div class="hoverContent">
+				<p class="hoverTitle">特别提示</p>
+				<p class="contentTxt">1、为了避免消费歧义, 请<font>勿</font>使用各类支付立减金/消费红包</p>
+				<label for="sure"><input class="sure" id="sure" type="checkbox">我已知悉</label>
+				<a href="javascript:;" onclick="payClick(this)">我已知悉，前往充值</a>
+			</div>
+		</div>
+		
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jweixin-1.0.0.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/fountain.js?v=1.0.0"></script>
+	</body>
+</html>

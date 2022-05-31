@@ -1,0 +1,83 @@
+.container{
+	min-width: 500px;
+}
+.searchView{
+	width: 100%;
+	background-color: #fff;
+	padding: 10px;
+	box-shadow: 0 0 5px #ddd;
+}
+.searchView p{
+	font-size: 16px;
+	color: #333;
+	margin-bottom: 20px;
+}
+.searchView input{
+	width: 100%;
+	height: 35px;
+	color: #333;
+	font-size: 16px;
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 0 10px;
+	margin: 5px 0;
+}
+.searchView .searchBtn{
+	display: block;
+	width: 75px;
+	line-height: 35px;
+	color: #fff;
+	background-color: #009F95;
+	text-align: center;
+	border-radius: 5px;
+	margin-top: 10px;
+	font-size: 16px;
+}
+.resulView{
+	margin-top: 10px;
+	background-color: #fff;
+	padding: 10px;
+	box-shadow: 0 0 5px #ddd;
+}
+.thView{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	background-color: #eee;
+}
+.thView p{
+	flex: 1;
+	text-align: center;
+	line-height: 40px;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	font-size: 14px;
+	color: #333;
+}
+.tdItem{
+	display: flex;
+}
+.tdItem p{
+	flex: 1;
+	text-align: center;
+	line-height: 40px;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+}
+
+.dark{
+	background-color: #d4d4d4;
+	color: red;
+}
+.totalView{
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+.totalView p{
+	flex: 1;
+	text-align: center;
+	line-height: 40px;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+}

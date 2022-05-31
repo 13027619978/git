@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="css/reset.css?v=10">
+		<link rel="stylesheet" href="css/routeClose.css">
+		<title></title>
+	</head>
+	<body>
+		<div class="hoverView">
+			<p>雪天路滑  暂停营业  敬请谅解</p>
+		</div>
+		<div class="container">
+			<div class="fullScreen">
+				<div class="topView">
+					<div class="weatherView">
+						<!-- <p class="weatherTxt"></p> -->
+						<img src="img/logo.png" >
+					</div>
+					<div class="titleView">
+						<p>玄武湖观光车智慧运营系统</p>
+					</div>
+					<div class="timeView">
+						<p class="dateTxt"></p>
+						<p class="weatherTxt"></p>
+					</div>
+				</div>
+				<div class="content">
+					<div class="content-left">
+						<!-- 购票流程 -->
+						<div class="progress">
+							<p class="siteNameTitle">当前站点：</p>
+							<div class="nextCar" style="display: none;">
+								<p>下班车：预计0分钟0空位</p>
+							</div>
+						</div>
+						
+						<div class="lineView">
+							<!-- 路线 -->
+							<div class="lineList">
+								<div class="lineItem">
+									<p class="lineTitle">内环线</p>
+									<!-- <div class="leftMap">
+										<img src="img/map1.png" >
+									</div> -->
+									<!-- <span class="icon"></span> -->
+									<div class="routeView">
+										<div>
+											<p class="routeTitle">内环线</p>
+											<p class="routeSecondTitle">单向行驶</p>
+										</div>
+										<div class="routeContent">
+											
+											<div class="routeDetail">
+												<span class="line"></span>
+												<div class="siteList nhx">
+													<img class="jtIcon" src="img/right-icon1.png" >
+													<img class="jtIcon" src="img/right-icon1.png" >
+													<img class="jtIcon" src="img/left-icon1.png" >
+													<img class="jtIcon" src="img/left-icon1.png" >
+													<!-- <div class="siteItem">
+														<div class="site">
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">站点1</p>
+															<p class="carInfo">xx分钟 xx空位</p>
+														</div>
+													</div> -->
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<!-- 路线 -->
+							<div class="lineList qly">
+								<div class="lineItem">
+									<!-- <p class="lineTitle">情侣园环线</p> -->
+									<!-- <div class="leftMap">
+										<img src="img/map1.png" >
+									</div> -->
+									<!-- <span class="icon"></span> -->
+									<div class="routeView">
+										<div>
+											<p class="routeTitle">情侣园环线</p>
+											<p class="routeSecondTitle">单向行驶</p>
+										</div>
+										<div class="routeContent">
+											<!-- <div class="nextCar">
+												<p></p>
+											</div> -->
+											<div class="routeDetail">
+												<span class="line"></span>
+												<div class="siteList">
+													<img class="jtIcon" src="img/right-icon.png" >
+													<img class="jtIcon" src="img/right-icon.png" >
+													<img class="jtIcon" src="img/right-icon.png" >
+													<img class="jtIcon" src="img/left-icon.png" >
+													<img class="jtIcon" src="img/left-icon.png" >
+													<img class="jtIcon" src="img/left-icon.png" >
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName">景区停车场</p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">花卉大道站</p>
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName">地铁4号线方向</p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">十里长堤站</p>
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName">地铁3号线方向</p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">翠洲门站</p>
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName"></p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName green">白苑站(换乘站)</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- 购票 -->
+						<div class="ticketView">
+							<div class="ticketItem">
+								<p class="itemTitle">单次票</p>
+								<div class="priceView">
+									<p class="ticketTitle">票价：10元/次</p>
+									<a href="javascript:;" onclick="buyTickets()">购票</a>
+								</div>
+								<p>购票须知</p>
+								<p>1. 票价10元/人/次，换乘站必须下车</p>
+								<p>2. 一票限一人使用</p>
+								<p>3. 凭此票可在运营时间内乘坐1次</p>
+								<p>4. 车票当日有效</p>
+								<p>5. 仅限在内环线使用</p>
+								<p>6.当日未核销车票于当日晚9点自动原路退票</p>
+								<p>7. 运营时间9:00-17:30</p>
+								<p>服务电话：025-83615961</p>
+							</div>
+							<div class="ticketItem">
+								<p class="itemTitle">多次票</p>
+								<div class="priceView">
+									<p class="ticketTitle">票价：40元/次</p>
+									<a href="javascript:;" onclick="buyTickets()">购票</a>
+								</div>
+								<p>购票须知</p>
+								<p>1. 票价40元/人/6次，换乘站必须下车</p>
+								<p>2. 一票限一人使用</p>
+								<p>3. 凭此票可在运营时间内乘坐6次</p>
+								<p>4. 车票当日有效</p>
+								<p>5. 可在内环线和情侣园线同时使用</p>
+								<p>6.当日未核销车票于当日晚9点自动原路退票</p>
+								<p>7. 运营时间9:00-16:30</p>
+								<p>投诉电话：025-83615961</p>
+							</div>
+						</div>
+					</div>
+				
+					<div class="content-right">
+						<div class="right-top">
+							<div class="mapView">
+								<p class="mapTitle">地图</p>
+								<!-- <div id="container"></div> -->
+								<div class="mapImg">
+									<img src="img/mapImg.jpg" >
+								</div>
+							</div>
+							<!-- <div class="callView">
+								<img src="img/callBg.png" >
+							</div> -->
+						</div>
+						<!-- <div class="adView">
+							<img src="" >
+						</div> -->
+					</div>
+				
+					<p class="bottomTitle">身高1.1米以下儿童可免费乘坐观光车（不占座），身高1.1米及以上需购票乘车。出于对安全乘车的考虑，每名成人只可携带1名身高1.1米以下儿童免费乘车。</p>
+				</div>
+				
+			</div>
+			
+			<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=c1b024a249b04326f11894fd0e35041d"></script>
+			<script src="js/jquery.min.js"></script>
+			<script src="layer/layer.js"></script>
+			<script src="js/app.js"></script>
+			<script type="text/javascript">
+				var scale =  window.innerHeight / ($('.fullScreen').height() + 20);
+				$('.fullScreen').css({
+					'transform': 'scaleY(.96)'
+				})
+				// 当前站点
+				var siteId = app.getQueryString('siteId');
+				siteId = siteId?siteId:'0';
+				
+				switch(siteId){
+					case '1':
+						$('.siteNameTitle').text('当前站点：假山瀑布站');
+						siteId = 6;
+					break;
+					
+					case '2':
+						$('.siteNameTitle').text('当前站点：月季园站')
+						siteId = 7;
+					break;
+					
+					case '3':
+						$('.siteNameTitle').text('当前站点：菱洲站')
+						siteId = 8;
+					break;
+					
+					case '4':
+						$('.siteNameTitle').text('当前站点：樱洲站')
+						siteId = 1;
+					break;
+					
+					case '5':
+						$('.siteNameTitle').text('当前站点：蒲仙岛站')
+						siteId = 4;
+					break;
+					
+					case '6':
+						$('.siteNameTitle').text('当前站点：梁洲渡口码头站')
+						siteId = 3;
+					break;
+					
+					case '7':
+						$('.siteNameTitle').text('当前站点：白苑站')
+						siteId = 2;
+					break;
+					
+					case '8':
+						$('.siteNameTitle').text('当前站点：莲花广场站')
+						siteId = 5;
+					break;
+				}
+				
+				// 创建地图实例
+				var map = new AMap.Map("container", {
+				    zoom: 14.5,
+				    center: [118.800223, 32.072163],
+				    resizeEnable: false,
+					zoomEnable:false,
+					dragEnable: false
+				});
+				// initMap(map);
+				
+				// 获取天气信息
+				$.ajax({
+				    url:'https://restapi.amap.com/v3/weather/weatherInfo?key=773c4e4c196eb78e21f220e7e14160d2&extensions=all&city=320100',
+				    type:"GET",
+				    success:function(data){
+						$('.weatherTxt').text('今日 ' + data.forecasts[0].casts[0].dayweather  + ' ' + data.forecasts[0].casts[0].nighttemp + '~' + data.forecasts[0].casts[0].daytemp + '℃')
+				    }
+				});
+				
+				// 初始化时间
+				setInterval(function(){
+					var year = new Date().getFullYear();
+					var month = new Date().getMonth() + 1;
+					month = month<10?'0'+month:month;
+					var day = new Date().getDate();
+					day = day<10?'0'+day:day;
+					var hour = new Date().getHours();
+					hour = hour<10?'0'+hour:hour;
+					var minutes = new Date().getMinutes();
+					minutes = minutes<10?'0'+minutes:minutes;
+					var seconds = new Date().getSeconds();
+					seconds = seconds<10?'0'+seconds:seconds;
+					$('.dateTxt').text(year+'/'+month+'/'+day+' '+hour+':'+minutes+':'+seconds);
+				}, 1000);
+				
+				
+				// 获取线路站点信息
+				app.getAjax('/battery/name/get', {
+					lineNum: 'LINE20210324110102667'
+				}, function(res){
+					if(res.code == 'SUCCESS'){
+						var siteList = res.data;
+						console.log(siteList);
+						var siteIdList = [];
+						var newSiteList = [];
+						newSiteList[0] = siteList[5];
+						newSiteList[1] = siteList[6];
+						newSiteList[2] = siteList[7];
+						newSiteList[3] = siteList[0];
+						newSiteList[4] = siteList[1];
+						newSiteList[5] = siteList[2];
+						newSiteList[6] = siteList[3];
+						newSiteList[7] = siteList[4];
+						newSiteList.forEach(function(value, key){
+							siteIdList.push(value.id);
+							var siteName = value.siteName;
+							if(siteName == '梁州站'){
+								siteName = '粱洲渡口码头站';
+							}
+							var otherName = '';
+							var secondName = '';
+							if(siteName == '菱洲站' || siteName == '白苑站'){
+								siteName = siteName + '(换乘站)';
+							}
+							if(siteName == '假山瀑布站'){
+								otherName = '玄武门方向';
+							}else if(siteName == '菱洲站(换乘站)'){
+								otherName = '解放门方向';
+								secondName = '中南乐园'
+							}else if(siteName == '蒲仙岛站'){
+								otherName = '儿童游乐场';
+							}else if(siteName == '粱洲渡口码头站'){
+								otherName = '可乘车至南京火车站';
+								secondName = '先锋书店'
+							}else if(siteName == '白苑站(换乘站)'){
+								otherName = '情侣园方向';
+							}else if(siteName == '莲花广场站'){
+								otherName = '音乐喷泉';
+							}
+							
+							if(value.id == siteId){
+								if(siteName.indexOf('换乘站') != -1){
+									$('.siteList').eq(0).append(
+										'<div class="siteItem">'+
+											'<div class="site">'+
+												'<p class="siteName active">'+ secondName +'</p>' +
+												'<p class="siteName active">'+ otherName +'</p>' +
+												'<img src="img/currSite.png" >'+
+												'<p class="siteName active green">'+ siteName +'</p>' +
+											'</div>'+
+										'</div>'
+									)
+								}else{
+									$('.siteList').eq(0).append(
+										'<div class="siteItem">'+
+											'<div class="site">'+
+												'<p class="siteName active">'+ secondName +'</p>' +
+												'<p class="siteName active">'+ otherName +'</p>' +
+												'<img src="img/currSite.png" >'+
+												'<p class="siteName active">'+ siteName +'</p>' +
+											'</div>'+
+										'</div>'
+									)
+								}
+								
+							}else{
+								if(siteName.indexOf('换乘站') != -1){
+									$('.siteList').eq(0).append(
+										'<div class="siteItem">'+
+											'<div class="site">'+
+												'<p class="siteName">'+ secondName +'</p>' +
+												'<p class="siteName">'+ otherName +'</p>' +
+												'<img src="img/site-unSelect.png" >'+
+												'<p class="siteName green">'+ siteName +'</p>' +
+											'</div>'+
+										'</div>'
+									)
+								}else{
+									$('.siteList').eq(0).append(
+										'<div class="siteItem">'+
+											'<div class="site">'+
+												'<p class="siteName">'+ secondName +'</p>' +
+												'<p class="siteName">'+ otherName +'</p>' +
+												'<img src="img/site-unSelect.png" >'+
+												'<p class="siteName">'+ siteName +'</p>' +
+											'</div>'+
+										'</div>'
+									)
+								}
+							}
+							
+						})
+						
+						setInterval(function(){
+							// initMap(map);
+							app.getAjax('/battery/last/get', {
+								siteId: siteId
+							}, function(res){
+								console.log(res);
+								var minutes = res.data.time;
+								minutes = parseInt(parseInt(minutes) / 60);
+								$('.nextCar p').eq(0).text('下班车：预计'+ minutes +'分钟'+ res.data.restNumber +'空位');
+							})
+						}, 5000);
+					}
+				})
+				
+				
+				function initMap(map){
+					app.getAjax('/batteryDataView/getLocation', {}, function(res){
+						var resLength = 0;
+						resLength += res.length;
+						var markers = [];
+						if(res.length > 0){
+							res.forEach(function(value, key){
+								var lnglat = value.location;
+								var icon = new AMap.Icon({
+								    size: new AMap.Size(15, 45),    // 图标尺寸
+								    image: './img/dpcIcon.png',  // Icon的图像
+								    imageOffset: new AMap.Pixel(0, 25),  // 图像相对展示区域的偏移量，适于雪碧图等
+								    imageSize: new AMap.Size(15, 15)   // 根据所设置的大小拉伸或压缩图片
+								});
+								// 创建点实例
+								var lng = lnglat.split(',')[0];
+								var lat = lnglat.split(',')[1];
+								var gps = [lng, lat];
+								new AMap.convertFrom(gps, 'gps', function (status, result) {
+								  if (result.info === 'ok') {
+								    var lnglats = result.locations;
+									var marker = new AMap.Marker({
+									    position: new AMap.LngLat(lnglats[0].lng, lnglats[0].lat),
+									    icon: icon
+									});
+									markers.push(marker);
+								  }
+								});
+							})
+							var myInter = setInterval(function(){
+								if(markers.length == resLength){
+									map.clearMap();
+									// 创建覆盖物群组，并将 marker 传给 OverlayGroup
+									overlayGroups = new AMap.OverlayGroup(markers);
+									map.add(overlayGroups);
+									clearInterval(myInter);
+								}
+							}, 100);
+						}
+					})
+				}
+				
+				function buyTickets(){
+					layer.open({
+						title: '温馨提示',
+						area:["500px","200px"],
+						content: '<div style="font-size: 23px;color: blue;font-weight:bold;line-height:35px;">五一假期人流拥挤  内环线暂停营业  敬请谅解</div>',
+						time: 10000
+					});
+				}
+				
+			</script>
+		</div>
+	</body>
+</html>

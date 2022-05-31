@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/boatTickets.css?v=1.0.1">
+		<title>皮划艇购票</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="banner">
+				<img src="img/canoeBanner.png" >
+			</div>
+			<div class="buyInfo">
+				<div class="orderView">
+					<a class="orderBtn" onclick="orderClick()" href="javascript:;">我的订单</a>
+				</div>
+				<div class="buy_item">
+					<div class="radioView">
+						<label for="ticketType1"><input id="ticketType1" type="radio" value="1" name="ticketType" onchange="ticketTypeChange()" >单人皮划艇</label>
+						<label for="ticketType2"><input id="ticketType2" type="radio" value="2" name="ticketType" onchange="ticketTypeChange()" >双人皮划艇</label>
+					</div>
+				</div>
+				<div class="buy_item">
+					<p class="item_l">票价：</p>
+					<p class="singlePrice">0元/小时</p>
+				</div>
+				<div class="buy_item">
+					<p class="item_l">手机号：</p>
+					<input class="phone" type="number" />
+				</div>
+			</div>
+			<div class="descView">
+				<p class="title">注意事项：</p>
+				<p>1，患有心脑血管系统疾病，患有“三高”疾病的人员不适合参与</p>
+				<p>2，严禁未穿好救生衣上船，严禁酒后上船</p>
+				<p>3，参与人员应全程听从教练员或管理员的指挥</p>
+				<p>4，严禁在船，艇上嬉戏打闹，禁止摇摆船，艇，严禁站立</p>
+				<p>5，贵重物品自行保管，为免落水，勿将贵重物品带上船，艇，因保管不善造成的后果自行承担</p>
+			</div>
+			<div class="bottomView">
+				<p>总计：<font class="totalPrice">0.00</font>元</p>
+				<a href="javascript:;" onclick="buyClick(this)">购票</a>
+			</div>
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app.js?v=1.0.0"></script>
+		<script src="js/cannoTicket.js?v=1.0.8"></script>
+	</body>
+</html>

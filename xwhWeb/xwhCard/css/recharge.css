@@ -1,0 +1,142 @@
+.container{
+	width: 100%;
+}
+
+.card{
+	padding: 10px;
+}
+.cardInfo{
+	position: relative;
+	border-radius: 10px;
+	overflow: hidden;
+	box-shadow: 0 5px 5px #666;
+}
+.infoView{
+	background: url(../img/ykt.png) no-repeat left top;
+	background-size: 100% 100%;
+}
+.infoContent{
+	background: rgba(232, 41, 31, .2);
+}
+.infoView .cardTitle{
+	font-size: 18px;
+	color: #e7b14c;
+	font-weight: bold;
+	text-align: center;
+	line-height: 45px;
+}
+.priceView{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 15px;
+}
+.lastPrice{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	background-color: #b88e52;
+	padding: 5px 10px;
+	border-radius: 5px;
+}
+.lastPrice span{
+	display: block;
+	height: 30px;
+	color: #fff;
+	border-left: 1px solid #fff;
+	margin: 0 10px;
+}
+.totalMoney{
+	font-size: 14px;
+	color: #fff;
+}
+.totalMoney font{
+	font-size: 30px;
+	color: #e7b14c;
+	font-weight: bold;
+	margin-right: 5px;
+}
+.lastMoney{
+	font-size: 12px;
+	color: #fff;
+	text-align: center;
+}
+.lastMoney font{
+	color: #00ff00;
+	font-size: 14px;
+}
+.numberView{
+	padding: 5px 10px;
+	background: #453c37;
+}
+.cardNumber{
+	font-size: 12px;
+	color: #fff;
+	line-height: 20px;
+}
+
+.rechargeList{
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	align-items: center;
+	background-color: #f5f5f5;
+	padding: 10px;
+}
+.rechargeList .rechargeItem{
+	width: 49%;
+	padding: 20px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	background-color: #fff;
+	margin: 5px 0;
+}
+.rechargeList .rechargeItem.active{
+	border: 1px solid #007AFF;
+	background-color: #007AFF;
+	color: #fff;
+}
+.rechargeItem p{
+	font-size: 14px;
+	color: #333;
+	text-align: center;
+}
+.rechargeItem.active p{
+	color: #fff;
+}
+.tjmView{
+	padding: 10px 20px;
+	display: none;
+}
+.tjmInput{
+	width: 100%;
+	height: 35px;
+	padding: 0 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	font-size: 14px;
+	color: #333;
+}
+.noticeTxt{
+	font-size: 14px;
+	color: red;
+}
+
+.rechargeBtn{
+	display: block;
+	background-color: #007AFF;
+	color: #fff;
+	border-radius: 5px;
+	line-height: 40px;
+	text-align: center;
+	width: 90%;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+
+.layui-layer-btn .layui-layer-btn0.disabled{
+	background-color: #ddd;
+	color: #666;
+	border: 1px solid #ddd;
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/bike.css?v=1.0.0">
+		<title>玄武湖</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="box">
+				<p class="title">收费标准：</p>
+				<div class="box-content">
+					<div class="price">
+						<div class="price-item">
+							<div class="price-txt">
+								价格：
+								<p class="chargeTxt">元/小时</p>
+							</div>
+						</div>
+						<div class="price-item">
+							<div class="price-txt">
+								押金：
+								<p class="depositTxt">元</p>
+							</div>
+							<p>(押金金额秒退)</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="box">
+				<p class="title">手机号：</p>
+				<div class="box-content">
+					<input class="phone" type="text">
+				</div>
+			</div>
+			<div class="box">
+				<p class="title">开放时间：</p>
+				<div class="box-content">
+					<div class="desc">
+						<p>游船开放时间：9:00--17:00</p>
+						<p>游船止票时间：16:30</p>
+					</div>
+				</div>
+			</div>
+			<div class="box">
+				<p class="title">游客须知：</p>
+				<div class="box-content">
+					<div class="desc">
+						<p class="cardTxt" style="color:blue;"></p>
+						<p>1、每船乘坐数量，包括儿童、禁止超员乘坐；禁止在码头以外自行上下船</p>
+						<p>2、乘客上船时需穿好救生衣。扫码确认后开始计时，游船1小时起租，游览结束后必须原路返回原租赁码头。超时部分按正价收取，每10分钟内加收20元计，超过40分钟及以上不足1小时按加收1小时费计，以此类推。<font>下船后请立即办理退押手续，以免增加租船费用。押金当天有效，过期不退。</font></p>
+						<p>3、须在规定水域内游览，船只严禁过桥。如遇困难，请按提示立即呼叫巡逻救生艇救助，也可拨打船只上所标明的求助电话。</p>
+						<p>4、如遇恶劣天气，景区可终止或停止游船游览娱乐。</p>
+						<p>5、如仍有疑问，请在上船前向工作人员提出，一旦发船，即视为您已理解并接受上述事项。最终解释权归玄武湖景区所有。</p>
+					</div>
+				</div>
+				<!-- <div class="box-content" style="margin-top: 10px;">
+					<div class="desc">
+						<p>技术支持: 北京骑思妙享科技有限公司 400-898-7021</p>
+					</div>
+				</div> -->
+				<p class="title">Tourist notice:</p>
+				<div class="box-content">
+					<div class="desc">
+						<p>1. The capacity of each yacht is limited including children and prohibit to boarding in or off the yacht outside of the docks casually.</p>
+						<p>2. Passengers need to take the life-jackets before boarding. The yacht start to rent after one hour and start timekeeping after scanning. Overtime part will be charged 20 yuan per ten minutes and over forty minutes but within one hour will be charged one hour cost and so on. When getting off the yacht, passengers need immediately to check out and take back the deposit in order to void overcharge. The deposit is valid only the same day and will not be returned if expiring. </p>
+						<p>3. Passengers should travel within the designated water area and the yacht is prohibit from navigating under all bridges. If meeting troubles, please immediately call cruising saving-boat for help according to instructing and also can call the telephone number for help marked in the yacht.</p>
+						<p>4. If meeting bad weather, the administration of the scenic area could terminate or stop yacht-tour service.</p>
+						<p>5. If more questions, passengers could put forward to staff numbers before boarding the yacht. Once the yacht is starting, we will treat as you understand all the mentioned terms. The final power of interpretation is contributed to Xuan Wu lake scenic are.</p>
+					</div>
+				</div>
+			</div>
+			
+			<!-- <p class="jszc">技术支持: 北京骑思妙享科技有限公司 400-898-7021</p> -->
+			
+			<div class="btnView">
+				<a href="javascript:;" onclick="hoverClick(this)">我已同意，前往充值</a>
+			</div>
+		</div>
+		
+		<div class="hoverView">
+			<div class="hoverContent">
+				<p class="hoverTitle">特别提示</p>
+				<p class="contentTxt">1、为了避免消费歧义, 请<font>勿</font>使用各类支付立减金/消费红包</p>
+				<p class="contentTxt">2、请您<font>原路返回</font>到租赁码头办理退押手续</p>
+				<label for="sure"><input class="sure" id="sure" type="checkbox">我已知悉</label>
+				<a href="javascript:;" onclick="payClick(this)">我已知悉，前往充值</a>
+			</div>
+		</div>
+		
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jweixin-1.0.0.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/boat.js?v=1.0.4"></script>
+	</body>
+</html>

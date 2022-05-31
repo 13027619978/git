@@ -1,0 +1,33 @@
+.container{
+	min-height: 100vh;
+	background-color: #f0f0f0;
+	padding: 0.625rem;
+}
+.orderItem{
+	margin-bottom: 0.625rem;
+}
+.orderItem a{
+	background-color: #fff;
+	width: 100%;
+	padding: 0.4375rem;
+	border-radius: 0.1875rem;
+	background: url(../img/more-icon.png) no-repeat right center #fff;
+	background-size: 0.9375rem auto;
+	box-shadow: 0 0 0.3125rem #ddd;
+}
+.orderItem a p{
+	font-size: 0.875rem;
+	color: #333;
+	padding: 0.1875rem 0;
+}
+.orderItem a p font{
+	font-size: 0.875rem;
+	color: #ff5500;
+}
+.noData{
+	font-size: 14px;
+	text-align: center;
+	color: #666;
+	line-height: 50px;
+	display: none;
+}

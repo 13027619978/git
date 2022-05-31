@@ -1,0 +1,166 @@
+.container{
+	min-height: 100vh;
+	width: 100%;
+	background-color: #f0f0f0;
+	padding: 0.625rem;
+	padding-bottom: 7rem;
+}
+.jszc{
+	position: fixed;
+	bottom: 3.75rem;
+	font-size: 13px;
+	color: #333;
+	background-color: #fff;
+	left: 0.625rem;
+	right: 0.625rem;
+	text-align: center;
+	padding: 0.625rem 0;
+	border-radius: 3px;
+	box-shadow: 0 0 5px #ddd;
+}
+.box .title{
+	font-size: 0.875rem;
+	font-weight: bold;
+	color: #333;
+	line-height: 1.875rem;
+}
+.box-content{
+	background-color: #fff;
+	padding: 0.5rem;
+	border-radius: 0.1875rem;
+}
+.price{
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+.price .price-item{
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	flex-direction: column;
+}
+.price .price-item .price-txt{
+	font-size: 0.8125rem;
+	color: #333;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+}
+.price .price-item .price-txt p{
+	font-size: 1rem;
+	font-weight: bold;
+	color: #ff5500;
+}
+.price .price-item p{
+	font-size: 0.875rem;
+	color: #333;
+}
+
+.cardDepositTxt{
+	display: none;
+}
+
+.box-content .phone{
+	width: 100%;
+	height: 2.1875rem;
+	border: 0.0625rem solid #ddd;
+	border-radius: 0.1875rem;
+	padding: 0 0.3125rem;
+	font-size: 0.875rem;
+}
+
+.box-content .desc p{
+	font-size: 0.875rem;
+	color: #333;
+	line-height: 1.375rem;
+	padding: 0.125rem 0;
+}
+.box-content .desc p font{
+	color: red;
+}
+
+.btnView{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 3.75rem;
+	padding: 0.625rem;
+}
+.btnView a{
+	width: 100%;
+	line-height: 2.5rem;
+	background-color: #ff5500;
+	color: #fff;
+	font-size: 0.9375rem;
+	text-align: center;
+	border-radius: 0.1875rem;
+}
+.btnView .disabled{
+	background-color: #ddd;
+	color: #666;;
+}
+
+
+.hoverView{
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, .5);
+	display: none;
+	justify-content: center;
+	align-items: center;
+}
+.hoverView .hoverContent{
+	width: 300px;
+	background-color: #fff;
+	border-radius: 3px;
+	padding: 0 20px;
+	padding-bottom: 10px;
+}
+.hoverView .hoverContent .hoverTitle{
+	line-height: 50px;
+	font-size: 16px;
+	color: #333;
+	text-align: center;
+}
+.hoverView .hoverContent p{
+	font-size: 14px;
+	color: #333;
+	text-align: left;
+	margin-bottom: 10px;
+}
+.hoverView .hoverContent .contentTxt{
+	font-size: 16px;
+	color: #0000FF;
+}
+.hoverView .hoverContent .contentTxt font{
+	font-size: 16px;
+	color: #ff5500;
+}
+.hoverView .hoverContent label{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 14px;
+	color: #333;
+}
+.hoverView .hoverContent label input{
+	width: 17px;
+	height: 17px;
+	margin-right: 5px;
+}
+.hoverContent a{
+	display: block;
+	width: 100%;
+	background-color: #ff5500;
+	font-size: 14px;
+	color: #fff;
+	line-height: 35px;
+	text-align: center;
+	border-radius: 3px;
+	margin-top: 20px;
+}
