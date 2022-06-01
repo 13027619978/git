@@ -1,0 +1,23 @@
+.container{
+	padding: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.medalItem{
+	width: 30%;
+	margin-bottom: 20px;
+}
+.medalItem img{
+	width: 100%;
+}
+.medalItem p{
+	font-size: 12px;
+	color: #c4c4c4;
+	text-align: center;
+}
+.medalItem .up{
+	color: #333;
+}

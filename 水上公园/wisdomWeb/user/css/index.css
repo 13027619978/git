@@ -1,0 +1,86 @@
+.container{
+	width: 100vw;
+	position: absolute;
+	top: 0;
+	left: 0;
+	/* background-color: #000; */
+}
+body{
+	position: relative;
+}
+.todayInfo{
+	padding: 0.2rem 0;
+	padding-right: .3rem;
+	background: url(../img/todayInfoBg.png) no-repeat left top;
+	background-size: 100% 100%;
+}
+.title{
+	font-size: 0.2rem;
+	color: #fff;
+	padding-left: .7rem;
+	line-height: 0.2rem;
+	margin-bottom: 0.1rem;
+	background: url(../img/icon.png) no-repeat 20px center;
+}
+.infoList{
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+.infoItem{
+	flex: 1;
+	padding: 0.04rem;
+}
+.infoItem p{
+	font-size: 0.11rem;
+	color: #fff;
+	width: 100%;
+	text-align: center;
+}
+.infoItem .infoNumber{
+	font-size: 0.28rem;
+	margin-bottom: 0.1rem;
+}
+.infoItem .infoNumber font{
+	font-size: 0.16rem;
+}
+
+.infoView{
+	display: flex;
+	justify-content: start;
+	align-items: flex-start;
+	margin-top: 10px;
+}
+.infoView>div{
+	/* background-color: #153a63; */
+	flex: 1;
+	padding: .2rem .2rem;
+	background: url(../img/userBg.png) no-repeat left top;
+	background-size: 100% 100%;
+}
+.weekInfo{
+	margin-right: 10px;
+}
+.infoView .infoItem p{
+	font-size: 0.11rem;
+}
+.infoView .infoItem .infoNumber{
+	font-size: 0.15rem;
+}
+.infoView .infoItem .infoNumber font{
+	font-size: 0.12rem;
+}
+.chartView{
+	padding: .1rem;
+	width: 100%;
+}
+.chartView .chartTitle{
+	font-size: .14rem;
+	width: 100%;
+	text-align: center;
+	color: #fff;
+}
+.chart{
+	width: 100%;
+	height: 1.4rem;
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/index.css?v=10">
+		<title></title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="todayInfo">
+				<p class="title">今日活动数据</p>
+				<div class="infoList">
+					<div class="infoItem">
+						<p class="infoNumber todayCal">0<font>kcal</font></p>
+						<p>相当于<font class="chicken">0</font>个鸡腿的热量</p>
+					</div>
+					<div class="infoItem">
+						<p class="infoNumber todayCal">0</p>
+						<p>能量代谢当量</p>
+					</div>
+					<div class="infoItem">
+						<p class="infoNumber todayFar">0<font>km</font></p>
+						<p>里程</p>
+					</div>
+					<div class="infoItem">
+						<p class="infoNumber todayTime">0'0"</p>
+						<p>时长</p>
+					</div>
+					<div class="infoItem">
+						<p class="infoNumber todaySpeed">0<font>km/h</font></p>
+						<p class="hour">跑完水上公园需要0小时</p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="infoView">
+				<div class="weekInfo">
+					<p class="title">近7天运动数据</p>
+					<div class="infoList">
+						<div class="infoItem">
+							<p class="infoNumber weekCal">0<font>kcal</font></p>
+							<p>热量消耗</p>
+						</div>
+						<div class="infoItem">
+							<p class="infoNumber weekFar">0<font>km</font></p>
+							<p>里程</p>
+						</div>
+						<div class="infoItem">
+							<p class="infoNumber weekTime">0<font>h</font></p>
+							<p>时长</p>
+						</div>
+						<div class="infoItem">
+							<p class="infoNumber">低</p>
+							<p>频率</p>
+						</div>
+						<div class="infoItem">
+							<p class="infoNumber weekHabit">散步</p>
+							<p>习惯</p>
+						</div>
+					</div>
+				
+					<div class="chartView">
+						<div class="chartItem">
+							<p class="chartTitle">近7天里程统计(km)</p>
+							<div class="chart" id="chart1"></div>
+						</div>
+					</div>
+					<div class="chartView">
+						<div class="chartItem">
+							<p class="chartTitle">近7天时长统计(h)</p>
+							<div class="chart" id="chart2"></div>
+						</div>
+					</div>
+				</div>
+				<div class="monthInfo">
+					<p class="title">近30天运动数据</p>
+					<div class="infoList">
+						<div class="infoItem">
+							<p class="infoNumber monthCal">0<font>kcal</font></p>
+							<p>热量消耗</p>
+						</div>
+						<div class="infoItem">
+							<p class="infoNumber monthFar">0<font>km</font></p>
+							<p>里程</p>
+						</div>
+						<div class="infoItem">
+							<p class="infoNumber monthTime">0<font>h</font></p>
+							<p>时长</p>
+						</div>
+						<div class="infoItem">
+							<p class="infoNumber">低</p>
+							<p>频率</p>
+						</div>
+						<div class="infoItem">
+							<p class="infoNumber Monthhabit">散步</p>
+							<p>习惯</p>
+						</div>
+					</div>
+				
+					<div class="chartView">
+						<div class="chartItem">
+							<p class="chartTitle">近30天里程统计(km)</p>
+							<div class="chart" id="chart3"></div>
+						</div>
+					</div>
+					<div class="chartView">
+						<div class="chartItem">
+							<p class="chartTitle">近30天时长统计(h)</p>
+							<div class="chart" id="chart4"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script src="js/jquery.min.js"></script>
+		<script src="js/echarts.min.js"></script>
+		<script src="js/qwebchannel.js"></script>
+		<script src="js/app1.js?v=20"></script>
+		<script src="js/index.js?v=10"></script>
+	</body>
+</html>

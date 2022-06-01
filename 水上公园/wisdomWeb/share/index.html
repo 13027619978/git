@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/index.css?v=40">
+		<title>水上公园智慧步道 运动数据</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="headView">
+				<div class="imgView">
+					<img class="headImg" src="" >
+				</div>
+				<div class="titleView">
+					<p class="title">水上公园智慧步道</p>
+					<p>快来和我一起运动吧</p>
+				</div>
+			</div>
+			<div class="myMedal">
+				<div class="medalTile">
+					<p>我的勋章</p>
+					<a href="javascript:;" onclick="medalClick()"><p class="medalNumber"></p><img src="img/right.png"></a>
+				</div>
+				<div class="medalList">
+					<!-- <div class="medalItem">
+						<img src="">
+					</div> -->
+				</div>
+			</div>
+			<div class="labelItem">
+				<a href="javascript:;" onclick="labelClick(this)">
+					<img src="img/sj-icon.png">
+					我的数据
+				</a>
+				<div class="centerView">
+					<div class="far">
+						<p><font class="totalFar">0</font>km</p>
+						<p>今日里程</p>
+					</div>
+					<div class="userInfo">
+						<div class="userItem">
+							<p><font class="kcal">0</font>kcal</p>
+							<p>消耗热量</p>
+						</div>
+						<div class="userItem">
+							<p><font class="speed">0</font>km/h</p>
+							<p>平均速度</p>
+						</div>
+						<div class="userItem">
+							<p><font class="totalTime">0'0"</font></p>
+							<p>今日时长</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="labelItem">
+				<a href="javascript:;" onclick="labelClick(this)">
+					<img src="img/rank-icon.png">
+					今日排行
+				</a>
+				<div class="rankView">
+					<p class="title">今日里程</p>
+					<div class="farPercentView">
+						<div class="farPercent"></div>
+					</div>
+					<div class="rankBottom">
+						<p>为自己打call</p>
+						<p>超过<font class="farText">0%</font>小家伙</p>
+					</div>
+				</div>
+				
+				<div class="rankView">
+					<p class="title">今日时长</p>
+					<div class="timePercentView">
+						<div class="timePercent"></div>
+					</div>
+					<div class="rankBottom">
+						<p>坚持就是胜利</p>
+						<p>超过<font class="timeText">0%</font>小家伙</p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="labelItem">
+				<a href="javascript:;" onclick="labelClick(this)">
+					<img src="img/zhou-icon.png">
+					7日统计
+				</a>
+				<div class="rankView historyView">
+					<div class="chartView">
+						<div class="chartItem">
+							<p class="chartTitle">近7天时长统计(h)</p>
+							<div class="chart" id="chart1"></div>
+						</div>
+					</div>
+				</div>
+				<div class="rankView historyView">
+					<div class="chartView">
+						<div class="chartItem">
+							<p class="chartTitle">近7天里程统计(km)</p>
+							<div class="chart" id="chart3"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="labelItem">
+				<a href="javascript:;" onclick="labelClick(this)">
+					<img src="img/yue-icon.png">
+					30日统计
+				</a>
+				<div class="rankView historyView">
+					<div class="chartView">
+						<div class="chartItem">
+							<p class="chartTitle">近30天时长统计(h)</p>
+							<div class="chart" id="chart2"></div>
+						</div>
+					</div>
+				</div>
+				<div class="rankView historyView">
+					<div class="chartView">
+						<div class="chartItem">
+							<p class="chartTitle">近30天里程统计(km)</p>
+							<div class="chart" id="chart4"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script src="js/jquery.min.js"></script>
+		<script src="js/echarts.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/index.js?v=80"></script>
+	</body>
+</html>

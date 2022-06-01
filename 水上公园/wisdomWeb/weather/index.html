@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/index.css?V=10">
+		<title></title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="weatherView">
+				<img class="temImg" src="" >
+				<div class="weatherText">
+					<p class="tem"></p>
+					<p class="weather"></p>
+				</div>
+			</div>
+			<div class="runView">
+				<div class="runText">
+					<p>温湿度</p>
+					<p class="wsd">无</p>
+				</div>
+			</div>
+			<div class="runView">
+				<div class="runText">
+					<p>风速风向</p>
+					<p class="wind">无</p>
+				</div>
+			</div>
+			<div class="runView">
+				<div class="runText">
+					<p>PM2.5</p>
+					<p class="pm">无</p>
+				</div>
+			</div>
+			<div class="runView">
+				<div class="runText">
+					<p>紫外线指数</p>
+					<p class="zwx">无</p>
+				</div>
+			</div>
+			<div class="runView">
+				<img src="img/run.png" >
+				<div class="runText">
+					<p class="run"></p>
+					<p>运动指数</p>
+				</div>
+			</div>
+			<div class="timeView">
+				<img src="img/time.png" >
+				<div class="timeText">
+					<p class="time"></p>
+					<p class="date"></p>
+				</div>
+			</div>
+		</div>
+		
+		<script src="js/jquery.min.js"></script>
+		<script src="js/app.js"></script>
+		<script type="text/javascript">
+			var weatherPicObj = {
+				"晴": "b0.png", "多云": "b1.png",
+				"少云": "b1.png", "晴间多云": "b1.png",
+				"阴": "b2.png","小雨": "b7.png",
+				"中雨": "b8.png","大雨": "b9.png",
+				"暴雨": "b10.png","雷阵雨": "b4.png",
+				"阵雨": "b3.png","小雪": "b11.png",
+				"中雪": "b12.png","大雪": "b13.png",
+				"暴雪": "b14.png","雨夹雪": "b6.png",
+				"其他": "b2.png"
+			};
+			$(function(){
+				resetFontSize();
+				getWeatherInfo();
+				getDate();
+				setInterval(function(){
+					var nowHour = new Date().getHours();
+					var nowMinutes = new Date().getMinutes();
+					var nowSeconds = new Date().getSeconds();
+					var timeString = nowHour + ':' + nowMinutes + ':' + nowSeconds;
+					if(timeString == '12:0:0' || timeString == '15:0:0'){
+						getWeatherInfo();
+					}
+				}, 1000)
+			})
+			
+			function getWeatherInfo(){
+				app.getAjax('http://node.smart-ideas.com.cn:3001/datav/common/weather/v1/weatherInfo?city=110106',{}, function(res){
+					var todayWeather = res[0];
+					var dayweather = todayWeather.weather;
+					if(dayweather != '晴' && dayweather != '少云' && dayweather != '阴' && dayweather != '中雨' && dayweather != '暴雨' && dayweather != '阵雨' && dayweather != '多云' && dayweather != '晴间多云' && dayweather != '小雨' && dayweather != '大雨' && dayweather != '雷阵雨'){
+						$('.temImg').attr('src', 'img/' + weatherPicObj['其他']);
+					}else{
+						$('.temImg').attr('src', 'img/' + weatherPicObj[dayweather]);
+					}
+					
+					$('.tem').text(todayWeather.temperature);
+					$('.weather').text(todayWeather.weather);
+					$('.wind').text(todayWeather.wind+':'+todayWeather.windpower+'级');
+				})
+				
+				$.ajax({
+				    url:'http://cdcsys.smart-ideas.com.cn/zhbd/pub/lcd/whapi',
+				    type:"POST",
+					dataType:"json",
+					contentType:"application/json",
+					data: JSON.stringify({
+						appcode: '8e2e35c3f1214969809962a3fe2f72a3',
+						cityId: 2,
+						host: 'http://aliv18.data.moji.com',
+						path: '/whapi/json/alicityweather/index',
+						token: '5944a84ec4a071359cc4f6928b797f91'
+					}),
+				    success:function(data){
+				    	console.log(data);
+						var weatherList = [];
+						for(var key in data.data.data.liveIndex){
+							weatherList = data.data.data.liveIndex[key];
+						}
+						console.log(weatherList)
+						weatherList.forEach(function(value, key){
+							if(value.name == '运动指数'){
+								$('.run').text(value.status);
+							}
+							if(value.name == '紫外线指数'){
+								$('.zwx').text(value.status);
+							}
+						})
+				    }
+				});
+				
+				$.ajax({
+				    url:'http://cdcsys.smart-ideas.com.cn/zhbd/pub/lcd/whapi',
+				    type:"POST",
+					dataType:"json",
+					contentType:"application/json",
+					data: JSON.stringify({
+						appcode: '8e2e35c3f1214969809962a3fe2f72a3',
+						cityId: 2,
+						host: 'http://aliv18.data.moji.com',
+						path: '/whapi/json/alicityweather/aqi',
+						token: '8b36edf8e3444047812be3a59d27bab9'
+					}),
+				    success:function(data){
+				    	console.log(data);
+						$('.pm').text(data.data.data.aqi.pm25);
+				    }
+				});
+				
+				$.ajax({
+				    url:'http://cdcsys.smart-ideas.com.cn/zhbd/pub/lcd/whapi',
+				    type:"POST",
+					dataType:"json",
+					contentType:"application/json",
+					data: JSON.stringify({
+						appcode: '8e2e35c3f1214969809962a3fe2f72a3',
+						cityId: 2,
+						host: 'http://aliv18.data.moji.com',
+						path: '/whapi/json/alicityweather/forecast15days',
+						token: 'f9f212e1996e79e0e602b08ea297ffb0'
+					}),
+				    success:function(data){
+				    	console.log(data);
+						var nowWeather = data.data.data.forecast[0];
+						$('.wsd').text(nowWeather.tempDay + '℃/' + nowWeather.humidity);
+				    }
+				});
+			}
+			
+			
+			function resetFontSize() {
+				var baseFontSize = 100;
+				var designWidth = 750;
+				var width = window.innerWidth;
+				var currentFontSize = (width / designWidth) * baseFontSize;
+				document.getElementsByTagName('html')[0].style.fontSize = currentFontSize + 'px';
+			}
+			window.onresize = function () {
+				resetFontSize();
+			};
+			
+			function getDate(){
+				setInterval(function(){
+					var year = new Date().getFullYear();
+					var month = new Date().getMonth() + 1;
+					month = month<10?'0'+month:month;
+					var day = new Date().getDate();
+					day = day<10?'0'+day:day;
+					var hour = new Date().getHours();
+					hour = hour<10?'0'+hour:hour;
+					var minutes = new Date().getMinutes();
+					minutes = minutes<10?'0'+minutes:minutes;
+					var seconds = new Date().getSeconds();
+					seconds = seconds<10?'0'+seconds:seconds;
+					$('.time').text(hour+':'+minutes+':'+seconds);
+					$('.date').text(year+'/'+month+'/'+day);
+				}, 1000);
+			}
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,124 @@
+.container{
+	width: 100vw;
+	position: relative;
+}
+.mapView{
+	width: 100%;
+	padding: .3rem;
+	background: url(../img/mapbg.png) no-repeat right top;
+	background-size: 100% 100%;
+	/* background-color: #000; */
+}
+.title{
+	font-size: .3rem;
+	color: #aaddff;
+	padding-left: .7rem;
+	background: url(../img/icon.png) no-repeat 10px center;
+}
+.container .mapImg{
+	width: 100%;
+}
+
+.container a{
+	display: block;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	position: absolute;
+	/* background-color: #000; */
+}
+.container .btnView{
+	position: relative;
+}
+.container .btn1{
+	left: 40.5%;
+	top: 85%;
+}
+.container .btn2{
+	left: 41.5%;
+	top: 83.5%;
+}
+.container .btn3{
+	left: 39%;
+	top: 82.5%;
+}
+.container .btn4{
+	left: 49.2%;
+	top: 80.7%;
+}
+.container .btn5{
+	left: 25%;
+	top: 80%;
+}
+.container .btn6{
+	left: 34.5%;
+	top: 66%;
+}
+.container .btn7{
+	left: 58.5%;
+	top: 72.8%;
+}
+.container .btn8{
+	left: 67.3%;
+	top: 72.2%;
+}
+.container .btn9{
+	left: 51.4%;
+	top: 67.7%;
+}
+.container .btn10{
+	left: 38.3%;
+	top: 60.8%;
+}
+.container .btn11{
+	left: 46.5%;
+	top: 55%;
+}
+.container .btn12{
+	left: 50%;
+	top: 55.5%;
+}
+.container .btn13{
+	left: 55.5%;
+	top: 62.8%;
+}
+.container .btn14{
+	left: 57.8%;
+	top: 58.8%;
+}
+.container .btn15{
+	left: 53.7%;
+	top: 55.5%;
+}
+.container .btn16{
+	left: 57.7%;
+	top: 55.7%;
+}
+.container .btn17{
+	left: 53.6%;
+	top: 49.8%;
+}
+.container .btn18{
+	left: 54.6%;
+	top: 41.5%;
+}
+.container .btn19{
+	left: 55.2%;
+	top: 36.6%;
+}
+.container .btn20{
+	left: 63%;
+	top: 8%;
+}
+.container .btn21{
+	left: 20%;
+	top: 75.2%;
+}
+.container .btn22{
+	left: 38.4%;
+	top: 67.6%;
+}
+.container .btn23{
+	left: 47%;
+	top: 68.8%;
+}

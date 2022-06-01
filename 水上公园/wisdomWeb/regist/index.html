@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta http-equiv="Content-Type"; content="multipart/form-data; charset=utf-8"/>
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/cropper.min.css">
+		<link rel="stylesheet" href="css/index.css?v=1">
+		<title>奥水步道注册</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="content">
+				<p class="title">奥水步道注册信息</p>
+				<div class="form-item">
+					<span class="icon icon1"></span>
+					<input class="userName" type="text" placeholder="请输入您的姓名">
+				</div>
+				<div class="form-item">
+					<span class="icon icon2"></span>
+					<select class="userSex" name="sex">
+						<option value="男">男</option>
+						<option value="女">女</option>
+					</select>
+				</div>
+				<!-- <div class="form-item">
+					<span class="icon icon3"></span>
+					<input class="userAge" type="text" placeholder="请输入您的年龄">
+				</div> -->
+				<!-- <div class="form-item">
+					<span class="icon icon4"></span>
+					<input class="userHeight" type="text" placeholder="请输入您的身高(cm)" oninput="onHeightInput(this)">
+				</div>
+				<div class="form-item">
+					<span class="icon icon5"></span>
+					<input class="userWeight" type="text" placeholder="请输入您的体重(kg)" oninput="onWeightInput(this)">
+				</div>
+				<div class="form-item">
+					<span class="icon icon6"></span>
+					<div class="bmi">
+						<div class="userBmi">您的BMI</div>
+						<div>成人标准BMI：18.5-23.9</div>
+					</div>
+				</div> -->
+				<div class="form-item">
+					<span class="icon icon9"></span>
+					<a class="imgBtn" href="javascript:;" onclick="imgClick()"><img class="userImg" src="./img/user.png" >人脸正面免冠照</a>
+				</div>
+				<div class="form-item">
+					<span class="icon icon7"></span>
+					<input class="phone" type="text" placeholder="请输入您的手机号">
+				</div>
+				<div class="form-item">
+					<span class="icon icon8"></span>
+					<div class="smsView">
+						<input class="smsCode" type="text" placeholder="请输入验证码">
+						<a class="yzmBtn" href="javascript:;" onclick="smscodeClick()">获取验证码</a>
+					</div>
+				</div>
+				<a class="subBtn" href="javascript:;" onclick="submit()">提交</a>
+			</div>
+		</div>
+		
+		<!-- 人脸采集部分 -->
+		<div class="face-modal">
+			<div class="face-modal-content">
+				<a class="closeBtn" href="javascript:;" onclick="closeClick()">x</a>
+				<p class="face-modal-title">人脸采集</p>
+				<img src="img/user.png" >
+				<p class="face-modal-txt">请确保图片清晰且主体为正脸</p>
+				<!-- <a class="face-modal-btn" href="javascript:;">确定<input class="face-modal-input" type="file" onchange="selectImg(this)"></a> -->
+				<a class="face-modal-btn" href="javascript:;">确定<input class="face-modal-input" type="file" accept="image/*" capture="camera" onchange="selectImg(this)"></a>
+			</div>
+		</div>
+		
+		<!-- 图片裁剪部分 -->
+		<div class="face-upload-modal">
+			<div class="face-upload-imgView">
+				<img class="face-upload-img" src="" >
+			</div>
+			<div class="face-upload-control">
+				<a class="face-upload-btn" href="javascript:;" onclick="cancelClick()">取消</a>
+				<a class="face-upload-btn" href="javascript:;" onclick="imgSubmit()">确定</a>
+			</div>
+		</div>
+		
+		<form id="myForm" method="post" action="https://cdcsys.smart-ideas.com.cn/zhbd/register/face/upload" enctype="multipart/form-data"></form>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/cropper.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app.js?V=20"></script>
+		<script src="js/index.js?v=100"></script>
+	</body>
+</html>

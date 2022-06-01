@@ -1,0 +1,196 @@
+.container{
+	width: 100%;
+	min-height: 100vh;
+	background-color: #011e56;
+	padding-bottom: 50px;
+}
+.headView{
+	padding: 20px 15px;
+	padding-top: 50px;
+	padding-left: 45px;
+}
+.imgView{
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	border: 5px solid #7aa8e3;
+	overflow: hidden;
+}
+.imgView img{
+	width: 100%;
+}
+.titleView{
+	padding-top: 20px;
+}
+.titleView p{
+	color: #20dbd0;
+	font-size: 16px;
+}
+.titleView .title{
+	font-size: 28px;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.myMedal{
+	background-color: rgba(1,110,203,.5);
+	margin-bottom: 20px;
+}
+.medalTile{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 0 10px 20px;
+}
+.medalTile p, .medalTile a{
+	font-size: 14px;
+	color: #fff;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+.medalTile a img{
+	width: 18px;
+	margin-left: 5px;
+}
+.medalList{
+	padding: 0 20px;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+}
+.medalItem{
+	width: 16%;
+	padding: 2px;
+}
+.medalItem img{
+	width: 100%;
+}
+
+.labelItem{
+	background-color: rgba(1,110,203,.5);
+}
+.labelItem>a{
+	color: #fff;
+	display: block;
+	font-size: 14px;
+	line-height: 40px;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	padding-left: 20px;
+	padding-right: 10px;
+	border-bottom: 1px solid #011e56;
+	background: url(../img/right.png) no-repeat right center;
+	background-size: 20px auto;
+}
+.labelItem>a img{
+	width: 20px;
+	margin-right: 10px;
+}
+.centerView{
+	background-color: #011e56;
+	padding: 20px 0;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.centerView .far{
+	width: 140px;
+	height: 140px;
+	border-radius: 50%;
+	border: 5px solid #0692f4;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.centerView .far p{
+	font-size: 14px;
+	color: #fff;
+}
+.centerView .far p font{
+	font-size: 26px;
+	margin-right: 3px;
+}
+.centerView .userInfo{
+	width: 100%;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	margin-top: 20px;
+}
+.centerView .userInfo .userItem{
+	flex: 1;
+}
+.centerView .userInfo .userItem p{
+	font-size: 14px;
+	color: #fff;
+	text-align: center;
+}
+.centerView .userInfo .userItem p font{
+	font-size: 26px;
+	margin-right: 3px;
+}
+
+.rankView{
+	padding: 20px 40px;
+	border-radius: 5px;
+	background-color: #011e56;
+}
+.rankView .title{
+	font-size: 18px;
+	color: #fff;
+	text-align: center;
+	font-weight: bold;
+}
+.farPercentView, .timePercentView{
+	width: 100%;
+	background-color: #fff;
+	height: 12px;
+	border-radius: 12px;
+	margin: 10px 0;
+	overflow: hidden;
+}
+.farPercent{
+	width: 0;
+	height: 12px;
+	border-radius: 12px;
+	background-color: #55affb;
+}
+.timePercent{
+	width: 0;
+	height: 12px;
+	border-radius: 12px;
+	background-color: #63e0b8;
+}
+.rankBottom{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.rankBottom p{
+	font-size: 14px;
+	color: #fff;
+}
+.rankBottom p font{
+	font-size: 22px;
+	margin: 0 4px;
+}
+
+.chartTitle{
+	font-size: 18px;
+	font-weight: bold;
+	width: 100%;
+	text-align: center;
+	color: #fff;
+}
+.chart{
+	width: 100%;
+	height: 100px;
+}
+.historyView{
+	padding: 20px 30px;
+}
