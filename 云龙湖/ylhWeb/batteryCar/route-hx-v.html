@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="css/reset.css?v=10">
+		<link rel="stylesheet" href="css/route-v.css?v=20">
+		<style type="text/css">
+			.qrcodeView .title{
+				color: greenyellow !important; 
+			}
+			.qrcodeView .red{
+				color: red !important;
+			}
+		</style>
+		<title></title>
+	</head>
+	<body>
+		<!-- <div class="hoverView">
+			
+		</div> -->
+		<div class="container">
+			<div class="fullScreen">
+				<div class="topView">
+					<div class="weather">
+						<p class="weatherTxt"></p>
+					</div>
+					<div class="titleView">
+						<p>云龙湖智慧运营系统</p>
+					</div>
+					<div class="timeView">
+						<p class="dateTxt"></p>
+					</div>
+				</div>
+				<div class="content">
+					<div class="content-left">
+						<!-- 购票流程 -->
+						<div class="progress">
+							<p class="siteNameTitle">当前站点：</p>
+						</div>
+						
+						<div class="lineView">
+							<!-- 路线 -->
+							<div class="lineList">
+								<div class="lineItem" style="padding: 73px 20px;">
+									<div class="routeView">
+										<div>
+											<p class="routeTitle">湖西线</p>
+											<p class="routeSecondTitle"></p>
+										</div>
+										<div class="routeContent">
+											<div class="routeDetail">
+												<span class="line"></span>
+												<!-- <img class="fx" src="img/double-icon.png" > -->
+												<div class="siteList pyx">
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName"></p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">音乐厅站</br>起点</p>
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<img class="siteIcon" src="img/site-icon.png" >
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<img class="siteIcon" src="img/site-icon.png" >
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<img class="siteIcon" src="img/site-icon.png" >
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<img class="siteIcon" src="img/site-icon.png" >
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<img class="siteIcon" src="img/site-icon.png" >
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<img class="siteIcon" src="img/site-icon.png" >
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<img class="siteIcon" src="img/site-icon.png" >
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<img class="siteIcon" src="img/site-icon.png" >
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<img class="siteIcon" src="img/site-icon.png" >
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName"></p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">断桥码头站</p>
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<img class="siteIcon" src="img/site-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName"></p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">水族馆站</p>
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<img class="siteIcon" src="img/site-icon.png" >
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<img class="siteIcon" src="img/site-icon.png" >
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<img class="siteIcon" src="img/site-icon.png" >
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<img class="siteIcon" src="img/site-icon.png" >
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<img class="siteIcon" src="img/site-icon.png" >
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<img class="siteIcon" src="img/site-icon.png" >
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<img class="siteIcon" src="img/site-icon.png" >
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<img class="siteIcon" src="img/site-icon.png" >
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<img class="siteIcon" src="img/site-icon.png" >
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<img class="siteIcon" src="img/site-icon.png" >
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName"></p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">好人园站</p>
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<img class="siteIcon" src="img/site-icon.png" >
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<img class="siteIcon" src="img/site-icon.png" >
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName"></p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">望湖阁站</p>
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<img class="siteIcon" src="img/site-icon.png" >
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<img class="siteIcon" src="img/site-icon.png" >
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName"></p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">玉带路站</br>终点</p>
+															<img class="carIcon" src="img/car-icon.png" >
+														</div>
+													</div>
+													<!-- <div class="siteItem">
+														<div class="site">
+															<p class="siteName"></p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">滨湖公园西门站</p>
+														</div>
+													</div> -->
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="lcView">
+							<p class="title">购票流程</p>
+							<div class="progressList">
+								<div class="progressItem">
+									<p>点击购票</p>
+								</div>
+								<div class="progressItem">
+									<p>选择购买张数</p>
+								</div>
+								<div class="progressItem">
+									<p>微信扫码支付</p>
+								</div>
+								<div class="progressItem">
+									<p>取票</p>
+								</div>
+							</div>
+						</div>
+						<div class="right-top">
+							<div class="mapView">
+								<p class="mapTitle">地图</p>
+								<div class="mapImg">
+									<img src="img/ylhMap.jpg" >
+								</div>
+							</div>
+						</div>
+						
+						<!-- 购票 -->
+						<div class="ticketView">
+							<p class="ticketTitle">观光车购票</p>
+							<div class="ticketList">
+								<div class="ticketItem">
+									<div class="ticketPrice"><p>湖西线</p></div>
+									<div class="ticketPrice"><p>票价：10元/人/次</p></div>
+									<div class="ticketPrice"><p>票价：20元/人/2次</p></div>
+									<div class="desc">
+										<p>游览观光车乘客须知</p>
+										<p>1、一人一票，超过1米请购票；车票当日有效。退票请当日24点前联系工作人员退票。</p>
+										<p>2、在线路范围内自选下车地点，终点站请下车。</p>
+										<p>3、乘车时需遵循先下后上、排队上车。</p>
+										<p>4、上车后请坐稳扶好、系好安全带，请勿将手、脚、头部伸出车外。</p>
+										<p>5、老、幼、病、残、孕人员请在家人陪同下乘车。</p>
+										<p>6、乘车期间请保管好个人物品，以防丢失。</p>
+										<p>7、遇大风、暴雨等恶劣天气时，本项目停止运营。</p>
+										<p>8、运营时间：上午9点—下午5点</p>
+										<p>服务热线：0516-83990123</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<script src="js/echarts.min.js"></script>
+			<script src="js/jquery.min.js"></script>
+			<script src="js/jquery.qrcode.min.js"></script>
+			<script src="js/app1.js?V=10"></script>
+			<script type="text/javascript">
+				var scale =  window.innerHeight / ($('.fullScreen').height() + 20);
+				$('.fullScreen').css({
+					'transform': 'scaleY(.96)'
+				})
+				
+				var siteId = app.getQueryString('siteId');
+				if(siteId == '1'){
+					$('.siteNameTitle').text('当前站点：玉带路站');
+				}else if(siteId == '2'){
+					$('.siteNameTitle').text('当前站点：望湖阁站');
+				}else if(siteId == '3'){
+					$('.siteNameTitle').text('当前站点：好人园站');
+				}else if(siteId == '4'){
+					$('.siteNameTitle').text('当前站点：滨湖公园西门站');
+				}
+				
+				// 获取天气信息
+				$.ajax({
+				    url:'http://node.smart-ideas.com.cn:3001/datav/common/weather/v1/weatherInfo?city=110106',
+				    type:"GET",
+				    success:function(data){
+						console.log(data);
+						$('.weatherTxt').text('今日 ' + data[0].weather  + ' ' + data[0].temperature);
+					}
+				});
+				
+				// 初始化时间
+				setInterval(function(){
+					var year = new Date().getFullYear();
+					var month = new Date().getMonth() + 1;
+					month = month<10?'0'+month:month;
+					var day = new Date().getDate();
+					day = day<10?'0'+day:day;
+					var hour = new Date().getHours();
+					hour = hour<10?'0'+hour:hour;
+					var minutes = new Date().getMinutes();
+					minutes = minutes<10?'0'+minutes:minutes;
+					var seconds = new Date().getSeconds();
+					seconds = seconds<10?'0'+seconds:seconds;
+					$('.dateTxt').text(year+'/'+month+'/'+day+' '+hour+':'+minutes+':'+seconds);
+					$('.dateView').text(year+'/'+month+'/'+day+' '+hour+':'+minutes+':'+seconds);
+				}, 1000);
+					
+				var seconds = 0;
+				setInterval(function(){
+					seconds += 1;
+					if(seconds == 1 || seconds % 10 == 0){
+						app.getAjax('loopDataV/getVehicleMountedLocation?lineId=2', {}, function(res){
+							$('.carIcon').hide();
+							var carList = res;
+							console.log('123');
+							var idList = [];
+							var siteIdList = [];
+							carList.forEach(function(value,key){
+								if(idList.indexOf(value.vehicleMountedSn) == -1){
+									idList.push(value.vehicleMountedSn);
+									siteIdList.push(value.id);
+								}
+							})
+							siteIdList.forEach(function(currentId, key){
+								if(10000 == currentId){
+								  currentId = 1;
+								}else if(10002 <= currentId && currentId < 10014){
+									currentId = currentId - 10000;
+								}else if(11000 == currentId){
+									currentId = 14;
+								}else if(11002 <= currentId && currentId < 11010){
+									currentId = currentId - 10987;
+								}else if(12000 == currentId){
+									currentId = 23;
+								}else if(13000 <= currentId && currentId < 13011){
+									currentId = currentId - 12976;
+								}else if(14000 <= currentId && currentId < 14003){
+									currentId = currentId - 13965;
+								}else if(15000 <= currentId && currentId < 15003){
+									currentId = currentId - 14962;
+								}else if(16000 == currentId){
+									currentId = 41;
+								}
+								console.log($('.carIcon').eq(currentId - 1));
+								$('.carIcon').eq(currentId - 1).show();
+							})
+						})
+					}
+					
+					if(seconds == 1 || seconds % 60 == 0){
+						// 获取运营时间
+						// app.getAjax('battery/getOperation?lineTicketId=', {}, function(res){
+						// 	console.log(res.data);
+						// 	var nowDay = new Date().getDay();
+						// 	if(nowDay == 0){
+						// 		nowDay = 6;
+						// 	}else{
+						// 		nowDay -= 1;
+						// 	}
+						// 	var startDate;
+						// 	var endDate;
+						// 	res.data.forEach(function(value, key){
+						// 		if(value.lineId == 2){
+						// 			var yyTimeList = value.list;
+						// 			startDate = yyTimeList[nowDay].startTime;
+						// 			endDate = yyTimeList[nowDay].endTime;
+						// 			if(value.ticketName.indexOf('夜场') != -1){
+						// 				if(yyTimeList[nowDay].state == '0'){
+						// 					$('.yjTime').text(startDate + '至' + endDate);
+						// 				}else{
+						// 					$('.yjTime').text(yyTimeList[nowDay].tip);
+						// 				}
+						// 			}else{
+						// 				if(yyTimeList[nowDay].state == '0'){
+						// 					$('.rjTime').text(startDate + '至' + endDate);
+						// 				}else{
+						// 					$('.rjTime').text(yyTimeList[nowDay].tip);
+						// 				}
+						// 			}
+						// 		}
+						// 	})
+							
+						// })
+					}
+				}, 1000)
+				
+				getNoticeInfo();
+				function getNoticeInfo(){
+					console.log($('.noticeItem').length)
+					if($('.noticeItem').length < 3){
+						for(var i = 1; i < 4; i++){
+							if(i > $('.noticeItem').length){
+								$('.scrollContent').append(
+									'<div class="noticeItem">' +
+										'<p>--</p>' + 
+									'</div>'
+								);
+							}
+						}
+					}
+				}
+			</script>
+		</div>
+	</body>
+</html>

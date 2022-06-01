@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/boatTickets.css?v=4">
+		<title>电瓶车购票</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="banner">
+				<img src="img/banner.png" >
+			</div>
+			<div class="buyInfo">
+				<div class="orderView">
+					<a class="orderBtn" href="carTicketsOrder.html">我的订单</a>
+				</div>
+				<div class="buy_item">
+					<p class="item_l" style="font-weight: bold;">电瓶车票</p>
+				</div>
+				<div class="buy_item">
+					<p class="item_l">线路：</p>
+					<select class="lineSelect" onchange="lineChange(this)">
+						
+					</select>
+				</div>
+				<div class="buy_item">
+					<p class="item_l">票价：</p>
+					<select class="priceSelect" onchange="ticketTypeChange(this)">
+						
+					</select>
+				</div>
+				<div class="buy_item">
+					<p class="item_l">票数：</p>
+					<div class="number">
+						<a href="javascript:;" onclick="sub(this)">-</a>
+						<div class="number_txt">
+							<input class="num" type="number" value="0" onchange="quantityChange(this)" disabled="true"/>
+							张
+						</div>
+						<a href="javascript:;" onclick="add(this)">+</a>
+					</div>
+				</div>
+			</div>
+			<div class="descView">
+				<p class="title">游览观光车乘客须知：</p>
+				<p>1、一人一票，超过1米请购票；车票当日有效。退票请当日24点前联系工作人员退票。</p>
+				<p>2、在线路范围内自选下车地点，终点站请下车。</p>
+				<p>3、乘车时需遵循先下后上、排队上车。</p>
+				<p>4、上车后请坐稳扶好、系好安全带，请勿将手、脚、头部伸出车外。</p>
+				<p>5、老、幼、病、残、孕人员请在家人陪同下乘车。</p>
+				<p>6、乘车期间请保管好个人物品，以防丢失。</p>
+				<p>7、遇大风、暴雨等恶劣天气时，本项目停止运营。</p>
+				<p>8、运营时间：上午9点—下午6点</p>
+				<p>服务热线：0516-83990123</p>
+			</div>
+			<div class="bottomView">
+				<p>总计：<font class="totalPrice">0.00</font>元</p>
+				<a href="javascript:;" onclick="buyClick(this)">购票</a>
+			</div>
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/carTickets.js?v=1.0.3"></script>
+	</body>
+</html>
