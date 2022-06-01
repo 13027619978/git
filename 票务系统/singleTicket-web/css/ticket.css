@@ -1,0 +1,227 @@
+.container{
+	min-height: 100vh;
+	background-color: #f5f5f5;
+	padding-bottom: 61px;
+	width: 100%;
+	overflow: hidden;
+}
+/* 门票名称 */
+.ticketName{
+	background-color: #fff;
+	padding: 15px 10px;
+}
+.ticketName .ticketNameTxt{
+	font-size: 16px;
+	font-weight: bold;
+	color: #333;
+	line-height: 25px;
+}
+.ticketName .ticketType{
+	display: inline-block;
+	font-size: 12px;
+	color: #00b3fd;
+	border-radius: 5px;
+	padding: 0 5px;
+	line-height: 20px;
+	margin-left: 10px;
+	background-color: #ddf3ff;
+}
+.ticketName .ticketDesc{
+	font-size: 12px;
+	color: #009F95;
+	line-height: 20px;
+}
+.ticketName .checkTime{
+	font-size: 12px;
+	color: #00b3fd;
+	line-height: 20px;
+}
+/* 购票须知 */
+.noticeView{
+	background-color: #fff;
+	padding: 15px 10px;
+	border-top: 1px solid #f5f5f5;
+}
+.noticeTitle{
+	font-size: 15px;
+	font-weight: bold;
+	color: #333;
+	padding-left: 5px;
+	border-left: 5px solid #00B3FD;
+	line-height: 20px;
+	margin-bottom: 5px;
+}
+.noticeText{
+	font-size: 14px;
+	color: #333;
+	line-height: 23px;
+	margin-bottom: 5px;
+	padding-left: 10px;
+}
+/* 预定时间 */
+.ticketTime{
+	background-color: #fff;
+	padding: 10px;
+	border-top: 1px solid #f5f5f5;
+}
+.ticketTime .timeTitle{
+	font-size: 15px;
+	color: #333;
+	font-weight: bold;
+	padding-bottom: 10px;
+}
+.ticketTime .timeInput{
+	border: none;
+	width: 120px;
+	height: 35px;
+	font-size: 14px;
+	color: #333;
+	padding: 0 10px;
+	background-color: #fff;
+}
+.ticketTime .timeView{
+	width: 200px;
+	height: 35px;
+	border: 1px solid #92B8B1;
+	border-radius: 5px;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	overflow: hidden;
+	position: relative;
+}
+.ticketTime .timeView .ticketPrice{
+	font-size: 14px;
+	color: #333;
+}
+.ticketTime .timeView .timeSelectBtn{
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	opacity: 0;
+}
+
+/* 门票数量 */
+.ticketNumber{
+	background-color: #fff;
+	padding: 10px;
+	border-top: 1px solid #f5f5f5;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+}
+.ticketNumber .numberText{
+	font-size: 15px;
+	font-weight: bold;
+	color: #333;
+}
+.ticketNumber .numberView{
+	position: relative;
+	padding: 0 40px;
+}
+.ticketNumber .numberView a{
+	width: 30px;
+	height: 30px;
+	line-height: 26px;
+	color: #fff;
+	text-align: center;
+	font-size: 20px;
+	background-color: #ff5500;
+	position: absolute;
+	top: 0;
+}
+.ticketNumber .numberView .addBtn{
+	right: 0;
+}
+.ticketNumber .numberView .subBtn{
+	left: 0;
+	display: none;
+}
+.ticketNumber .numberView input{
+	width: 50px;
+	height: 30px;
+	padding: 10px 0;
+	text-align: center;
+	font-size: 15px;
+	color: #333;
+}
+
+/* 游客信息 */
+.visitorInfo{
+	background-color: #fff;
+	padding: 15px 10px;
+	margin-top: 10px;
+}
+.visitorTitle{
+	font-size: 15px;
+	font-weight: bold;
+	color: #333;
+	padding-left: 5px;
+	border-left: 5px solid #00B3FD;
+	line-height: 20px;
+	margin-bottom: 5px;
+}
+.visitorItem{
+	padding: 10px 0;
+	border-top: 5px solid #f5f5f5;
+}
+.visitorItem:nth-of-type(1){
+	border: none;
+}
+.itemInfo{
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	font-size: 14px;
+	color: #333;
+	line-height: 35px;
+	padding: 5px 0;
+	border-bottom: 1px solid #f5f5f5;
+}
+.itemInfo p{
+	flex: 0 0 75px;
+	text-align: center;
+}
+.itemInfo input{
+	height: 35px;
+	flex: 1;
+	border: none;
+}
+
+/* 在线支付 */
+.priceView{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: #fff;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	border-top: 1px solid #f5f5f5;
+}
+
+.priceView .priceLeft{
+	line-height: 50px;
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 14px;
+	color: #333;
+}
+.priceView .priceLeft .priceText{
+	font-size: 20px;
+	font-weight: bold;
+	color: #ff5500;
+}
+.priceView .payBtn{
+	line-height: 50px;
+	font-size: 15px;
+	color: #fff;
+	text-align: center;
+	background-color: #ff5500;
+	flex: 0 0 85px;
+}

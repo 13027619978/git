@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="./css/cropper.min.css">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/ybyhsTicket.css">
+		<title>在线预约</title>
+	</head>
+	<body>
+		<div class="container">
+			<!-- 门票名称 -->
+			<div class="ticketName">
+				<p class="ticketNameTxt"><font class="ticketType"></font></p>
+				<p class="ticketDesc" style="font-size: 14px;"></p>
+				<!-- <p class="checkTime"></p> -->
+			</div>
+			
+			<!-- 购票须知 -->
+			<!-- <div class="noticeView">
+				<p class="noticeTitle fhlTitle">购票须知</p>
+				<div class="noticeText">
+					
+				</div>
+			</div> -->
+			
+			<!-- 预定时间 -->
+			<div class="ticketTime">
+				<p class="timeTitle">预定时间</p>
+				<div class="timeView">
+					<input class="timeInput" type="text" readonly="readonly">
+					<!-- <p class="ticketPrice"></p> -->
+					<a class="timeSelectBtn" href="javascript:;"></a>
+				</div>
+			</div>
+			
+			<!-- 凤凰岭时间段 -->
+			<div class="ticketTime fhlTime">
+				<p class="timeTitle">预定时间段</p>
+				<select>
+					<option value ="0">上午</option>
+					<option value ="0">下午</option>
+				</select>
+			</div>
+			
+			<!-- 购票数量 -->
+			<div class="ticketNumber">
+				<p class="numberText">预约数量：</p>
+				<div class="numberView">
+					<a class="subBtn" href="javascript:;" onclick="subClick(this)">-</a>
+					<input class="numberInput" type="number" readonly="readonly" value="0">
+					<a class="addBtn" href="javascript:;" onclick="addClick(this)">+</a>
+				</div>
+			</div>
+			
+			<!-- 游客信息 -->
+			<div class="visitorInfo">
+				<p class="visitorTitle">预约信息</p>
+				<div class="visitorList">
+					<!-- <div class="visitorItem">
+						<div class="itemInfo">
+							<p>姓名：</p>
+							<input type="text" placeholder="请输入姓名">
+						</div>
+						<div class="itemInfo">
+							<p>手机号：</p>
+							<input type="text" placeholder="请输入手机号">
+						</div>
+						<div class="itemInfo">
+							<p>身份证：</p>
+							<input type="text" placeholder="请输入身份证">
+						</div>
+					</div> -->
+				</div>
+			</div>
+			
+			<!-- 疫情防控 -->
+			<!-- <div class="yqView">
+				<div class="radioItem">
+					<div>14天内是否有中高风险地区旅行史</div>
+					<div class="radioView">
+						<label for="lxs1"><input type="radio" id="lxs1" name="lxs" value="0">是</label>
+						<label for="lxs2"><input type="radio" id="lxs2" name="lxs" value="1">否</label>
+					</div>
+				</div>
+				<div class="radioItem">
+					<div>14天内是否与新冠检测阳性人员密切接触</div>
+					<div class="radioView">
+						<label for="jcs1"><input type="radio" id="jcs1" name="jcs" value="0">是</label>
+						<label for="jcs2"><input type="radio" id="jcs2" name="jcs" value="1">否</label>
+					</div>
+				</div>
+			</div> -->
+			
+			<!-- 价格合计 -->
+			<div class="priceView">
+				<div class="priceLeft">
+					在线预约
+				</div>
+				<div class="priceRight">
+					<a class="orderBtn" href="ybyhsOrder.html">我的订单</a>
+					<a class="payBtn" href="javascript:;" onclick="payClick()">在线预约</a>
+				</div>
+				<div class="noSale">
+					<p>暂不售票</p>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 图片裁剪部分 -->
+		<div class="face-upload-modal">
+			<div class="face-upload-imgView">
+				<img class="face-upload-img" src="" >
+			</div>
+			<div class="face-upload-control">
+				<a class="face-upload-btn" href="javascript:;" onclick="cancelClick()">取消</a>
+				<a class="face-upload-btn" href="javascript:;" onclick="imgSubmit()">确定</a>
+			</div>
+		</div>
+		
+		<!-- 个人头像预览 -->
+		<div class="face-preview-modal">
+			<div class="face-preview-content">
+				<p class="face-preview-title">个人照片</p>
+				<div class="face-preview-imgView">
+					<img class="face-preview-img" src="" >
+				</div>
+				<div class="face-preview-control">
+					<a class="face-preview-btn" href="javascript:;" onclick="previewSure()">确定</a>
+				</div>
+			</div>
+		</div>
+		
+		<form id="myForm" method="post" action="https://boss.smart-ideas.com.cn/ticketApi/order/uploadHeadImg" enctype="multipart/form-data"></form>
+		
+		
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/laydate.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/cropper.min.js"></script>
+		<script src="js/app.js?v=20"></script>
+		<script src="js/region.js"></script>
+		<script src="js/ybyhsTicket.js?v=50"></script>
+	</body>
+</html>

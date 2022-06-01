@@ -1,0 +1,293 @@
+.container{
+	min-height: 100vh;
+	background-color: #f5f5f5;
+	padding: 10px;
+	padding-bottom: 60px;
+}
+.content{
+	background-color: #fff;
+	width: 100%;
+	border-radius: 5px;
+	padding: 0 10px;
+}
+.priceView{
+	padding: 10px 0;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	border-bottom: 1px solid #f5f5f5;
+}
+.priceView p{
+	flex: 0 0 100px;
+	font-size: 16px;
+	font-weight: bold;
+}
+.priceView .price{
+	flex: 1;
+	font-size: 18px;
+	text-align: right;
+	color: #ff5500;
+}
+.ticketView{
+	padding: 5px 0;
+	border-bottom: 1px solid #f5f5f5;
+	position: relative;
+}
+.ticketView div{
+	display: flex;
+	justify-content: start;
+	align-items: flex-start;
+	padding: 5px 0;
+}
+.ticketView div .desc{
+	font-size: 14px;
+	line-height: 20px;
+	color: #00B3FD;
+	flex: 0 0 70px;
+}
+.ticketView .headPic{
+	display: none;
+}
+.ticketView div .headImg{
+	width: 250px;
+	border-radius: 50%;
+}
+.ticketView div .qrcode{
+	flex: 1;
+}
+.ticketView div img{
+	width: 150px;
+	margin: 0 auto;
+}
+.ticketView div p{
+	flex: 1;
+	font-size: 14px;
+	line-height: 20px;
+	color: #333;
+}
+.ticketView div .red{
+	color: red;
+	font-size: 100px;
+	font-weight: bold;
+	line-height: 100px;
+	text-align: center;
+}
+.visitorView{
+	padding: 10px 0;
+	border-bottom: 1px solid #f5f5f5;
+}
+.visitorView .title{
+	font-size: 16px;
+	color: #333;
+	font-weight: bold;
+	padding-bottom: 10px;
+}
+.visitorList{
+	padding: 0 10px;
+	/* display: none; */
+}
+.visitor{
+	padding: 5px 10px;
+	background-color: #f5f5f5;
+	border-radius: 5px;
+	margin-bottom: 10px;
+}
+.visitor .visitorInfo{
+	display: flex;
+	justify-content: start;
+	align-items: flex-start;
+	line-height: 25px;
+}
+.visitor .visitorInfo .desc{
+	font-size: 14px;
+	color: #5FB878;
+	flex: 0 0 70px;
+}
+.visitor .visitorInfo p{
+	font-size: 14px;
+	color: #333;
+}
+.detailView{
+	padding: 10px 0;
+	border-bottom: 1px solid #f5f5f5;
+}
+.detailView .title{
+	font-size: 16px;
+	color: #333;
+	font-weight: bold;
+	padding-bottom: 10px;
+}
+
+.ticketList{
+	padding: 0 10px;
+	/* display: none; */
+}
+.ticket{
+	background-color: #f5f5f5;
+	padding: 10px;
+	border-radius: 5px;
+	margin-bottom: 10px;
+}
+.ticket .ticketName{
+	font-size: 14px;
+	color: #333;
+	font-weight: bold;
+	line-height: 25px;
+}
+.ticket .ticketInfo{
+	display: flex;
+	justify-content: start;
+	align-items: flex-start;
+	line-height: 25px;
+}
+.ticket .ticketInfo .desc{
+	font-size: 14px;
+	color: #5FB878;
+	flex: 0 0 70px;
+}
+.ticket .ticketInfo p{
+	font-size: 14px;
+	color: #333;
+}
+.ticket .ticketInfo .qrcodeView{
+	flex: 1;
+}
+.ticket .ticketInfo .qrcodeView p{
+	font-size: 14px;
+	color: #333;
+}
+
+.ticket .ticketInfo .qrcodeView .qrcode-img{
+	width: 150px;
+	margin: 10px 0;
+}
+.detailBtn{
+	width: 100%;
+	text-align: center;
+	line-height: 35px;
+	font-size: 14px;
+	color: #333;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.detailBtn img{
+	height: 25px;
+}
+.detailBtn.active img{
+	transform: rotateX(180deg);
+}
+
+.checkView{
+	padding: 10px 0;
+	border-bottom: 1px solid #f5f5f5;
+}
+.checkView .title{
+	font-size: 16px;
+	color: #333;
+	font-weight: bold;
+	padding-bottom: 10px;
+}
+.checkList{
+	padding: 0 10px;
+	display: none;
+}
+.checkList .noData{
+	background-color: #f5f5f5;
+	color: #666;
+	font-size: 14px;
+	text-align: center;
+	line-height: 50px;
+	display: none;
+}
+.check{
+	padding: 5px 10px;
+	background-color: #f5f5f5;
+	border-radius: 5px;
+	margin-bottom: 10px;
+}
+.check .checkInfo{
+	display: flex;
+	justify-content: start;
+	align-items: flex-start;
+	line-height: 25px;
+}
+.check .checkInfo .desc{
+	font-size: 14px;
+	color: #5FB878;
+	flex: 0 0 70px;
+}
+.check .checkInfo p{
+	font-size: 14px;
+	color: #333;
+}
+
+/* 发票详情 */
+.invoiceView{
+	display: none;
+	padding: 10px 0;
+	border-bottom: 1px solid #f5f5f5;
+	background-color: #fff;
+}
+.invoiceDetail{
+	display: none;
+	padding: 10px 0;
+}
+.invoiceDetail canvas{
+	display: none;
+}
+.invoiceDetail img{
+	margin: 0 auto;
+	width: 150px;
+}
+.invoiceDetail p{
+	font-size: 14px;
+	color: #333;
+	text-align: center;
+	margin-top: 5px;
+}
+
+/* 微信卡券详情 */
+.cardView{
+	display: none;
+	padding: 10px 0;
+	border-bottom: 1px solid #f5f5f5;
+	background-color: #fff;
+}
+.cardDetail{
+	display: none;
+	padding: 10px 0;
+}
+.cardDetail canvas{
+	display: none;
+}
+.cardDetail img{
+	margin: 0 auto;
+	width: 150px;
+}
+.cardDetail p{
+	font-size: 14px;
+	color: #333;
+	text-align: center;
+	margin-top: 5px;
+}
+.refundView{
+	background-color: #fff;
+	border-radius: 5px;
+	position: fixed;
+	bottom: 10px;
+	left: 10px;
+	right: 10px;
+	box-shadow: 0 0 3px #D2D2D2;
+}
+.refundView a{
+	width: 100%;
+	line-height: 40px;
+	border-radius: 3px;
+	text-align: center;
+	font-size: 14px;
+	color: #333;
+}
+.refundView a.red{
+	color: red;
+}

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="./css/cropper.min.css">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/ybyhsTicket.css">
+		<style type="text/css">
+			.itemInfo p{
+				flex: 0 0 100px;
+			}
+		</style>
+		<title>在线申请</title>
+	</head>
+	<body>
+		<div class="container">
+			<!-- 门票名称 -->
+			<div class="ticketName">
+				<p class="ticketNameTxt"><font class="ticketType"></font></p>
+				<p class="ticketDesc" style="font-size: 14px;"></p>
+				<!-- <p class="checkTime"></p> -->
+			</div>
+			
+			<!-- 购票须知 -->
+			<!-- <div class="noticeView">
+				<p class="noticeTitle fhlTitle">购票须知</p>
+				<div class="noticeText">
+					
+				</div>
+			</div> -->
+			
+			<!-- 预定时间 -->
+			<!-- <div class="ticketTime">
+				<p class="timeTitle">预定时间</p>
+				<div class="timeView">
+					<input class="timeInput" type="text" readonly="readonly">
+					<p class="ticketPrice"></p>
+					<a class="timeSelectBtn" href="javascript:;"></a>
+				</div>
+			</div> -->
+			
+			<!-- 凤凰岭时间段 -->
+			<!-- <div class="ticketTime fhlTime">
+				<p class="timeTitle">预定时间段</p>
+				<select>
+					<option value ="0">上午</option>
+					<option value ="0">下午</option>
+				</select>
+			</div> -->
+			
+			<!-- 购票数量 -->
+			<!-- <div class="ticketNumber">
+				<p class="numberText">申请数量：</p>
+				<div class="numberView">
+					<a class="subBtn" href="javascript:;" onclick="subClick(this)">-</a>
+					<input class="numberInput" type="number" readonly="readonly" value="0">
+					<a class="addBtn" href="javascript:;" onclick="addClick(this)">+</a>
+				</div>
+			</div> -->
+			
+			<!-- 游客信息 -->
+			<div class="visitorInfo">
+				<p class="visitorTitle">发票信息</p>
+				<div class="visitorList">
+					<div class="visitorItem">
+						<div class="itemInfo">
+							<p>姓名：</p>
+							<input class="name" type="text" placeholder="请输入姓名">
+						</div>
+						<div class="itemInfo">
+							<p>电话：</p>
+							<input class="phone" type="text" placeholder="请输入电话">
+						</div>
+						<div class="itemInfo">
+							<p>邮箱：</p>
+							<input class="yjdz" type="text" placeholder="请输入邮箱">
+						</div>
+						<div class="itemInfo">
+							<p>公司抬头：</p>
+							<input class="gstt" type="text" placeholder="请输入公司抬头">
+						</div>
+						<div class="itemInfo">
+							<p>税号：</p>
+							<input class="sh" type="text" placeholder="请输入税号">
+						</div>
+						<div class="itemInfo">
+							<p>发票金额：</p>
+							<input class="fpje" type="text" placeholder="请输入发票金额">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- 价格合计 -->
+			<div class="priceView">
+				<div class="priceLeft">
+					在线申请
+				</div>
+				<div class="priceRight">
+					<a class="orderBtn" href="xtybyOrder.html">我的申请</a>
+					<a class="payBtn" href="javascript:;" onclick="payClick()">在线申请</a>
+				</div>
+				<div class="noSale">
+					<p>暂不售票</p>
+				</div>
+			</div>
+		</div>
+		
+		
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/laydate.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/cropper.min.js"></script>
+		<script src="js/app.js?v=20"></script>
+		<script src="js/region.js"></script>
+		<script src="js/xtyby/xtybyTicket.js?v=1.0.1"></script>
+	</body>
+</html>

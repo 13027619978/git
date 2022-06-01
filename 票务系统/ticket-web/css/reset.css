@@ -1,0 +1,60 @@
+*{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+a{
+	color: #333;
+	text-decoration: none;
+	display: block;
+}
+ul, li{
+	list-style: none;
+}
+img{
+	display: block;
+}
+input{
+	outline: none;
+}
+
+
+/* tabbar */
+.tabbar{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	background-color: #fff;
+	padding: 5px 0;
+}
+.tabbar a{
+	width: 50%;
+	text-align: center;
+	font-size: 14px;
+	color: #8a8a8a;
+	padding-top: 22px;
+}
+.tabbar .active{
+	color: #00b6fc;
+}
+.tabbar .homeBtn{
+	background: url(../img/home_icon_no.png) no-repeat center top;
+	background-size: auto 20px; 
+}
+.tabbar .homeBtn.active{
+	background: url(../img/home_icon.png) no-repeat center top; 
+	background-size: auto 20px; 
+}
+.tabbar .userBtn{
+	background: url(../img/user_icon_no.png) no-repeat center top;
+	background-size: auto 20px; 
+}
+.tabbar .userBtn.active{
+	background: url(../img/user_icon.png) no-repeat center top;
+	background-size: auto 20px; 
+}

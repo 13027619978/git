@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="./css/cropper.min.css">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/ticket.css?V=10">
+		<title>激活年卡</title>
+	</head>
+	<body>
+		<div class="container">
+			<!-- 门票名称 -->
+			<div class="ticketName">
+				<p class="ticketNameTxt">园博园年卡<font class="ticketType">年卡</font></p>
+				<p class="ticketDesc"></p>
+			</div>
+			
+			<!-- 游客信息 -->
+			<div class="visitorInfo">
+				<p class="visitorTitle">绑定信息</p>
+				<div class="visitorList">
+					<div class="visitorItem">
+						<div class="itemInfo">
+							<p>姓名：</p>
+							<input class="name" type="text" placeholder="请输入姓名">
+						</div>
+						<div class="itemInfo">
+							<p>手机号：</p>
+							<input class="phone" type="text" placeholder="请输入手机号">
+						</div>
+						<div class="itemInfo">
+							<p>身份证：</p>
+							<input class="idCard" type="text" placeholder="请输入身份证">
+						</div>
+						<div class="itemInfo">
+							<p>头像：</p>
+							<div class="imgView">
+								<input class="selectImg" type="file" accept="image/*" onchange="selectImg(this)">
+								<p>请上传个人正面免冠照片</p>
+								<img src="img/user.png" >
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- 价格合计 -->
+			<div class="priceView">
+				<a class="payBtn" href="javascript:;" onclick="payClick(0)">在线激活</a>
+			</div>
+		</div>
+		
+		<!-- 图片裁剪部分 -->
+		<div class="face-upload-modal">
+			<div class="face-upload-imgView">
+				<img class="face-upload-img" src="" >
+			</div>
+			<div class="face-upload-control">
+				<a class="face-upload-btn" href="javascript:;" onclick="cancelClick()">取消</a>
+				<a class="face-upload-btn" href="javascript:;" onclick="imgSubmit()">确定</a>
+			</div>
+		</div>
+		
+		<!-- 个人头像预览 -->
+		<div class="face-preview-modal">
+			<div class="face-preview-content">
+				<p class="face-preview-title">个人照片</p>
+				<div class="face-preview-imgView">
+					<img class="face-preview-img" src="" >
+				</div>
+				<div class="face-preview-control">
+					<a class="face-preview-btn" href="javascript:;" onclick="previewSure()">确定</a>
+				</div>
+			</div>
+		</div>
+		
+		<form id="myForm" method="post" action="https://boss.smart-ideas.com.cn/ticketApi/order/uploadHeadImg" enctype="multipart/form-data"></form>
+		
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/laydate.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/cropper.min.js"></script>
+		<script src="js/app.js?v=100"></script>
+		<script src="js/ticket.js?v=300"></script>
+	</body>
+</html>

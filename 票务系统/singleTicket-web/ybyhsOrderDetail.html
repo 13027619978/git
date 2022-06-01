@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/orderDetail.css?v=20">
+		<title>订单详情</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="content">
+				<div class="priceView">
+					<p>实付金额</p>
+					<p class="price"></p>
+				</div>
+				<div class="ticketView">
+					<div class="ticketNumber checkItem">
+						<p class="desc">检票次数：</p>
+						<p class="checkQuantity"></p>
+					</div>
+					<div class="ticketTime">
+						<p class="desc">游玩日期：</p>
+						<p class="visitDate"></p>
+					</div>
+					<div class="headPic">
+						<p class="desc">个人照片：</p>
+						<img class="headImg" src="" >
+					</div>
+					<!-- <div class="ticketDetail">
+						<p class="desc">入园凭证：</p>
+						<div class="qrcode"></div>
+					</div> -->
+					
+				</div>
+				<!-- 门票详情 -->
+				<div class="detailView">
+					<a class="detailBtn" href="javascript:;" onclick="detailClick(this)"><p>查看门票详情</p><img src="img/down_icon.png" ></a>
+					<div class="ticketList list">
+						<!-- <div class="ticket">
+							<p class="ticketName">北京国际鲜花港</p>
+							<div class="ticketInfo">
+								<p class="desc">购买次数：</p>
+								<p>1</p>
+							</div>
+							<div class="ticketInfo">
+								<p class="desc">剩余次数：</p>
+								<p>1</p>
+							</div>
+							<div class="ticketInfo">
+								<p class="desc">检票时间：</p>
+								<p>09:00-17:00</p>
+							</div>
+						</div> -->
+					</div>
+				</div>
+				<!-- 游客详情 -->
+				<div class="visitorView">
+					<a class="detailBtn" href="javascript:;" onclick="detailClick(this)"><p>查看游客详情</p><img src="img/down_icon.png" ></a>
+					<div class="visitorList list">
+						<!-- <div class="visitor">
+							<p class="name">魏腾1</p>
+							<p class="phone">130****9978</p>
+							<p class="idCard">410521********0018</p>
+						</div>
+						<div class="visitor">
+							<p class="name">魏腾2</p>
+							<p class="phone">130****9978</p>
+							<p class="idCard">410521********0018</p>
+						</div> -->
+					</div>
+				</div>
+				
+				
+				<!-- 检票详情 -->
+				<div class="checkView">
+					<a class="detailBtn" href="javascript:;" onclick="detailClick(this)"><p>查看检票详情</p><img src="img/down_icon.png" ></a>
+					<div class="checkList list">
+						<p class="noData">--暂无检票信息--</p>
+						<!-- <div class="check">
+							<div class="checkInfo">
+								<p class="desc">检票方式：</p>
+								<p>1</p>
+							</div>
+							<div class="checkInfo">
+								<p class="desc">检票次数：</p>
+								<p>1</p>
+							</div>
+							<div class="checkInfo">
+								<p class="desc">检票时间：</p>
+								<p>09:00-17:00</p>
+							</div>
+						</div> -->
+					</div>
+				</div>
+				
+				<!-- 微信卡券 -->
+				<div class="cardView">
+					<a class="detailBtn" href="javascript:;" onclick="detailClick(this)"><p>查看微信卡券</p><img src="img/down_icon.png" ></a>
+					<div class="cardDetail list">
+						<img class="cardImg" src="" >
+						<p>长按识别微信卡券二维码</p>
+					</div>
+				</div>
+				
+				<!-- 发票详情 -->
+				<div class="invoiceView">
+					<a class="detailBtn" href="javascript:;" onclick="detailClick(this)"><p>查看发票详情</p><img src="img/down_icon.png" ></a>
+					<div class="invoiceDetail list">
+						<img class="invoiceImg" src="" >
+						<p>长按识别开发票二维码</p>
+					</div>
+				</div>
+			</div>
+			
+			
+			
+			<div class="refundView">
+				<a class="refundBtn" href="javascript:;" onclick="refundClick()">申请退票</a>
+			</div>
+		</div>
+		
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/aes.js"></script>
+		<script src="js/md5.js"></script>
+		<script src="js/base64.js"></script>
+		<script src="js/jquery.qrcode.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app.js?v=10"></script>
+		<script src="js/ybyhsOrderDetail.js?v=20"></script>
+	</body>
+</html>

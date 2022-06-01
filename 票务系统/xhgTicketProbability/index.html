@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css">
+		<title>门票跳转设置</title>
+		<style type="text/css">
+			.container{
+				width: 100%;
+				height: 100vh;
+				background-color: #55aaff;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.content{
+				width: 90%;
+				background-color: #fff;
+				border-radius: 10px;
+				box-shadow: 0 0 5px #ddd;
+				padding: 10px 20px;
+			}
+			.title{
+				text-align: center;
+				font-size: 18px;
+				font-weight: bold;
+				color: #333;
+				line-height: 50px;
+			}
+			.ticketItem{
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+				font-size: 14px;
+				color: #333;
+				margin-bottom: 10px;
+				position: relative;
+			}
+			.ticketItem .percent{
+				position: absolute;
+				right: 0;
+				top: 0;
+			}
+			.ticketItem p{
+				flex:  0 0 75px;
+				text-align: right;
+				padding-right: 10px;
+				line-height: 35px;
+			}
+			.ticketItem input{
+				flex: 1;
+				height: 35px;
+				border: 1px solid #ddd;
+				border-radius: 5px;
+				outline: none;
+				padding: 0 10px;
+			}
+			.subBtn{
+				display: block;
+				width: 100%;
+				background-color: #55AAFF;
+				color: #fff;
+				line-height: 35px;
+				border-radius: 5px;
+				text-align: center;
+				font-size: 14px;
+				margin: 10px 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="content">
+				<p class="title">门票设置</p>
+				<div class="ticketItem">
+					<p>同程</p>
+					<input class="tc" type="number">
+					<p class="percent">%</p>
+				</div>
+				<div class="ticketItem">
+					<p>测试</p>
+					<input class="cs" type="number">
+					<p class="percent">%</p>
+				</div>
+				<div class="ticketItem">
+					<p>宇嘉</p>
+					<input class="yj" type="number">
+					<p class="percent">%</p>
+				</div>
+				<a class="subBtn" href="javascript:;" onclick="subClick()">确认提交</a>
+			</div>
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app.js"></script>
+		<script type="text/javascript">
+			var tcTicket;
+			var csTicket;
+			var yjTicket;
+			$(function(){
+				app.getAjax('getTicketProbability', {}, function(res){
+					tcTicket = res.data.ybyTicket;
+					csTicket = res.data.fhlTicket;
+					yjTicket = res.data.ymyTicket;
+					$('.tc').val(tcTicket);
+					$('.cs').val(csTicket);
+					$('.yj').val(yjTicket);
+				})
+			})
+			
+			function subClick(){
+				var tc = parseInt($('.tc').val());
+				var cs = parseInt($('.cs').val());
+				var yj = parseInt($('.yj').val());
+				if(tc + cs + yj == 100){
+					if(tcTicket == tc && csTicket == cs && yjTicket == yj){
+						layer.alert('请先修改后再提交数据');
+					}else{
+						app.getAjax('writeTicketProbability', {
+							ybyTicket: tc,
+							fhlTicket: cs,
+							ymyTicket: yj,
+							yjTicket: 0
+						}, function(res){
+							if(res.success == 'true'){
+								layer.alert(res.msg);
+							}
+						})
+					}
+				}else{
+					layer.alert('总数之和非等于100');
+				}
+			}
+		</script>
+	</body>
+</html>

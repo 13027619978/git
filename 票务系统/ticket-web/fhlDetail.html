@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css">
+		<style type="text/css">
+			.container{
+				width: 100%;
+			}
+			.bgImg{
+				width: 100%;
+			}
+			.imgView{
+				width: 34.6%;
+				height: 46.3vw;
+				position: absolute;
+				left: 56%;
+				top: 21.4vw;
+				overflow: hidden;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background-color: #000;
+			}
+			.imgView img{
+				height: 100%;
+			}
+			.qrcodeImg{
+				position: absolute;
+				top: 85vw;
+				left: 50%;
+				margin-left: -18%;
+				width: 36%;
+				height: 36.5vw;
+				background-color: #000;
+			}
+			.qrcodeImg img{
+				width: 100%;
+				height: 100%;
+			}
+			.ticketNum, .useTime{
+				position: absolute;
+				left: 0;
+				top: 123vw;
+				font-size: 13px;
+				color: #333;
+				text-align: center;
+				width: 100%;
+			}
+			.useTime{
+				top: 127vw;
+			}
+			.qyBtn{
+				position: fixed;
+				bottom: 1%;
+				left: 50%;
+				margin-left: -75px;
+				display: block;
+				width: 150px;
+				line-height: 35px;
+				text-align: center;
+				color: #fff;
+				text-align: center;
+				border-radius: 10px;
+				font-size: 12px;
+				color: #fff;
+				background-color: #009688;
+			}
+			
+			.hoverView{
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: rgba(0,0,0,.5);
+				display: none;
+			}
+			.hoverContent{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 100%;
+				height: 100%;
+			}
+			.djqView{
+				width: 90%;
+				position: relative;
+			}
+			.djqView img{
+				width: 100%;
+			}
+			.djqView .closeBtn{
+				position: absolute;
+				right: 0;
+				top: 0;
+				background-color: #fff;
+				display: block;
+				width: 35px;
+				height: 35px;
+				border-radius: 50%;
+				text-align: center;
+				line-height: 25px;
+				color: #333;
+				border: 4px solid #009688;
+			}
+			.qyImg{
+				position: absolute;
+				top: 37.5%;
+				left: 27vw;
+			}
+			.qyImg img{
+				width: 35.5vw;
+			}
+			.qyBtn{
+				display: none;
+			}
+		</style>
+		<title>订单详情</title>
+	</head>
+	<body>
+		<div class="container">
+			<img class="bgImg" src="img/fhlDetailBg.jpg" >
+			<div class="imgView">
+				<img class="headImg" src="" >
+			</div>
+			<div class="qrcode" style="display: none;">
+				
+			</div>
+			<div class="qrcodeImg">
+				<img src="" >
+				
+			</div>
+			<p class="ticketNum"></p>
+			<p class="useTime"></p>
+			<a class="qyBtn" href="javascript:;" onclick="showqy()">查看年卡权益</a>
+		</div>
+		
+		<div class="hoverView">
+			<div class="hoverContent">
+				<div class="djqView">
+					<img src="img/fhlDjq1.jpg" >
+					<a class="closeBtn" href="javascript:;" onclick="closeClick()">x</a>
+					<div class="qyImg">
+						<img src="" >
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/md5.js?v=1.0.0"></script>
+		<script src="js/encrypt.js?v=1.0.1"></script>
+		<script src="js/app4.js?v=1.0.1"></script>
+		<script src="js/jquery.qrcode.min.js"></script>
+		<script src="js/fhlDetail1.js?v=1.0.4"></script>
+	</body>
+</html>
+

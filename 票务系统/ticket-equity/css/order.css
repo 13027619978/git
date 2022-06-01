@@ -1,0 +1,90 @@
+.container{
+	min-height: 100vh;
+	background-color: #f5f5f5;
+	padding: 10px 15px;
+	padding-bottom: 64px;
+}
+.orderItem{
+	background-color: #fff;
+	border-radius: 5px;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+.orderItem .ticketName{
+	border-bottom: 1px solid #f5f5f5;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	padding-bottom: 10px;
+}
+.orderItem .ticketName .name{
+	flex: 1;
+	font-size: 14px;
+	color: #333;
+	font-weight: bold;
+}
+.orderItem .ticketName .name font{
+	display: inline-block;
+	font-size: 12px;
+	color: #00b3fd;
+	line-height: 23px;
+	padding: 0 5px;
+	border-radius: 5px;
+	margin-left: 10px;
+	background-color: #ddf3ff;
+}
+.orderItem .ticketName .status{
+	flex: 0 0 60px;
+	font-size: 14px;
+	text-align: right;
+}
+.orderItem .ticketName .status.black{
+	color: #636363;
+}
+.orderItem .ticketName .status.red{
+	color: red;
+}
+.orderItem .timeView{
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	padding: 5px 0;
+}
+.orderItem .timeView .time{
+	flex: 1;
+	font-size: 14px;
+	color: #636363;
+}
+.orderItem .timeView .price{
+	flex: 0 0 80px;
+	font-size: 14px;
+	color: #636363;
+	text-align: right;
+}
+.orderItem .timeView .price font{
+	font-size: 16px;
+	font-weight: bold;
+	color: #ff5500;
+}
+.orderItem .refundView{
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+.orderItem .refundView a{
+	width: 75px;
+	line-height: 30px;
+	border-radius: 30px;
+	font-size: 14px;
+	color: #636363;
+	border: 1px solid #c4c4c4;
+	text-align: center;
+}
+
+.noData{
+	font-size: 14px;
+	color: #009F95;
+	text-align: center;
+	line-height: 50px;
+	display: none;
+}

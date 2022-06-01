@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/fhlIndex.css?v=40">
+		<style type="text/css">
+			.hoverView{
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: rgba(0,0,0,.5);
+				display: none;
+				z-index: 999;
+			}
+			.hoverContent{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 100%;
+				height: 100%;
+			}
+			.djqView{
+				width: 90%;
+				position: relative;
+			}
+			.djqView img{
+				width: 100%;
+			}
+			.djqView .closeBtn{
+				position: absolute;
+				right: 0;
+				top: 0;
+				background-color: #fff;
+				display: block;
+				width: 35px;
+				height: 35px;
+				border-radius: 50%;
+				text-align: center;
+				line-height: 25px;
+				color: #333;
+				border: 4px solid #009688;
+			}
+			.qyImg{
+				position: absolute;
+				top: 37.5%;
+				left: 27vw;
+			}
+			.qyImg img{
+				width: 35.5vw;
+			}
+			.qyBtn{
+				display: none;
+			}
+			.qyNotice{
+				line-height: 35px;
+				font-size: 12px;
+				color: #fff;
+				text-align: center;
+				position: absolute;
+				top: 22vh;
+				left: 3vw;
+				right: 3vw;
+				background: #78ac45;
+				border: 1px solid #fff;
+				border-radius: 5px;
+			}
+		</style>
+		<title>凤凰岭景区门票</title>
+	</head>
+	<body>
+		<div class="hoverView">
+			<div class="hoverContent">
+				<div class="djqView">
+					<div class="qrcode" style="display: none;">
+						
+					</div>
+					<img src="img/fhlDjq1.jpg" >
+					<p class="qyNotice">可前往“我的->年票详情”中查看年票权益</p>
+					<a class="closeBtn" href="javascript:;" onclick="closeClick()">x</a>
+					<div class="qyImg">
+						<img src="" >
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<!-- 通知 -->
+			<div class="noticeView">
+				<p class="noticeText"><font class="ticketStatus">开园</font>正常售票</p>
+			</div>
+			
+			<!-- 景区名称 -->
+			<div class="scenicInfo">
+				<div class="scenicDesc maxHeight">
+					<div class="descContent">
+						
+					</div>
+					<a class="allBtn" href="javascript:;" onclick="showAll(this)">展开全部</a>
+				</div>
+			</div>
+			
+			<!-- 门票列表 -->
+			<div class="ticketView">
+				<div class="ticketList">
+					
+				</div>
+			</div>
+		</div>
+		
+		<div class="moreView">
+			<img src="img/more-icon.png" >
+			向下滑动查看更多
+		</div>
+		
+		<!-- tabbar -->
+		<div class="tabbar">
+			<a class="homeBtn active" href="javascript:;">首页</a>
+			<a class="userBtn" href="order.html">我的</a>
+		</div>
+		
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/md5.js?v=1.0.0"></script>
+		<script src="js/encrypt.js?v=1.0.2"></script>
+		<script src="js/jweixin-1.0.0.js"></script>
+		<script src="js/jquery.qrcode.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app3.js?v=1.0.0"></script>
+		<script src="js/fhlIndex.js?v=1.0.4"></script>
+	</body>
+</html>

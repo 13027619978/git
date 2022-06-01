@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="./css/cropper.min.css">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/ticket.css?V=10">
+		<title>提交订单</title>
+	</head>
+	<body>
+		<div class="container">
+			<!-- 门票名称 -->
+			<div class="ticketName">
+				<p class="ticketNameTxt"><font class="ticketType"></font></p>
+				<p class="ticketDesc"></p>
+				<!-- <p class="checkTime"></p> -->
+			</div>
+			
+			<!-- 购票须知 -->
+			<div class="noticeView">
+				<p class="noticeTitle fhlTitle">购票须知</p>
+				<div class="noticeText">
+					
+				</div>
+			</div>
+			
+			<!-- 预定时间 -->
+			<div class="ticketTime">
+				<p class="timeTitle">预定时间</p>
+				<div class="timeView">
+					<input class="timeInput" type="text" readonly="readonly">
+					<p class="ticketPrice"></p>
+					<a class="timeSelectBtn" href="javascript:;"></a>
+				</div>
+			</div>
+			
+			<!-- 凤凰岭时间段 -->
+			<div class="ticketTime fhlTime">
+				<p class="timeTitle">预定时间段</p>
+				<select class="fhlSelect">
+					<!-- <option value ="0">7:00-10:00</option>
+					<option value ="0">10:00-12:00</option>
+					<option value ="0">12:00-14:00</option>
+					<option value ="0">14:00-17:00</option> -->
+				</select>
+			</div>
+			
+			<!-- 证件类型 -->
+			<div class="ticketTime cetTypeView">
+				<p class="timeTitle">证件类型</p>
+				<div class="cetTypeSelect">
+					<label for="cetType1"><input class="cetType" type="radio" id="cetType1" name="cetType" value="0" onchange="certTypeChange(this)" checked="checked">身份证</label>
+					<label for="cetType2"><input class="cetType" type="radio" id="cetType2" name="cetType" value="1" onchange="certTypeChange(this)">护照</label>
+				</div>
+			</div>
+			
+			<!-- 购票数量 -->
+			<div class="ticketNumber">
+				<p class="numberText">购票数量：</p>
+				<div class="numberView">
+					<a class="subBtn" href="javascript:;" onclick="subClick(this)">-</a>
+					<input class="numberInput" type="number" readonly="readonly" value="1">
+					<a class="addBtn" href="javascript:;" onclick="addClick(this)">+</a>
+				</div>
+			</div>
+			
+			<!-- 游客信息 -->
+			<div class="visitorInfo">
+				<p class="visitorTitle">游客信息</p>
+				<div class="visitorList">
+					<!-- <div class="visitorItem">
+						<div class="itemInfo">
+							<p>姓名：</p>
+							<input class="name" type="text" placeholder="请输入姓名">
+						</div>
+						<div class="itemInfo">
+							<p>手机号：</p>
+							<input class="phone" type="text" placeholder="请输入手机号">
+						</div>
+						<div class="itemInfo">
+							<p>身份证：</p>
+							<input class="idCard" type="text" placeholder="请输入身份证">
+						</div>
+						<div class="itemInfo">
+							<p>头像：</p>
+							<div class="imgView">
+								<input type="file">
+								<p>点击上传头像</p>
+								<img src="img/user.png" >
+							</div>
+						</div>
+					</div> -->
+				</div>
+			</div>
+			
+			<!-- 疫情防控 -->
+			<div class="yqView">
+				<div class="radioItem">
+					<div>14天内是否有中高风险地区旅行史</div>
+					<div class="radioView">
+						<label for="lxs1"><input type="radio" id="lxs1" name="lxs" value="0">是</label>
+						<label for="lxs2"><input type="radio" id="lxs2" name="lxs" value="1">否</label>
+					</div>
+				</div>
+				<div class="radioItem">
+					<div>14天内是否与新冠检测阳性人员密切接触</div>
+					<div class="radioView">
+						<label for="jcs1"><input type="radio" id="jcs1" name="jcs" value="0">是</label>
+						<label for="jcs2"><input type="radio" id="jcs2" name="jcs" value="1">否</label>
+					</div>
+				</div>
+				<div class="radioItem sfyx" style="display: none;">
+					<div>48小时内核酸检测结果是否阳性</div>
+					<div class="radioView">
+						<label for="sfyx1"><input type="radio" id="sfyx1" name="sfyx" value="0">是</label>
+						<label for="sfyx2"><input type="radio" id="sfyx2" name="sfyx" value="1">否</label>
+					</div>
+				</div>
+			</div>
+			
+			<!-- 价格合计 -->
+			<div class="priceView">
+				<div class="priceLeft">
+					订单金额：<p class="priceText">0元</p>
+				</div>
+				<a class="payBtn" href="javascript:;" onclick="payClick(0)">在线支付</a>
+				<a class="szPayBtn" href="javascript:;" onclick="payClick(1)" style="display: none;">数字货币支付</a>
+			</div>
+		</div>
+		
+		<!-- 图片裁剪部分 -->
+		<div class="face-upload-modal">
+			<div class="face-upload-imgView">
+				<img class="face-upload-img" src="" >
+			</div>
+			<div class="face-upload-control">
+				<a class="face-upload-btn" href="javascript:;" onclick="cancelClick()">取消</a>
+				<a class="face-upload-btn" href="javascript:;" onclick="imgSubmit()">确定</a>
+			</div>
+		</div>
+		
+		<!-- 个人头像预览 -->
+		<div class="face-preview-modal">
+			<div class="face-preview-content">
+				<p class="face-preview-title">个人照片</p>
+				<div class="face-preview-imgView">
+					<img class="face-preview-img" src="" >
+				</div>
+				<div class="face-preview-control">
+					<a class="face-preview-btn" href="javascript:;" onclick="previewSure()">确定</a>
+				</div>
+			</div>
+		</div>
+		
+		<form id="myForm" method="post" action="https://boss.smart-ideas.com.cn/ticketApi/order/uploadHeadImg" enctype="multipart/form-data"></form>
+		
+		<!-- 凤凰岭购票须知 -->
+		<div class="fhlNoticeView">
+			<p class="fhlNoticeTitle">北京凤凰岭景区游览须知</p>
+			<p>1、北京凤凰岭景区实行限量、预约、错峰游园，根据每日最大承载量的50%上限，当在园游客量接近限流标准时，景区将适时启动限流措施，请主动配合管理人员疏导。</p>
+			<p style="color: red;">2、已预约、购票的游客请严格按照预约来园时段向工作人员出示48小时内核酸检测阴性证明、扫描“北京健康宝”未见异常、购票二维码方可入园。</p>
+			<p>3、景区实行实名制分时段网络预约购票、限量有序无接触入园措施，入园游客（含中、小学生）需提前实名制预约购票；游览当日，凭预约二维码验码入园。</p>
+			<p>4、港澳台游客及外籍游客，需凭港、澳、台通行证或护照等有效证件提前实名预约。</p>
+			<p>5、请无法提供北京健康宝状态但符合有关年龄标准的老年人或儿童到门区“志愿服务点”，由景区工作人员助查获取健康状态。使用现金购票游客请到传统通道购买。</p>
+			<p>6、请按照正规路线参观游览，禁止攀爬野山及进入未开发路段。</p>
+			<p>7、进入景区须佩戴口罩，有序入园，保持1米以上安全距离。</p>
+			<p>8、入园时间：7:00-17:00，闭园时间：17:00。</p>
+			<p>9、咨询电话：62455933，咨询时间：8:00-17:00。</p>
+			<a class="fhlNoticeBtn" href="javascript:;" onclick="fhlNoticeClick()">我已知悉，前往购票</a>
+		</div>
+		
+		<!-- 凤凰岭购票须知 -->
+		<div class="fhlNoticeView fhlFreeNoticeView">
+			<p class="fhlNoticeTitle">北京凤凰岭景区免费游园预约须知</p>
+			<p>1、免费游园时间</p>
+			<p>北京凤凰岭景区2021年2月11日至2月17日免费开放，实行限量、预约、错峰游园。根据每日最大承载量的50%上限，当在园游客量接近限流标准时，景区将适时启动限流措施，请主动配合管理人员疏导。</p>
+			<p>2、请提前使用北京健康宝扫码</p>
+			<p>所有游客预约前须使用北京健康宝扫码，本人健康宝显示“未见异常”的游客可预约，北京健康宝未能显示“未见异常”游客不可预约。</p>
+			<img src="img/fhljkb.jpg">
+			<p>3、请实名预约</p>
+			<p>景区实行实名制分时段网络预约、限量有序无接触入园措施，入园游客（含中、小学生）需提前实名制预约（购买0元门票），预约游览当日，凭预约二维码验码入园。港澳台游客及外籍游客，需凭港、澳、台通行证或护照等有效证件提前实名预约。</p>
+			<p>4、其他提示</p>
+			<p>进入景区门区须佩戴口罩，按1米线排队，配合安检、测温验码。入园游览请文明游园，科学佩戴口罩，保持安全社交距离，不扎堆、不聚集。进入室内空间时以及在室外间距不足1米时须佩戴口罩。龙泉寺、桃源观暂未开放。</p>
+			<p>5、开放时间</p>
+			<p>春节假期入园时间：7:00-17:00，闭园时间：17:00。</p>
+			<p>6、咨询电话</p>
+			<p>春节假期免费开放咨询电话：62455933，咨询时间：8:00-17:00。</p>
+			<a class="fhlNoticeBtn" href="javascript:;" onclick="fhlNoticeClick()">我已知悉，前往预定</a>
+		</div>
+		
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/md5.js?v=1.0.0"></script>
+		<script src="js/encrypt.js?v=1.0.2"></script>
+		<script src="js/laydate.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/cropper.min.js"></script>
+		<script src="js/app4.js?v=1.0.1"></script>
+		<script src="js/region.js"></script>
+		<script src="js/holiday.js"></script>
+		<script src="js/ticket.js?v=1.0.6"></script>
+	</body>
+</html>

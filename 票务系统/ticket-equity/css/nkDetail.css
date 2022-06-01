@@ -1,0 +1,84 @@
+.container{
+	width: 100%;
+	border-top: 5px solid #00B3FD;
+	background-color: #f6f8ed;
+	min-height: 100vh;
+}
+.title{
+	font-size: 24px;
+	color: #00B3FD;
+	font-weight: bold;
+	text-align: center;
+	line-height: 75px;
+}
+
+.imgView{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 30px;
+}
+.imgView .logo{
+	width: 75px;
+}
+.headImg{
+	border: 1px solid #00B6FC;
+	width: 110px;
+	height: 140px;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.headImg img{
+	height: 100%;
+}
+
+.qrcodeView{
+	padding: 0 10px;
+	margin-top: 30px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+}
+.qrcodeTxt{
+	color: #fff;
+	font-size: 18px;
+	font-weight: bold;
+	background-color: #00B6FC;
+	text-align: center;
+	line-height: 35px;
+	width: 100%;
+}
+.qrcode{
+	margin: 20px 0 10px;
+}
+.ticketNum{
+	font-size: 13px;
+	color: #333;
+}
+
+.descView{
+	margin-top: 10px;
+	padding: 0 10px;
+}
+.titleView{
+	border-bottom: 1px solid #00B3FD;
+}
+.descTitle{
+	font-size: 12px;
+	color: #fff;
+	width: 75px;
+	line-height: 25px;
+	background-color: #00B3FD;
+	text-align: center;
+}
+.descContent{
+	padding: 5px;
+}
+.descContent p{
+	font-size: 12px;
+	color: #333;
+	line-height: 20px;
+}	
