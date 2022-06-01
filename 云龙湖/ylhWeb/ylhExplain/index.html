@@ -1,0 +1,294 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>云龙湖导览</title>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
+    <style>
+        html, body, #container {
+            height: 100%;
+            width: 100%;
+        }
+        #addOverlayGroup {
+            margin-right: 1rem;
+        }
+		.amap-marker-label{
+			border: 0;
+			background-color: none;
+			background: rgba(0,0,0,0);
+		}
+		.info{
+			position: relative;
+			min-width: 0;
+			top: 0;
+			right: -15px;
+			width: 100px;
+			z-index: 999;
+			text-align: center;
+			color: #fff;
+			font-weight: bold;
+			background: rgba(0, 0, 0, .4);
+			padding: 5px 0;
+			margin-bottom: 5px;
+			
+		}
+		.info p{
+			font-weight: normal;
+			line-height: 15px;
+		}
+		.amap-logo, .amap-copyright{
+			display: none !important;
+		}
+		.btnView img{
+			width: 150px;
+			margin-bottom: 10px;
+		}
+		.explainView{
+			background-color: #fff;
+			position: fixed;
+			z-index: 999;
+			top: 0;
+			left: 0;
+			right: 0;
+			padding: 10px 20px;
+			display: none;
+		}
+		.explainView .title{
+			font-size: 18px;
+			font-weight: bold;
+		}
+		.explainView .descView{
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+		}
+		.explainView .descView img{
+			height: 75px;
+			flex: 0 0 100px;
+			margin-right: 10px;
+		}
+		.explainView .desc{
+			flex: 1;
+			font-size: 13px;
+			color: #333;
+			line-height: 25px;
+			text-overflow: -o-ellipsis-lastline;
+		    overflow: hidden;
+		    text-overflow: ellipsis;
+		    display: -webkit-box;
+		    -webkit-line-clamp: 3;
+		    line-clamp: 3;
+		    -webkit-box-orient: vertical;
+			margin: 10px 0;
+		}
+		.explainView .btnView{
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			padding-top: 10px;
+			border-top: 1px solid #ddd;
+		}
+		.explainView .btnView a{
+			text-decoration: none;
+			display: block;
+			width: 75px;
+			text-align: center;
+			margin-left: 10px;
+			color: #fff;
+			font-size: 12px;
+			background-color: #1E9FFF;
+			line-height: 25px;
+			border-radius: 3px;
+		}
+		.explainView .btnView .play{
+			width: 100px;
+			padding-right: 25px;
+			background: url(img/play-icon.png) no-repeat 75px center #1E9FFF;
+			background-size: 15px 15px;
+		}
+		.explainView .btnView .stop{
+			width: 100px;
+			padding-right: 25px;
+			background: url(img/stop-icon.png) no-repeat 75px center #1E9FFF;
+			background-size: 15px 15px;
+		}
+		.myAudio{
+			position: fixed;
+			bottom: 0;
+			right: 0;
+			left: 0;
+			opacity: 0;
+		}
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<div class="explainView">
+	<p class="title"></p>
+	<div class="descView">
+		<img src="" >
+		<p class="desc"></p>
+	</div>
+	<div class="btnView">
+		<a class="play audioBtn" href="javascript:;" onclick="audioClick()">语音讲解</a>
+		<a class="detailBtn" href="javascript:;" onclick="detailClick()">查看详情</a>
+	</div>
+</div>
+<audio src="" class="myAudio" id="myAudio"></audio>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=c1b024a249b04326f11894fd0e35041d"></script>
+<script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/scenicList.js?v=10"></script>
+<script type="text/javascript">
+	var map;
+	var audioSrc = '';
+	var play = false;
+	var myAudio = document.getElementById('myAudio');
+	$(function(){
+		var overlayGroups;
+		// 创建地图实例
+		map = new AMap.Map("container", {
+		    zoom: 15,
+		    center: [117.153041, 34.235073]
+		});
+		
+		map.setFeatures(['bg','road']);
+		
+		
+		$('.amap-marker-label').css({
+			'display': 'none'
+		})
+		
+		map.on('zoomend', function(){
+			console.log(map.getZoom());
+			if(map.getZoom() < 15){
+				$('.amap-marker-label').hide();
+			}else{
+				$('.amap-marker-label').show();
+			}
+		})
+		
+		map.on('click', showInfoClick);
+		
+		map.on('complete', function(){
+			$('.amap-marker-label').hide();
+		})
+		
+		
+		
+		var markers = [];
+		markers.push(getMarkerInfo(117.186002,34.248308, '抗战碑亭'));
+		markers.push(getMarkerInfo(117.184618,34.24869, '怀古亭'));
+		markers.push(getMarkerInfo(117.184736,34.248082, '佘錡义墓'));
+		markers.push(getMarkerInfo(117.183743,34.24845, '云龙书院'));
+		markers.push(getMarkerInfo(117.183556,34.248251, '张山人故居'));
+		markers.push(getMarkerInfo(117.186136,34.246881, '郑克墓'));
+		markers.push(getMarkerInfo(117.185841,34.246495, '山西会馆'));
+		markers.push(getMarkerInfo(117.184934,34.246548, '碑廊'));
+		markers.push(getMarkerInfo(117.184543,34.246592, '放鹤亭'));
+		markers.push(getMarkerInfo(117.184457,34.246841, '大士岩'));
+		markers.push(getMarkerInfo(117.18413,34.24626, '招鹤亭'));
+		markers.push(getMarkerInfo(117.185412,34.245497, '兴化寺'));
+		markers.push(getMarkerInfo(117.176351,34.240544, '汉画像石馆'));
+		markers.push(getMarkerInfo(117.180053,34.241883, '观景台'));
+		markers.push(getMarkerInfo(117.179758,34.241475, '云龙山索滑道'));
+		markers.push(getMarkerInfo(117.175461,34.237966, '云龙山'));
+		markers.push(getMarkerInfo(117.16956,34.233487, '十里杏花村'));
+		markers.push(getMarkerInfo(117.16318,34.228172, '小南湖'));
+		markers.push(getMarkerInfo(117.160262,34.225737, '解忧桥'));
+		markers.push(getMarkerInfo(117.157086,34.226686, '泛月桥'));
+		markers.push(getMarkerInfo(117.155155,34.224983, '苏公桥'));
+		markers.push(getMarkerInfo(117.153663,34.226091, '苏轼纪念馆'));
+		markers.push(getMarkerInfo(117.149452,34.227502, '万福广场'));
+		markers.push(getMarkerInfo(117.149785,34.229489, '沉水廊道'));
+		markers.push(getMarkerInfo(117.148787,34.230926, '诗博园'));
+		markers.push(getMarkerInfo(117.146888,34.23372, '珠山'));
+		markers.push(getMarkerInfo(117.146148,34.233427, '天师广场'));
+		markers.push(getMarkerInfo(117.14331,34.233605, '好人园'));
+		markers.push(getMarkerInfo(117.141883,34.234736, '钓鱼岛'));
+		markers.push(getMarkerInfo(117.141336,34.233015, '水杉步道'));
+		markers.push(getMarkerInfo(117.140209,34.23184, '望湖阁游客中心'));
+		markers.push(getMarkerInfo(117.152402,34.237907, '云龙湖旅游景区'));
+		markers.push(getMarkerInfo(117.153175,34.239149, '沙月岛'));
+		markers.push(getMarkerInfo(117.159998,34.239451, '水族展览馆'));
+		markers.push(getMarkerInfo(117.155278,34.243903, '音乐桥'));
+		markers.push(getMarkerInfo(117.157438,34.24533, '音乐厅'));
+		markers.push(getMarkerInfo(117.157406,34.24697, '滨湖公园'));
+		markers.push(getMarkerInfo(117.167255,34.245884, '彭祖寿石'));
+		markers.push(getMarkerInfo(117.173966,34.245055, '万人游泳场'));
+		markers.push(getMarkerInfo(117.152246,34.246323, '彭城金石园'));
+
+		overlayGroups = new AMap.OverlayGroup(markers);
+		map.add(overlayGroups);
+		map.setZoom(13);
+	})
+	
+	function showInfoClick(e){
+		$('.explainView').hide();
+	}
+	
+	function getMarkerInfo(lng, lat, name){
+		var icon = new AMap.Icon({
+		    size: new AMap.Size(35, 35), 
+		    image: './img/mark.png',
+		    imageOffset: new AMap.Pixel(0, 0),
+		    imageSize: new AMap.Size(35, 35),
+			clickable: true
+		});
+		var marker = new AMap.Marker({
+			position: new AMap.LngLat(lng,lat),
+			icon: icon
+		})
+		marker.content = name;
+		marker.on('click', markerClick);
+		marker.setLabel({
+			offset: new AMap.Pixel(-15, 0),
+			content: "<div class='info'><p>"+ name +"</p></div>",
+			direction: 'bottom'
+		});
+		
+		return marker;
+	}
+	
+	function markerClick(e){
+		var scenicName = e.target.content;
+		var lng = e.lnglat.getLng();
+		var lat = e.lnglat.getLat();
+		scenicList.detail.forEach(function(value, key){
+			if(value.name == scenicName){
+				console.log(value);
+				$('.title').text(scenicName);
+				$('.desc').html(value.desc);
+				audioSrc = value.media;
+				$('.descView img').attr('src',value.img);
+				$('.explainView').show();
+				$('.detailBtn').attr('onclick', 'detailClick('+ key +')');
+				map.setZoom(18);
+				map.setCenter([lng, lat]);
+			}
+		})
+	}
+	
+	function audioClick(){
+		$('.myAudio').attr('src', audioSrc);
+		if(!play){
+			play = true;
+			$('.audioBtn').removeClass('play').addClass('stop');
+			myAudio.play();
+		}else{
+			play = false;
+			$('.audioBtn').removeClass('stop').addClass('play');
+			myAudio.pause();
+		}
+	}
+	
+	function detailClick(scenicIndex){
+		window.location.href = 'detail.html?scenicIndex=' + scenicIndex;
+	}
+	
+</script>
+</body>
+</html>

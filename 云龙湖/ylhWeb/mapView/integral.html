@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+		<link rel="stylesheet" href="css/reset.css">
+		<style type="text/css">
+			a{
+				text-decoration: none;
+			}
+			.container{
+				min-height: 100vh;
+				padding: 0;
+				background-color: #f0f0f0;
+			}
+			.myCount{
+				background-color: #1E9FFF;
+				padding: 40px 0;
+			}
+			.myCount p{
+				font-size: 13px;
+				color: #fff;
+				margin: 5px 0;
+			}
+			.myCount .count{
+				font-size: 45px;
+				color: #ADFF2F;
+			}
+			.searchView{
+				padding: 20px 0;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background-color: #fff;
+			}
+			.searchContent{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				border: 1px solid #01AAED;
+				border-radius: 5px;
+				overflow: hidden;
+			}
+			.searchContent input{
+				width: 150px;
+				height: 40px;
+				border: none;
+				outline: none;
+				padding: 0 10px;
+				font-size: 13px;
+				color: #333;
+			}
+			.searchContent a{
+				display: block;
+				width: 100px;
+				line-height: 40px;
+				text-align: center;
+				text-decoration: none;
+				background-color: #01AAED;
+				color: #fff;
+				font-size: 13px;
+			}
+			.jfList{
+				margin-top: 10px;
+				padding: 0 10px;
+				background-color: #fff;
+			}
+			.jfItem{
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 5px;
+				border-bottom: 1px solid #ddd;
+			}
+			.jfItem p{
+				font-size: 13px;
+				color: #333;
+			}
+			.jfItem img{
+				width: 28px;
+				margin: 0;
+			}
+		</style>
+		<title>查询积分</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="myCount">
+				<p>我的积分</p>
+				<p class="count">0</p>
+			</div>
+			<div class="searchView">
+				<div class="searchContent">
+					<input class="phone" type="text" placeholder="请输入您的手机号">
+					<a href="javascript:;" onclick="searchClick()">查询积分</a>
+				</div>
+			</div>
+			<div class="jfList">
+				<a class="jfItem" href="javascript:;" onclick="jfDetailClick()">
+					<p>积分详情</p>
+					<img src="img/more.png" >
+				</a>
+			</div>
+		</div>
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app3.js"></script>
+		<script type="text/javascript">
+			var userIntegralId;
+			function searchClick(){
+				var phone = $('.phone').val();
+				if(!phone || phone.length != 11){
+					layer.alert('请输入正确的手机号');
+					return;
+				}
+				app.getAjax('userIntegral/get', {
+					phone: phone
+				}, function(res){
+					if(res.data){
+						$('.count').text(res.data.points);
+						app.setCookie('userIntegralId', res.data.integralId);
+						userIntegralId = res.data.integralId;
+					}else{
+						userIntegralId = '无';
+						layer.alert('暂无积分');
+					}
+				})
+			}
+			
+			function jfDetailClick(){
+				if(userIntegralId == '无'){
+					layer.alert('您还没有积分');
+				}else if(!userIntegralId){
+					layer.alert('请先输入手机号查询积分');
+				}else{
+					window.location.href = 'integralDetail.html'
+				}
+			}
+		</script>
+	</body>
+</html>

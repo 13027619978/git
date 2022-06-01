@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+		<link rel="stylesheet" href="css/reset.css">
+		<style type="text/css">
+			*{
+				box-sizing: border-box;
+			}
+			.container{
+				height: 100vh;
+				background: url(img/bg.png) no-repeat left top;
+				background-size: 100% 100%;
+				padding: 0;
+			}
+			.loginView{
+				width: 100%;
+				height: 100vh;
+				padding: 20px;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+			}
+			.loginContent{
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				background-color: #fff;
+				padding: 30px;
+				border-radius: 5px;
+				width: 95%;
+			}
+			.loginView .title{
+				font-size: 18px;
+				color: #333;
+				font-weight: bold;
+			}
+			.loginView input{
+				width: 100%;
+				height: 35px;
+				border: 1px solid #ddd;
+				border-radius: 5px;
+				padding: 0 10px;
+				font-size: 14px;
+				color: #333;
+				outline: none;
+			}
+			.loginView a{
+				width: 100%;
+				background-color: #0000FF;
+				color: #fff;
+				text-align: center;
+				line-height: 35px;
+				display: block;
+				text-decoration: none;
+				margin-top: 10px;
+				border-radius: 5px;
+				font-size: 14px;
+			}
+			
+			.userView{
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				font-size: 14px;
+				color: #333;
+				height: 48vh;
+			}
+			.userView a{
+				font-size: 12px;
+				color: #5555ff;
+				text-decoration: none;
+			}
+			
+			.userList{
+				padding: 10px 10px;
+				background-color: #fff;
+				height: 52vh;
+				overflow-y: auto;
+			}
+			.userList a{
+				display: block;
+				width: 100%;
+				padding: 10px;
+				text-decoration: none;
+				color: #333;
+				font-size: 14px;
+				background: url(./img/right_icon.png) no-repeat right center;
+				background-size: 15px auto;
+				border-bottom: 1px solid #ddd;
+			}
+		</style>
+		<title>云龙湖用户中心</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="loginView">
+				<div class="loginContent">
+					<p class="title">云龙湖个人中心</p>
+					<input class="phone" type="text" placeholder="请输入您的手机号">
+					<a href="javascript:;" onclick="loginClick()">登录查询</a>
+				</div>
+			</div>
+			<div class="userView">
+				<p class="userName">用户手机：13027619978</p>
+				<a href="javascript:;" onclick="changeClick()">切换用户>></a>
+			</div>
+			<div class="userList">
+				<a href="javascript:;">优惠券</a>
+				<!-- <a href="javascript:;">租赁订单</a> -->
+			</div>
+		</div>
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				var userPhone = sessionStorage.getItem('userPhone');
+				if(userPhone){
+					$('.loginView').hide();
+					$('.userView').show();
+					$('.userList').show();
+				}else{
+					$('.loginView').show();
+					$('.userView').hide();
+					$('.userList').hide();
+				}
+			})
+			
+			// 登录点击事件
+			function loginClick(){
+				var userPhone = $('.phone').val();
+				if(userPhone && userPhone.length == 11){
+					sessionStorage.setItem('userPhone', userPhone);
+					$('.loginView').hide();
+					$('.userView').show();
+					$('.userList').show();
+					$('.userName').text('用户手机：' + userPhone);
+				}else{
+					layer.alert('请输入正确的手机号');
+				}
+			}
+			
+			// 切换用户
+			function changeClick(){
+				$('.loginView').show();
+				$('.userView').hide();
+				$('.userList').hide();
+				sessionStorage.clear();
+			}
+		</script>
+	</body>
+</html>
