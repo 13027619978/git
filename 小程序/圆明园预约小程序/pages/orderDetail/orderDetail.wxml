@@ -1,0 +1,98 @@
+<view class="container">
+  <view class="content">
+    <view class="price">
+      <view>实付金额</view>
+      <view class="priceTxt">￥{{ticketInfo.totalPrice}}</view>
+    </view>
+
+    <view class="noticeView">
+      <view class="noticeTitle">入园须知</view>
+      <view>请携带<text style="color:red;">身份证</text>及相关证件入园</view>
+    </view>
+
+    <view class="ticketInfo">
+      <view class="ticketItem">
+        <view class="itemTxt">检票次数：</view>
+        <view>{{ticketInfo.checkQuantity}}</view>
+      </view>
+      <view class="ticketItem">
+        <view class="itemTxt">游玩时间：</view>
+        <view>{{ticketInfo.visitDate}} {{visitTime}}</view>
+      </view>
+      <view class="ticketItem" hidden="{{refundBtn=='已退票成功'}}">
+        <view class="itemTxt">入园凭证：</view>
+        <view>
+          <canvas style="width: 120px; height: 120px;background:pink;" canvas-id="myQrcode"></canvas>
+        </view>
+      </view>
+    </view>
+
+    <view class="ticketDetail">
+      <view class="detailBtn">查看门票详情</view>
+      <view class="detailView">
+        <view class="ticketName">{{ticketInfo.ticketName}}</view>
+        <view class="detailItem">
+          <view class="detailItemTxt">购买张数：</view>
+          <view>{{ticketInfo.buyQuantity}}</view>
+        </view>
+        <view class="detailItem">
+          <view class="detailItemTxt">剩余次数：</view>
+          <view>{{ticketInfo.restCheckQuantity}}</view>
+        </view>
+        <view class="detailItem">
+          <view class="detailItemTxt">检票时间：</view>
+          <view>{{ticketInfo.visitDate}} {{visitTime}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="ticketDetail">
+      <view class="detailBtn">游客详情</view>
+      <view class="detailView" wx:for="{{visitorList}}">
+        <view class="detailItem">
+          <view class="detailItemTxt">姓名：</view>
+          <view>{{item.userName}}</view>
+        </view>
+        <view class="detailItem">
+          <view class="detailItemTxt">手机号：</view>
+          <view>{{item.phone}}</view>
+        </view>
+        <view class="detailItem">
+          <view class="detailItemTxt">证件号：</view>
+          <view>{{item.certNumber}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="ticketDetail">
+      <view class="detailBtn">检票详情</view>
+      <view class="noData" hidden="{{checkList.length>0}}">--暂无数据--</view>
+      <view class="detailView" hidden="{{checkList.length==0}}" wx:for="{{checkList}}">
+        <view class="detailItem">
+          <view class="detailItemTxt">检票方式：</view>
+          <view>{{item.checkWay}}</view>
+        </view>
+        <view class="detailItem">
+          <view class="detailItemTxt">检票次数：</view>
+          <view>{{item.checkQuantity}}</view>
+        </view>
+        <view class="detailItem">
+          <view class="detailItemTxt">检票时间：</view>
+          <view>{{item.checkTime}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="refundView" bindtap="refundClick">{{refundBtn}}</view>
+
+  <!-- 询问层 -->
+  <cover-view class="hoverView" hidden="{{sure}}">
+    <cover-view class="hoverContent">
+      <cover-view class="hoverTitle">入园须知</cover-view>
+      <cover-view class="hoverItem" style="padding:40rpx;color:#00b3fd;font-size:30rpx;font-weight:bold;">请携带身份证及相关证件入园</cover-view>
+      <cover-view class="btnView">
+        <cover-view class="confirmBtn" bindtap="sureClick" style="color:#333;">确认</cover-view>
+      </cover-view>
+    </cover-view>
+  </cover-view>
+</view>

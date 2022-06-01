@@ -1,0 +1,455 @@
+.container {
+	min-height: 100vh;
+	background-color: #f5f5f5;
+	box-sizing: border-box;
+}
+
+.banner {
+	width: 100%;
+}
+
+.banner img {
+	margin: 0;
+	width: 100%;
+}
+.banner .bannerImg{
+	line-height: 400rpx;
+	text-align: center;
+	background-color: #ff5500;
+	color: #fff;
+}
+
+.swiper-container {
+	--swiper-theme-color: #fff;
+	--swiper-pagination-color: #333;
+}
+
+/* 景区名称 */
+.scenicInfo {
+	background-color: #fff;
+	padding: 20rpx 30rpx;
+	border-bottom: 2rpx solid #f5f5f5;
+}
+
+.scenicInfo .scenicName {
+	font-size: 30rpx;
+	color: #333;
+	font-weight: bold;
+	line-height: 60rpx;
+}
+
+.scenicInfo .scenicDesc {
+	font-size: 24rpx;
+	color: #666;
+	line-height: 50rpx;
+	position: relative;
+	padding-bottom: 50rpx;
+}
+.scenicInfo .scenicDesc .allBtn{
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 150rpx;
+	line-height: 50rpx;
+	color: #00B6FC;
+	text-align: center;
+	background-color: #fff;
+}
+.scenicInfo .maxHeight{
+	max-height: 100rpx;
+	overflow: hidden;
+}
+.scenicInfo .checkTime{
+	font-size: 24rpx;
+	color: #00b3fd;
+}
+
+/* 通知 */
+.noticeView{
+	background-color: #fff;
+  padding: 20rpx 30rpx;
+}
+.icon{
+	width: 40rpx;
+	height: 50rpx;
+  margin-right: 20rpx;
+}
+.noticeText{
+	font-size: 26rpx;
+	color: #333;
+  line-height: 40rpx;
+  display: flex;
+  justify-content: start;
+	align-items: center;
+	flex-wrap: wrap;
+}
+.noticeContent{
+	padding-top: 20rpx;
+}
+.noticeContent text{
+	font-size: 24rpx;
+	color: #333;
+	line-height: 40rpx;
+}
+.noticeText .ticketStatus{
+	font-size: 24rpx;
+	padding: 0 10rpx;
+	color: #00b3fd;
+	border: 1rpx solid #00b3fd;
+	border-radius: 10rpx;
+	margin-right: 20rpx;
+}
+
+
+/* 预定日期 */
+.dateView{
+	background-color: #fff;
+	padding: 10rpx 20rpx 20rpx;
+	margin-top: 20rpx;
+}
+.dateView .dateTitle{
+	padding-bottom: 10rpx;
+	font-size: 28rpx;
+	font-weight: bold;
+	color: #333;
+	border-bottom: 1rpx solid #f5f5f5;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+}
+.dateContent{
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	padding-top: 20rpx;
+}
+.dateView .dateItem{
+	flex: 1;
+	height: 120rpx;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: start;
+	font-size: 26rpx;
+	color: #333;
+	border: 3rpx solid #cdcdcd;
+	border-radius: 10rpx;
+	margin-right: 10rpx;
+	padding: 0 10rpx;
+	line-height: 40rpx;
+	position: relative;
+}
+.dateView .select{
+	background-color: rgba(150,255,255);
+}
+.dateView .dateItem .yesView{
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	background-color: #00b3fd;
+	width: 48rpx;
+	height: 26rpx;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-top-left-radius: 10rpx;
+}
+.dateView .dateItem .hidden{
+	display: none;
+}
+.dateView .dateItem .yesView image{
+	width: 28rpx;
+}
+.dateView .moreBtn{
+	flex: 0 0 100rpx;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 26rpx;
+	color: #333;
+	border: 3rpx solid #cdcdcd;
+	border-radius: 10rpx;
+	height: 120rpx;
+	padding: 0 10rpx;
+	line-height: 40rpx;
+}
+.dateView .moreBtn image{
+	width: 32rpx;
+}
+
+/* 门票列表 */
+.ticketView {
+	margin-top: 20rpx;
+	background-color: #fff;
+	padding: 0 20rpx;
+}
+.ticketView .ticketTile {
+	font-size: 30rpx;
+	color: #333;
+	font-weight: bold;
+	line-height: 70rpx;
+  border-bottom: 1rpx solid #f5f5f5;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.ticketList .ticketItem{
+	padding: 20rpx 0 0;
+	border-bottom: 1rpx solid #f5f5f5;
+}
+.ticketList .ticketItem .ticketContent, .ticketSubItem{
+	display: flex;
+	justify-content: start;
+	align-items: center;
+}
+.ticketList .ticketItem .ticketContent{
+	padding-bottom: 20rpx;
+}
+.ticketSubList{
+	background-color: #f5f5f5;
+}
+.ticketSubItem{
+	padding: 20rpx;
+	border-bottom: 1rpx solid #ddd;
+}
+.ticketItem .itemLeft{
+	flex: 1;
+	padding-right: 10rpx;
+}
+.ticketItem .itemLeft .ticketName{
+	font-size: 28rpx;
+	color: #333;
+	line-height: 46rpx;
+}
+.ticketItem .itemLeft .ticketName .ticketType{
+	display: inline-block;
+	font-size: 24rpx;
+	color: #00b3fd;
+	line-height: 46rpx;
+	padding: 0 10rpx;
+	border-radius: 10rpx;
+	margin-left: 20rpx;
+	background-color: #ddf3ff;
+}
+.ticketItem .itemLeft .ticketDesc{
+	font-size: 24rpx;
+	color: #009F95;
+	line-height: 40rpx;
+	padding: 10rpx 0;
+}
+.ticketItem .itemLeft .checkTime{
+	font-size: 24rpx;
+	color: #00b3fd;
+	line-height: 50rpx;
+}
+.ticketItem .itemLeft .effectTime{
+	font-size: 24rpx;
+	color: #00b3fd;
+}
+.ticketItem .itemRight{
+	flex: 0 0 170rpx;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: center;
+}
+.ticketItem .itemRight image{
+	width: 50rpx;
+	height: 30rpx;
+	margin-left: 10rpx;
+}
+.ticketItem .itemRight .ticketPrice{
+	font-size: 34rpx;
+	color: #ff5500;
+	line-height: 60rpx;
+}
+.ticketItem .itemRight .buyBtn{
+	width: 160rpx;
+	font-size: 28rpx;
+	color: #fff;
+	background-color: #ff5500;
+	line-height: 60rpx;
+	border-radius: 60rpx;
+}
+.ticketItem .itemRight .disabeld{
+	background-color: #d1d1d1;
+	color: #666;
+}
+
+.ticketItem .itemRight .disabled{
+	color: #666;
+	background-color: #ddd;
+}
+
+/* 时间选择器 */
+.selectView{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: #fff;
+	border-top: 1rpx solid #f5f5f5;
+	transition: all .25s;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, .5);
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: center;
+}
+.selectTitle{
+	font-size: 28rpx;
+	line-height: 50rpx;
+	font-weight: bold;
+	color: #333;
+	text-align: center;
+	background-color: #fff;
+	width: 100%;
+	padding-top: 10rpx;
+}
+.selectList{
+	width: 100%;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	flex-wrap: wrap;
+	background-color: #fff;
+	padding: 10rpx 7rpx;
+}
+.selectView .selectItem{
+	flex: 0 0 140rpx;
+	height: 100rpx;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: start;
+	font-size: 24rpx;
+	color: #333;
+	border: 3rpx solid #cdcdcd;
+	border-radius: 10rpx;
+	padding: 0 10rpx;
+	line-height: 40rpx;
+	position: relative;
+	margin: 10rpx;
+}
+
+.selectView .selectItem .yesView{
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #00b3fd;
+	width: 40rpx;
+	height: 24rpx;
+	border-top-left-radius: 10rpx;
+}
+.selectView .selectItem .hidden{
+	display: none;
+}
+.selectView .select{
+	background-color: #00b3fd;
+	border-color: #00b3fd;
+}
+.selectView .selectItem image{
+	width: 20rpx;
+}
+
+/* 询问层样式 */
+.hoverView{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, .3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+.hoverView .hoverContent{
+  width: 660rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding-top: 30rpx;
+}
+.hoverView .hoverContent .hoverTitle{
+  text-align: center;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+.hoverContent .hoverItem{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  font-size: 26rpx;
+  padding: 0 20rpx;
+}
+.hoverContent .hoverItem .hoverTxt{
+  flex: 0 0 130rpx;
+  text-align: right;
+}
+.hoverContent .visitorItem{
+  padding-top: 20rpx;
+}
+.hoverContent .hoverItem .hoverTxt{
+  color: #00B3FD;
+}
+.hoverContent .btnView{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  border-top: 1rpx solid #f5f5f5;
+  margin-top: 20rpx;
+}
+.hoverContent .btnView view{
+  flex: 1;
+  text-align: center;
+  font-size: 28rpx;
+  color: #00b3fd;
+  font-weight: bold;
+  line-height: 70rpx;
+}
+.hoverContent .btnView .cancelBtn{
+  border-right: 1rpx solid #f5f5f5;
+  color: #333;
+}
+.timeList{
+	padding: 40rpx 20rpx;
+}
+.timeItem{
+	display: block;
+	width: 100%;
+	padding: 20rpx;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	font-size: 26rpx;
+	box-sizing: border-box;
+	border-top: 1rpx solid #f5f5f5;
+}
+.timeItem:nth-of-type(1){
+	border-top: none;
+}
+.timeItem radio{
+	flex: 0 0 30rpx;
+}
+radio .wx-radio-input{
+  width: 36rpx;
+  height: 36rpx;
+}
+radio .wx-radio-input.wx-radio-input-checked{
+	width: 36rpx;
+	height: 36rpx;
+	border-color: #00b3fd !important;
+	background: #00b3fd !important;
+}
+.timeItem view{
+	flex: 1;
+	padding-left: 10rpx;
+}

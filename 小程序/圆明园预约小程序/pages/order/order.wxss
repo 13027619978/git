@@ -1,0 +1,92 @@
+.container{
+  box-sizing: border-box;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 20rpx;
+}
+.noData{
+  font-size: 28rpx;
+  text-align: center;
+  color: #666;
+  line-height: 100rpx;
+}
+.orderItem{
+  background-color: #fff;
+  margin-bottom: 20rpx;
+  border-radius: 10rpx;
+  padding: 20rpx;
+}
+.orderItem .nameView{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+.orderItem .nameView .ticketName{
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  flex: 1;
+}
+.orderItem .nameView .ticketStatus{
+  font-size: 28rpx;
+  color:#00B3FD;
+  flex: 0 0 130rpx;
+  text-align: right;
+}
+
+.ticketDetail .detailItem{
+  line-height: 50rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 28rpx;
+  color: #333;
+  padding: 6rpx 0;
+}
+.ticketDetail .detailItem .price{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 28rpx;
+  color: #333;
+}
+.ticketDetail .detailItem .price view{
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #ff5500;
+}
+
+
+
+
+
+
+
+/* .tabbar{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.tabbar .tabItem{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 24rpx;
+  color: #8a8a8a;
+  padding: 14rpx 0;
+}
+.tabbar .tabItem.active{
+  color: #00B3FD;
+}
+.tabbar .tabItem image{
+  height: 40rpx;
+} */

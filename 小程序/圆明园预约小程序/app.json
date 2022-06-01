@@ -1,0 +1,31 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/ticket/ticket",
+    "pages/orderDetail/orderDetail",
+    "pages/order/order"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTitleText": "圆明园入园票预约",
+    "navigationBarTextStyle":"white"
+  },
+  "tabBar": {
+    "color": "#666",
+    "selectedColor": "#00B3FD",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "首页",
+      "iconPath": "/images/home_icon_no.png",
+      "selectedIconPath": "/images/home_icon.png"
+    },{
+      "pagePath": "pages/order/order",
+      "text": "我的",
+      "iconPath": "/images/user_icon_no.png",
+      "selectedIconPath": "/images/user_icon.png"
+    }]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

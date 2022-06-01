@@ -1,0 +1,39 @@
+<view class="container">
+  <!-- 订单列表 -->
+  <view class="noData" hidden="{{orderList.length>0}}">--暂无数据--</view>
+  <view class="orderList" hidden="{{orderList.length==0}}">
+    <view class="orderItem" bindtap="orderClick" wx:for="{{orderList}}" data-ticketid="{{item.ticketOrderId}}">
+      <view class="nameView">
+        <view class="ticketName">{{item.ticketName}}</view>
+        <view class="ticketStatus">{{item.payStatus=='1'?item.checkQuantity==item.restCheckQuantity?'未核销':restCheckQuantity>0?'部分核销':'已核销':'退票成功'}}</view>
+      </view>
+      <view class="ticketDetail">
+        <view class="detailItem">
+          <view>订单编号：{{item.orderNum}}</view>
+        </view>
+        <view class="detailItem">
+          <view>购买张数：{{item.buyQuantity}}</view>
+        </view>
+        <view class="detailItem">
+          <view>预约时间：{{item.visitDate}}</view>
+        </view>
+        <view class="detailItem">
+          <view>支付时间：{{item.payTime}}</view>
+          <view class="price">合计： <view>￥{{item.totalPrice}}</view> </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- tabbar -->
+  <!-- <view class="tabbar">
+    <view class="tabItem" bindtap="homeClick">
+      <image src="/images/home_icon.png" mode="heightFix"></image>
+      购票
+    </view>
+    <view class="tabItem active">
+      <image src="/images/user_icon.png" mode="heightFix"></image>
+      我的
+    </view>
+  </view> -->
+</view>

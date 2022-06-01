@@ -1,0 +1,109 @@
+<view class="container">
+  <!-- 景区名称 -->
+  <view class="scenicInfo">
+    <view class="scenicName">{{groupInfo.groupName}}（南门往西150米）</view>
+    <view class="scenicDesc {{maxHeight}}">
+      {{groupInfo.mark}}
+      <view class="allBtn" bindtap="allBtnClick">{{allBtn}}</view>
+    </view>
+  </view>
+
+  <!-- 通知 -->
+  <view class="noticeView">
+    <view class="noticeText"><image class="icon" src="/images/notice_icon.png" mode="widthFix"></image><view class="ticketStatus">开园</view>
+      <view>正常售票  <text style="color:#00B6FC;font-weight:bold;">正觉寺（南门往西150米）</text></view>
+      <view class="noticeContent" style="width:100%;">
+        <text style="display: block;">退票说明</text>
+        <text style="display: block;">1.预约票一经验证入园，无法办理退票。</text>
+        <text style="display: block;">2.若订单内包含多人，仅限整单退票，不支持分单退票。</text>
+        <text style="display: block;">3.退票需由游客自行发起退票申请，退款会在您预约入园日之后的15日内原路退回，如果您届时尚未收到退款，请致电咨询。</text>
+        <text style="display: block;">注：请各位观众根据马首展的参观时间提前规划好浏览时间，以避免由于参观时间结束导致门票无法使用。</text>
+        <text style="display: block;">客服电话：4008987021</text>
+        <text style="display: block;">工作时间：8:30-17:00</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 预约时间 -->
+  <view class="dateView">
+    <view class="dateTitle"><image class="icon" src="/images/date-icon.png" mode="widthFix"></image>预约日期</view>
+    <view class="dateContent">
+      <view class="dateItem {{item.date==selectDate?'select':''}}" wx:for="{{currentDateList}}" bindtap="selectClick" data-date="{{item.date}}">
+        <view>{{item.date}}</view>
+        <view>余票:{{item.restTotal>=0?item.restTotal:0}}</view>
+        <view class="yesView {{item.date==selectDate?'':'hidden'}}">
+          <image mode="widthFix" src="/images/yes.png"></image>
+        </view>
+      </view>
+      <view class="moreBtn" bindtap="moreClick">
+          <view class="moreTxt">
+            <view>更多</view>
+            <view>日期</view>
+          </view>
+          <image mode="widthFix" src="/images/more.png"></image>
+        </view>
+    </view>
+  </view>
+
+  <!-- 门票列表 -->
+  <view class="ticketView">
+    <view class="ticketTile"><image class="icon" src="/images/ticket_icon.png" mode="widthFix"></image>门票</view>
+    <view class="ticketList">
+      <view class="ticketItem" wx:for="{{newTicketList}}" wx:for-index="showIndex" hidden="{{item.ticketList[0].shouldHide}}">
+        <view class="ticketContent" data-showindex="{{showIndex}}">
+          <view class="itemLeft">
+            <view class="ticketName">{{item.ticketName}}<view class="ticketType">{{item.categoryName}}</view></view>
+          </view>
+          <view class="itemRight">
+            <view class="ticketPrice">{{item.settlePrice}}元</view>
+            <view class="buyBtn {{restTotal<=0||stockTotal<=0?'disabeld':''}} {{selectDate=='2021-10-18'&&item.categoryName!='政策性免票'?'disabled':''}}" bindtap="ticketClick" data-ticketindex="{{showIndex}}">立即预定</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 时间选择器 -->
+  <view class="selectView" style="bottom:{{selectHeight}}">
+    <view class="selectTitle">请选择游玩日期</view>
+    <view class="selectList">
+      <view class="selectItem {{item.date==selectDate?'select':''}}" wx:for="{{stockList}}" bindtap="selectClick" data-date="{{item.date}}" data-index="{{index}}">
+        <view>{{item.date}}</view>
+          <view>余票:{{item.restTotal>=0?item.restTotal:0}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 询问层 -->
+  <view class="hoverView" hidden="{{hoverHidden}}">
+    <view class="hoverContent">
+      <view class="hoverTitle">请选择入园时段</view>
+      <view class="timeList">
+        <radio-group bindchange="selectTicketType">
+          <label class="timeItem" wx:for="{{selectList}}" wx:if="{{item.ticketInfoId}}">
+            <radio value="{{item.ticketInfoId}}"/>
+            <view>{{item.ticketName}}</view>
+          </label>
+        </radio-group>
+      </view>
+      <view class="btnView">
+        <view class="cancelBtn" bindtap="cancleClick">取消</view>
+        <view class="confirmBtn" bindtap="confirmClick">确认预定</view>
+      </view>
+    </view>
+  </view>
+
+   <!-- 询问层 -->
+   <view class="hoverView" hidden="{{sure}}">
+    <view class="hoverContent">
+      <view class="hoverTitle">特别提醒</view>
+      <view class="noticeContent" style="width:100%;padding:20rpx 30rpx;">
+        <text style="display: block;color:red;line-height:50rpx;">入园需持7日内核酸阴性证明。</text>
+        <text style="display: block;color:red;line-height:50rpx;">不按预约时间的来到景区游客，不能进入景区游览。</text>
+      </view>
+      <view class="btnView">
+        <view class="confirmBtn" bindtap="sureClick">确认</view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,155 @@
+<view class="container">
+  <!-- 门票名称 -->
+  <view class="ticketName">
+    <view class="ticketNameTxt">{{ticketInfo.ticketName}}</view>
+  </view>
+  
+  <!-- 购票须知 -->
+  <view class="noticeView">
+    <view class="noticeTitle">购票须知</view>
+    <rich-text class="noticeText" nodes="{{ticketInfo.description}}"></rich-text>
+    <view class="noticeText">尊敬的游客，您的预约进入时间是{{ticketName}}，请严格按照预约时间进入景区游览。</view>
+    <view class="noticeText" style="color:red;">不按预约时间的来到景区游客，不能进入景区游览。</view>
+    <view class="noticeText" style="color:red;">入园需持48小时核酸阴性证明。</view>
+  </view>
+  
+  <!-- 预定时间 -->
+  <view class="ticketTime">
+    <view class="ticketTimeTitle">预约入园日期</view>
+    <view class="timeText">{{selectDate}} {{ticketName}}</view>
+  </view>
+
+  <!-- 证件类型 -->
+  <view class="certType">
+    <view class="certText">证件类型</view>
+    <radio-group class="radioView" bindchange="radioChange">
+      <label class="weui-cell weui-check__label" wx:for="{{items}}" wx:key="{{item.value}}">
+        <view class="weui-cell__hd">
+          <radio value="{{item.value}}" checked="{{item.checked}}"/>
+          <view class="weui-cell__bd">{{item.name}}</view>
+        </view>
+      </label>
+    </radio-group>
+  </view>
+  
+  <!-- 购票数量 -->
+  <view class="ticketNumber">
+    <view class="numberText">购票数量：</view>
+    <view class="numberView">
+      <button class="subBtn" bindtap="subClick" style="width:{{subWidth}};margin-right:{{subWidth==0?0:20}}rpx">-</button>
+      <input class="numberInput" disabled="true" value="{{ticketNumber}}"></input>
+      <button class="addBtn" bindtap="addClick">+</button>
+    </view>
+  </view>
+
+  <form bindsubmit="submit">
+  <!-- 游客信息 -->
+  <view class="visitorInfo">
+    <view class="visitorTitle">游客信息</view>
+    <view class="visitorList">
+      <view class="visitor" wx:for="{{ticketNumber}}">
+        <view class="itemInfo">
+          <view>姓名：</view>
+          <input name="name{{index}}" type="text" placeholder="请输入姓名"></input>
+        </view>
+        <view class="itemInfo">
+          <view>手机号：</view>
+          <input name="phone{{index}}" type="number" placeholder="请输入手机号"></input>
+        </view>
+        <view class="itemInfo">
+          <view>{{certType==0?'身份证':'护照'}}：</view>
+          <input name="idCard{{index}}" type="idcard" placeholder="请输入{{certType==0?'身份证':'护照'}}"></input>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 疫情防控 -->
+  <view class="yqView">
+    <view class="radioItem">
+      <view class="fyTitle">14天内是否有中高风险地区旅行史</view>
+      <radio-group class="radioView" bindchange="lxsChange">
+        <label class="weui-cell weui-check__label" wx:for="{{fyItems}}" wx:key="{{item.value}}">
+          <view class="weui-cell__hd">
+            <radio value="{{item.value}}" checked="{{item.checked}}"/>
+            <view class="weui-cell__bd">{{item.name}}</view>
+          </view>
+        </label>
+      </radio-group>
+    </view>
+    <view class="radioItem">
+      <view class="fyTitle">14天内是否与新冠检测阳性人员密切接触</view>
+      <radio-group class="radioView" bindchange="jcsChange">
+        <label class="weui-cell weui-check__label" wx:for="{{fyItems}}" wx:key="{{item.value}}">
+          <view class="weui-cell__hd">
+            <radio value="{{item.value}}" checked="{{item.checked}}"/>
+            <view class="weui-cell__bd">{{item.name}}</view>
+          </view>
+        </label>
+      </radio-group>
+    </view>
+  </view>
+  
+  <!-- 价格合计 -->
+  <view class="priceView">
+    <view class="priceLeft">
+      订单金额：<view class="priceText">{{ticketInfo.settlePrice*ticketNumber}}元</view>
+    </view>
+    <button form-type="submit" class="payBtn">在线支付</button>
+  </view>
+  </form>
+
+  <!-- 询问层 -->
+  <view class="hoverView" hidden="{{hoverHide}}">
+    <view class="hoverContent">
+      <view class="hoverTitle">请核对您的购票信息</view>
+      <view class="hoverItem">
+        <view class="hoverTxt">入园日期：</view>
+        {{selectDate}} {{ticketName}}
+      </view>
+      <view class="visitorItem" wx:for="{{visitors}}" wx:item="visitor">
+        <view class="hoverItem">
+          <view class="hoverTxt">姓名：</view>
+          {{item.userName}}
+        </view>
+        <view class="hoverItem">
+          <view class="hoverTxt">手机号：</view>
+          {{item.phone}}
+        </view>
+        <view class="hoverItem">
+          <view class="hoverTxt">证件号：</view>
+          {{item.certNumber}}
+        </view>
+      </view>
+      <view class="btnView">
+        <view class="cancelBtn" bindtap="cancelClick">取消</view>
+        <view class="confirmBtn" bindtap="confirmClick">确认</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 询问层 -->
+  <view class="hoverView" hidden="{{sure}}">
+    <view class="hoverContent">
+      <view class="hoverTitle">购票须知</view>
+      <rich-text class="hoverItem" nodes="{{ticketInfo.description}}" style="padding:40rpx 40rpx 0"></rich-text>
+      <view class="noticeContent" style="width:100%;padding-bottom:10rpx;">
+        <text style="display: block;font-size: 26rpx;font-weight: bold;">特别提醒</text>
+        <text style="display: block;">入园需持48小时核酸阴性证明。</text>
+        <text style="display: block;">尊敬的游客，您的预约进入时间是{{ticketName}}，请严格按照预约时间进入景区游览。</text>
+      </view>
+      <view class="noticeContent" style="width:100%;">
+        <text style="display: block;font-size: 26rpx;font-weight: bold;">退票说明</text>
+        <text style="display: block;">1.预约票一经验证入园，无法办理退票。</text>
+        <text style="display: block;">2.若订单内包含多人，仅限整单退票，不支持分单退票。</text>
+        <text style="display: block;">3.退票需由游客自行发起退票申请，退款会在您预约入园日之后的15日内原路退回，如果您届时尚未收到退款，请致电咨询。</text>
+        <text style="display: block;">注：请各位观众根据马首展的参观时间提前规划好浏览时间，以避免由于参观时间结束导致门票无法使用。</text>
+        <text style="display: block;">客服电话：4008987021</text>
+        <text style="display: block;">工作时间：8:30-17:00</text>
+      </view>
+      <view class="btnView">
+        <view class="confirmBtn" bindtap="sureClick">确认</view>
+      </view>
+    </view>
+  </view>
+</view>

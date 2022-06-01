@@ -1,0 +1,182 @@
+/* pages/orderDetail/orderDetail.wxss */
+.container{
+  box-sizing: border-box;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  padding: 20rpx;
+  padding-bottom: 90rpx;
+}
+.content{
+  background-color: #fff;
+  border-radius: 10rpx;
+  padding: 20rpx;
+}
+.content .price{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+.content .price .priceTxt{
+  color: #ff5500;
+}
+
+.noticeView{
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f5f5f5;
+  font-size: 26rpx;
+  color: #333;
+}
+.noticeView .noticeTitle{
+  font-size: 30rpx;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+  padding-left: 10rpx;
+  border-left: 10rpx solid #00B3FD;
+}
+
+.ticketInfo{
+  padding-bottom: 20rpx;
+}
+.ticketItem{
+  display: flex;
+  justify-content: start;
+  align-items: flex-start;
+  padding: 10rpx 0;
+}
+.ticketItem view{
+  font-size: 26rpx;
+  color: #333;
+  line-height: 40rpx;
+}
+.ticketItem .qrCodeImage{
+  width: 240rpx;
+  height: 240rpx;
+}
+.ticketItem .itemTxt{
+  color: #00B3FD;
+}
+.ticketDetail{
+  border-top: 2rpx solid #f5f5f5;
+  padding: 20rpx 0;
+}
+.ticketDetail .detailBtn{
+  font-size: 26rpx;
+  color: #333;
+  text-align: center;
+  padding-bottom: 20rpx;
+}
+.ticketDetail .detailView{
+  background-color: #f5f5f5;
+  border-radius: 10rpx;
+  padding: 20rpx;
+}
+.ticketDetail .detailView .ticketName{
+  font-size: 26rpx;
+  color: #333;
+  font-weight: bold;
+}
+.ticketDetail .detailView .detailItem{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  font-size: 26rpx;
+  color: #333;
+  padding: 6rpx 0;
+}
+.ticketDetail .detailView .detailItem .detailItemTxt{
+  color: #5FB878;
+  width: 130rpx;
+  text-align: right;
+}
+
+.refundView{
+  position: fixed;
+  left: 20rpx;
+  right: 20rpx;
+  bottom: 10rpx;
+  background-color: #fff;
+  border-radius: 6rpx;
+  color: #333;
+  text-align: center;
+  font-size: 28rpx;
+  box-shadow: 0 0 5rpx #ddd;
+  line-height: 70rpx;
+}
+
+.noData{
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #666;
+  background-color: #f5f5f5;
+}
+
+/* 询问层样式 */
+.hoverView{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, .3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+.hoverView .hoverContent{
+  width: 660rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding-top: 30rpx;
+}
+.hoverView .hoverContent .hoverTitle{
+  text-align: center;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+.hoverContent .hoverItem{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26rpx;
+  padding: 0 20rpx;
+  text-align: center;
+}
+.hoverContent .hoverItem .hoverTxt{
+  flex: 0 0 130rpx;
+  text-align: right;
+}
+.hoverContent .visitorItem{
+  padding-top: 20rpx;
+}
+.hoverContent .hoverItem .hoverTxt{
+  color: #00B3FD;
+}
+.hoverContent .btnView{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  border-top: 1rpx solid #f5f5f5;
+  margin-top: 20rpx;
+}
+.hoverContent .btnView .confirmBtn{
+  flex: 1;
+  text-align: center;
+  font-size: 28rpx;
+  color: #00b3fd;
+  font-weight: bold;
+  line-height: 70rpx;
+}
+.hoverContent .btnView .cancelBtn{
+  border-right: 1rpx solid #f5f5f5;
+  color: #333;
+}
