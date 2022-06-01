@@ -1,0 +1,66 @@
+/* pages/tickets-success/tickets-success.wxss */
+.container{
+  background-color: #f0f0f0;
+  min-height: 100vh;
+  padding: 30rpx 0;
+  box-sizing: border-box;
+}
+.success-title{
+  font-size: 60rpx;
+  color: #ff5500;
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+
+.tickets-info{
+  background-color: #fff;
+  padding: 20rpx;
+}
+.qrCode-view{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20rpx 0;
+}
+.qrCode-view .qrCode{
+  width: 200px;
+  height: 200px;
+  background-color: #000;
+}
+
+.label-item{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  font-size: 30rpx;
+  color: #333;
+  border-top: 1rpx solid #ddd;
+  padding: 20rpx 0;
+}
+.label-item .label-name{
+  flex: 0 0 200rpx;
+  text-align: right;
+}
+.label-item .label-info{
+  color: #ff5500;
+}
+
+.title{
+  padding-left: 10rpx;
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+  border-left: 10rpx solid #ff5500;
+  margin-bottom: 10rpx;
+}
+
+.tickets-desc{
+  padding: 30rpx 30rpx 0;
+}
+.desc-item{
+  margin-bottom: 20rpx;
+}
+.desc-item .desc-txt{
+  font-size: 28rpx;
+  color: #333;
+}

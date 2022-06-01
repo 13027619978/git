@@ -1,0 +1,76 @@
+<view class="container">
+  <view class='banner'>
+    <image src='/image/ssly-banner.jpg' mode='widthFix'></image>
+  </view>
+
+  <view class='tickets-info'>
+    <view class='title'>购票信息</view>
+    <view class='tickets-content'>
+      <view class='label-item'>
+        <view class='label-name'>门票：</view>
+        <view class='label-info'>{{ticketMoney}}元/张</view>
+      </view>
+      <view class='label-item'>
+        <view class='label-name'>数量：</view>
+        <view class='label-info'>
+          <view class='sub-btn' bindtap='subClick'>-</view>
+          <input class="number-txt" type='number' disabled='{{true}}' value='{{ticketNumber}}'></input>张
+          <view class='add-btn' bindtap='addClick'>+</view>
+        </view>
+      </view>
+      <view class='label-item'>
+        <view class='label-name'>手机号：</view>
+        <input class='phone-view' bindinput='writePhone' disabled='{{phone?true:false}}' placeholder='{{phone?"":"请输入手机号"}}' value='{{phone?phone:""}}'></input>
+      </view>
+    </view>
+  </view>
+
+  <view class='tickets-desc'>
+    <view class='title'>购票须知：</view>
+    <view class='desc-content'>
+      <view>门票（含水上乐园门票，1米以下儿童免票）</view>
+    </view>
+    <view class='title'>活动时间：</view>
+    <view class='desc-content'>
+      <view>2021年6月26日-8月29日</view>
+    </view>
+    <view class='title'>营业时间：</view>
+    <view class='desc-content'>
+      <view>9:00至18:00</view>
+    </view>
+    <view class='title'>活动地点：</view>
+    <view class='desc-content'>
+      <view>顺义奥林匹克水上公园动水艇库区域</view>
+    </view>
+    <view class='title'>活动亮点：</view>
+    <view class='desc-content'>
+      <view>（一）面积大</view>
+      <view>水上公园总体面积163公顷，其中水域面积63公顷，绿地面积57公顷，园区拥有全长6公里的塑胶跑道、4个足球场、3个篮球场、一个多功能球场、一个沙滩足排球场、一座青少年拓展基地等固定设施，还可体验划船、赛艇、皮划艇、帆船、滑水等水上项目，幻影摩托、亲子嘉年华、7D电影院、自驾电瓶车等陆地项目。水上嘉年华可容纳多人同时游玩，并配套建设餐饮区、购物区、休息区、淋浴间、更衣室等，满足游客不同需求。</view>
+      <view>（二）项目多</view>
+      <view>体验项目包括龙头大滑梯和滑梯水池，其中，龙头滑梯大坡度滑道接近4层楼的高度，是一项集刺激性和趣味性为一体的水上项目。设施材质符合国家安全环保标准，造型设计新颖，产品的研发迎合儿童、成人心理，融入流行元素，色彩艳丽，造型逼真，游客特别是小朋友可以放心游玩。</view>
+      <view>（三）标准高</view>
+      <view>园区是4A级旅游景区，拥有优美的环境、专业的管理和贴心的服务。运营项目严格按照国家相关标准设计、建设、运营，场地内全部铺设人工草坪，无裸漏地面，水处理配有专业人员，每天定时检测水质，配置专业沙缸过滤。</view>
+    </view>
+    <view class="title">票务政策：</view>
+    <view class='desc-content'>
+      <view>售票窗口：成人、儿童统一票价79元（包括水上公园入园门票）。</view>	
+      <view>门票限制：1米以下儿童免费。</view>
+    </view>
+    <view class="title">行车路线：</view>
+    <view class='desc-content'>
+      <view>自驾路线：</view>	
+      <view>路线1：行车至京承高速，在白马路出口出，出收费站右转后直行即可到达顺义奥林匹克水上公园（推荐行车路线）；</view>
+      <view>路线2：经机场高速上机场北线，至顺平路右转往东过彩虹桥左转，沿左堤路往北直行即可到达顺义奥林匹克水上公园；</view>
+      <view>路线3：行车至京顺路直行，至京顺路马坡路口右转后直行即可到达顺义奥林匹克水上公园；</view>
+      <view>公交路线：</view>
+      <view>乘坐915路/945路/850路等公交车至顺义区医院站可换乘顺5路至水上公园站下车即可。</view>
+      <view>地铁路线：</view>
+      <view>地铁15号线（至顺义区站）换乘公交顺5路至水上公园站下车即可。</view>
+    </view>
+  </view>
+
+  <view class='bottom-control'>
+    <view>总计：{{totalMoney}}元</view>
+    <button class='buy-btn' bindtap='buyClick' disabled='{{disabled}}'>购买</button>
+  </view>
+</view>

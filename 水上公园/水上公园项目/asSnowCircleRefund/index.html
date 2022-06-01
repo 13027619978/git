@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/index.css" />
+		<title>奥森雪圈退款</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="content">
+				<div class="searchView">
+					<input class="phone" type="number" placeholder="请输入手机号" />
+					<a class="searchBtn" href="javascript:;" onclick="searchClick()">查询并退款</a>
+				</div>
+				<div class="desc-view">
+					<p class="title">收费标准</p>
+					<p>雪圈押金200元，一小时100元，一小时后按半小时累计。</p>
+				</div>
+			</div>
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app.js"></script>
+		<script type="text/javascript">
+			function searchClick(){
+				var phone = $('.phone').val();
+				$('.searchBtn').attr('onclick', 'reClick()');
+				if(phone.length != 11){
+					layer.msg('请输入正确的手机号！');
+					return;
+				}
+				app.getAjax('otherOrder/refund', {
+					phone: phone
+				}, function(res){
+					$('.searchBtn').attr('onclick', 'searchClick()');
+					if(res.code == 'SUCCESS'){
+						var str = '<div style="padding: 10px;">';
+						str += '<div style="margin-top: 5px;">已发起退款</div> ';
+						str += '<div style="margin-top: 5px;">租赁时间：'+res.data.createDate+'</div> ';
+						str += '<div style="margin-top: 5px;">收费：'+res.data.consume+'元</div> ';
+						str += '<div style="margin-top: 5px;">退款：'+res.data.refund+'元</div> </div>';
+						layer.open({	
+							content: str,
+							btn: ['确定']
+						})
+					}else{
+						layer.msg(res.msg);
+					}
+				})
+			}
+			
+			function reClick(){
+				layer.msg('请求中，请勿重复点击！');
+			}
+		</script>
+	</body>
+</html>

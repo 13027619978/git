@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="css/success.css" />
+		<title></title>
+	</head>
+	<body>
+		<div class="container">
+			<p class="top_title">购票成功！</p>
+			<div class="ticketInfo">
+				<div class="ticket_item">
+					<div class="qrcode"></div>
+					<canvas id="imgCanvas" width="680" height="680"></canvas>
+					<img src="" class="qrcode_img"/>
+				</div>
+				<div class="ticket_item">
+					<p>已购票：</p>
+					<ul>
+						<li>全价票<font class="aduleNum"></font>张</li>
+					</ul>
+				</div>
+				<div class="ticket_item">
+					<p>购票日期：</p>
+					<p class="date"></p>
+				</div>
+				
+			</div>
+			
+			<div class="notice">
+				<div class="notice_item">
+					<p class="title">购票须知：</p>
+					<p>已购票请当日使用。</p>
+				</div>
+				<div class="notice_item">
+					<p class="title">使用方法：</p>
+					<p>请长按二维码保存图片，检票请出示此二维码！检票后此二维码失效。如果二维码丢失，请微信扫描购票二维码，点击我的订单查看二维码。</p>
+				</div>
+				
+			</div>
+		</div>
+		
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.qrcode.min.js"></script>
+		<script src="js/app.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				var orderId = app.getQueryString('orderId');
+//				var orderId = '8f7175fe8c164ef6bc2a5fb4180f88b3';
+				$.ajax({
+					type:"get",
+					url: app.root + "ticketsOrderApp/getTicketsOrder",
+					data: {
+						ticketsId: orderId
+					},
+					success: function(res){
+						console.log(res);
+						var qrcode = res.data.orderCode;
+						var order = res.data.order;
+						$('.aduleNum').text(res.data.number);
+						$('.date').text(res.data.createDate);
+						$('.qrcode').qrcode({
+							width: 640,
+							height: 640,
+							text: qrcode
+						});
+						var canvas = document.getElementsByTagName('canvas')[0];
+						var oldCtx = canvas.getContext('2d');
+						console.log()
+						var imgCanvas = document.getElementById('imgCanvas');
+						var ctx = imgCanvas.getContext('2d');
+						ctx.fillStyle = 'white';  
+						ctx.fillRect(0,0,canvas.width + 40,canvas.height + 40);
+						ctx.putImageData(oldCtx.getImageData(0, 0, canvas.width, canvas.height), 20, 20);
+						$('.qrcode_img').attr('src', document.getElementById('imgCanvas').toDataURL("image/png"));
+					}
+				})
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,108 @@
+.myMap{
+  width: 100%;
+  height: 100vh;
+}
+
+.position{
+  position: fixed;
+  bottom: 40rpx;
+  left: 40rpx;
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.position .position-image{
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.category-view{
+  position: fixed;
+  bottom: 0;
+  right: 20rpx;
+}
+.category-view .category-item{
+  width: 230rpx;
+  text-align: center;
+  background-color: #fff;
+  line-height: 80rpx;
+  font-size: 28rpx;
+  border-radius: 40rpx;
+  margin-bottom: 20rpx;
+}
+.category-view .active{
+  background-color: #ff5500;
+  color: #fff;
+}
+
+.distance-view{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  padding: 0 20rpx;
+}
+.distance-top{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 20rpx 0;
+}
+.distance-top .mark-name{
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  flex: 1;
+}
+.distance-top .mark-distance{
+  flex: 1;
+  text-align: center;
+  font-size: 28rpx;
+  color: #ff5500;
+}
+.distance-bottom{
+  padding: 10rpx 20rpx;
+}
+.time-txt{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16rpx 0;
+}
+.time-txt .time-item{
+  width: 50%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  font-size: 24rpx;
+  color: #333;
+}
+.distance-bottom .type{
+  font-weight: bold;
+  flex: 0 0 200rpx;
+  text-align: right;
+}
+.distance-bottom .explain-btn{
+  font-size: 26rpx;
+  color: #fff;
+  background-color: #ff5500;
+  border-radius: 10rpx;
+  padding: 10rpx;
+  margin-right: 20rpx;
+}
+.distance-bottom .time{
+  flex: 1;
+  text-align: left;
+  color: #ff5500;
+}
+.underLine{
+  width: 100%;
+  background-color: #ddd;
+  height: 2rpx;
+}

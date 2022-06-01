@@ -1,0 +1,43 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/bike-buy/bike-buy",
+    "pages/regist/regist",
+    "pages/map/map",
+    "pages/loopCar-orderDetail/loopCar-orderDetail",
+    "pages/loopCar-order/loopCar-order",
+    "pages/loopCar-buy/loopCar-buy",
+    "pages/explain/explain",
+    "pages/order/order",
+    "pages/bike-order/bike-order",
+    "pages/bike-orderDetail/bike-orderDetail",
+    "pages/tickets-buy/tickets-buy",
+    "pages/tickets-order/tickets-order",
+    "pages/tickets-orderDetail/tickets-orderDetail",
+    "pages/boat-buy/boat-buy",
+    "pages/boat-order/boat-order",
+    "pages/boat-orderDetail/boat-orderDetail",
+    "pages/batteryCar-buy/batteryCar-buy",
+    "pages/batteryCar-order/batteryCar-order",
+    "pages/batteryCar-orderDetail/batteryCar-orderDetail",
+    "pages/refund/refund"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTitleText": "鲜花港",
+    "navigationBarTextStyle": "white"
+  },
+  "plugins": {
+    "myPlugin": {
+      "version": "0.2.2",
+      "provider": "wx069ba97219f66d99"
+    }
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "位置信息将用于为你推荐周边景点"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
+}

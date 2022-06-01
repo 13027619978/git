@@ -1,0 +1,30 @@
+<view class="container">
+  <view class='order-info'>
+    <view class='label-item'>
+      <view class='label-name'>押金金额:</view>
+      <view class='label-info'>{{orderInfo.normalDeposit}}元</view>
+    </view>
+    <view class='label-item'>
+      <view class='label-name'>消费金额:</view>
+      <view class='label-info'>{{orderInfo.actualConsumeMoney?orderInfo.actualConsumeMoney:0}}元</view>
+    </view>
+    <view class='label-item'>
+      <view class='label-name'>起租时间:</view>
+      <view class='label-info'>{{orderInfo.ridingStartTime?orderInfo.ridingStartTime:"无"}}</view>
+    </view>
+    <view class='label-item'>
+      <view class='label-name'>订单状态:</view>
+      <view class='label-info'>{{orderInfo.status}}</view>
+    </view>
+  </view>
+
+  <view class='order-desc'>
+    <view class='title'>退押金须知:</view>
+    <view class='desc-info'>
+      <view>请停稳游船到指定点扫描还车二维码，自助退款。</view>
+      <view>鲜花港游船归还点：幻花湖站！</view>
+      <view>1.微信扫描还车二维码，输入租船的手机号码</view>
+      <view>2.点击查询并退款</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/pay_success.css" />
+		<title>奥森雪圈租赁</title>
+	</head>
+	<body>
+		<div class="completeView">
+			<img src="img/pay_icon.png"/>
+			<p class="money"></p>
+			<p>支付成功</p>
+			<p class="shopName">奥森雪圈租赁</p>
+		</div>
+		<div class="bottomView">
+			<p class="date"></p>
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/app.js"></script>
+		<script type="text/javascript">
+			var nowDate = app.getQueryString('date');
+			nowDate = decodeURI(nowDate);
+			nowDate = decodeURI(nowDate);
+			nowDate = decodeURI(nowDate);
+			var deposit = app.getQueryString('deposit');
+			$('.date').text(nowDate);
+			$('.money').text('￥'+deposit);
+		</script>
+	</body>
+</html>

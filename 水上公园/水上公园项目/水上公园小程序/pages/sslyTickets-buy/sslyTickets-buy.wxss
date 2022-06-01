@@ -1,0 +1,128 @@
+/* pages/tickets-buy/tickets-buy.wxss */
+.container{
+  padding: 20rpx;
+  padding-bottom: 110rpx;
+}
+.banner{
+  width: 100%;
+  margin-bottom: 20rpx;
+}
+.banner image{
+  width: 100%;
+}
+
+.title{
+  padding-left: 10rpx;
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+  border-left: 10rpx solid #ff5500;
+  margin: 20rpx 0 10rpx;
+}
+
+.tickets-content{
+  padding: 0 20rpx;
+}
+.label-item{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #ddd;
+}
+.label-item .label-name{
+  font-size: 28rpx;
+  color: #333;
+  flex: 0 0 180rpx;
+  text-align: right;
+}
+.label-item .label-info{
+  flex: 1;
+  font-size: 28rpx;
+  color: #333;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding-left: 20rpx;
+}
+.label-item .label-info view{
+  width: 70rpx;
+  height: 70rpx;
+  text-align: center;
+  line-height: 70rpx;
+  background-color: #ff5500;
+  color: #fff;
+  font-size: 40rpx;
+  margin: 0 10rpx;
+}
+.label-item .label-info .sub-btn{
+  margin-left: 0;
+}
+.label-item .label-info .number-txt{
+  width: 70rpx;
+  height: 70rpx;
+  border: 1rpx solid #ddd;
+  margin: 0 16rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #333;
+}
+.label-item .label-info .phone-txt{
+  width: 100%;
+  height: 70rpx;
+  border: 1rpx solid #ddd;
+  padding-left: 10rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.label-item .phone-view{
+  height: 70rpx;
+  border: 1rpx solid #ddd;
+  font-size: 28rpx;
+  color: #333;
+  width: 400rpx;
+  padding: 0 10rpx;
+}
+
+.tickets-desc{
+  margin-top: 40rpx;
+}
+.desc-content{
+  font-size: 28rpx;
+  color: #333;
+}
+.desc-content view{
+  padding: 5rpx 0;
+}
+
+.bottom-control{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  line-height: 90rpx;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  font-size: 32rpx;
+  text-align: center;
+  color: #333;
+  background-color: #fff;
+}
+.bottom-control view{
+  flex: 1;
+  border-top: 1rpx solid #ddd;
+  line-height: 89rpx;
+}
+.bottom-control .buy-btn{
+  flex: 0 0 300rpx;
+  line-height: 90rpx;
+  background-color: red;
+  color: #fff;
+  border-top: none;
+  border-radius: 0;
+}
+.bottom-control .buy-btn::after{
+  border-radius: 0;
+}

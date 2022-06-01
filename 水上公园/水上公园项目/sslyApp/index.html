@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<link rel="stylesheet" href="css/index.css" />
+		<style type="text/css">
+			.layui-layer-dialog{
+				max-width: 90%;
+			}
+			.close-notice{
+				text-align: center;
+			}
+		</style>
+		<title>水上乐园购票系统</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="banner">
+				<img src="img/banner.jpg"/>
+			</div>
+			
+			<!-- 用户信息部分 -->
+			<div class="userInfo">
+				<p class="title">个人信息</p>
+				<div class="userInfo_content">
+					<div class="content_l">
+						<div class="headImg" >
+							<img class="avatar_img" src="img/banner.jpg"/>
+						</div>
+						<!--<p class="userName">用户昵称</p>-->
+					</div>
+					<a href="myOrder.html">我的订单</a>
+				</div>
+			</div>
+			
+			<!-- 购票信息 -->
+			<div class="buyInfo">
+				<p class="title">购票信息</p>
+				
+				<div class="ticketInfo">
+					<label class="select-view active">
+						<input type="radio" name="ticketType" value="type1" checked=""/>
+						<p>单人票：79元/张</p>
+					</label>
+				</div>
+				
+				<div class="buy_item">
+					<p class="item_l">单人票：</p>
+					<div class="number">
+						<a href="javascript:;" onclick="sub(this)">-</a>
+						<div class="number_txt">
+							<input class="num" type="number" value="0" onchange="quantityChange(this)" disabled="true"/>
+							张
+						</div>
+						<a href="javascript:;" onclick="add(this)">+</a>
+					</div>
+				</div>
+				<div class="buy_item">
+					<p class="item_l">购票人电话：</p>
+					<input class="buyerPhone" type="number" />
+				</div>
+			</div>
+			
+			<!--购票须知-->
+			<div class="notice">
+				<div class="notice_item">
+					<p class="title">活动时间：</p>
+					<p>2019年6月22日-8月25日</p>
+				</div>
+				
+				<div class="notice_item">
+					<p class="title">营业时间：</p>
+					<p>9:00至19:00</p>
+				</div>
+				
+				<div class="notice_item">
+					<p class="title">活动地点：</p>
+					<p>顺义奥林匹克水上公园动水艇库区域</p>	
+				</div>
+				
+				<div class="notice_item">
+					<p class="title">活动亮点：</p>
+					<p>（一）面积大</p>	
+					<p>水上公园总体面积163公顷，其中水域面积63公顷，绿地面积57公顷，园区拥有全长6公里的塑胶跑道、4个足球场、3个篮球场、一个多功能球场、一个沙滩足排球场、一座青少年拓展基地等固定设施，还可体验划船、赛艇、皮划艇、帆船、滑水等水上项目，幻影摩托、亲子嘉年华、7D电影院、自驾电瓶车等陆地项目。新建顺义首家高起点、高标准、高投入的大型户外水上嘉年华项目，占地总面积1.5万㎡，可容纳千人同时游玩，并配套建设餐饮区、购物区、休息区、淋浴间、更衣室等，满足游客不同需求。</p>
+					<p>（二）项目多</p>
+					<p>体验项目包括龙头大滑梯和滑梯水池，为保证安全起见，所有项目水深不超过1米，其中，龙头滑梯是目前国内长度及高度最大的充气类水上滑梯，大坡度滑道接近4层楼的高度，是一项集刺激性和趣味性为一体的水上项目。设施材质符合国家安全环保标准，造型设计新颖，产品的研发迎合儿童、成人心理，融入流行元素，色彩艳丽，造型逼真，游客特别是小朋友可以放心游玩。除此之外，每天还将上演小丑表演，增强与游客的互动。</p>
+					<p>（三）标准高</p>
+					<p>园区是4A级旅游景区，拥有优美的环境、专业的管理和贴心的服务。运营项目严格按照国家相关标准设计、建设、运营，场地内全部铺设人工草坪，无裸漏地面，水处理配有专业人员，每天定时检测水质，配置专业沙缸过滤，水质符合国家质检部门的相关要求。</p>
+					<p>（四）优惠多</p>
+					<p>本次活动特别推出季卡优惠，季卡含一大一小门票，凡在6月22日之前购买，只需129元，数量有限；6月22日之后购买价格为199元，活动期间可以无限次畅玩。除了以上优惠，周一至周五购水上嘉年华门票游玩电瓶船还可享受五折优惠，周六日享受八折优惠。</p>
+				</div>
+				
+				<div class="notice_item">
+					<p class="title">票务政策：</p>
+					<p>售票窗口：成人、儿童统一票价79元（包括水上公园入园门票）。</p>	
+					<p>美团网：票价74元。</p>
+					<p>门票限制：1米以下儿童免费。</p>
+				</div>
+				
+				<div class="notice_item">
+					<p class="title">行车路线：</p>
+					<p>自驾路线：</p>	
+					<p>路线1：行车至京承高速，在白马路出口出，出收费站右转后直行即可到达顺义奥林匹克水上公园（推荐行车路线）；</p>
+					<p>路线2：经机场高速上机场北线，至顺平路右转往东过彩虹桥左转，沿左堤路往北直行即可到达顺义奥林匹克水上公园；</p>
+					<p>路线3：行车至京顺路直行，至京顺路马坡路口右转后直行即可到达顺义奥林匹克水上公园；</p>
+					<p>公交路线：</p>
+					<p>乘坐915路/945路/850路等公交车至顺义区医院站可换乘顺5路至水上公园站下车即可。</p>
+					<p>地铁路线：</p>
+					<p>地铁15号线（至顺义区站）换乘公交顺5路至水上公园站下车即可。</p>
+				</div>
+			</div>
+			
+			<div class="bottomView">
+				<div class="bottom_l">
+					总计：<p><font class="totalPrice">0.00</font>元</p>
+				</div>
+				<a href="javascript:;" onclick="payClick(this)">购买</a>
+			</div>
+		</div>
+		<div class="close-notice" style="display: none;">
+			系统暂停使用
+		</div>
+		<script src="js/jweixin-1.0.0.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$('.num').val('0');
+				$('.buyerPhone').val('');
+				
+				//微信授权
+//				app.wxUserInfo();	
+				
+				//config
+				$.ajax({
+					type:"get",
+					url: app.root + "wx/getWaChatConfig",
+					data: {
+						url: window.location.href
+					},
+					dataType: 'json',
+					success: function(res){
+						var das = res.rows;
+						wx.config({
+							debug: false,
+							appId: das.appid,
+							timestamp: das.timestamp,
+							nonceStr: das.nonceStr,
+							signature: das.signature,
+							jsApiList: [
+								"chooseWXPay"
+							]
+						});
+					}
+				});
+			})
+			//门票数量改变事件
+			function quantityChange(that){
+				getTotalPrice();
+			}
+			
+			//获取总价格
+			function getTotalPrice(){
+				//全价票数量
+				var adultQuantity = $('.num').eq(0).val();
+				//半价票数量
+//				var halfPriceQuantity = $('.num').eq(1).val();
+				//全价票总价格
+				var adulePrice = $('.num').eq(0).val() * 79;
+				//半价票总价格
+//				var halfPrice = $('.num').eq(1).val() * 129;
+				//总价格
+//				var totalPrice = parseFloat(adulePrice) + parseFloat(halfPrice);
+				var totalPrice = parseFloat(adulePrice);
+				
+				$('.totalPrice').text(totalPrice.toFixed(2));
+			}
+			
+			//加
+			function add(that){
+				var num = parseInt($(that).parent().find('.num').val());
+				if(num < 9){
+					num += 1;
+					$(that).parent().find('.num').val(num);
+					getTotalPrice();
+				}else{
+					layer.alert('最多只能购买9张门票')
+				}
+			}
+			
+			//减
+			function sub(that){
+				var num = parseInt($(that).parent().find('.num').val());
+				if(num > 0){
+					num -= 1;
+					$(that).parent().find('.num').val(num);
+					getTotalPrice();
+				}
+			}
+			
+			//购买事件
+			function payClick(that){
+				var currYear = new Date().getFullYear();
+				var currMonth = new Date().getMonth() + 1;
+				var currDay = new Date().getDate();
+				var startDate = currYear + '/' + currMonth + '/' + currDay + ' 07:30:00';
+				var endDate = currYear + '/' + currMonth + '/' + currDay + ' 16:00:00';
+				startDate = new Date(startDate).getTime();
+				endDate = new Date(endDate).getTime();
+				var currDate = new Date().getTime();
+				console.log($('.num').eq(0).val() + '+' + $('.num').eq(1).val())
+//				if($('.num').eq(0).val() == 0 && $('.num').eq(1).val() == 0){
+				if(startDate <= currDate && endDate > currDate){
+					if($('.num').eq(0).val() == 0 && $('.num').eq(1).val() == 0){
+						layer.alert('购买数量不能少于0')
+					}else{
+						//openid
+						var openid = app.getCookie('openid');
+						//全价票数量
+						var adultQuantity = $('.num').eq(0).val();
+						//半价票数量
+	//					var halfPriceQuantity = $('.num').eq(1).val();
+						//全价票总价格
+						var adulePrice = $('.num').eq(0).val() * 20;
+						//半价票总价格
+	//					var halfPrice = $('.num').eq(1).val() * 0.01;
+						//总价格
+	//					var totalPrice = parseFloat(adulePrice) + parseFloat(halfPrice);
+						var totalPrice = parseFloat(adulePrice);
+						//支付金额
+						var orderMoney = totalPrice;
+						//手机号
+						var buyerPhone = $('.buyerPhone').val();
+						//描述
+						//var productDesc = '园博园门票';
+						if(buyerPhone){
+							var myreg=/^[1][1,2,3,4,5,6,7,8,9][0-9]{9}$/;  
+				          	if (!myreg.test(buyerPhone)) {  
+				            	layer.alert('请输入正确的手机号！')
+				          	} else {
+				          		//禁用购买按钮
+				          		$(that).attr('onclick', '');
+								$(that).addClass('disabled');
+								window.location.href = 'success.html';
+//				            	app.postAjax('ticketsPay/app/pay', {
+//									openid: openid,
+//									adultQuantity: adultQuantity,
+//	//								halfPriceQuantity: halfPriceQuantity,
+//									halfPriceQuantity: 0,
+//									adulePrice: adulePrice,
+//	//								halfPrice: halfPrice,
+//									halfPrice: 0,
+//									totalPrice: totalPrice,
+//									orderMoney: orderMoney,
+//									buyerPhone: buyerPhone,
+//									payType: 1 // 园博园
+//								}, function(res){
+//									var res_o = JSON.parse(res.rows.res);
+//									var orderId = res.rows.orderId;
+//									WeixinJSBridge.invoke(
+//										'getBrandWCPayRequest', {
+//									       "appId":res_o.appId,     //公众号名称，由商户传入
+//									       "timeStamp":res_o.timeStamp,  //时间戳，自1970年以来的秒数
+//									       "nonceStr":res_o.nonceStr, //随机串
+//									       "package":res_o.package,
+//									       "signType":res_o.signType,//微信签名方式：
+//									       "paySign":res_o.paySign //微信签名
+//										},
+//										function(res){
+//											if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+//												window.location.href = 'success.html?orderId=' + orderId;
+//											}else{
+//												//取消禁用购买按钮
+//								          		$(that).attr('onclick', 'payClick(this)');
+//											}
+//										}
+//									);
+//	
+//								})
+				          	}  
+							
+						}else{
+							layer.alert('请先输入您的手机号');
+						}
+						
+					}
+				}else{
+					layer.alert('门票购买时间：7:30--16:00');
+				}
+				
+			}
+		</script>
+	</body>
+</html>

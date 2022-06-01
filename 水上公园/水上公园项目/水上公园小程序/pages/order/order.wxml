@@ -1,0 +1,24 @@
+<view class="container">
+  <view class='order-content'>
+    <view class='order-item' bindtap='orderClick' data-orderType='0'>
+      门票
+      <image src='/image/more-icon.png' mode='widthFix'></image>
+    </view>
+    <view class='order-item' bindtap='orderClick' data-orderType='1'>
+      自驾电瓶车
+      <image src='/image/more-icon.png' mode='widthFix'></image>
+    </view>
+    <view class='order-item' bindtap='orderClick' data-orderType='2'>
+      自行车
+      <image src='/image/more-icon.png' mode='widthFix'></image>
+    </view>
+    <view class='order-item' bindtap='orderClick' data-orderType='3'>
+      电瓶船
+      <image src='/image/more-icon.png' mode='widthFix'></image>
+    </view>
+    <!-- <view class='order-item' bindtap='orderClick' data-orderType='4'>
+      环线电瓶车
+      <image src='/image/more-icon.png' mode='widthFix'></image>
+    </view> -->
+  </view>
+</view>

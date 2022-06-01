@@ -1,0 +1,44 @@
+<view class="container">
+  <view class='title'>票价</view>
+  <view class='content-box'>
+    <view class='price-view'>
+      {{price}}元/人
+    </view>
+  </view>
+  <view class='title'>购票数</view>
+  <view class='content-box'>
+    <view class='select-view'>
+      请选择购票人数： 
+      <view class='select-btn'>
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+          <view>{{array[index]}}</view>
+        </picker>
+        <image src='/image/down-icon.png' mode='widthFix'></image>
+      </view>
+    </view>
+  </view>
+  <view class='title'>单票使用次数</view>
+  <view class='content-box'>
+    <view class='price-view'>
+      5次
+    </view>
+  </view>
+  <view class='title'>购票须知</view>
+  <view class='content-box'>
+    <view class='desc-view'>
+      <view>1.环线观光车当日车票当日有效，过期作废。</view>
+      <view>2.环线观光车车票指定站点出售，概不退换。</view>
+      <view>3.环线观光车路线为环园路线，循环行驶，共计六站，依次为南门站、幻花湖站、育秀园站、北门站、植物专类园站、万花馆站，小程序买票上车，每张车票可乘车5次。每次上车请扫码验票，剩余次数概不退还。</view>
+      <view>4.中途上下车须配合工作人员的检票验票工作。</view>
+      <view>5.乘客中途不得抛洒垃圾，不得将手臂伸出车外。</view>
+      <view>6.老人、儿童、行动不便者须有成年人陪同，不得单独乘车。</view>
+      <view>7.乘客候车时应按照先后顺序排队上车，到站时等车辆停稳后依次下车。</view>
+      <view>8.环线观光车运营时间为早8:00到晚5:00，请购买观光车票的乘客在此时间内乘车。</view>
+    </view>
+  </view>
+  
+  <view class='bottom-view'>
+    <view>总计：{{totalMoney}}元</view>
+    <button class='buy-btn' bindtap='buyClick' disabled='{{disabled}}'>缴费购票</button>
+  </view>
+</view>

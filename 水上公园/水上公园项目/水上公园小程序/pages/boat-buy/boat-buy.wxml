@@ -1,0 +1,37 @@
+<view class="container">
+  <view class='box'>
+    <view class='title'>收费标准：</view>
+    <view class='box-content price'>
+      <view class='price-item'>
+        <view>价格： <view class="price-txt">{{price}}元/小时</view></view>
+        <view></view>
+      </view>
+      <view class='price-item'>
+        <view>押金： <view class="price-txt">{{deposit}}元</view></view>
+        <view>（押金余额秒退）</view>
+      </view>
+    </view>
+
+    <view class='title'>手机号：</view>
+    <view class='box-content price'>
+      <input class='phone-view' value='{{phone?phone:""}}' disabled='{{phone?true:false}}' placeholder='{{phone?"":"请输入手机号"}}' bindinput='writePhone'></input>
+    </view>
+
+    <view class='title'>开放时间:</view>
+    <view class='box-content prompt'>
+      <view>游船开放时间：9:00--17:00</view>
+      <view>游船止票时间：16:30</view>
+      <view>每条船限乘{{bikeType=='8'?'四':'六'}}人（含婴儿）</view>
+    </view>
+
+    <view class='title'>温馨提示:</view>
+    <view class='box-content prompt'>
+      <view>1.购票时只收押金，归还时扣除相应消费金额后退还其余押金。</view>
+      <view>2.请您将婴儿车等物品折叠后收入船内。</view>
+      <view>3.开票后请尽快到游船码头上船，以上船时间为计时时间。</view>
+      <view>4.退还押金后，钱款请当面点清。</view>
+    </view>
+  </view>
+
+  <button class='buy-btn' bindtap='buyClick' disabled="{{disabled}}">缴纳押金并开锁</button>
+</view>

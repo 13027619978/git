@@ -1,0 +1,119 @@
+<view class="container">
+  <!-- 提示文字部分 -->
+  <view class="noticeView">
+    <view class="noticeContent">
+      <image src="/image/tip.png" mode="widthFix"></image>
+      <view class="notice_txt">
+        <view class="marquee_text" style="{{orientation}}:{{marqueeDistance2}}px;font-size: {{size}}px;">
+          <text>{{text}}</text>
+          <text wx:if="{{marquee2copy_status}}" style="margin-left:{{marquee2_margin}}px;">{{text}}</text>
+        </view>
+      </view>
+    </view> 
+  </view>
+
+  <!-- banner -->
+  <swiper class='banner'>
+    <block>
+      <swiper-item>
+        <image src='/image/banner.png' mode='widthFix'></image>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <!-- 购票部分 -->
+  <view class='ticket-view'>
+    <image class='ticket-bg' src='/image/home-bg.png' mode='widthFix'></image>
+    <view class="ticket-content">
+      <view class='scan-btn' bindtap='scanClick'>
+        <image src='/image/scan-image.png' mode='widthFix'></image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 为你推荐 -->
+  <view class='recommend-view'>
+    <view class='title'>为你推荐</view>
+    <view class='recommend-list'>
+      <view class="recommend-item" bindtap='explainClick' data-qrcode='1959997'>
+        <image class='recommend-item-img' src='https://newlj.oss-cn-beijing.aliyuncs.com/yjly/power/145766552152121.jpg' mode='widthFix'></image>
+        <view class='recommend-item-content'>
+          <view class='recommend-type'>必赏</view>
+          <view class='recommend-name'>白沙滩</view>
+        </view>
+      </view>
+      
+      <view class='recommend-bottom'>
+        <view class="recommend-item" bindtap='explainClick' data-qrcode='1959994'>
+          <image class='recommend-item-img' src='https://newlj.oss-cn-beijing.aliyuncs.com/yjly/power/145766533695958.jpg' mode='aspectFill' style='height:400rpx;'></image>
+          <view class='recommend-item-content'>
+            <view class='recommend-type'>特色</view>
+            <view class='recommend-name'>幻花湖</view>
+          </view>
+        </view>
+        <view class='recommend-bottom-right'>
+          <view class="recommend-item" bindtap='explainClick' data-qrcode='1959996'>
+            <image class='recommend-item-img' src='https://newlj.oss-cn-beijing.aliyuncs.com/yjly/power/145766571244670.jpg' mode='aspectFill' style='height:196rpx;'></image>
+            <view class='recommend-item-content'>
+              <view class='recommend-type'>推荐</view>
+              <view class='recommend-name'>大地花海</view>
+            </view>
+          </view>
+          <view class="recommend-item" bindtap='explainClick' data-qrcode='1959995'>
+            <image class='recommend-item-img' src='https://newlj.oss-cn-beijing.aliyuncs.com/yjly/power/145766522526473.jpg' mode='aspectFill' style='height:196rpx;'></image>
+            <view class='recommend-item-content'>
+              <view class='recommend-type'>秋游</view>
+              <view class='recommend-name'>花神广场</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- tabbar -->
+  <view class='tabbar'>
+    <view class='tabbar-content'>
+      <view class='tabbar-item'>
+        <image src='/image/home-icon.png' mode='widthFix'></image>
+        首页
+      </view>
+      <view class='tabbar-item' bindtap='mapClick'>
+        <image src='/image/order-icon.png' mode='widthFix'></image>
+        地图
+      </view>
+      <view class='tabbar-item scan-btn' bindtap='scanClick'>
+        <image src='/image/scan-icon.png' mode='widthFix'></image>
+      </view>
+      <view class='tabbar-item' bindtap='orderClick'>
+        <image src='/image/order-icon1.png' mode='widthFix'></image>
+        订单
+      </view>
+      <view class='tabbar-item'>
+        <image src='/image/message-icon.png' mode='widthFix'></image>
+        客服
+      </view>
+    </view>
+  </view>
+
+  <view class='modal-view' hidden='{{modalShow?false:true}}'>
+    <view class='modal-content' animation="{{animationData}}">
+      <view class='modal-title'>是否让我为您导览？</view>
+      <image src='{{imgUrl}}' mode='aspectFit'></image>
+      <view class='modal-txt'>
+        <view class='txt-item'>
+          <view class='txt-view'>
+            附近景点：{{attraction}}
+          </view>
+          <view class='txt-view'>
+            距离您：{{distance}}米
+          </view>
+        </view>
+      </view>
+      <view class='btn-view'>
+        <view class='cancle-btn' bindtap='modalCancel'>取消</view>
+        <view class='explain-btn' data-qrcode='{{qrCode}}' bindtap='explainClick'>导览</view>
+      </view>
+    </view>
+  </view>
+</view>

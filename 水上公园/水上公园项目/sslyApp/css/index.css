@@ -1,0 +1,160 @@
+.container{
+	padding-bottom: 46px;
+}
+.banner img{
+	width: 100%;
+}
+.userInfo{
+	padding: 20px 10px;
+	border-bottom: 1px solid #ddd;
+}
+.userInfo_content{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-top: 20px;
+}
+.userInfo .headImg{
+	width: 75px;
+	height: 75px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	margin-bottom: 5px;
+}
+.userInfo .content_l{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+}
+.userInfo img{
+	height: 100%;
+}
+.userInfo a{
+	line-height: 35px;
+	background-color: #ff5500;
+	width: 105px;
+	color: #fff;
+	text-align: center;
+	border-radius: 5px;
+}
+
+.buyInfo{
+	padding: 20px 10px;
+}
+.ticketInfo{
+	font-size: 14px;
+	line-height: 25px;
+	padding: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid #ddd;
+}
+
+.buy_item{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;	
+	padding: 10px 0;
+	border-bottom: 1px solid #ddd;
+}
+.item_l{
+	width: 40%;
+	text-align: right;
+	padding-right: 10px;
+	font-size: 16px;
+}
+.number{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+.number .number_txt{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	margin: 0 10px;
+	font-size: 16px;
+}
+.number input{
+	width: 45px;
+	height: 35px;
+	padding: 0 5px;
+	font-size: 16px;
+	margin-right: 10px;
+}
+.number a{
+	width: 35px;
+	line-height: 35px;
+	text-align: center;
+	background-color: #ff5500;
+	color: #fff;
+	font-size: 18px;
+}
+.buy_item>input{
+	display: block;
+	height: 35px;
+	max-width: 55%;
+	padding: 0 5px;
+	font-size: 16px;
+}
+
+.notice{
+	padding: 0 10px;
+	font-size: 14px;
+	color: #666;
+	line-height: 25px;
+}
+.notice_item{
+	margin-top: 20px;
+}
+.notice .title{
+	font-size: 16px;
+	margin-bottom: 10px;
+	color: #000;
+}
+
+.bottomView{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	border-top: 1px solid #ddd;
+	background-color: #fff;
+}
+.bottom_l{
+	width: 60%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.bottomView a{
+	width: 40%;
+	line-height: 45px;
+	background-color: red;
+	text-align: center;
+	color: #fff;
+	font-size: 16px;
+}
+.bottomView .disabled{
+	background-color: #ddd;
+	color: #666;;
+}
+.select-view{
+	padding: 15px 10px;
+	border-radius: 5px;
+}
+.select-view.active{
+	background-color: #ff5500;
+	color: #fff;
+}
+.select-view input{
+	display: none;
+}

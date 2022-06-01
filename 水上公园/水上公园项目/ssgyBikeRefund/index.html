@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<title></title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="content">
+				<input class="phone-input" id="phone" type="number" placeholder="请输入手机号" />
+				<a class="search-btn" href="javascript:;" onclick="searchClick()">查询并退款</a>
+				<div class="notice_txt">
+		        	<p>自行车还车点：未堂小镇租赁处，北园租赁处，南门租赁处，游船码头。</p>
+		        	<p>电瓶车还车点：南门租赁处。</p>
+			        <p>1.自行车还车前请锁车，听到滴滴锁车提示音后，扫描还车二维码，输入租车手机号，点击查询手动退款。</p>
+			        <p>2.电瓶车还车务必到南门租赁处归还。扫描南门租赁处的还车二维码，输入租车手机号，点击查询手动退款。</p>
+			        <p>3.游船请到游船租赁处归还。</p>
+		        </div>
+			</div>
+			
+			<div class="alert">
+				<div class="alert-content">
+					<div class="alert_info">
+						<p>您的手机号已经退款成功，请不要重新申请！请返回微信查询退款状态！</p>
+						<img src="img/wx_tuikuan.png"/>
+					</div>
+					<a href="javascript:;" class="close-btn">我知道了</a>
+				</div>
+			</div>
+		</div>
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script type="text/javascript">
+			// 阻止键盘弹出压缩页面
+			var containerHeight = $('.container').height();
+			var contentHeight = $('.content').height();
+			$('.container').css({
+				"height": containerHeight + 'px'
+			});
+			$('.content').css({
+				"height": contentHeight + 'px'
+			});
+			var click = true;
+			var host = 'https://iot.smart-ideas.com.cn/ssgy/';
+			function searchClick(){
+				var phone = $('#phone').val();
+				if(phone){
+					$.ajax({
+						type:"get",
+						url:host + "orderRefundApp/getRefundDeviceOrderInfo?phone=" + phone,
+						async:true,
+						success: function(data){
+							console.log(data);
+							if(data.code == "SUCCESS"){
+								var user = data.data.wxUser;
+								var order = data.data.order;
+								console.log()
+								var bikeType = "";
+								if(order.deviceType == 0){
+									bikeType = "双人电瓶车";
+								}else if(order.deviceType == 1){
+									bikeType = "四人电瓶车";
+								}else if(order.deviceType == 2){
+									bikeType = "14人电瓶车";
+								}else if(order.deviceType == 3){
+									bikeType = "23人电瓶车";
+								}else if(order.deviceType == 4){
+									bikeType = "双人自行车";
+								}else if(order.deviceType == 5){
+									bikeType = "四人自行车";
+								}else if(order.deviceType == 6){
+									bikeType = "电瓶船";
+								}
+								var de = order.normalDeposit;
+								var ac = order.actualConsumeMoney;
+								var re = "";
+								if(de*1 <= ac*1){
+									ac = de;
+									re = 0;
+								}else{
+									re = (de*1 - ac*1).toFixed(2);
+								}
+								var str = '<div style="padding: 10px;">';
+								str += '<div style="margin-top: 5px;">手机号：'+user.phone+'</div> ';
+								str += '<div style="margin-top: 5px;">车型：'+bikeType+'</div>';
+								str += '<div style="margin-top: 5px;">骑行开始时间：'+order.ridingStartTime+'</div>';
+								str += '<div style="margin-top: 5px;">骑行结束时间：'+order.ridingEndTime+'</div>';
+								str += '<div style="margin-top: 5px;">押金：'+de+'元</div>';
+								str += '<div style="margin-top: 5px;">骑行费用：'+ac+'元</div>';
+								str += '<div style="margin-top: 5px;">骑行退还：'+re+'元</div> </div>';
+								layer.open({	
+									content: str,
+									btn: ['申请退款', '取消'],
+									yes: function(index){
+										if(click){
+											click = false;
+											layer.msg('退款中，请稍后...', {
+											  icon: 16,
+											  shade: 0.01,
+											  time: false
+											});
+											$.ajax({
+								        		type:"post",
+								        		url:host + 'orderRefundApp/refundDeviceOrder',
+								        		contentType:"application/json",
+								        		data: JSON.stringify(order),
+								        		success: function(data){
+								        			layer.closeAll('loading');
+								        			layer.alert(data.msg);
+								        			click = true;
+								        		}
+								        	});
+										}
+									}
+								});
+							}else{
+								$('.alert_info p').text(data.msg);
+								$('.alert').css('display', 'flex');
+							    return;
+							}
+						}
+					});
+				}else{
+					layer.alert('请输入手机号！');
+				}
+			}
+
+			$('.close-btn').click(function(){
+				$('.alert').hide();
+			})
+		</script>
+	</body>
+</html>

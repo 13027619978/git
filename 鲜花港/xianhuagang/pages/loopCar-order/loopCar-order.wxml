@@ -1,0 +1,14 @@
+<view class="container">
+  <view class='order-list' hidden='{{orderList.length>0?false:true}}'>
+    <block wx:for="{{orderList}}" wx:key="order-item">
+      <view class='order-item' bindtap='orderDetail' data-id='{{item.id}}'>
+        <view class='item-left'>
+          <view>消费金额：<view>{{item.totalPrice}}元</view></view>
+          <view>订单时间：<view>{{item.createDate}}</view></view>
+        </view>
+        <image src='/image/more-icon.png' mode='widthFix'></image>
+      </view>
+    </block>
+  </view>
+  <view class='nodata' hidden='{{orderList.length>0?true:false}}'>-- 暂无订单 --</view>
+</view>

@@ -1,0 +1,10 @@
+<view class="container">
+  <image class='bg-img' src='/image/regist-bg.jpg'></image>
+  <view class='content'>
+    <input class='phone-view' type='number' bindinput='writePhone' placeholder='请输入手机号'></input>
+    <view class='regist-btn' bindtap='registClick'>绑定手机号</view>
+    <view class='desc'>
+      <view>请确保输入正确的手机号，否则退款失败概不负责。</view>
+    </view>
+  </view>
+</view>

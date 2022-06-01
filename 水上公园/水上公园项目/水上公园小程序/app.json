@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/batteryCar-buy/batteryCar-buy",
+    "pages/regist/regist",
+    "pages/map/map",
+    "pages/explain/explain",
+    "pages/order/order",
+    "pages/bike-buy/bike-buy",
+    "pages/bike-order/bike-order",
+    "pages/bike-orderDetail/bike-orderDetail",
+    "pages/tickets-buy/tickets-buy",
+    "pages/tickets-order/tickets-order",
+    "pages/tickets-orderDetail/tickets-orderDetail",
+    "pages/boat-buy/boat-buy",
+    "pages/boat-order/boat-order",
+    "pages/boat-orderDetail/boat-orderDetail",
+    "pages/batteryCar-order/batteryCar-order",
+    "pages/batteryCar-orderDetail/batteryCar-orderDetail",
+    "pages/refund/refund",
+    "pages/sslyTickets-buy/sslyTickets-buy"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTitleText": "水上公园",
+    "navigationBarTextStyle": "white"
+  },
+  "plugins": {
+    "myPlugin": {
+      "version": "0.2.3",
+      "provider": "wx069ba97219f66d99"
+    }
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "位置信息将用于为你推荐周边景点"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
+}

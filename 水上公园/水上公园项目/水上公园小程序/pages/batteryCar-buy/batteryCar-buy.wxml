@@ -1,0 +1,47 @@
+<view class="container">
+  <view class='box'>
+    <view class='title'>收费标准：</view>
+    <view class='box-content price'>
+      <view class='price-item'>
+        <view>价格：
+          <view class="price-txt">{{price}}元/小时</view>
+        </view>
+        <view></view>
+      </view>
+      <view class='price-item'>
+        <view>押金：
+          <view class="price-txt">{{deposit}}元</view>
+        </view>
+        <view>（押金余额秒退）</view>
+      </view>
+    </view>
+
+    <view class='title'>手机号：</view>
+    <view class='box-content price'>
+      <input class='phone-view' value='{{phone?phone:""}}' disabled='{{phone?true:false}}' placeholder='{{phone?"":"请输入手机号"}}' bindinput='writePhone'></input>
+    </view>
+
+    <view class='title'>备注:</view>
+    <view class='box-content prompt'>
+      <view>1小时起租，时间不足1小时按1小时计算，超过1小时不足1.5小时按1.5小时计算，依次累加。</view>
+    </view>
+
+    <view class='title'>游客须知:</view>
+    <view class='box-content prompt'>
+      <view>1.电动代步车只提供园内游览，不得开出园区，游览完毕需只是送还租赁处。</view>
+      <view>2.电动代步车只能由成年人驾驶，未成年人不得驾驶，请您注意驾驶安全，不得在驾驶过程中追逐打闹。如因违规驾驶导致事故发生，驾驶人员赔偿相关经济损失。</view>
+      <view>3.注意力要集中，注意观察过往行人并合理避让。因驾驶人员操作不当导致车辆毁坏或交通事故，押金不退且一切经济损失由驾驶人员承担。</view>
+      <view>4.驾驶过程中要注意行人，右侧行车，行驶中要注意车距，最小车距为5米，严禁行驶中随意停车。</view>
+      <view>5.电动代步车禁止在陡坡处停留，请在行车区行驶，严禁进入禁行区域，行驶中不得强行占道。如因驾驶员违反规定造成意外事故，由驾驶员自行承担全部责任及相关经济损失。</view>
+      <view>6.如因驾驶员原因导致撞车，撞树，撞人等意外事故或车上人员意外伤害，驾驶员须承担全部赔偿责任。</view>
+    </view>
+    <view class='title'>安全须知:</view>
+    <view class='box-content prompt'>
+      <view>1.租赁的车辆必须由成年人驾驶，严禁酒后行驶。行驶过程中注意避让行人，游览途中请保持车距。</view>
+      <view>2.电动代步车、自行车禁止在陡坡处停留，严禁进入禁行区域，行驶中不得强行停留占道。</view>
+      <view>3.请照看好随行儿童，注意游园安全，以免发生意外。车筐内只可存放物品，禁止坐人。在离开车辆时请妥善保管好自己的行李物品，以免造成您的损失。</view>
+    </view>
+  </view>
+
+  <button class='buy-btn' bindtap='buyClick' disabled='{{disabled}}'>我已同意，前往充值</button>
+</view>

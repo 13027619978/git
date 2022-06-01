@@ -1,0 +1,44 @@
+<view class="container">
+  <view class='banner'>
+    <image src='/image/banner.png' mode='widthFix'></image>
+  </view>
+
+  <view class='tickets-info'>
+    <view class='title'>购票信息</view>
+    <view class='tickets-content'>
+      <view class='label-item'>
+        <view class='label-name'>门票：</view>
+        <view class='label-info'>{{ticketMoney}}元/张</view>
+      </view>
+      <view class='label-item'>
+        <view class='label-name'>数量：</view>
+        <view class='label-info'>
+          <view class='sub-btn' bindtap='subClick'>-</view>
+          <input class="number-txt" type='number' disabled='{{true}}' value='{{ticketNumber}}'></input>张
+          <view class='add-btn' bindtap='addClick'>+</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='tickets-desc'>
+    <view class='title'>免票：</view>
+    <view class='desc-content'>
+      <view>1.身高1.3米以下（不含1.3米）儿童可免费参观景区，须有家长陪同。</view>
+      <view>2.残疾人持本人有效证件可免费入园参观。</view>
+      <view>3.80岁老人持有效证件可免费入园参观。</view>
+    </view>
+    <view class='title'>备注：</view>
+    <view class='desc-content'>
+      <view>1.游客没人限享受一种优惠政策，以最低折扣计算。</view>
+      <view>2.每张成人票限带1名1.3米以下（不含1.3米）儿童入园参观，超出1名以上儿童需购特惠票入园。</view>
+      <view>3.门票不记名，不挂失，一经售出，概不退换。</view>
+      <view>4.入园需遵守《入园须知》。</view>
+    </view>
+  </view>
+
+  <view class='bottom-control'>
+    <view>总计：{{totalMoney}}元</view>
+    <button class='buy-btn' bindtap='buyClick' disabled='{{disabled}}'>购买</button>
+  </view>
+</view>

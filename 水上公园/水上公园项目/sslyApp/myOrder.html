@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="css/myOrder.css" />
+		<title></title>
+	</head>
+	<body>
+		<div class="container">
+			<p class="top_title">我的订单</p>
+			
+			<!-- 分类部分 -->
+			<ul class="category">
+				<li class="active">
+					<a href="javascript:;" onclick="unuseClick(this)">未使用</a>
+				</li>
+				<li>
+					<a href="javascript:;" onclick="useClick(this)">已使用</a>
+				</li>
+			</ul>
+			
+			<ul class="orderList">
+				
+			</ul>
+		</div>
+		
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.qrcode.min.js"></script>
+		<script src="js/app.js"></script>
+		<script type="text/javascript">
+			var useOrders = [];
+			var unUseOrders = [];
+			//获取订单列表
+			$(function(){
+				$.ajax({
+					type:"get",
+					url:app.root + 'ticketsOrder/app/getOrders?openId=' + app.getCookie('openid'),
+					success: function(res){
+						console.log(res);
+						var orderList = res.rows;
+						$.each(orderList, function(key, value){
+							if(orderList[key].whetherUse == 1 && orderList[key].payDate){
+								unUseOrders.push(orderList[key]);
+							}else if(orderList[key].whetherUse == 2  && orderList[key].payDate){
+								useOrders.push(orderList[key]);
+							}
+						})
+						getOrderList(unUseOrders, '未使用');
+					}
+				});
+			})
+			
+			
+			
+			//拼接订单列表
+			function getOrderList(orderList, userTxt){
+				var htmlStr = '';
+				$.each(orderList, function(key, value){
+					var order = orderList[key];
+					htmlStr += '<li onclick="orderClick(this)">' +
+									'<a href="javascript:;" class="orderInfo">' +
+										'<div class="orderInfo_l">' +
+										'<p>北京园博园门票</p>' +
+										'<p>' + order.payDate + '</p>' +
+										'</div><img src="img/under.png"/>' +
+									'</a>' +
+									'<div class="orderDetail">' +
+										'<div class="qrcode"></div>' +
+										'<img src="" class="qrcode_img"/>' +
+										'<div class="orderDetail_txt">' +
+											'<div class="txt_item">' +
+												'<p>订单编号：</p>' +
+												'<p>' + order.orderCode + '</p>' +
+											'</div>' +
+											'<div class="txt_item">' +
+												'<p>游览日期：</p>' +
+												'<p>' + order.payDate.split(' ')[0] + '</p>' +
+											'</div>' +
+											'<div class="txt_item">' +
+												'<p>全票数：</p>' +
+												'<p>' + parseInt(order.adultQuantity) + '</p>' +
+											'</div>' +
+											'<div class="txt_item">' +
+												'<p>半票数：</p>' +
+												'<p>' + parseInt(order.halfPriceQuantity) + '</p>' +
+											'</div>' +
+											'<div class="txt_item">' +
+												'<p>使用详情：</p>' +
+												'<p>' + userTxt + '</p>' +
+											'</div>' +
+										'</div>' + 
+									'</div>' +
+								'</li>'
+								
+				})
+				$('.orderList').append(htmlStr);
+				
+				//转换二维码
+				$('.orderList li').each(function(key, value){
+					$('.orderList li').eq(key).find('.qrcode').qrcode(unUseOrders[key].qrcode);
+					$('.qrcode_img').eq(key).attr('src', document.getElementsByTagName('canvas')[key].toDataURL("image/png"));
+				})
+			}
+			
+			
+			function orderClick(that){
+				$(that).find('.orderDetail').slideToggle();
+				$(that).siblings().find('.orderDetail').slideUp();
+			}
+			
+			//未使用点击事件
+			function unuseClick(that){
+				if($(that).parent().attr('class') != 'active'){
+					$(that).parent().addClass('active');
+					$(that).parent().siblings().removeClass('active');
+					$('.orderList').html('');
+					getOrderList(unUseOrders, '未使用');
+				}
+			}
+			
+			//已使用点击事件
+			function useClick(that){
+				if($(that).parent().attr('class') != 'active'){
+					$(that).parent().addClass('active');
+					$(that).parent().siblings().removeClass('active');
+					$('.orderList').html('');
+					getOrderList(useOrders, '已使用');
+				}
+			}
+		</script>
+	</body>
+</html>

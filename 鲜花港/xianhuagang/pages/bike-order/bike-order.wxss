@@ -1,0 +1,34 @@
+/* pages/bike-order/bike-order.wxss */
+.container{
+  min-height: 100vh;
+  background-color: #f0f0f0;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+.order-item{
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 28rpx;
+  color: #333;
+  padding: 15rpx 20rpx;
+  border-radius: 10rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 0 5rpx rgba(9, 9, 9, .5);
+}
+.order-item>image{
+  width: 32rpx;
+  height: 20rpx;
+}
+.item-left>view{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  line-height: 50rpx;
+}
+.item-left>view view{
+  font-size: 26rpx;
+  color: #ff5500;
+}

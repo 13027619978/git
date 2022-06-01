@@ -1,0 +1,50 @@
+<view class="container">
+  <view class='box'>
+    <view class='title'>收费标准：</view>
+    <view class='box-content price'>
+      <view class='price-item'>
+        <view>价格：
+          <view class="price-txt">{{price}}元/小时</view>
+        </view>
+        <view></view>
+      </view>
+      <view class='price-item'>
+        <view>押金：
+          <view class="price-txt">{{deposit}}元</view>
+        </view>
+        <view>（押金余额秒退）</view>
+      </view>
+    </view>
+
+    <view class='title'>手机号：</view>
+    <view class='box-content price'>
+      <input class='phone-view' value='{{phone?phone:""}}' disabled='{{phone?true:false}}' placeholder='{{phone?"":"请输入手机号"}}' bindinput='writePhone'></input>
+    </view>
+
+    <view class='title'>备注:</view>
+    <view class='box-content prompt'>
+      <view>1小时起租，时间不足1小时按1小时计算，超过1小时不足1.5小时按1.5小时计算，依次累加。</view>
+    </view>
+
+    <view class='title'>游客须知:</view>
+    <view class='box-content prompt'>
+      <view>1.请文明驾行车辆，请注意骑驾安全，遇有行人及其他车辆需文明礼让。</view>
+      <view>2.请按园内指定路线行驶，请勿在禁行区域游驾。</view>
+      <view>3.请爱护公共设施，爱护花草树木，请勿进入草坪骑行等。</view>
+      <view>4.请勿野蛮骑驾车辆，如恶意损坏，需双倍赔偿。</view>
+      <view>5.照看好随行儿童，注意游玩安全，以免意外的发生。</view>
+      <view>6.请妥善保管好自己的行李物品，以免造成不必要的损失。</view>
+      <view>7.如未按规则骑行，发生意外事故，游客承担相应赔偿责任。</view>
+      <view>8.如游览过程中遇到突发状况，请拨打服务热线：010-61417123</view>
+    </view>
+
+    <view class='title'>安全须知:</view>
+    <view class='box-content prompt'>
+      <view>1.租赁的车辆必须由成年人驾驶，严禁酒后行驶。行驶过程中注意避让行人，游览途中请保持车距。</view>
+      <view>2.电动代步车、自行车禁止在陡坡处停留，严禁进入禁行区域，行驶中不得强行停留占道。</view>
+      <view>3.请照看好随行儿童，注意游园安全，以免发生意外。车筐内只可存放物品，禁止坐人。在离开车辆时请妥善保管好自己的行李物品，以免造成您的损失。 </view>
+    </view>
+  </view>
+
+  <button class='buy-btn' bindtap='buyClick' disabled='{{disabled}}'>我已同意，前往充值</button>
+</view>

@@ -1,0 +1,6 @@
+.nodata{
+  font-size: 28rpx;
+  color: #666;
+  text-align: center;
+  padding-top: 50rpx;
+}

@@ -1,0 +1,36 @@
+<view class="container">
+  <view class='tickets-info'>
+    <view class='qrCode-view' hidden='{{status=="支付成功"?false:true}}'>
+      <view class='qrCode'>
+        <canvas class='canvas' canvas-id='canvas' bindlongtap='save' style='width:500rpx;height:500rpx;'></canvas>
+      </view>
+    </view>
+    <view class='label-item'>
+      <view class='label-name'>购票数量：</view>
+      <view class='label-info'>{{number}}张</view>
+    </view>
+    <view class='label-item'>
+      <view class='label-name'>购票日期：</view>
+      <view class='label-info'>{{createDate}}</view>
+    </view>
+    <view class='label-item'>
+      <view class='label-name'>有效日期：</view>
+      <view class='label-info'>{{endDate}}</view>
+    </view>
+    <view class='label-item'>
+      <view class='label-name'>订单状态：</view>
+      <view class='label-info'>{{status}}</view>
+    </view>
+  </view>
+
+  <view class='tickets-desc'>
+    <view class='desc-item'>
+      <view class='title'>购票须知：</view>
+      <view class='desc-txt'>已购票请当日使用。</view>
+    </view>
+    <view class='desc-item'>
+      <view class='title'>使用方法：</view>
+      <view class='desc-txt'>请截屏保存二维码，检票请出示此二维码！检票后此二维码失效。如果二维码丢失，请微信扫描购票二维码，点击我的订单查看二维码。</view>
+    </view>
+  </view>
+</view>

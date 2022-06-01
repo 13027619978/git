@@ -1,0 +1,41 @@
+<view class="container">
+  <map class='myMap' latitude='{{latitude}}' longitude='{{longitude}}' show-location="{{true}}" scale='{{scale}}' markers='{{markers}}' bindmarkertap='markerClick' bindtap='mapClick' polyline="{{polyline}}"></map>
+  <cover-view class='position' bindtap='positionClick'>
+    <cover-image class='position-image' src='/image/position-icon.png' mode='widthFix'></cover-image>
+  </cover-view>
+
+  <cover-view class='category-view'>
+    <cover-view class='category-item' bindtap='navigateClick' hidden='{{isPark?true:false}}'>一键导航</cover-view>
+    <block wx:for="{{categoryList}}" wx:key="category">
+      <cover-view class='category-item {{currentIndex==index?"active":""}}' bindtap='categoryClick' data-index='{{index}}'>{{item}}</cover-view>
+    </block>
+  </cover-view>
+
+  <cover-view class='distance-view' hidden='{{distanceHidden}}'>
+    <cover-view class='distance-top'>
+      <cover-view class='mark-name'>{{markerInfo.name}}</cover-view>
+      <cover-view class='mark-distance'>{{markerInfo.distance}}m</cover-view>
+    </cover-view>
+    <cover-view class='underLine'></cover-view>
+    <cover-view class='distance-bottom'>
+      <cover-view class='time-txt'>
+        <cover-view class='time-item'>
+          <cover-view class='type'>步行时间：</cover-view>
+          <cover-view class='time'>{{markerInfo.walkTime}}分钟</cover-view>
+        </cover-view>
+        <cover-view class='time-item'>
+          <cover-view class='type'>电瓶车时间：</cover-view>
+          <cover-view class='time'>{{markerInfo.batteyCarTime}}分钟</cover-view>
+        </cover-view>
+      </cover-view>
+      <cover-view class='underLine'></cover-view>
+      <cover-view class='time-txt'>
+        <cover-view class='time-item'>
+          <cover-view class='type'>自行车时间：</cover-view>
+          <cover-view class='time'>{{markerInfo.bikeTime}}分钟</cover-view>
+        </cover-view>
+        <cover-view class='explain-btn' bindtap='explainClick' data-qrcode='{{markerInfo.qrcode}}' hidden='{{currentIndex==0?false:true}}'>前往导览</cover-view>
+      </cover-view>
+    </cover-view>
+  </cover-view>
+</view>

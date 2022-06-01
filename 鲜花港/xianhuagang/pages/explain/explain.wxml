@@ -1,0 +1,22 @@
+<view class="container">
+  <image class='banner' src='{{flowerInfo.imageUrl?flowerInfo.imageUrl:"/image/banner.png"}}' mode='widthFix'></image>
+
+  <view class='content'>
+    <view class='content-box'>
+      <view class='title'>名称：</view>
+      <view>{{flowerInfo.flowersCnName}}{{flowerInfo.family=="景点"?"":"("+flowerInfo.flowersEnName+")"}}</view>
+    </view>
+    <view class='content-box' hidden='{{flowerInfo.family=="景点"?true:false}}'>
+      <view class='title'>科属：</view>
+      <view>{{flowerInfo.family}}、{{flowerInfo.belong}}</view>
+    </view>
+    <view class='content-box' hidden='{{flowerInfo.feature?false:true}}'>
+      <view class='title'>简介：</view>
+      <view>{{flowerInfo.feature}}</view>
+    </view>
+  </view>
+
+  <view class='audio' bindtap='audioClick'>
+    <image src='/image/audio-icon{{close?"-close":""}}.png' mode='widthFix'></image>
+  </view>
+</view>

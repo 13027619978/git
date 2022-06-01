@@ -1,0 +1,40 @@
+<view class="container">
+  <view class='box'>
+    <view class='title'>收费标准：</view>
+    <view class='box-content price'>
+      <view class='price-item'>
+        <view>价格： <view class="price-txt">{{price}}元/小时</view></view>
+        <view></view>
+      </view>
+      <view class='price-item'>
+        <view>押金： <view class="price-txt">{{deposit}}元</view></view>
+        <view>（押金余额秒退）</view>
+      </view>
+    </view>
+
+    <view class='title'>手机号：</view>
+    <view class='box-content price'>
+      {{phone?phone:'空'}}
+    </view>
+
+    <view class='title'>开放时间:</view>
+    <view class='box-content prompt'>
+      <view>游船开放时间：9:00--17:00</view>
+      <view>游船止票时间：16:30</view>
+      <view>每条船限乘六人（含婴儿）</view>
+    </view>
+
+    <view class='title'>温馨提示:</view>
+    <view class='box-content prompt'>
+      <view>1.购票时只收押金，电瓶船押金300元。</view>
+      <view>2.半小时起租，不足半小时按半小时计算价格，半小时以上超过十分钟按一小时计费，以此类推。</view>
+      <view>3.开票计时，请您购票后抓紧时间上船。</view>
+      <view>4.请您将婴儿车等物品折叠后放入船内。</view>
+      <view>5.退票后钱款请当面点清。</view>
+      <view>6.购票前请认真阅读乘船须知，请您收好票据，此票据为消费和退押金依据（票据当日有效），如有遗失，不予退还。</view>
+      <view>7.如游览过程中遇到突发状况，请拨打服务热线：010-61417123</view>
+    </view>
+  </view>
+
+  <button class='buy-btn' bindtap='buyClick' disabled="{{disabled}}">缴纳押金并开锁</button>
+</view>

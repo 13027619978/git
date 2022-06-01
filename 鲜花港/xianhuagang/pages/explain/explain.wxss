@@ -1,0 +1,51 @@
+.container{
+  min-height: 100vh;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+/* .banner{
+  height: auto;
+}
+.banner image{
+  width: 100%;
+} */
+.banner{
+  width: 100%;
+}
+
+.content{
+  padding: 20rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+.content-box{
+  margin-bottom: 20rpx;
+}
+.title{
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+  padding-left: 15rpx;
+  border-left: 10rpx solid #ff5500;
+  line-height: 35rpx;
+  margin-bottom: 10rpx;
+}
+
+.audio{
+  position: fixed;
+  bottom: 150rpx;
+  right: 20rpx;
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.audio image{
+  width: 64rpx;
+  height: 64rpx;
+}
