@@ -173,9 +173,9 @@ function wxPay(params, that){
 				);
 			}else{
 				$(that).attr('onclick', 'buyClick()');
-				if(ticketType == '15'){
+				if(ticketsType == '15'){
 					window.location.replace("lzxTicketsDetail.html?orderId=" + orderId);
-				}else if(ticketType == '16'){
+				}else if(ticketsType == '16'){
 					window.location.replace("lzTicketsDetail.html?orderId=" + orderId);
 				}else{
 					window.location.replace("boatTicketsDetail.html?orderId=" + orderId);

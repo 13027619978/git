@@ -33,5 +33,5 @@ $(function(){
 })
 
 function orderClick(orderId){
-	window.location.href = "lzTicketsDetail.html?orderId=" + orderId;
+	window.location.href = "lzTicketsOrderDetail.html?orderId=" + orderId;
 }
