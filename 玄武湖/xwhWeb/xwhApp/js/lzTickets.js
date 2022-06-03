@@ -173,12 +173,10 @@ function wxPay(params, that){
 				);
 			}else{
 				$(that).attr('onclick', 'buyClick()');
-				if(ticketsType == '15'){
+				if(parseInt(ticketsType) == 15){
 					window.location.replace("lzxTicketsOrderDetail.html?orderId=" + orderId);
-				}else if(ticketsType == '16'){
+				}else if(parseInt(ticketsType) == 16){
 					window.location.replace("lzTicketsOrderDetail.html?orderId=" + orderId);
-				}else{
-					window.location.replace("boatTicketsDetail.html?orderId=" + orderId);
 				}
 			}
 		}else{
