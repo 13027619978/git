@@ -177,6 +177,8 @@ function wxPay(params, that){
 					window.location.replace("lzxTicketsOrderDetail.html?orderId=" + orderId);
 				}else if(parseInt(ticketsType) == 16){
 					window.location.replace("lzTicketsOrderDetail.html?orderId=" + orderId);
+				}else{
+					window.location.replace("lzxTicketsOrderDetail.html?orderId=" + orderId);
 				}
 			}
 		}else{

@@ -649,7 +649,7 @@
 										<p>5、老、幼、病、残、孕人员请在家人陪同下乘车。</p>
 										<p>6、乘车期间请保管好个人物品，以防丢失。</p>
 										<p>7、遇大风、暴雨等恶劣天气时，本项目停止运营。</p>
-										<p>8、运营时间：上午9点—下午5点</p>
+										<p>8、运营时间：<font class="yyTime"></font></p>
 										<p>服务热线：0516-83990123</p>
 									</div>
 								</div>
@@ -781,38 +781,32 @@
 					
 					if(seconds == 1 || seconds % 60 == 0){
 						// 获取运营时间
-						// app.getAjax('battery/getOperation?lineTicketId=', {}, function(res){
-						// 	console.log(res.data);
-						// 	var nowDay = new Date().getDay();
-						// 	if(nowDay == 0){
-						// 		nowDay = 6;
-						// 	}else{
-						// 		nowDay -= 1;
-						// 	}
-						// 	var startDate;
-						// 	var endDate;
-						// 	res.data.forEach(function(value, key){
-						// 		if(value.lineId == 2){
-						// 			var yyTimeList = value.list;
-						// 			startDate = yyTimeList[nowDay].startTime;
-						// 			endDate = yyTimeList[nowDay].endTime;
-						// 			if(value.ticketName.indexOf('夜场') != -1){
-						// 				if(yyTimeList[nowDay].state == '0'){
-						// 					$('.yjTime').text(startDate + '至' + endDate);
-						// 				}else{
-						// 					$('.yjTime').text(yyTimeList[nowDay].tip);
-						// 				}
-						// 			}else{
-						// 				if(yyTimeList[nowDay].state == '0'){
-						// 					$('.rjTime').text(startDate + '至' + endDate);
-						// 				}else{
-						// 					$('.rjTime').text(yyTimeList[nowDay].tip);
-						// 				}
-						// 			}
-						// 		}
-						// 	})
+						app.getAjax('battery/getOperation?lineTicketId=', {}, function(res){
+							console.log(res.data);
+							var nowDay = new Date().getDay();
+							if(nowDay == 0){
+								nowDay = 6;
+							}else{
+								nowDay -= 1;
+							}
+							var startDate;
+							var endDate;
+							res.data.forEach(function(value, key){
+								if(value.lineId == 2){
+									var yyTimeList = value.list;
+									startDate = yyTimeList[nowDay].startTime;
+									endDate = yyTimeList[nowDay].endTime;
+									if(value.ticketName == '单次票'){
+										if(yyTimeList[nowDay].state == '0'){
+											$('.yyTime').text(startDate + '至' + endDate);
+										}else{
+											$('.yyTime').text(yyTimeList[nowDay].tip);
+										}
+									}
+								}
+							})
 							
-						// })
+						})
 					}
 				}, 1000)
 				
