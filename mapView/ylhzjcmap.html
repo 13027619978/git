@@ -1,0 +1,290 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title></title>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
+    <style>
+        html, body, #container {
+            height: 100%;
+            width: 100%;
+        }
+        #addOverlayGroup {
+            margin-right: 1rem;
+        }
+		.amap-marker-label{
+			border: 0;
+			background-color: none;
+			background: rgba(0,0,0,0);
+		}
+		.info{
+			position: relative;
+			min-width: 0;
+			top: 0;
+			right: -15px;
+			width: 100px;
+			z-index: 999;
+			text-align: center;
+			color: #fff;
+			font-weight: bold;
+			background: rgba(0, 0, 0, .5);
+			padding: 5px 0;
+			margin-bottom: 5px;
+			
+		}
+		.info p{
+			font-weight: normal;
+			line-height: 20px;
+		}
+		.amap-logo, .amap-copyright{
+			display: none !important;
+		}
+		.btnView img{
+			width: 150px;
+			margin-bottom: 10px;
+		}
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=c1b024a249b04326f11894fd0e35041d"></script>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/app3.js"></script>
+<script src="js/gps.js"></script>
+<script type="text/javascript">
+	var map;
+	var scenicName;
+	$(function(){
+		var scenicId = app.getQueryString('scenicId');
+		if(!scenicId){
+			scenicId = '';
+		}
+		if(scenicId == '14249a7ee96d4d3f95195a799a3709d2'){
+		  scenicName = '杏花坞';
+		}else if(scenicId == '2a96be8cf7744d9088986920e2f0d6d9'){
+		  scenicName = '开元宾馆';
+		}else if(scenicId == '47fca49def99492c80a58d8592400589'){
+		  scenicName = '老子水居';
+		}else if(scenicId == '4c74b97aaf5b4ff594d11841d4ec8de9'){
+		  scenicName = '南湖一号';
+		}else if(scenicId == '5acd3b7ae10544ec9632b41392c0e695'){
+		  scenicName = '解忧桥';
+		}else if(scenicId == '7911474d3e1b42e891bd91f6eaf55077'){
+		  scenicName = '未定';
+		}else if(scenicId == '8ea1d467f3af4d2aa46b09219d6273f6'){
+		  scenicName = '断桥';
+		}else if(scenicId == 'b3bb924f74ed4e8ebcad576a382e8791'){
+		  scenicName = '沉水廊道';
+		}else if(scenicId == 'cdabffaf5cb442da8f5ca9ac50f85efc'){
+		  scenicName = '水族馆（沙月岛）';
+		}else if(scenicId == 'ed28b43724f0477d9755de59b28160dd'){
+		  scenicName = '音乐厅';
+		}else if(scenicId == 'f769f573bc3e4df5986ec45993e94fbd'){
+		  scenicName = '苏公塔';
+		}else if(scenicId == 'e258ca79d5ca4e33b177794a6d815ad5'){
+		  scenicName = '测试码头';
+		}
+		var overlayGroups;
+		// 创建地图实例
+		map = new AMap.Map("container", {
+		    zoom: 14,
+		    center: [117.153041, 34.235073],
+		    resizeEnable: false,
+			zoomEnable:false,
+			dragEnable: false
+		});
+		map.setFeatures(['bg','road']);
+		initMap(scenicId, map);
+		setInterval(function(){
+			initMap(scenicId, map);
+		}, 30000);
+	})
+	
+	function initMap(scenicId, map){
+		app.getAjax('deviceDataView/getDeviceShipLease', {},function(res){
+			var mtList = res;
+			app.getAjax('deviceDataView/getDeviceShipLocation?scenicId=' + scenicId, {}, function(res){
+				var markers = [];
+				console.log(res)
+				var resLength = res.length;
+				if(res.length > 0){
+					res.forEach(function(value, key){
+						var icon = new AMap.Icon({
+						    size: new AMap.Size(15, 45),    // 图标尺寸
+						    image: './img/mark.png',  // Icon的图像
+						    imageOffset: new AMap.Pixel(0, 25),  // 图像相对展示区域的偏移量，适于雪碧图等
+						    imageSize: new AMap.Size(15, 15)   // 根据所设置的大小拉伸或压缩图片
+						});
+						var lnglat = value;
+						// 创建点实例
+						if(lnglat.lat && lnglat.lng){
+							if (lnglat.lat != '32.072163' && lnglat.lng != '118.798823') {
+								let mark = GPS.gcj_encrypt(
+									Number(lnglat.lat),
+									Number(lnglat.lng)
+								)
+								var marker = new AMap.Marker({
+								    position: new AMap.LngLat(mark.lon, mark.lat),
+								    icon: icon
+								});
+								markers.push(marker);
+							}else{
+								resLength -= 1;
+							}
+						}else{
+							resLength -= 1;
+						}
+						
+					})
+					
+					mtList.forEach(function(value, key){
+						var icon = new AMap.Icon({
+						    size: new AMap.Size(15, 45),    // 图标尺寸
+						    image: './img/zd.png',  // Icon的图像
+						    imageOffset: new AMap.Pixel(0, 25),  // 图像相对展示区域的偏移量，适于雪碧图等
+						    imageSize: new AMap.Size(15, 15)   // 根据所设置的大小拉伸或压缩图片
+						});
+						var currName = value.scenicName;
+						if(currName == scenicName){
+							if(currName == '水族馆（沙月岛）'){
+								currName = '您在此位置:<br>水族馆';
+							}else{
+								currName = '您在此位置:<br>' + currName;
+							}
+							
+						}
+						var noLease = value.total - value.leaseTotal;
+						// 创建点实例
+						if(value.scenicName == '杏花坞'){
+							var marker = new AMap.Marker({
+							    position: new AMap.LngLat(117.173798, 34.239279),
+							    icon: icon
+							});
+							marker.setLabel({
+								offset: new AMap.Pixel(-10, 0),  //设置文本标注偏移量
+								content: "<div class='info'><p>"+ currName +"<br>空闲："+ noLease +"</p></div>", //设置文本标注内容
+								direction: 'right' //设置文本标注方位
+							});
+							markers.push(marker);
+						}else if(value.scenicName == '开元宾馆'){
+							var marker = new AMap.Marker({
+							    position: new AMap.LngLat(117.13593,34.245462),
+							    icon: icon
+							});
+							marker.setLabel({
+								offset: new AMap.Pixel(-10, 20),  //设置文本标注偏移量
+								content: "<div class='info'><p>"+ currName +"<br>空闲："+ noLease +"</p></div>", //设置文本标注内容								
+								direction: 'right' //设置文本标注方位
+							});
+							markers.push(marker);
+						}else if(value.scenicName == '老子水居'){
+							var marker = new AMap.Marker({
+							    position: new AMap.LngLat(117.159591,34.228974),
+							    icon: icon
+							});
+							marker.setLabel({
+								offset: new AMap.Pixel(-140, 0),  //设置文本标注偏移量
+								content: "<div class='info'><p>"+ currName +"<br>空闲："+ noLease +"</p></div>", //设置文本标注内容								
+								direction: 'right' //设置文本标注方位
+							});
+							markers.push(marker);
+						}else if(value.scenicName == '南湖一号'){
+							var marker = new AMap.Marker({
+							    position: new AMap.LngLat(117.161119,34.223773),
+							    icon: icon
+							});
+							marker.setLabel({
+								offset: new AMap.Pixel(-140, -20),  //设置文本标注偏移量
+								content: "<div class='info'><p>"+ currName +"<br>空闲："+ noLease +"</p></div>", //设置文本标注内容								
+								direction: 'right' //设置文本标注方位
+							});
+							markers.push(marker);
+						}else if(value.scenicName == '解忧桥'){
+							var marker = new AMap.Marker({
+							    position: new AMap.LngLat(117.161626,34.226212),
+							    icon: icon
+							});
+							marker.setLabel({
+								offset: new AMap.Pixel(-10, -10),  //设置文本标注偏移量
+								content: "<div class='info'><p>"+ currName +"<br>空闲："+ noLease +"</p></div>", //设置文本标注内容								
+								direction: 'right' //设置文本标注方位
+							});
+							markers.push(marker);
+						}else if(value.scenicName == '断桥'){
+							var marker = new AMap.Marker({
+							    position: new AMap.LngLat(117.153978,34.240263),
+							    icon: icon
+							});
+							marker.setLabel({
+								offset: new AMap.Pixel(-140, 0),  //设置文本标注偏移量
+								content: "<div class='info'><p>"+ currName +"<br>空闲："+ noLease +"</p></div>", //设置文本标注内容								
+								direction: 'right' //设置文本标注方位
+							});
+							markers.push(marker);
+						}else if(value.scenicName == '沉水廊道'){
+							var marker = new AMap.Marker({
+							    position: new AMap.LngLat(117.152994,34.224228),
+							    icon: icon
+							});
+							marker.setLabel({
+								offset: new AMap.Pixel(-140, -10),  //设置文本标注偏移量
+								content: "<div class='info'><p>"+ currName +"<br>空闲："+ noLease +"</p></div>", //设置文本标注内容								
+								direction: 'right' //设置文本标注方位
+							});
+							markers.push(marker);
+						}else if(value.scenicName == '水族馆（沙月岛）'){
+							var marker = new AMap.Marker({
+							    position: new AMap.LngLat(117.15504,34.238198),
+							    icon: icon
+							});
+							marker.setLabel({
+								offset: new AMap.Pixel(-10, 0),  //设置文本标注偏移量
+								content: "<div class='info'><p>"+ currName +"<br>空闲："+ noLease +"</p></div>", //设置文本标注内容								
+								direction: 'right' //设置文本标注方位
+							});
+							markers.push(marker);
+						}else if(value.scenicName == '音乐厅'){
+							var marker = new AMap.Marker({
+							    position: new AMap.LngLat(117.163347,34.245386),
+							    icon: icon
+							});
+							marker.setLabel({
+								offset: new AMap.Pixel(-10, 20),  //设置文本标注偏移量
+								content: "<div class='info'><p>"+ currName +"<br>空闲："+ noLease +"</p></div>", //设置文本标注内容								
+								direction: 'right' //设置文本标注方位
+							});
+							markers.push(marker);
+						}else if(value.scenicName == '苏公塔'){
+							var marker = new AMap.Marker({
+							    position: new AMap.LngLat(117.167573,34.23185),
+							    icon: icon
+							});
+							marker.setLabel({
+								offset: new AMap.Pixel(-10, 0),  //设置文本标注偏移量
+								content: "<div class='info'><p>"+ currName +"<br>空闲："+ noLease +"</p></div>", //设置文本标注内容								
+								direction: 'right' //设置文本标注方位
+							});
+							markers.push(marker);
+						}
+					})
+					
+					var myInter = setInterval(function(){
+						if(markers.length == resLength + 10){
+							map.clearMap();
+							// 创建覆盖物群组，并将 marker 传给 OverlayGroup
+							overlayGroups = new AMap.OverlayGroup(markers);
+							map.add(overlayGroups);
+							clearInterval(myInter);
+						}
+					}, 100);
+				}
+			})
+		})
+		
+	}
+    
+</script>
+</body>
+</html>

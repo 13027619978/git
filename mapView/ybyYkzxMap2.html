@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en" >
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <style type="text/css">
+      html,body,.map{
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+      }
+	  #container{
+		  transform: scale(.8);
+	  }
+    </style>
+    <title>简易行政区地图标注</title>
+  </head>
+  <body>
+    <div id="container" class="map" tabindex="0"></div>
+<script language="javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=c1b024a249b04326f11894fd0e35041d&plugin=Map3D,AMap.DistrictLayer,AMap.Scale,AMap.ToolBar"></script>
+<script type="text/javascript" src="https://a.amap.com/jsapi_demos/static/demo-center/data/china-pp.js"></script>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+
+var SOC = 'CHN'
+var colors = {};
+var GDPSpeed = {};
+
+$.ajax({
+	url: 'https://boss.smart-ideas.com.cn/ticketApi/orderView/getVisitorProvince?enterpriseCode=TgsEpcYby&ticketGroupNum=TGN20201210095942945',
+	type: 'GET',
+	success: function(res){
+		console.log(res);
+		var total = 0;
+		res.forEach(function(value, key){
+			total += parseInt(value.value);
+		})
+		res.forEach(function(value, key){
+			GDPSpeed[value.area_id] = value.value / total * 100;
+		})
+		var getColorByDGP = function(adcode){
+		    if(!colors[adcode]){
+		        var gdp = GDPSpeed[adcode];
+		        if(!gdp){
+		            colors[adcode] = 'rgb(0,186,255)'
+		        }else{   
+		            var r = 0;
+		            var g = 255;
+		            var b = 0;
+		            var a = gdp/10;
+		            colors[adcode] = 'rgba('+ r +','+ g +','+b+','+a+')';
+		        }
+		    }
+		    return colors[adcode]
+		}
+		
+		var disCountry = new AMap.DistrictLayer.Country({
+		    zIndex:10,
+		    SOC:'CHN',
+		    depth:1,
+		    styles:{
+		        'nation-stroke':'#ff0000',
+		        'coastline-stroke':'#0088ff',
+		        'province-stroke':'#888888',
+		        'fill':function(props){
+		           return getColorByDGP(props.adcode_pro)
+		        }
+		    }
+		})
+		
+		var map = new AMap.Map("container",{
+		        zooms: [4, 10],
+		        center:[106.122082,33.719192],
+		        zoom: 3.5,
+				resizeEnable: false,
+				zoomEnable:false,
+				dragEnable: false,
+		        isHotspot:false,
+		        layers:[
+		            disCountry
+		        ],
+				mapStyle: 'amap://styles/blue'
+		})
+		
+		map.on('complete',function(){
+		    var layer = new AMap.LabelsLayer({
+		        // 开启标注避让，默认为开启，v1.4.15 新增属性
+		        collision: false,
+		        // 开启标注淡入动画，默认为开启，v1.4.15 新增属性
+		        animation: true,
+		    });
+		})
+		
+	}
+})
+
+
+
+</script>
+  </body>
+  
+</html>

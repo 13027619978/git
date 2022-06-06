@@ -1,0 +1,206 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title></title>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
+    <style>
+        html, body, #container {
+            height: 100%;
+            width: 100%;
+			overflow: hidden;
+        }
+        #addOverlayGroup {
+            margin-right: 1rem;
+        }
+		#container{
+			background-color: rgba(0,0,0,0) !important;
+		}
+		.info{
+			position: relative;
+			top: 0;
+			width: 75px !important;
+			min-width: 0;
+			font-size: 16px;
+			background: none;
+			box-shadow: none;
+			background-color: rgba(0, 0, 0, .4);
+			color: #fff;
+		}
+		.amap-marker-label{
+			  position: absolute;
+			  z-index: 2;
+			  border: none;
+			  background: none;
+			  white-space: nowrap;
+			  cursor: default;
+			  padding: 3px;
+			  font-size: 12px;
+			  line-height: 14px;
+			  box-shadow: none;
+		}
+		.amap-logo{
+			display: none !important;
+		}
+		.amap-controls{
+			display: none !important;
+		}
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=c1b024a249b04326f11894fd0e35041d&plugin=AMap.Driving"></script>
+<script src="//webapi.amap.com/ui/1.1/main.js?v=1.1.1"></script>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/app.js?v=10"></script>
+<script src="js/gps.js"></script>
+<script type="text/javascript">
+	var map;
+	$(function(){
+		var overlayGroups;
+		// 创建地图实例
+		map = new AMap.Map("container", {
+		    zoom: 14.5,
+		    center: [118.800223, 32.072163],
+		    resizeEnable: false,
+			zoomEnable:false,
+			dragEnable: false,
+			mapStyle: 'amap://styles/blue'
+		});
+		map.setFeatures(['bg', 'road']);
+		app.getAjax('loopDataV/getLocation', {}, function(res){
+			var carList = [];
+			res.forEach(function(value, key){
+				if(value.location && value.location != "0.000000, 0.000000"){
+					var lat = value.location.split(',')[1];
+					var lng = value.location.split(',')[0];
+					var mark = GPS.gcj_encrypt(
+						Number(lat),
+						Number(lng)
+					)
+					var carItem = {};
+					carItem.vehicleMountedSn = value.vehicleMountedSn;
+					carItem.location = mark.lon + ',' + mark.lat;
+					carItem.newLocation = '118.784433,32.077084';
+					carList.push(carItem);
+				}
+			})
+			initMap(map, carList);
+			setInterval(function(){
+				initMap(map, carList);
+			}, 10000);
+		})
+	})
+	
+	
+	
+	function initMap(map, carList){
+		app.getAjax('loopDataV/getLocation', {}, function(res){
+			res.forEach(function(value, key){
+				carList.forEach(function(car, carIndex){
+					if(value.vehicleMountedSn == car.vehicleMountedSn){
+						var lat = value.location.split(',')[1];
+						var lng = value.location.split(',')[0];
+						var mark = GPS.gcj_encrypt(
+							Number(lat),
+							Number(lng)
+						)
+						value.location = mark.lon + ',' + mark.lat;
+						if(value.location != car.location){
+							if(car.newLocation && car.newLocation != car.location){
+								car.location = car.newLocation;
+							}
+							car.newLocation = '';
+						}
+						console.log(car.newLocation + '===' + car.location);
+						// 车移动后
+						if(car.newLocation){
+							AMapUI.load(['ui/misc/PathSimplifier'], function(PathSimplifier) {
+								if (!PathSimplifier.supportCanvas) {
+									alert('当前环境不支持 Canvas！');
+									return;
+								}
+								var pathSimplifierIns = new PathSimplifier({
+									// zIndex: 100,
+									map: map, //所属的地图实例
+									autoSetFitView: false,
+									clickToSelectPath: false,
+									getPath: function(pathData, pathIndex) {
+										return pathData.path;
+									},
+									renderOptions: {
+										pathLineStyle: {
+											strokeStyle: '#fff',
+											lineWidth: 1,
+											dirArrowStyle: false
+										}
+									}
+								});
+								
+								var driving = new AMap.Driving({
+									map: map,
+									autoFitView: false,
+									showTraffic: false,
+									hideMarkers: true
+								}); 
+								
+								driving.search(new AMap.LngLat(car.location), new AMap.LngLat(car.newLocation), function(status, result) {
+									var routes = result.routes[0];
+									var path = parseRuteToPath(routes);
+									//设置数据
+									pathSimplifierIns.setData([
+										{
+											path: path
+										}]
+									);
+									
+									//对第一条线路（即索引 0）创建一个巡航器
+									var navg1 = pathSimplifierIns.createPathNavigator(0, {
+										loop: false, //循环播放
+										speed: 300, //巡航速度，单位千米/小时
+										pathNavigatorStyle: {
+											width: 10,
+											height: 15,
+											//使用图片
+											content: PathSimplifier.Render.Canvas.getImageContent('./img/car.png', onload, onerror),
+											pathLinePassedStyle: {
+												lineWidth: 0,
+												strokeStyle: '#fff',
+												dirArrowStyle: {
+													stepSpace: 0,
+													strokeStyle: '#fff'
+												}
+											}
+									   }
+									});
+									navg1.start();
+								});
+								
+								function parseRuteToPath(route){
+									var path = [];
+									for(var i = 0, l = route.steps.length; i < l; i++ ){
+										var step = route.steps[i]
+										console.log(step);
+										for(var j = 0, n = step.path.length; j < n; j++){
+											var lat = step.path[j].lat;
+											var lng = step.path[j].lng;
+											path.push([lng,lat]);
+										}
+									}
+									return path;
+								}
+							});
+						}else{
+							
+						}
+					}
+				})
+			})
+		})
+	}
+    
+</script>
+</body>
+</html>

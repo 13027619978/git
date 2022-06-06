@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title></title>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
+    <style>
+        html, body, #container {
+            height: 100%;
+            width: 100%;
+        }
+        #addOverlayGroup {
+            margin-right: 1rem;
+        }
+		.amap-maps{
+			transform: scale(1);
+		}
+		.searchView{
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: #fff;
+			padding: 10px 0;
+		}
+		.searchView select{
+			width: 200px;
+			height: 40px;
+			font-size: 16px;
+		}
+		.searchView a{
+			width: 100px;
+			height: 40px;
+			font-size: 16px;
+			text-align: censelectter;
+			background-color: blue;
+			color: #fff;
+			text-align: center;
+			display: block;
+			line-height: 40px;
+			text-decoration: none;
+		}
+    </style>
+</head>
+<body>
+	<div class="searchView">
+		<select class="mt">
+			<option value="f57419d544e741838fb789056f63ee80">解放门</option>
+			<option value="59800000eb4a4c4287652f86eaba848c">菱洲</option>
+			<option value="bcd98681896f48ed878486519bfdeacf">苔菱堤</option>
+			<option value="b4124ce0c8b244208de6d870ceb824a0">玄武门南</option>
+			<option value="43a3c0756f854990ad7fd13f597cda3c">玄武门北</option>
+			<option value="a9f74e0b584945bea69985cd17f66a9d">后湖印月</option>
+			<option value="8698c2bb90d645b3912528473f5ce930">和平门</option>
+			<option value="41ab29656e5b405a9c94871488050ec3">翠洲门</option>
+			<option value="283db1801eda4d0d9b542570b4506219">阳光</option>
+			<option value="3f288414620f42cba6a7634401f71bca">芳桥</option>
+			<option value="9030c8e60fa34f37b674a30f3c890143">郭璞敦</option>
+			<option value="696dc31a1125458fa5ba1696f6e445c7">环洲</option>
+		</select>
+		<a href="javascript:;" onclick="searchClick()">查询离线</a>
+	</div>
+	<div id="container"></div>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=c1b024a249b04326f11894fd0e35041d"></script>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="layer/layer.js"></script>
+<script src="js/app.js"></script>
+<script type="text/javascript">
+	var map;
+	$(function(){
+		var mtNumber = 0;
+		var overlayGroups;
+		// 创建地图实例
+		map = new AMap.Map("container", {
+		    zoom: 14.5,
+		    center: [118.800223, 32.072163],
+		    resizeEnable: false,
+			zoomEnable:false,
+			dragEnable: false
+		});
+		// initMap(scenidList, map);
+		// setInterval(function(){
+		// 	initMap(scenidList, map);
+		// }, 30000);
+	})
+	
+	function searchClick(){
+		layer.load(1);
+		var scenicId = $('.mt').val();
+		console.log(scenicId);
+		app.getAjax('deviceDataView/getDeviceShipLocation?scenicId=' + scenicId, {}, function(res){
+			var markers = [];
+			var resLength = 0;
+			resLength += res.length;
+			if(res.length > 0){
+				res.forEach(function(value, key){
+					var lnglat = value;
+					var icon = new AMap.Icon({
+					    size: new AMap.Size(15, 45),    // 图标尺寸
+					    image: './img/mark.png',  // Icon的图像
+					    imageOffset: new AMap.Pixel(0, 25),  // 图像相对展示区域的偏移量，适于雪碧图等
+					    imageSize: new AMap.Size(15, 15)   // 根据所设置的大小拉伸或压缩图片
+					});
+					// 创建点实例
+					if(lnglat.lat && lnglat.lng){
+						if (lnglat.lat != '32.072163' && lnglat.lng != '118.798823' && lnglat.status != 'ONLINE') {
+							var gps = [lnglat.lng, lnglat.lat];
+							new AMap.convertFrom(gps, 'gps', function (status, result) {
+							  if (result.info === 'ok') {
+							    var lnglats = result.locations;
+								var marker = new AMap.Marker({
+								    position: new AMap.LngLat(lnglats[0].lng, lnglats[0].lat),
+								    icon: icon
+								});
+								marker.setLabel({
+									offset: new AMap.Pixel(20, 20),  //设置文本标注偏移量
+									content: "<div class='info'>"+lnglat.code+"</div>", //设置文本标注内容
+									direction: 'right' //设置文本标注方位
+								});
+								markers.push(marker);
+							  }
+							});
+						}
+					}
+				})
+				
+				var myInter = setInterval(function(){
+					map.clearMap();
+					// 创建覆盖物群组，并将 marker 传给 OverlayGroup
+					overlayGroups = new AMap.OverlayGroup(markers);
+					map.add(overlayGroups);
+					clearInterval(myInter);
+					layer.closeAll();
+				}, 100);
+			}
+		})
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title></title>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
+    <style>
+        html, body, #container {
+            height: 100%;
+            width: 100%;
+        }
+        #addOverlayGroup {
+            margin-right: 1rem;
+        }
+        .amap-maps{
+        	transform: scale(1);
+        }
+        .searchView{
+        	width: 100%;
+        	display: flex;
+        	justify-content: center;
+        	align-items: center;
+        	background-color: #fff;
+        	padding: 10px 0;
+        }
+        .searchView input{
+        	width: 200px;
+        	height: 40px;
+        	font-size: 16px;
+        }
+        .searchView a{
+        	width: 100px;
+        	height: 40px;
+        	font-size: 16px;
+        	text-align: center;
+        	background-color: blue;
+        	color: #fff;
+        	text-align: center;
+        	display: block;
+        	line-height: 40px;
+        	text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+	<div class="searchView">
+		<input class="lat" type="text" placeholder="请输入车锁编号">
+		<a href="javascript:;" onclick="searchClick()">查询</a>
+	</div>
+<div id="container"></div>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=c1b024a249b04326f11894fd0e35041d"></script>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="layer/layer.js"></script>
+<script src="js/app.js"></script>
+<script src="js/gps.js"></script>
+<script type="text/javascript">
+	var map;
+	$(function(){
+		var mtNumber = 0;
+		var overlayGroups;
+		// 创建地图实例
+		map = new AMap.Map("container", {
+		    zoom: 14.5,
+		    center: [118.159871,39.601066],
+		    resizeEnable: true,
+			zoomEnable: true,
+			dragEnable: true
+		});
+		map.setFeatures(['road','bg'])
+		initMap(map);
+	})
+	
+	function searchClick(){
+		var bikeSn = $('.lat').val();
+		$.ajax({
+			url:'https://lease.smart-ideas.com.cn/nhpark/deviceLeaseApp/getDeviceInfo?deviceSn='+bikeSn+'&openId=001',
+			type: 'GET',
+			success: function(res){
+				if(res.msg == '设备不存在'){
+					layer.alert(res.msg);
+					return;
+				}
+				$.ajax({
+					url:'https://lease.smart-ideas.com.cn/nhpark/deviceLeaseApp/getGps?deviceSn=' + bikeSn,
+					type: 'GET',
+					success: function(res){
+						console.log(res);
+						var bikeList = res;
+						if(res.code == 'ERROR'){
+							layer.alert(res.msg);
+							return;
+						}
+						var status;
+						if(res.data.status == '0'){
+							status = '空闲';
+						}else{
+							status = '在租';
+						}
+						var lng = res.data.location.split(',')[1];
+						var lat = res.data.location.split(',')[0];
+						map.setCenter([parseFloat(lng), parseFloat(lat)]);
+						var icon = new AMap.Icon({
+						    size: new AMap.Size(20, 50),    // 图标尺寸
+						    image: './img/bike-icon.png',  // Icon的图像
+						    imageOffset: new AMap.Pixel(0, 25),  // 图像相对展示区域的偏移量，适于雪碧图等
+						    imageSize: new AMap.Size(20, 20)   // 根据所设置的大小拉伸或压缩图片
+						});
+						var marker = new AMap.Marker({
+						    position: new AMap.LngLat(lng, lat),
+						    icon: icon
+						});
+						marker.setLabel({
+							offset: new AMap.Pixel(-75, -20),  //设置文本标注偏移量
+							content: "<div class='info'><p style='font-size:14px;'>车号："+bikeSn+"</br>状态："+status+"</p></div>", //设置文本标注内容
+							direction: 'right' //设置文本标注方位
+						});
+						map.clearMap();
+						// 创建覆盖物群组，并将 marker 传给 OverlayGroup
+						overlayGroups = new AMap.OverlayGroup(marker);
+						map.add(overlayGroups);
+					}
+				})
+			}
+		})
+	}
+	
+	function initMap(map){
+		$.ajax({
+		    url:'https://lease.smart-ideas.com.cn/nhpark/operation/getDeviceLocation?type=bike',
+		    type:"GET",
+		    success:function(res){
+		    	var markers = [];
+		    	var resLength = 0;
+				if(!res.code){
+					resLength += res.length;
+					if(res.length > 0){
+						res.forEach(function(value, key){
+							var lnglat = value;
+							var icon = new AMap.Icon({
+							    size: new AMap.Size(15, 45),    // 图标尺寸
+							    image: './img/bike-icon.png',  // Icon的图像
+							    imageOffset: new AMap.Pixel(0, 25),  // 图像相对展示区域的偏移量，适于雪碧图等
+							    imageSize: new AMap.Size(15, 15)   // 根据所设置的大小拉伸或压缩图片
+							});
+							// 创建点实例
+							if(lnglat.longitude && lnglat.latitude){
+								let mark = GPS.gcj_encrypt(
+									Number(lnglat.latitude),
+									Number(lnglat.longitude)
+								)
+								var marker = new AMap.Marker({
+								    position: new AMap.LngLat(mark.lon, mark.lat),
+								    icon: icon
+								});
+								// marker.setLabel({
+								// 	offset: new AMap.Pixel(-75, -20),  //设置文本标注偏移量
+								// 	content: "<div class='info'><p>"+value.sn+"</p></div>", //设置文本标注内容
+								// 	direction: 'right' //设置文本标注方位
+								// });
+								marker.on('click', function(){
+									console.log(value.sn)
+									$.ajax({
+										url:'https://lease.smart-ideas.com.cn/nhpark/deviceLeaseApp/getDeviceInfo?deviceSn='+value.sn+'&openId=001',
+										type: 'GET',
+										success: function(res){
+											console.log(res);
+											var status;
+											if(res.data.device.deviceStatus == '0'){
+												status = '空闲';
+											}else{
+												status = '在租';
+											}
+											layer.alert('车号：' + value.sn + '<br>状态：' + status);
+										}
+									})
+								})
+								markers.push(marker);
+							}else{
+								resLength -= 1;
+							}
+						})
+					}
+				}
+		    	
+				var myInter = setInterval(function(){
+					if(markers.length == resLength){
+						console.log('123');
+						map.clearMap();
+						// 创建覆盖物群组，并将 marker 传给 OverlayGroup
+						overlayGroups = new AMap.OverlayGroup(markers);
+						map.add(overlayGroups);
+						clearInterval(myInter);
+					}
+				}, 100);
+		    }
+		});
+	}
+</script>
+</body>
+</html>

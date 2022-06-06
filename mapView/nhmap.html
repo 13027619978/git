@@ -1,0 +1,309 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title></title>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
+    <style>
+        html, body, #container {
+            height: 100%;
+            width: 100%;
+        }
+        #addOverlayGroup {
+            margin-right: 1rem;
+        }
+		.amap-maps{
+			transform: scale(1);
+		}
+		.amap-marker-label{
+			border: 0;
+			background-color: transparent;
+		}
+		.info{
+			position: relative;
+			min-width: 0;
+			top: 0;
+			right: 0;
+			width: 150px;
+			z-index: 999;
+			text-align: center;
+			color: #fff;
+			font-weight: bold;
+			background: rgba(0,0,0,.4);
+			box-shadow: none;
+		}
+		.amap-logo {
+			display: none !important;
+		}
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=c1b024a249b04326f11894fd0e35041d"></script>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/gps.js"></script>
+<script type="text/javascript">
+	var map;
+	$(function(){
+		var mtNumber = 0;
+		var overlayGroups;
+		// 创建地图实例
+		map = new AMap.Map("container", {
+		    center: [118.157386,39.592199],
+		    disableSocket: true,
+		    viewMode: '3D',
+		    showLabel: false,
+		    labelzIndex: 130,
+		    pitch: 40,
+		    zoom: 14.5,
+		    mapStyle: 'amap://styles/blue',
+		});
+		map.setFeatures(['road','bg'])
+		initMap(map);
+		setInterval(function(){
+			initMap(map);
+		}, 30000);
+	})
+	
+	function initMap(map){
+		$.ajax({
+		    url:'https://lease.smart-ideas.com.cn/nhpark/operation/getDeviceLocation?type=bike',
+		    type:"GET",
+		    success:function(res){
+		    	var markers = [];
+		    	var resLength = 0;
+				if(!res.code){
+					resLength += res.length;
+					if(res.length > 0){
+						res.forEach(function(value, key){
+							var lnglat = value;
+							var icon = new AMap.Icon({
+							    size: new AMap.Size(15, 45),    // 图标尺寸
+							    image: './img/bike-icon1.png',  // Icon的图像
+							    imageOffset: new AMap.Pixel(0, 25),  // 图像相对展示区域的偏移量，适于雪碧图等
+							    imageSize: new AMap.Size(15, 15)   // 根据所设置的大小拉伸或压缩图片
+							});
+							// 创建点实例
+							if(lnglat.longitude && lnglat.latitude){
+								let mark = GPS.gcj_encrypt(
+									Number(lnglat.latitude),
+									Number(lnglat.longitude)
+								)
+								var marker = new AMap.Marker({
+								    position: new AMap.LngLat(mark.lon, mark.lat),
+								    icon: icon
+								});
+								markers.push(marker);
+							}else{
+								resLength -= 1;
+							}
+						})
+					}
+				}
+		    	
+				$.ajax({
+				    url:'https://lease.smart-ideas.com.cn/nhpark/operation/getDeviceLocation?type=ship',
+				    type:"GET",
+				    success:function(res){
+				    	resLength += res.length;
+				    	if(res.length > 0){
+				    		res.forEach(function(value, key){
+				    			var lnglat = value;
+				    			var icon = new AMap.Icon({
+				    			    size: new AMap.Size(15, 45),    // 图标尺寸
+				    			    image: './img/mark1.png',  // Icon的图像
+				    			    imageOffset: new AMap.Pixel(0, 25),  // 图像相对展示区域的偏移量，适于雪碧图等
+				    			    imageSize: new AMap.Size(15, 15)   // 根据所设置的大小拉伸或压缩图片
+				    			});
+				    			// 创建点实例
+				    			if(lnglat.longitude && lnglat.latitude){
+				    				let mark = GPS.gcj_encrypt(
+				    					Number(lnglat.latitude),
+				    					Number(lnglat.longitude)
+				    				)
+				    				var marker = new AMap.Marker({
+				    				    position: new AMap.LngLat(mark.lon, mark.lat),
+				    				    icon: icon
+				    				});
+				    				markers.push(marker);
+				    			}else{
+				    				resLength -= 1;
+				    			}
+				    		})
+				    	}
+						$.ajax({
+						    url:'https://lease.smart-ideas.com.cn/nhpark/operation/getDeviceLocation?type=battery',
+						    type:"GET",
+						    success:function(res){
+						    	resLength += res.length;
+						    	if(res.length > 0){
+						    		res.forEach(function(value, key){
+										// if(value.status == '1'){
+											
+										// }else{
+										// 	resLength -= 1;
+										// }
+										var lnglat = value;
+										var icon = new AMap.Icon({
+										    size: new AMap.Size(35, 55),    // 图标尺寸
+										    image: './img/dpcIcon1.png',  // Icon的图像
+										    imageOffset: new AMap.Pixel(0, 20),  // 图像相对展示区域的偏移量，适于雪碧图等
+										    imageSize: new AMap.Size(35, 35)   // 根据所设置的大小拉伸或压缩图片
+										});
+										// 创建点实例
+										if(lnglat.longitude && lnglat.latitude){
+											let mark = GPS.gcj_encrypt(
+												Number(lnglat.latitude),
+												Number(lnglat.longitude)
+											)
+											var marker = new AMap.Marker({
+											    position: new AMap.LngLat(mark.lon, mark.lat),
+											    icon: icon
+											});
+											markers.push(marker);
+										}else{
+											resLength -= 1;
+										}
+						    		})
+						    	}
+								
+								$.ajax({
+								    url:'https://lease.smart-ideas.com.cn/nhpark/thirdPartyDataView/getDeviceSiteLeaseDetail?type=bike',
+								    type:"GET",
+								    success:function(res){
+								    	resLength += res.length;
+								    	if(res.length > 0){
+								    		res.forEach(function(value, key){
+								    			var icon = new AMap.Icon({
+								    			    size: new AMap.Size(15, 45),    // 图标尺寸
+								    			    image: './img/zd.png',  // Icon的图像
+								    			    imageOffset: new AMap.Pixel(0, 25),  // 图像相对展示区域的偏移量，适于雪碧图等
+								    			    imageSize: new AMap.Size(15, 15)   // 根据所设置的大小拉伸或压缩图片
+								    			});
+								    			// 创建点实例
+								    			if(value.siteName == '丹凤朝阳站'){
+								    				var marker = new AMap.Marker({
+								    				    position: new AMap.LngLat(118.159362, 39.601292),
+								    				    icon: icon
+								    				});
+													marker.setLabel({
+														offset: new AMap.Pixel(-85, -20),  //设置文本标注偏移量
+														content: "<div class='info'><p>丹凤朝阳站</br>剩余自行车数："+value.noLeaseTotal+"</p></div>", //设置文本标注内容
+														direction: 'right' //设置文本标注方位
+													});
+								    				markers.push(marker);
+								    			}else if(value.siteName == '桃花潭站'){
+													var marker = new AMap.Marker({
+													    position: new AMap.LngLat(118.177193, 39.609984),
+													    icon: icon
+													});
+													marker.setLabel({
+														offset: new AMap.Pixel(-85, -20),  //设置文本标注偏移量
+														content: "<div class='info'><p>桃花潭站</br>剩余自行车数："+value.noLeaseTotal+"</p></div>", //设置文本标注内容
+														direction: 'right' //设置文本标注方位
+													});
+													markers.push(marker);
+												}else if(value.siteName == '龙山站'){
+													var marker = new AMap.Marker({
+													    position: new AMap.LngLat(118.161619, 39.598587),
+													    icon: icon
+													});
+													marker.setLabel({
+														offset: new AMap.Pixel(-85, 50),  //设置文本标注偏移量
+														content: "<div class='info'><p>龙山站</br>剩余自行车数："+value.noLeaseTotal+"</p></div>", //设置文本标注内容
+														direction: 'right' //设置文本标注方位
+													});
+													markers.push(marker);
+												}else if(value.siteName == '凤凰台站'){
+													var marker = new AMap.Marker({
+													    position: new AMap.LngLat(118.151688, 39.587468),
+													    icon: icon
+													});
+													marker.setLabel({
+														offset: new AMap.Pixel(-85, 50),  //设置文本标注偏移量
+														content: "<div class='info'><p>凤凰台站</br>剩余自行车数："+value.noLeaseTotal+"</p></div>", //设置文本标注内容
+														direction: 'right' //设置文本标注方位
+													});
+													markers.push(marker);
+												}else if(value.siteName == '游客中心站'){
+													var marker = new AMap.Marker({
+													    position: new AMap.LngLat(118.148597, 39.596937),
+													    icon: icon
+													});
+													marker.setLabel({
+														offset: new AMap.Pixel(-85, -20),  //设置文本标注偏移量
+														content: "<div class='info'><p>游客中心站</br>剩余自行车数："+value.noLeaseTotal+"</p></div>", //设置文本标注内容
+														direction: 'right' //设置文本标注方位
+													});
+													markers.push(marker);
+												}else if(value.siteName == '国内园站'){
+													var marker = new AMap.Marker({
+													    position: new AMap.LngLat(118.165951, 39.602027),
+													    icon: icon
+													});
+													marker.setLabel({
+														offset: new AMap.Pixel(0, 15),  //设置文本标注偏移量
+														content: "<div class='info'><p>国内园站</br>剩余自行车数："+value.noLeaseTotal+"</p></div>", //设置文本标注内容
+														direction: 'right' //设置文本标注方位
+													});
+													markers.push(marker);
+												}
+								    		})
+								    	}
+										
+										$.ajax({
+										    url:'https://lease.smart-ideas.com.cn/nhpark/operation/getDeviceShipUsage',
+										    type:"GET",
+										    success:function(res){
+										    	resLength += res.length;
+										    	if(res.length > 0){
+										    		res.forEach(function(value, key){
+										    			var icon = new AMap.Icon({
+										    			    size: new AMap.Size(15, 45),    // 图标尺寸
+										    			    image: './img/zd.png',  // Icon的图像
+										    			    imageOffset: new AMap.Pixel(0, 25),  // 图像相对展示区域的偏移量，适于雪碧图等
+										    			    imageSize: new AMap.Size(15, 15)   // 根据所设置的大小拉伸或压缩图片
+										    			});
+										    			// 创建点实例
+										    			var marker = new AMap.Marker({
+										    			    position: new AMap.LngLat(118.151725,39.588283),
+										    			    icon: icon
+										    			});
+														var noleaseNumber = parseInt(value.total) - parseInt(value.useTotal);
+														noleaseNumber = noleaseNumber>0?noleaseNumber:0;
+										    			marker.setLabel({
+										    				offset: new AMap.Pixel(-85, -20),  //设置文本标注偏移量
+										    				content: "<div class='info'><p>白鹭码头</br>剩余自驾船数："+noleaseNumber+"</p></div>", //设置文本标注内容
+										    				direction: 'right' //设置文本标注方位
+										    			});
+										    			markers.push(marker);
+										    		})
+										    	}
+												
+												var myInter = setInterval(function(){
+													if(markers.length == resLength){
+														console.log('123');
+														map.clearMap();
+														// 创建覆盖物群组，并将 marker 传给 OverlayGroup
+														overlayGroups = new AMap.OverlayGroup(markers);
+														map.add(overlayGroups);
+														clearInterval(myInter);
+													}
+												}, 100);
+											}
+										})
+									}
+								})
+						    }
+						});
+				    }
+				});
+		    }
+		});
+	}
+</script>
+</body>
+</html>

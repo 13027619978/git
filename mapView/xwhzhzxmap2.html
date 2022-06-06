@@ -1,0 +1,650 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title></title>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
+    <style>
+        html, body, #container {
+            height: 100%;
+            width: 100%;
+        }
+        #addOverlayGroup {
+            margin-right: 1rem;
+        }
+		.amap-maps{
+			transform: scale(1);
+		}
+		#addOverlayGroup {
+		    margin-right: 1rem;
+		}
+		.amap-marker-label{
+			border: 0;
+			background-color: none;
+			background: rgba(0,0,0,0);
+		}
+		.info{
+			position: relative;
+			min-width: 0;
+			top: 0;
+			right: -15px;
+			width: 100px;
+			z-index: 999;
+			text-align: center;
+			color: #fff;
+			font-weight: bold;
+			background: rgba(0, 0, 0, .5);
+			padding: 5px 0;
+			margin-bottom: 5px;
+			font-size: 16px;
+		}
+		.amap-logo, .amap-copyright{
+			display: none !important;
+		}
+		.amap-marker-label {
+			border: none;
+			padding: 0;
+			background: rgba(0, 0, 0, 0);
+		}
+		
+		.info {
+			width: 153px;
+			height: 62px;
+			font-size: 12px;
+			color: #fff;
+			padding: 5px;
+			line-height: 17px;
+			padding: 0;
+			background: rgba(0, 0, 0, 0);
+			box-shadow: none;
+		}
+		
+		.info p {
+			width: 180px;
+			height: 110px;
+			background: url(img/labelBg.png) no-repeat left top rgba(0, 0, 0, 0);
+			background-size: 100% 100%;
+			padding: 8px;
+			text-align: left;
+			padding-right: 55px;
+		}
+		
+		.info .labelRight {
+			background: url(img/mapMarker-right.png) no-repeat left top;
+			background-size: 100% 100%;
+			text-align: left;
+			padding: 5px;
+			padding-left: 60px;
+			padding-top: 10px;
+		}
+		
+		.info .labelBottom {
+			background: url(img/labelBottom.png) no-repeat left top;
+			background-size: 100% 100%;
+		}
+		.info .gpdLabel {
+			width: 230px;
+			height: 240px;
+			background: url(img/gpdLabel.png) no-repeat left top;
+			background-size: 100% 100%;
+			padding-top: 140px;
+		}
+		
+		.info .lzLabel {
+			width: 340px;
+			height: 300px;
+			background: url(img/lzLabel.png) no-repeat left top;
+			background-size: 100% 100%;
+			padding-top: 205px;
+		}
+		
+		.info .gpdLabel1 {
+			width: 230px;
+			height: 310px;
+			background: url(img/gpdLabel1.png) no-repeat left top;
+			background-size: 100% 100%;
+			padding-top: 5px;
+		}
+		.info .fqLabel {
+			width: 230px;
+			height: 260px;
+			background: url(img/fqLabel.png) no-repeat left top;
+			background-size: 100% 100%;
+			padding-top: 5px;
+			padding-left: 110px;
+		}
+		
+		.info .tldLabel {
+			width: 300px;
+			height: 230px;
+			background: url(img/tldLabel.png) no-repeat left top;
+			background-size: 100% 100%;
+			padding-top: 130px;
+			padding-left: 170px;
+		}
+		
+		.info .tldxLabel {
+			width: 150px;
+			height: 230px;
+			background: url(img/tldxLabel.png) no-repeat left top;
+			background-size: 100% 100%;
+			padding-top: 130px;
+			padding-left: 10px;
+		}
+		
+		.info .labelBottomLeft {
+			background: url(img/labelBottomLeft.png) no-repeat left top;
+			background-size: 100% 100%;
+			width: 140px;
+			height: 140px;
+			padding: 55px 5px 0;
+		}
+		
+		.info .labelBottomRight {
+			background: url(img/labelBottomRight.png) no-repeat left top;
+			background-size: 100% 100%;
+			width: 160px;
+			height: 160px;
+			padding: 70px 0 0 45px;
+		}
+		
+		.info font {
+			font-size: 13px;
+			font-weight: bold;
+			color: #1AFA29;
+		}
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=c1b024a249b04326f11894fd0e35041d&plugin=AMap.Driving&plugin=Map3D,AMap.DistrictSearch"></script>
+<script src="//webapi.amap.com/ui/1.1/main.js?v=1.1.1"></script>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/app.js?v=10"></script>
+<script src="js/gps.js"></script>
+<script type="text/javascript">
+	var map;
+	var second = 0;
+	$(function(){
+		var scenidList = [
+			'41ab29656e5b405a9c94871488050ec3',
+			'3f288414620f42cba6a7634401f71bca',
+			'9030c8e60fa34f37b674a30f3c890143',
+			'a9f74e0b584945bea69985cd17f66a9d',
+			'8698c2bb90d645b3912528473f5ce930',
+			'696dc31a1125458fa5ba1696f6e445c7',
+			'f57419d544e741838fb789056f63ee80',
+			'59800000eb4a4c4287652f86eaba848c',
+			'bcd98681896f48ed878486519bfdeacf',
+			'43a3c0756f854990ad7fd13f597cda3c',
+			'b4124ce0c8b244208de6d870ceb824a0',
+			'283db1801eda4d0d9b542570b4506219'
+		]
+		var mtNumber = 0;
+		var overlayGroups;
+		var mask = [
+			[118.78474, 32.089673],
+			[118.787122, 32.090055],
+			[118.788045, 32.09],
+			[118.790813, 32.088528],
+			[118.794589, 32.086001],
+			[118.798387, 32.083892],
+			[118.802099, 32.081747],
+			[118.806799, 32.07891],
+			[118.809524, 32.077565],
+			[118.813257, 32.070328],
+			[118.815532, 32.065783],
+			[118.815875, 32.065237],
+			[118.813, 32.056908],
+			[118.809181, 32.057454],
+			[118.808451, 32.057527],
+			[118.807249, 32.059309],
+			[118.805146, 32.060218],
+			[118.802443, 32.060545],
+			[118.801198, 32.061491],
+			[118.796563, 32.061891],
+			[118.796392, 32.062546],
+			[118.794461, 32.06411],
+			[118.792272, 32.065128],
+			[118.790512, 32.065164],
+			[118.789482, 32.065346],
+			[118.788409, 32.065673],
+			[118.786822, 32.07051],
+			[118.786392, 32.07251],
+			[118.786564, 32.072765],
+			[118.786092, 32.076692],
+			[118.785835, 32.079783],
+			[118.785963, 32.081529],
+			[118.786435, 32.081383],
+			[118.786564, 32.088146],
+			[118.785877, 32.088183],
+			[118.785835, 32.088583],
+			[118.785448, 32.088728],
+			[118.784247, 32.088655],
+			[118.784204, 32.089419],
+			[118.78489, 32.089637]
+		]
+		map = new AMap.Map('container', {
+			mask: mask,
+			center: [118.799323, 32.068163],
+			disableSocket: true,
+			viewMode: '3D',
+			showLabel: false,
+			labelzIndex: 130,
+			pitch: 40,
+			zoom: 15,
+			zooms:[1,15],
+			mapStyle: 'amap://styles/blue',
+		    resizeEnable: true,
+			zoomEnable:true,
+			dragEnable: true
+		});
+		//添加高度面
+		var object3Dlayer = new AMap.Object3DLayer({
+			zIndex: 1
+		});
+		map.add(object3Dlayer)
+		var height = -500;
+		var color = 'rgba(0,170,255,.8)'; //rgba
+		var wall = new AMap.Object3D.Wall({
+			path: mask,
+			height: height,
+			color: color
+		});
+		wall.transparent = true
+		object3Dlayer.add(wall)
+		initMap(scenidList, map);
+		setInterval(function(){
+			initMap(scenidList, map);
+		}, 5000);
+	})
+	
+	let nowDate = new Date();
+	let nowYear = nowDate.getFullYear();
+	let nowMonth = nowDate.getMonth() + 1;
+	nowMonth = nowMonth > 9?nowMonth:'0'+nowMonth;
+	let nowDay = nowDate.getDate();
+	nowDay = nowDay > 9?nowDay:'0'+nowDay;
+	let dateString = nowYear + '-' + nowMonth + '-' + nowDay;
+	
+	function initMap(scenidList, map){
+		second += 5;
+		app.getAjax('deviceDataView/getDeviceSosShipLocation', {}, function(res){
+			console.log(res);
+			if(res.length > 0){
+				jy = true;
+				var markers = [];
+				var resLength = 0;
+				resLength += res.length;
+				res.forEach(function(value, key){
+					var lnglat = value;
+					var icon = new AMap.Icon({
+					    size: new AMap.Size(15, 45),    // 图标尺寸
+					    image: './img/mark.png',  // Icon的图像
+					    imageOffset: new AMap.Pixel(0, 25),  // 图像相对展示区域的偏移量，适于雪碧图等
+					    imageSize: new AMap.Size(15, 15)   // 根据所设置的大小拉伸或压缩图片
+					});
+					// 创建点实例
+					if(lnglat.lat && lnglat.lng){
+						let mark = GPS.gcj_encrypt(
+							Number(lnglat.lat),
+							Number(lnglat.lng)
+						)
+						var marker = new AMap.Marker({
+						    position: new AMap.LngLat(mark.lon, mark.lat),
+						    icon: icon
+						});
+						var snNumber = value.sn;
+						snNumber = snNumber?snNumber:'';
+						marker.setLabel({
+							offset: new AMap.Pixel(-75, -10),  //设置文本标注偏移量
+							content: "<div class='info'><p>"+value.phone+"</p></br><p>"+snNumber+"</p></div>", //设置文本标注内容
+							direction: 'right' //设置文本标注方位
+						});
+						markers.push(marker);
+					}else{
+						resLength -= 1;
+					}
+				})
+				var myInter = setInterval(function(){
+					if(markers.length == resLength){
+						map.clearMap();
+						// 创建覆盖物群组，并将 marker 传给 OverlayGroup
+						overlayGroups = new AMap.OverlayGroup(markers);
+						map.add(overlayGroups);
+						clearInterval(myInter);
+					}
+				}, 100);
+			}else{
+				if(second == 5 || second % 20 == 0){
+					getShipLocation(scenidList, map);
+				}
+			}
+		})
+	}
+	
+	// 获取船只位置信息
+	function getShipLocation(scenidList, map){
+		app.getAjax('deviceDataView/getDeviceShipLocation?scenicId=', {}, function(res){
+			var markers = [];
+			var resLength = 0;
+			resLength += res.length;
+			if(res.length > 0){
+				res.forEach(function(value, key){
+					var lnglat = value;
+					var icon = new AMap.Icon({
+					    size: new AMap.Size(15, 45),    // 图标尺寸
+					    image: './img/mark.png',  // Icon的图像
+					    imageOffset: new AMap.Pixel(0, 25),  // 图像相对展示区域的偏移量，适于雪碧图等
+					    imageSize: new AMap.Size(15, 15)   // 根据所设置的大小拉伸或压缩图片
+					});
+					// 创建点实例
+					if(lnglat.lat && lnglat.lng){
+						if (lnglat.lat != '32.072163' && lnglat.lng != '118.798823' && lnglat.status == 'ONLINE') {
+							let mark = GPS.gcj_encrypt(
+								Number(lnglat.lat),
+								Number(lnglat.lng)
+							)
+							var marker = new AMap.Marker({
+							    position: new AMap.LngLat(mark.lon, mark.lat),
+							    icon: icon
+							});
+							markers.push(marker);
+						}else{
+							resLength -= 1;
+						}
+					}else{
+						resLength -= 1;
+					}
+				})
+				
+				resLength += 13;
+				$.ajax({
+					url:'http://xwhykt.smart-ideas.com.cn/prod-api/api/datav/device/recharge?beginCreateTime='+dateString+' 00:00:00&endCreateTime='+dateString+' 23:59:59',
+					type:"GET",
+					success:function(data){
+						console.log(data);
+						let posList = data.data[1].deviceCollectList;
+						let xwmb = {pos1: 0, pos2: 0};
+						let xwmn = {pos1: 0, pos2: 0};
+						let hhyy = {pos1: 0, pos2: 0};
+						let gpd = {pos1: 0, pos2: 0};
+						let hz = {pos1: 0, pos2: 0};
+						let lz = {pos1: 0, pos2: 0};
+						let jfm = {pos1: 0, pos2: 0};
+						let tldx = {pos1: 0, pos2: 0};
+						let tld = {pos1: 0, pos2: 0};
+						let yg = {pos1: 0, pos2: 0};
+						let czm = {pos1: 0, pos2: 0};
+						let fq = {pos1: 0, pos2: 0};
+						let hpm = {pos1: 0, pos2: 0};
+						posList.forEach(function(value, key){
+							if(value.deviceSn == '121002' || value.deviceSn == '121019'){
+								xwmb.pos1 += value.itemCollectList[0].countRecharge;
+								xwmb.pos2 += value.itemCollectList[1].countRecharge;
+							}else if(value.deviceSn == '121018'){
+								xwmn.pos1 += value.itemCollectList[0].countRecharge;
+								xwmn.pos2 += value.itemCollectList[1].countRecharge;
+							}else if(value.deviceSn == '121014'){
+								hhyy.pos1 += value.itemCollectList[0].countRecharge;
+								hhyy.pos2 += value.itemCollectList[1].countRecharge;
+							}else if(value.deviceSn == '121007'){
+								gpd.pos1 += value.itemCollectList[0].countRecharge;
+								gpd.pos2 += value.itemCollectList[1].countRecharge;
+							}else if(value.deviceSn == '121015'){
+								hz.pos1 += value.itemCollectList[0].countRecharge;
+								hz.pos2 += value.itemCollectList[1].countRecharge;
+							}else if(value.deviceSn == '121004'){
+								lz.pos1 += value.itemCollectList[0].countRecharge;
+								lz.pos2 += value.itemCollectList[1].countRecharge;
+							}else if(value.deviceSn == '121005'){
+								jfm.pos1 += value.itemCollectList[0].countRecharge;
+								jfm.pos2 += value.itemCollectList[1].countRecharge;
+							}else if(value.deviceSn == '121031'){
+								tldx.pos1 += value.itemCollectList[0].countRecharge;
+								tldx.pos2 += value.itemCollectList[1].countRecharge;
+							}else if(value.deviceSn == '121006'){
+								tld.pos1 += value.itemCollectList[0].countRecharge;
+								tld.pos2 += value.itemCollectList[1].countRecharge;
+							}else if(value.deviceSn == '121011'){
+								yg.pos1 += value.itemCollectList[0].countRecharge;
+								yg.pos2 += value.itemCollectList[1].countRecharge;
+							}else if(value.deviceSn == '121009'){
+								czm.pos1 += value.itemCollectList[0].countRecharge;
+								czm.pos2 += value.itemCollectList[1].countRecharge;
+							}else if(value.deviceSn == '121008'){
+								fq.pos1 += value.itemCollectList[0].countRecharge;
+								fq.pos2 += value.itemCollectList[1].countRecharge;
+							}else if(value.deviceSn == '121010'){
+								hpm.pos1 += value.itemCollectList[0].countRecharge;
+								hpm.pos2 += value.itemCollectList[1].countRecharge;
+							}
+						})
+						
+						getMtInfo(markers, 'f57419d544e741838fb789056f63ee80', jfm);
+						getMtInfo(markers, 'bcd98681896f48ed878486519bfdeacf', tld);
+						getMtInfo(markers, 'b4124ce0c8b244208de6d870ceb824a0', xwmn);
+						getMtInfo(markers, '59800000eb4a4c4287652f86eaba848c', lz);
+						getMtInfo(markers, '43a3c0756f854990ad7fd13f597cda3c', xwmb);
+						getMtInfo(markers, 'a9f74e0b584945bea69985cd17f66a9d', hhyy);
+						getMtInfo(markers, '8698c2bb90d645b3912528473f5ce930', hpm);
+						getMtInfo(markers, '41ab29656e5b405a9c94871488050ec3', czm);
+						getMtInfo(markers, '283db1801eda4d0d9b542570b4506219', yg);
+						getMtInfo(markers, '3f288414620f42cba6a7634401f71bca', fq);
+						getMtInfo(markers, '9030c8e60fa34f37b674a30f3c890143', gpd);
+						getMtInfo(markers, '696dc31a1125458fa5ba1696f6e445c7', hz);
+						getMtInfo(markers, '80b566bb372a47f7a4a24fda6ed0d476', tldx);
+					}
+				})
+				
+				
+				var myInter = setInterval(function(){
+					if(markers.length == resLength){
+						map.clearMap();
+						// 创建覆盖物群组，并将 marker 传给 OverlayGroup
+						overlayGroups = new AMap.OverlayGroup(markers);
+						map.add(overlayGroups);
+						clearInterval(myInter);
+					}
+				}, 1000);
+			}
+		})
+	}
+	
+	// 获取码头信息
+	function getMtInfo(markers, scenicId, mtInfo){
+		app.getAjax('/deviceDataView/getDeviceShipLeaseQuantity', {
+			scenicId: scenicId
+		}, function(res){
+			console.log(res);
+			var totalNumber = parseInt(res[0].number);
+			var leaseNumber = parseInt(res[1].number);
+			var mtName;
+			var lng;
+			var lat;
+			var icon = new AMap.Icon({
+			    size: new AMap.Size(0, 0),    // 图标尺寸
+			    image: './img/mapMarker.png',  // Icon的图像
+			    imageOffset: new AMap.Pixel(0, 0), // 图像相对展示区域的偏移量，适于雪碧图等
+			    imageSize: new AMap.Size(0, 0) // 根据所设置的大小拉伸或压缩图片
+			});
+			if(scenicId == 'f57419d544e741838fb789056f63ee80'){
+				mtName = '解放门码头';
+				lng = 118.79681;
+				lat = 32.063079;
+				var marker = new AMap.Marker({
+					position: new AMap.LngLat(lng,lat),
+					icon: icon
+				})
+				marker.setLabel({
+					offset: new AMap.Pixel(-210, 50),  //设置文本标注偏移量
+					content: "<div class='info'><p class='labelBottom'><font>"+ mtName +"</font></br>总船数：<font>"+ totalNumber +"</font></br>在租数：<font>" + leaseNumber +"</font></br>1000送600：<font>"+ mtInfo.pos2 + "</font></br>500送250：<font>" + mtInfo.pos1 +"</font></p></div>", //设置文本标注内容
+					direction: 'right' //设置文本标注方位
+				});
+			}else if(scenicId == 'bcd98681896f48ed878486519bfdeacf'){
+				mtName = '台菱堤码头';
+				lng = 118.798026;
+				lat = 32.063915;
+				var marker = new AMap.Marker({
+					position: new AMap.LngLat(lng,lat),
+					icon: icon
+				})
+				marker.setLabel({
+					offset: new AMap.Pixel(-30, 55),  //设置文本标注偏移量
+					content: "<div class='info'><p class='tldLabel'><font>"+ mtName +"</font></br>总船数："+ totalNumber +"</font></br>在租数：" + leaseNumber +"</font></br>1000送600："+ mtInfo.pos2 + "</font></br>500送250：" + mtInfo.pos1 + "</font></p></div>", //设置文本标注内容
+					direction: 'right' //设置文本标注方位
+				});
+			}else if(scenicId == 'b4124ce0c8b244208de6d870ceb824a0'){
+				mtName = '玄武门南';
+				lng = 118.78836;
+				lat = 32.070272;
+				var marker = new AMap.Marker({
+					position: new AMap.LngLat(lng,lat),
+					icon: icon
+				})
+				marker.setLabel({
+					offset: new AMap.Pixel(-210, 50),  //设置文本标注偏移量
+					content: "<div class='info'><p class='labelBottom'><font>"+ mtName +"</font></br>总船数：<font>"+ totalNumber +"</font></br>在租数：<font>" + leaseNumber +"</font></br>1000送600：<font>"+ mtInfo.pos2 + "</font></br>500送250：<font>" + mtInfo.pos1 + "</font></p></div>", //设置文本标注内容
+					direction: 'right' //设置文本标注方位
+				});
+			}else if(scenicId == '59800000eb4a4c4287652f86eaba848c'){
+				mtName = '菱洲码头';
+				lng = 118.797578;
+				lat = 32.068232;
+				var marker = new AMap.Marker({
+					position: new AMap.LngLat(lng,lat),
+					icon: icon
+				})
+				marker.setLabel({
+					offset: new AMap.Pixel(-380, 50),  //设置文本标注偏移量
+					content: "<div class='info'><p class='lzLabel'><font>"+ mtName +"</font></br>总船数：<font>"+ totalNumber +"</font></br>在租数：<font>" + leaseNumber +"</font></br>1000送600：<font>"+ mtInfo.pos2 + "</font></br>500送250：<font>" + mtInfo.pos1 + "</font></p></div>", //设置文本标注内容
+					direction: 'right' //设置文本标注方位
+				});
+			}else if(scenicId == '43a3c0756f854990ad7fd13f597cda3c'){
+				mtName = '玄武门北';
+				lng = 118.788227;
+				lat = 32.071012;
+				var marker = new AMap.Marker({
+					position: new AMap.LngLat(lng,lat),
+					icon: icon
+				})
+				marker.setLabel({
+					offset: new AMap.Pixel(-210, -50),  //设置文本标注偏移量
+					content: "<div class='info'><p><font>"+ mtName +"</font></br>总船数：<font>"+ totalNumber +"</font></br>在租数：<font>" + leaseNumber +"</font></br>1000送600：<font>"+ mtInfo.pos2 + "</font></br>500送250：<font>" + mtInfo.pos1 + "</font></p></div>", //设置文本标注内容
+					direction: 'right' //设置文本标注方位
+				});
+			}else if(scenicId == 'a9f74e0b584945bea69985cd17f66a9d'){
+				mtName = '后湖印月';
+				lng = 118.787272;
+				lat = 32.07744;
+				var marker = new AMap.Marker({
+					position: new AMap.LngLat(lng,lat),
+					icon: icon
+				})
+				marker.setLabel({
+					offset: new AMap.Pixel(-210, -50),  //设置文本标注偏移量
+					content: "<div class='info'><p><font>"+ mtName +"</font></br>总船数：<font>"+ totalNumber +"</font></br>在租数：<font>" + leaseNumber +"</font></br>1000送600：<font>"+ mtInfo.pos2 + "</font></br>500送250：<font>" + mtInfo.pos1 + "</font></p></div>", //设置文本标注内容
+					direction: 'right' //设置文本标注方位
+				});
+			}else if(scenicId == '8698c2bb90d645b3912528473f5ce930'){
+				mtName = '和平门';
+				lng = 118.793935;
+				lat = 32.085698;
+				var marker = new AMap.Marker({
+					position: new AMap.LngLat(lng,lat),
+					icon: icon
+				})
+				marker.setLabel({
+					offset: new AMap.Pixel(-220, -40),  //设置文本标注偏移量
+					content: "<div class='info'><p><font>"+ mtName +"</font></br>总船数：<font>"+ totalNumber +"</font></br>在租数：<font>" + leaseNumber +"</font></br>1000送600：<font>"+ mtInfo.pos2 + "</font></br>500送250：<font>" + mtInfo.pos1 + "</font></p></div>", //设置文本标注内容
+					direction: 'right' //设置文本标注方位
+				});
+			}else if(scenicId == '41ab29656e5b405a9c94871488050ec3'){
+				mtName = '翠洲门';
+				lng = 118.8044;
+				lat = 32.07474;
+				var marker = new AMap.Marker({
+					position: new AMap.LngLat(lng,lat),
+					icon: icon
+				})
+				marker.setLabel({
+					offset: new AMap.Pixel(-30, -40),  //设置文本标注偏移量
+					content: "<div class='info'><p class='labelRight'><font>"+ mtName +"</font></br>总船数：<font>"+ totalNumber +"</font></br>在租数：<font>" + leaseNumber +"</font></br>1000送600：<font>"+ mtInfo.pos2 + "</font></br>500送250：<font>" + mtInfo.pos1 + "</font></p></div>", //设置文本标注内容
+					direction: 'right' //设置文本标注方位
+				});
+			}else if(scenicId == '283db1801eda4d0d9b542570b4506219'){
+				mtName = '阳光码头';
+				lng = 118.81065;
+				lat = 32.065422;
+				var marker = new AMap.Marker({
+					position: new AMap.LngLat(lng,lat),
+					icon: icon
+				})
+				marker.setLabel({
+					offset: new AMap.Pixel(-30, -40),  //设置文本标注偏移量
+					content: "<div class='info'><p class='labelRight'><font>"+ mtName +"</font></br>总船数：<font>"+ totalNumber +"</font></br>在租数：<font>" + leaseNumber +"</font></br>1000送600：<font>"+ mtInfo.pos2 + "</font></br>500送250：<font>" + mtInfo.pos1 + "</font></p></div>", //设置文本标注内容
+					direction: 'right' //设置文本标注方位
+				});
+			}else if(scenicId == '3f288414620f42cba6a7634401f71bca'){
+				mtName = '芳桥码头';
+				lng = 118.793194;
+				lat = 32.07509;
+				var marker = new AMap.Marker({
+					position: new AMap.LngLat(lng,lat),
+					icon: icon
+				})
+				marker.setLabel({
+					offset: new AMap.Pixel(-50, -200),  //设置文本标注偏移量
+					content: "<div class='info'><p class='fqLabel'><font>"+ mtName +"</font></br>总船数：<font>"+ totalNumber +"</font></br>在租数：<font>" + leaseNumber +"</font></br>1000送600：<font>"+ mtInfo.pos2 + "</font></br>500送250：<font>" + mtInfo.pos1 + "</font></p></div>", //设置文本标注内容
+					direction: 'right' //设置文本标注方位
+				});
+			}else if(scenicId == '9030c8e60fa34f37b674a30f3c890143'){
+				mtName = '郭璞敦码头';
+				lng = 118.790679;
+				lat = 32.071944;
+				var marker = new AMap.Marker({
+					position: new AMap.LngLat(lng,lat),
+					icon: icon
+				})
+				marker.setLabel({
+					offset: new AMap.Pixel(-270, -250),  //设置文本标注偏移量
+					content: "<div class='info'><p class='gpdLabel1'><font>"+ mtName +"</font></br>总船数：<font>"+ totalNumber +"</font></br>在租数：<font>" + leaseNumber +"</font></br>1000送600：<font>"+ mtInfo.pos2 + "</font></br>500送250：<font>" + mtInfo.pos1 + "</font></p></div>", //设置文本标注内容
+					direction: 'right' //设置文本标注方位
+				});
+			}else if(scenicId == '696dc31a1125458fa5ba1696f6e445c7'){
+				mtName = '环洲码头';
+				lng = 118.790247;
+				lat = 32.070792;
+				var marker = new AMap.Marker({
+					position: new AMap.LngLat(lng,lat),
+					icon: icon
+				})
+				marker.setLabel({
+					offset: new AMap.Pixel(-260, 55),  //设置文本标注偏移量
+					content: "<div class='info'><p class='gpdLabel'><font>"+ mtName +"</font></br>总船数：<font>"+ totalNumber +"</font></br>在租数：<font>" + leaseNumber +"</font></br>1000送600：<font>"+ mtInfo.pos2 + "</font></br>500送250：<font>" + mtInfo.pos1 + "</font></p></div>", //设置文本标注内容
+					direction: 'right' //设置文本标注方位
+				});
+			}else if(scenicId == '80b566bb372a47f7a4a24fda6ed0d476'){
+				mtName = '台菱堤西';
+				lng = 118.797894;
+				lat = 32.063999;
+				var marker = new AMap.Marker({
+					position: new AMap.LngLat(lng,lat),
+					icon: icon
+				})
+				marker.setLabel({
+					offset: new AMap.Pixel(-110, 55),  //设置文本标注偏移量
+					content: "<div class='info'><p class='tldxLabel'><font>"+ mtName +"</font></br>总船数：<font>"+ totalNumber +"</font></br>在租数：<font>" + leaseNumber +"</font></br>1000送600：<font>"+ mtInfo.pos2 + "</font></br>500送250：<font>" + mtInfo.pos1 + "</font></p></div>", //设置文本标注内容
+					direction: 'right' //设置文本标注方位
+				});
+			}
+			
+			
+			markers.push(marker);
+		})
+	}
+</script>
+</body>
+</html>

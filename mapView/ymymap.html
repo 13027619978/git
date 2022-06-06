@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title></title>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
+    <style>
+        html, body, #container {
+            height: 100%;
+            width: 100%;
+        }
+        #addOverlayGroup {
+            margin-right: 1rem;
+        }
+		.amap-maps{
+			transform: scale(1);
+		}
+		/* 地图 */
+		.amap-logo {
+			display: none !important;
+		}
+		
+		.amap-controls {
+			display: none !important;
+		}
+		
+		.amap-marker-label {
+			border: none;
+			padding: 0;
+			background: rgba(0, 0, 0, 0);
+		}
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=c1b024a249b04326f11894fd0e35041d"></script>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/app.js"></script>
+<script type="text/javascript">
+	var map;
+	$(function(){
+		var mtNumber = 0;
+		var overlayGroups;
+		// 创建地图实例
+		map = new AMap.Map("container", {
+		    zoom: 16,
+		    center: [116.304297,40.00941],
+		    resizeEnable: false,
+			zoomEnable:false,
+			dragEnable: false
+		});
+		initMap(map);
+		setInterval(function(){
+			initMap(map);
+		}, 30000);
+	})
+	
+	function initMap(map){
+		$.ajax({
+		    url:'http://api.smart-ideas.com.cn/ymypark/deviceDataView/getDeviceShipLocation',
+		    type:"GET",
+		    success:function(res){
+		    	var markers = [];
+		    	var resLength = 0;
+		    	resLength += res.length;
+		    	if(res.length > 0){
+		    		res.forEach(function(value, key){
+		    			var lnglat = value;
+		    			var icon = new AMap.Icon({
+		    			    size: new AMap.Size(15, 45),    // 图标尺寸
+		    			    image: './img/mark.png',  // Icon的图像
+		    			    imageOffset: new AMap.Pixel(0, 25),  // 图像相对展示区域的偏移量，适于雪碧图等
+		    			    imageSize: new AMap.Size(15, 15)   // 根据所设置的大小拉伸或压缩图片
+		    			});
+		    			// 创建点实例
+		    			if(lnglat.lat && lnglat.lng){
+							var marker = new AMap.Marker({
+							    position: new AMap.LngLat(lnglat.lng, lnglat.lat),
+							    icon: icon
+							});
+							markers.push(marker);
+		    				// var gps = [lnglat.lng, lnglat.lat];
+		    				// new AMap.convertFrom(gps, 'gps', function (status, result) {
+		    				//   if (result.info === 'ok') {
+		    				//     var lnglats = result.locations;
+		    				// 	var marker = new AMap.Marker({
+		    				// 	    position: new AMap.LngLat(lnglats[0].lng, lnglats[0].lat),
+		    				// 	    icon: icon
+		    				// 	});
+		    				// 	markers.push(marker);
+		    				//   }
+		    				// });
+		    			}else{
+		    				resLength -= 1;
+		    			}
+		    			
+		    		})
+		    		
+		    		var myInter = setInterval(function(){
+		    			if(markers.length == resLength){
+		    				map.clearMap();
+		    				// 创建覆盖物群组，并将 marker 传给 OverlayGroup
+		    				overlayGroups = new AMap.OverlayGroup(markers);
+		    				map.add(overlayGroups);
+		    				clearInterval(myInter);
+		    			}
+		    		}, 100);
+		    	}
+		    }
+		});
+	}
+    
+</script>
+</body>
+</html>

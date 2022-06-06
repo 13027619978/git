@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title></title>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
+    <style>
+        html, body, #container {
+            height: 100%;
+            width: 100%;
+        }
+        #addOverlayGroup {
+            margin-right: 1rem;
+        }
+		.amap-maps{
+			transform: scale(1);
+		}
+		.searchView{
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: #fff;
+			padding: 10px 0;
+		}
+		.searchView input{
+			width: 200px;
+			height: 40px;
+			font-size: 16px;
+		}
+		.searchView a{
+			width: 100px;
+			height: 40px;
+			font-size: 16px;
+			text-align: center;
+			background-color: blue;
+			color: #fff;
+			text-align: center;
+			display: block;
+			line-height: 40px;
+			text-decoration: none;
+		}
+    </style>
+</head>
+<body>
+	<div class="searchView">
+		<input class="lat" type="text" placeholder="118.798823,32.072163">
+		<a href="javascript:;" onclick="searchClick()">查询</a>
+	</div>
+<div id="container"></div>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=c1b024a249b04326f11894fd0e35041d"></script>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/app.js"></script>
+<script type="text/javascript">
+	var map;
+	$(function(){
+		var scenidList = [
+			'43a3c0756f854990ad7fd13f597cda3c'
+		]
+		var mtNumber = 0;
+		var overlayGroups;
+		// 创建地图实例
+		map = new AMap.Map("container", {
+		    zoom: 14.5,
+		    center: [118.800223, 32.072163],
+		    resizeEnable: false,
+			zoomEnable:false,
+			dragEnable: false
+		});
+		// initMap(scenidList, map);
+		// setInterval(function(){
+		// 	initMap(scenidList, map);
+		// }, 30000);
+	})
+	
+	function searchClick(){
+		var lat = $('.lat').val().split(',')[0];
+		var lng = $('.lat').val().split(',')[1];
+		var gps = [];
+		gps[0] = lat;
+		gps[1] = lng;
+		new AMap.convertFrom(gps, 'gps', function (status, result) {
+		  if (result.info === 'ok') {
+		    var lnglats = result.locations;
+			map.setCenter([parseFloat(lnglats[0].lng), parseFloat(lnglats[0].lat)]);
+			var icon = new AMap.Icon({
+			    size: new AMap.Size(15, 45),    // 图标尺寸
+			    image: './img/mark.png',  // Icon的图像
+			    imageOffset: new AMap.Pixel(0, 25),  // 图像相对展示区域的偏移量，适于雪碧图等
+			    imageSize: new AMap.Size(15, 15)   // 根据所设置的大小拉伸或压缩图片
+			});
+			var marker = new AMap.Marker({
+			    position: new AMap.LngLat(lnglats[0].lng, lnglats[0].lat),
+			    icon: icon
+			});
+			// var myInter = setInterval(function(){
+			// 	map.clearMap();
+			// 	// 创建覆盖物群组，并将 marker 传给 OverlayGroup
+			// 	overlayGroups = new AMap.OverlayGroup(marker);
+			// 	map.add(overlayGroups);
+			// }, 100);
+			map.clearMap();
+			// 创建覆盖物群组，并将 marker 传给 OverlayGroup
+			overlayGroups = new AMap.OverlayGroup(marker);
+			map.add(overlayGroups);
+		  }
+		});
+		
+	}
+	
+	function initMap(scenidList, map){
+		app.getAjax('deviceDataView/getDeviceShipLocation?scenicId=' + scenidList[0], {}, function(res){
+			var markers = [];
+			var resLength = 0;
+			resLength += res.length;
+			if(res.length > 0){
+				res.forEach(function(value, key){
+					var lnglat = value;
+					var icon = new AMap.Icon({
+					    size: new AMap.Size(15, 45),    // 图标尺寸
+					    image: './img/mark.png',  // Icon的图像
+					    imageOffset: new AMap.Pixel(0, 25),  // 图像相对展示区域的偏移量，适于雪碧图等
+					    imageSize: new AMap.Size(15, 15)   // 根据所设置的大小拉伸或压缩图片
+					});
+					// 创建点实例
+					if(lnglat.lat && lnglat.lng){
+						if (lnglat.lat != '32.072163' && lnglat.lng != '118.798823') {
+							
+						}
+					}
+				})
+				
+				var myInter = setInterval(function(){
+					if(markers.length == resLength){
+						map.clearMap();
+						// 创建覆盖物群组，并将 marker 传给 OverlayGroup
+						overlayGroups = new AMap.OverlayGroup(markers);
+						map.add(overlayGroups);
+						clearInterval(myInter);
+					}
+				}, 100);
+			}
+		})
+	}
+    
+</script>
+</body>
+</html>

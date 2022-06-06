@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title></title>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
+    <style>
+        html, body, #container {
+            height: 100%;
+            width: 100%;
+        }
+        #addOverlayGroup {
+            margin-right: 1rem;
+        }
+		#container{
+			transform: scale(.7);
+			background-color: rgba(0,0,0,0) !important;
+		}
+		.info{
+			position: relative;
+			top: 0;
+			width: 75px !important;
+			min-width: 0;
+			font-size: 16px;
+			background: none;
+			box-shadow: none;
+			background-color: rgba(0, 0, 0, .4);
+			color: #fff;
+		}
+		.amap-marker-label{
+			  position: absolute;
+			  z-index: 2;
+			  border: none;
+			  background: none;
+			  white-space: nowrap;
+			  cursor: default;
+			  padding: 3px;
+			  font-size: 12px;
+			  line-height: 14px;
+			  box-shadow: none;
+		}
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=c1b024a249b04326f11894fd0e35041d"></script>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/app.js?v=10"></script>
+<script type="text/javascript">
+	var map;
+	$(function(){
+		var overlayGroups;
+		// 创建地图实例
+		map = new AMap.Map("container", {
+		    zoom: 14.5,
+		    center: [118.800223, 32.072163],
+		    resizeEnable: false,
+			zoomEnable:false,
+			dragEnable: false
+		});
+		initMap(map);
+		setInterval(function(){
+			initMap(map);
+		}, 30000);
+	})
+	
+	function initMap(map){
+		app.getAjax('batteryDataView/getLocation', {}, function(res){
+			var resLength = 0;
+			resLength += res.length;
+			var markers = [];
+			if(res.length > 0){
+				res.forEach(function(value, key){
+					var lnglat = value.location;
+					var icon = new AMap.Icon({
+					    size: new AMap.Size(15, 45),    // 图标尺寸
+					    image: './img/dpcIcon.png',  // Icon的图像
+					    imageOffset: new AMap.Pixel(0, 25),  // 图像相对展示区域的偏移量，适于雪碧图等
+					    imageSize: new AMap.Size(15, 15)   // 根据所设置的大小拉伸或压缩图片
+					});
+					// 创建点实例
+					var lng = lnglat.split(',')[0];
+					var lat = lnglat.split(',')[1];
+					var gps = [lng, lat];
+					new AMap.convertFrom(gps, 'gps', function (status, result) {
+					  if (result.info === 'ok') {
+					    var lnglats = result.locations;
+						var marker = new AMap.Marker({
+						    position: new AMap.LngLat(lnglats[0].lng, lnglats[0].lat),
+						    icon: icon
+						});
+						marker.setLabel({
+							offset: new AMap.Pixel(-33, -10),  //设置文本标注偏移量
+							content: "<div class='info'><p>"+value.vehicleMountedSn+"</p></div>", //设置文本标注内容
+							direction: 'right' //设置文本标注方位
+						});
+						markers.push(marker);
+					  }
+					});
+				})
+				var myInter = setInterval(function(){
+					if(markers.length == resLength){
+						map.clearMap();
+						// 创建覆盖物群组，并将 marker 传给 OverlayGroup
+						overlayGroups = new AMap.OverlayGroup(markers);
+						map.add(overlayGroups);
+						clearInterval(myInter);
+					}
+				}, 100);
+			}
+		})
+	}
+    
+</script>
+</body>
+</html>

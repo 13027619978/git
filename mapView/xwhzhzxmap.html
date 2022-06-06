@@ -1,0 +1,196 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title></title>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
+    <style>
+        html, body, #container {
+            height: 100%;
+            width: 100%;
+        }
+        #addOverlayGroup {
+            margin-right: 1rem;
+        }
+		.amap-maps{
+			transform: scale(1);
+		}
+		#addOverlayGroup {
+		    margin-right: 1rem;
+		}
+		.amap-marker-label{
+			border: 0;
+			background-color: none;
+			background: rgba(0,0,0,0);
+		}
+		.info{
+			position: relative;
+			min-width: 0;
+			top: 0;
+			right: -15px;
+			width: 100px;
+			z-index: 999;
+			text-align: center;
+			color: #fff;
+			font-weight: bold;
+			background: rgba(0, 0, 0, .5);
+			padding: 5px 0;
+			margin-bottom: 5px;
+			font-size: 16px;
+		}
+		.info p{
+			font-weight: normal;
+			line-height: 10px;
+		}
+		.amap-logo, .amap-copyright{
+			display: none !important;
+		}
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=c1b024a249b04326f11894fd0e35041d"></script>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/app.js?v=10"></script>
+<script src="js/gps.js"></script>
+<script type="text/javascript">
+	var map;
+	var second = 0;
+	$(function(){
+		var scenidList = [
+			'41ab29656e5b405a9c94871488050ec3',
+			'3f288414620f42cba6a7634401f71bca',
+			'9030c8e60fa34f37b674a30f3c890143',
+			'a9f74e0b584945bea69985cd17f66a9d',
+			'8698c2bb90d645b3912528473f5ce930',
+			'696dc31a1125458fa5ba1696f6e445c7',
+			'f57419d544e741838fb789056f63ee80',
+			'59800000eb4a4c4287652f86eaba848c',
+			'bcd98681896f48ed878486519bfdeacf',
+			'43a3c0756f854990ad7fd13f597cda3c',
+			'b4124ce0c8b244208de6d870ceb824a0',
+			'283db1801eda4d0d9b542570b4506219'
+		]
+		var mtNumber = 0;
+		var overlayGroups;
+		// 创建地图实例
+		map = new AMap.Map("container", {
+		    zoom: 14.5,
+			zooms:[1,15],
+		    center: [118.800223, 32.072163],
+		    resizeEnable: true,
+			zoomEnable:true,
+			dragEnable: true
+		});
+		initMap(scenidList, map);
+		setInterval(function(){
+			initMap(scenidList, map);
+		}, 5000);
+	})
+	
+	function initMap(scenidList, map){
+		second += 5;
+		app.getAjax('deviceDataView/getDeviceSosShipLocation', {}, function(res){
+			console.log(res);
+			if(res.length > 0){
+				jy = true;
+				var markers = [];
+				var resLength = 0;
+				resLength += res.length;
+				res.forEach(function(value, key){
+					var lnglat = value;
+					var icon = new AMap.Icon({
+					    size: new AMap.Size(15, 45),    // 图标尺寸
+					    image: './img/mark.png',  // Icon的图像
+					    imageOffset: new AMap.Pixel(0, 25),  // 图像相对展示区域的偏移量，适于雪碧图等
+					    imageSize: new AMap.Size(15, 15)   // 根据所设置的大小拉伸或压缩图片
+					});
+					// 创建点实例
+					if(lnglat.lat && lnglat.lng){
+						let mark = GPS.gcj_encrypt(
+							Number(lnglat.lat),
+							Number(lnglat.lng)
+						)
+						var marker = new AMap.Marker({
+						    position: new AMap.LngLat(mark.lon, mark.lat),
+						    icon: icon
+						});
+						var snNumber = value.sn;
+						snNumber = snNumber?snNumber:'';
+						marker.setLabel({
+							offset: new AMap.Pixel(-75, -10),  //设置文本标注偏移量
+							content: "<div class='info'><p>"+value.phone+"</p></br><p>"+snNumber+"</p></div>", //设置文本标注内容
+							direction: 'right' //设置文本标注方位
+						});
+						markers.push(marker);
+					}else{
+						resLength -= 1;
+					}
+				})
+				var myInter = setInterval(function(){
+					if(markers.length == resLength){
+						map.clearMap();
+						// 创建覆盖物群组，并将 marker 传给 OverlayGroup
+						overlayGroups = new AMap.OverlayGroup(markers);
+						map.add(overlayGroups);
+						clearInterval(myInter);
+					}
+				}, 100);
+			}else{
+				if(second == 5 || second % 20 == 0){
+					getShipLocation(scenidList, map);
+				}
+			}
+		})
+	}
+	
+	function getShipLocation(scenidList, map){
+		app.getAjax('deviceDataView/getDeviceShipLocation?scenicId=', {}, function(res){
+			var markers = [];
+			var resLength = 0;
+			resLength += res.length;
+			if(res.length > 0){
+				res.forEach(function(value, key){
+					var lnglat = value;
+					var icon = new AMap.Icon({
+					    size: new AMap.Size(15, 45),    // 图标尺寸
+					    image: './img/mark.png',  // Icon的图像
+					    imageOffset: new AMap.Pixel(0, 25),  // 图像相对展示区域的偏移量，适于雪碧图等
+					    imageSize: new AMap.Size(15, 15)   // 根据所设置的大小拉伸或压缩图片
+					});
+					// 创建点实例
+					if(lnglat.lat && lnglat.lng){
+						if (lnglat.lat != '32.072163' && lnglat.lng != '118.798823' && lnglat.status == 'ONLINE') {
+							let mark = GPS.gcj_encrypt(
+								Number(lnglat.lat),
+								Number(lnglat.lng)
+							)
+							var marker = new AMap.Marker({
+							    position: new AMap.LngLat(mark.lon, mark.lat),
+							    icon: icon
+							});
+							markers.push(marker);
+						}else{
+							resLength -= 1;
+						}
+					}else{
+						resLength -= 1;
+					}
+				})
+				var myInter = setInterval(function(){
+					if(markers.length == resLength){
+						map.clearMap();
+						// 创建覆盖物群组，并将 marker 传给 OverlayGroup
+						overlayGroups = new AMap.OverlayGroup(markers);
+						map.add(overlayGroups);
+						clearInterval(myInter);
+					}
+				}, 100);
+			}
+		})
+	}
+</script>
+</body>
+</html>
