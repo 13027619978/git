@@ -206,15 +206,15 @@
 							var startDate;
 							var endDate;
 							res.data.forEach(function(value, key){
-								if(value.lineId == '5'){
+								if(value.ticketName == '中南乐园专线票'){
 									var yyTimeList = value.list;
 									startDate = yyTimeList[nowDay].startTime;
 									endDate = yyTimeList[nowDay].endTime;
-									// if(yyTimeList[nowDay].state == '0'){
-									// 	$('.yytime').text(startDate + '至' + endDate);
-									// }else{
-									// 	$('.yytime').text(yyTimeList[nowDay].tip);
-									// }
+									if(yyTimeList[nowDay].state == '0'){
+										$('.yytime').text(startDate + '至' + endDate);
+									}else{
+										$('.yytime').text(yyTimeList[nowDay].tip);
+									}
 								}
 							})
 						})
