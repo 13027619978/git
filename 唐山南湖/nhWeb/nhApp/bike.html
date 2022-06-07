@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/bike.css">
+		<title>南湖扫码租赁</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="box">
+				<p class="title">收费标准：</p>
+				<div class="box-content">
+					<div class="price">
+						<div class="price-item">
+							<div class="price-txt">
+								价格：
+								<p class="chargeTxt">元/小时</p>
+							</div>
+						</div>
+						<div class="price-item">
+							<div class="price-txt">
+								押金：
+								<p class="depositTxt">元</p>
+							</div>
+							<p>(押金金额秒退)</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="box">
+				<p class="title">手机号：</p>
+				<div class="box-content">
+					<input class="phone" type="text">
+				</div>
+			</div>
+			<div class="box">
+				<p class="title">备注：</p>
+				<div class="box-content">
+					<div class="desc">
+						<p>1小时起租，时间不足1小时按1小时计算，超过1小时不足1.5小时按1.5小时计算，依次累加。</p>
+					</div>
+				</div>
+			</div>
+			<div class="box">
+				<p class="title">游客须知：</p>
+				<div class="box-content">
+					<div class="desc">
+						<p>1.请文明驾行车辆，请注意骑驾安全，遇有行人及其他车辆需文明礼让。</p>
+						<p>2.请按园内指定路线行驶，请勿在禁行区域游驾。</p>
+						<p>3.请爱护公共设施，爱护花草树木，请勿进入草坪骑行等。</p>
+						<p>4.请勿野蛮骑驾车辆，如恶意损坏，需双倍赔偿。</p>
+						<p>5.照看好随行儿童，注意游玩安全，以免意外的发生。</p>
+						<p>6.请妥善保管好自己的行李物品，以免造成不必要的损失。</p>
+						<p>7.如未按规则骑行，发生意外事故，游客承担相应赔偿责任。</p>
+						<p>8.如游览过程中遇到突发状况，请拨打服务热线：010-61417123</p>
+					</div>
+				</div>
+			</div>
+			<div class="box">
+				<p class="title">安全须知：</p>
+				<div class="box-content">
+					<div class="desc">
+						<p>1.租赁的车辆必须由成年人驾驶，严禁酒后行驶。行驶过程中注意避让行人，游览途中请保持车距。</p>
+						<p>2.电动代步车、自行车禁止在陡坡处停留，严禁进入禁行区域，行驶中不得强行停留占道。</p>
+						<p>3.请照看好随行儿童，注意游园安全，以免发生意外。车筐内只可存放物品，禁止坐人。在离开车辆时请妥善保管好自己的行李物品，以免造成您的损失。</p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="btnView">
+				<a href="javascript:;" onclick="payClick(this)">我已同意，前往充值</a>
+			</div>
+		</div>
+		
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jweixin-1.0.0.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/bike.js?v=10"></script>
+	</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/bike.css">
+		<title>南湖扫码租赁</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="box">
+				<p class="title">收费标准：</p>
+				<div class="box-content">
+					<div class="price">
+						<div class="price-item">
+							<div class="price-txt">
+								价格：
+								<p class="chargeTxt">元/小时</p>
+							</div>
+						</div>
+						<div class="price-item">
+							<div class="price-txt">
+								押金：
+								<p class="depositTxt">元</p>
+							</div>
+							<p>(押金金额秒退)</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="box">
+				<p class="title">手机号：</p>
+				<div class="box-content">
+					<input class="phone" type="text">
+				</div>
+			</div>
+			<div class="box">
+				<p class="title">开放时间：</p>
+				<div class="box-content">
+					<div class="desc">
+						<p>游船开放时间：9:00--17:00</p>
+						<p>游船止票时间：16:30</p>
+					</div>
+				</div>
+			</div>
+			<div class="box">
+				<p class="title">温馨提示：</p>
+				<div class="box-content">
+					<div class="desc">
+						<p>1.购票时只收押金，归还时扣除相应消费金额后退还其余押金。</p>
+						<p>2.请您将婴儿车等物品折叠后收入船内。</p>
+						<p>3.开票后请尽快到游船码头上船，以上船时间为计时时间。</p>
+						<p>4.退还押金后，钱款请当面点清。</p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="btnView">
+				<a href="javascript:;" onclick="payClick(this)">我已同意，前往充值</a>
+			</div>
+		</div>
+		
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jweixin-1.0.0.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/boat.js?v=10"></script>
+	</body>
+</html>

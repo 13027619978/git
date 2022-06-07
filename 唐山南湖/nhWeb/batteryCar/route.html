@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/route.css?v=500">
+		<style type="text/css">
+			.nextTxt{
+				display: none;
+			}
+		</style>
+		<title></title>
+	</head>
+	<body>
+		<div class="hoverView">
+			<div class="ticketView">
+				<a class="closeBtn" href="javascript:;" onclick="closeClick()"></a>
+				<img class="qrcodeImg" src="" >
+				<p class="currLineName"></p>
+				<p class="djs">30秒后自动关闭</p>
+			</div>
+		</div>
+		<div class="container">
+			<div class="fullScreen">
+				<div class="topView">
+					<div class="weatherView">
+						<p class="weatherTxt"></p>
+					</div>
+					<div class="titleView">
+						<p>观光车智慧运营系统</p>
+					</div>
+					<div class="timeView">
+						<p class="dateTxt"></p>
+					</div>
+				</div>
+				<div class="content">
+					<div class="content-left">
+						<!-- 当前站点 -->
+						<div class="currSite">
+							<p class="currSiteName">当前站点：</br>Current Station:</p>
+						</div>
+						<!-- 路线 -->
+						<div class="lineList">
+							
+							<div class="lineItem">
+								<div class="leftMap">
+									<p class="lineTitle">火车环线<font>Train route</font></p>
+									<img src="img/train-icon.png" >
+									<p class="yyTime">营业时间</br><font class="en">Business hours</font></br><font class="yyTxt">09:00-17:30</font></p>
+								</div>
+								<!-- <span class="icon"></span> -->
+								<div class="routeView">
+									<!-- <p class="routeTitle">火车线路</p> -->
+									<div class="routeContent">
+										<div class="nextCar">
+											<p>本站不停靠</br><font class="en">The tour cart doesn’t stop here</font></p>
+										</div>
+										<div class="routeDetail loopDetail train">
+											<span class="line"></span>
+											<div class="siteList loop">
+												<img class="fx" src="img/double-icon.png" >
+												<img class="fx" src="img/double-icon.png" >
+												<img class="fx" src="img/right-icon.png" >
+												<img class="fx" src="img/right-icon.png" >
+												<img class="fx" src="img/left-icon.png" >
+												<img class="fx" src="img/double-icon.png" >
+												<img class="fx" src="img/double-icon.png" >
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="btnView">
+									<a class="buyBtn trainBtn" href="javascript:;" onclick="buyClick(this,1)">购票</br>Buy tickets</a>
+									<p>票价：30元/人/圈</br><font class="en">RMB 30 per person per loop</font></p>
+								</div>
+							</div>
+							
+							<div class="lineItem">
+								<div class="leftMap">
+									<p class="lineTitle">观光车环线<font>Tour cart loop</font></p>
+									<img src="img/car-icon.png" >
+									<p class="yyTime">营业时间</br><font class="en">Business hours</font></br><font class="yyTxt">09:00-17:30</font></p>
+								</div>
+								<!-- <span class="icon"></span> -->
+								<div class="routeView">
+									<!-- <p class="routeTitle">环线北行</p> -->
+									<div class="routeContent">
+										<div class="nextCar">
+											<p>本站不停靠</br><font class="en">The tour cart doesn’t stop here</font></p>
+										</div>
+										<div class="routeDetail loopDetail">
+											<span class="line"></span>
+											<div class="siteList loop bx">
+												<img class="fx" src="img/double-icon.png" >
+												<img class="fx" src="img/double-icon.png" >
+												<img class="fx" src="img/double-icon.png" >
+												<img class="fx" src="img/double-icon.png" >
+												<img class="fx" src="img/double-icon.png" >
+												<img class="fx" src="img/double-icon.png" >
+												<img class="fx" src="img/double-icon.png" >
+												<img class="fx" src="img/double-icon.png" >
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="btnView">
+									<a class="buyBtn carBtn" href="javascript:;" onclick="buyClick(this,3)">购票</br>Buy tickets</a>
+									<p>票价：30元/人/4次</br><font class="en">RMB 30 per person per four times</font></p>
+								</div>
+							</div>
+							
+							
+							
+							<div class="lineItem">
+								<div class="leftMap">
+									<p class="lineTitle">观光车单站票<font>Inter-zone route</font></p>
+									<img src="img/car-icon.png" >
+									<p class="yyTime">营业时间</br><font class="en">Business hours</font></br><font class="yyTxt">09:00-17:30</font></p>
+								</div>
+								<!-- <span class="icon"></span> -->
+								<div class="routeView">
+									<!-- <p class="routeTitle">区间线</p> -->
+									<div class="routeContent">
+										<div class="nextCar">
+											<p>本站不停靠</br><font class="en">The tour cart doesn’t stop here</font></p>
+										</div>
+										<div class="routeDetail loopDetail">
+											<span class="line"></span>
+											<div class="siteList loop bx">
+												<img class="fx" src="img/double-icon.png" >
+												<img class="fx" src="img/double-icon.png" >
+												<img class="fx" src="img/double-icon.png" >
+												<img class="fx" src="img/double-icon.png" >
+												<img class="fx" src="img/double-icon.png" >
+												<img class="fx" src="img/double-icon.png" >
+												<img class="fx" src="img/double-icon.png" >
+												<img class="fx" src="img/double-icon.png" >
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="btnView">
+									<a class="buyBtn carBtn" href="javascript:;" onclick="buyClick(this,4)">购票</br>Buy tickets</a>
+									<p>票价：5元/人/站</br><font class="en">RMB 5 per person per site</font></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+					<div class="content-right">
+						<div class="right-top">
+							<div class="mapView">
+								<p class="mapTitle">地图</p>
+								<div class="priceView">
+									<p style="text-align: center;">观光车服务热线：0315-6338955</p>
+									<p style="font-weight: bold;font-size: 22px;">票价公示:</p>
+									<p>观光火车环线：30元/人/圈，单次上下</p>
+									<p>观光车单站票：5元/人/站</p>
+									<p>观光车环线：30元/人/4次（当日有效）</p>
+								</div>
+								<img src="img/mapimg.png" >
+							</div>
+							<!-- <div class="callView">
+								<img src="img/callBg.png" >
+							</div> -->
+						</div>
+						<div class="adView">
+							<img src="" >
+						</div>
+					</div>
+				
+					<div class="progressView">
+						<div class="progressContent">
+							<img src="img/progressImg.jpg" >
+							<!-- <p class="progress-title">购票流程</p>
+							<div class="progressList">
+								<p class="progress-item">
+									1.微信扫一扫电瓶车二维码，进入支付界面。
+								</p>
+								<p class="progress-item">
+									2.选择自己想要的支付，微信支付 和 余额支付，然后点击立即结算。
+								</p>
+								<p class="progress-item">
+									3.支付成功后，界面自动跳转订单详情界面。
+								</p>
+								<p class="progress-item">
+									4.上车验票成功后，电瓶车票下方状态路线站点就会显示为 “黑色”，代表站点已经坐过，不可进行二次上车。
+								</p>
+							</div> -->
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<script src="js/jquery.min.js"></script>
+			<script src="layer/layer.js"></script>
+			<script src="js/app.js?v=100"></script>
+			<script type="text/javascript">
+				var siteId = app.getQueryString('siteId');
+				siteId = siteId?siteId:'0';
+				// 当前站点站点id
+				var currSiteList = siteId.indexOf(',')!=-1?siteId.split(','):[siteId];
+				
+				var scale =  $('.fullScreen').height() / window.innerHeight;
+				$('.fullScreen').css({
+					'transform': 'scaleY('+scale+')'
+				})
+				
+				// 更新天气情况
+				getWeatherInfo();
+				// 获取运营时间
+				getYYTime();
+				setInterval(function(){
+					getWeatherInfo();
+					getYYTime();
+				}, 60000)
+				
+				var trainStart;
+				var trainEnd;
+				var trainStatus;
+				var trainTip;
+				var batteryStart;
+				var batteryEnd;
+				var batteryStatus;
+				var batteryTip;
+				// 获取营业时间
+				function getYYTime(){
+					app.getAjax('deviceLeaseApp/getOperationTime', {}, function(res){
+						$('.yyTxt').eq(0).text(res.data.trainOperationStartTime.split(':')[0] + ':' + res.data.trainOperationStartTime.split(':')[1] + '至' + res.data.trainOperationEndTime.split(':')[0] + ':' + res.data.trainOperationEndTime.split(':')[1]);
+						$('.yyTxt').eq(1).text(res.data.batteryOperationStartTime.split(':')[0] + ':' + res.data.batteryOperationStartTime.split(':')[1] + '至' + res.data.batteryOperationEndTime.split(':')[0] + ':' + res.data.batteryOperationEndTime.split(':')[1]);
+						$('.yyTxt').eq(2).text(res.data.batteryOperationStartTime.split(':')[0] + ':' + res.data.batteryOperationStartTime.split(':')[1] + '至' + res.data.batteryOperationEndTime.split(':')[0] + ':' + res.data.batteryOperationEndTime.split(':')[1]);
+						
+						var nowYear = new Date().getFullYear();
+						var nowMonth = new Date().getMonth() + 1;
+						nowMonth = nowMonth>9?nowMonth:'0'+nowMonth;
+						var nowDay = new Date().getDate();
+						nowDay = nowDay>9?nowDay:'0'+nowDay;
+						
+						var nowTimeString = new Date().getTime();
+						trainStart = new Date(nowYear + '-' + nowMonth + '-' + nowDay + ' ' + res.data.trainOperationStartTime).getTime();
+						trainEnd = new Date(nowYear + '-' + nowMonth + '-' + nowDay + ' ' + res.data.trainOperationEndTime).getTime();
+						batteryStart = new Date(nowYear + '-' + nowMonth + '-' + nowDay + ' ' + res.data.batteryOperationStartTime).getTime();
+						batteryEnd = new Date(nowYear + '-' + nowMonth + '-' + nowDay + ' ' + res.data.batteryOperationEndTime).getTime();
+						trainStatus = res.data.trainState;
+						batteryStatus = res.data.batteryState;
+						trainTip = res.data.trainTip;
+						batteryTip = res.data.batteryTip;
+						if(trainStatus == '1'){
+							$('.trainBtn').addClass('disabled').html('停运</br>Shut down');
+						}else{
+							if(trainStart > nowTimeString || nowTimeString > trainEnd){
+								$('.trainBtn').addClass('disabled').html('购票</br>Buy tickets');
+							}else{
+								$('.trainBtn').removeClass('disabled').html('购票</br>Buy tickets');
+							}
+						}
+						
+						if(batteryStatus == '1'){
+							$('.carBtn').addClass('disabled').html('停运</br>Shut down');
+						}else{
+							if(batteryStart > nowTimeString || nowTimeString > batteryEnd){
+								$('.carBtn').addClass('disabled').html('购票</br>Buy tickets');
+							}else{
+								$('.carBtn').removeClass('disabled').html('购票</br>Buy tickets');
+							}
+						}
+					})
+				}
+				
+				if(currSiteList.indexOf('6') != -1 || currSiteList.indexOf('34') != -1){
+					$('.currSiteName').html('当前站点：游客中心站</br>Current Station:Tourist Center');
+					$('.mapView img').attr('src', 'img/ykzx.png');
+				}else if(currSiteList.indexOf('7') != -1 || currSiteList.indexOf('35') != -1){
+					$('.currSiteName').html('当前站点：湖畔里站</br>Current Station:Hupanli');
+					// $('.buyBtn').eq(2).attr('onclick', '').addClass('disabled');
+					$('.mapView img').attr('src', 'img/hpl.png');
+				}else if(currSiteList.indexOf('8') != -1 || currSiteList.indexOf('36') != -1){
+					$('.currSiteName').html('当前站点：丹凤朝阳站</br>Current Station:Danfeng Chaoyang');
+					// $('.buyBtn').eq(2).attr('onclick', '').addClass('disabled');
+					$('.mapView img').attr('src', 'img/dfcy.png');
+				}else if(currSiteList.indexOf('15') != -1 || currSiteList.indexOf('42') != -1){
+					$('.currSiteName').html('当前站点：朝晖岛站</br>Current Station:Zhaohui Islet');
+					// $('.buyBtn').eq(2).attr('onclick', '').addClass('disabled');
+					$('.mapView img').attr('src', 'img/chd.png');
+				}else if(currSiteList.indexOf('14') != -1 || currSiteList.indexOf('41') != -1){
+					$('.currSiteName').html('当前站点：桃花潭站</br>Current Station:Taohuatan');
+					// $('.buyBtn').eq(2).attr('onclick', '').addClass('disabled');
+					$('.mapView img').attr('src', 'img/thy.png');
+				}else if(currSiteList.indexOf('13') != -1 || currSiteList.indexOf('40') != -1){
+					$('.currSiteName').html('当前站点：鱼龙码头站</br>Current Station:Yulong Wharf');
+					// $('.buyBtn').eq(2).attr('onclick', '').addClass('disabled');
+					$('.mapView img').attr('src', 'img/ylmt.png');
+				}else if(currSiteList.indexOf('12') != -1 || currSiteList.indexOf('39') != -1){
+					$('.currSiteName').html('当前站点：国内园站</br>Current Station:Domestic Garden');
+					// $('.buyBtn').eq(2).attr('onclick', '').addClass('disabled');
+					$('.mapView img').attr('src', 'img/gny.png');
+				}else if( currSiteList.indexOf('11') != -1 || currSiteList.indexOf('38') != -1){
+					$('.currSiteName').html('当前站点：植物馆站</br>Current Station:Botanical Pavilion');
+					// $('.buyBtn').eq(2).attr('onclick', '').addClass('disabled');
+					$('.mapView img').attr('src', 'img/zwy.png');
+				}else if(currSiteList.indexOf('9') != -1 || currSiteList.indexOf('37') != -1){
+					$('.currSiteName').html('当前站点：龙山站</br>Current Station:Longshan');
+					// $('.buyBtn').eq(2).attr('onclick', '').addClass('disabled');
+					$('.mapView img').attr('src', 'img/ls.png');
+				}else if(currSiteList.indexOf('10') != -1){
+					$('.currSiteName').html('当前站点：皮影乐园站</br>Current Station:Shadow Puppet Theme Park');
+					$('.buyBtn').eq(0).attr('onclick', '').addClass('disabled');
+					// $('.buyBtn').eq(2).attr('onclick', '').addClass('disabled');
+					$('.mapView img').attr('src', 'img/pyly.png');
+				}else if(currSiteList.indexOf('4') != -1 || currSiteList.indexOf('47') != -1){
+					$('.currSiteName').html('当前站点：凤凰台站</br>Current Station:Fenghuangtai');
+					// $('.buyBtn').eq(1).attr('onclick', '').addClass('disabled');
+					// $('.buyBtn').eq(2).attr('onclick', '').addClass('disabled');
+					$('.mapView img').attr('src', 'img/fht.png');
+				}else if(currSiteList.indexOf('5') != -1 || currSiteList.indexOf('46') != -1){
+					$('.currSiteName').html('当前站点：云凤岛站</br>Current Station:Yunfeng Islet');
+					// $('.buyBtn').eq(1).attr('onclick', '').addClass('disabled');
+					// $('.buyBtn').eq(2).attr('onclick', '').addClass('disabled');
+					$('.mapView img').attr('src', 'img/yfd.png');
+				}
+				
+				// 获取天气信息
+				function getWeatherInfo(){
+					$.ajax({
+					    url:'https://restapi.amap.com/v3/weather/weatherInfo?key=773c4e4c196eb78e21f220e7e14160d2&extensions=all&city=130202',
+					    type:"GET",
+					    success:function(data){
+					    	console.log(data);
+							$('.weatherTxt').text('今日 ' + data.forecasts[0].casts[0].dayweather  + ' ' + data.forecasts[0].casts[0].nighttemp + '~' + data.forecasts[0].casts[0].daytemp + '℃')
+					    }
+					});
+				}
+				
+				
+				// 初始化时间
+				setInterval(function(){
+					var year = new Date().getFullYear();
+					var month = new Date().getMonth() + 1;
+					month = month<10?'0'+month:month;
+					var day = new Date().getDate();
+					day = day<10?'0'+day:day;
+					var hour = new Date().getHours();
+					hour = hour<10?'0'+hour:hour;
+					var minutes = new Date().getMinutes();
+					minutes = minutes<10?'0'+minutes:minutes;
+					var seconds = new Date().getSeconds();
+					seconds = seconds<10?'0'+seconds:seconds;
+					$('.dateTxt').text(year+'/'+month+'/'+day+' '+hour+':'+minutes+':'+seconds);
+				}, 1000);
+				
+				
+				app.getAjax('loopSite/name/get', {
+					lineNum: 'LINE20210207203306267'
+				}, function(res){
+					if(res.code == 'SUCCESS'){
+						var siteList = res.data;
+						var siteIdList = [];
+						siteList.forEach(function(value, key){
+							siteIdList.push(value.siteId);
+							console.log(value.siteId);
+							console.log(currSiteList);
+							if(currSiteList.indexOf(value.siteId.toString()) != -1){
+								if(key < 12){
+									$('.siteList').eq(1).append(
+										'<div class="siteItem currItem">'+
+											'<div class="site">'+
+												'<img src="img/currSite.png" >'+
+												'<p class="siteName">'+ value.siteName +'</p>'+
+											'</div>'+
+										'</div>'
+									)
+									$('.siteList').eq(2).append(
+										'<div class="siteItem currItem">'+
+											'<div class="site">'+
+												'<img src="img/currSite.png" >'+
+												'<p class="siteName">'+ value.siteName +'</p>'+
+											'</div>'+
+										'</div>'
+									)
+								}
+							}else{
+								if(key < 12){
+									$('.siteList').eq(1).append(
+										'<div class="siteItem">'+
+											'<div class="site">'+
+												'<img src="img/site-unSelect.png" >'+
+												'<p class="siteName">'+ value.siteName +'</p>'+
+											'</div>'+
+										'</div>'
+									)
+									$('.siteList').eq(2).append(
+										'<div class="siteItem">'+
+											'<div class="site">'+
+												'<img src="img/site-unSelect.png" >'+
+												'<p class="siteName">'+ value.siteName +'</p>'+
+											'</div>'+
+										'</div>'
+									)
+								}
+							}
+						})
+						
+						
+						currSiteList.forEach(function(value, key){
+							if(siteIdList.indexOf(parseInt(value)) != -1){
+								var leftSiteName = '';
+								var rightSiteName = '';
+								var leftEnName;
+								var rightEnName;
+								siteList.forEach(function(value1, key){
+									if(value1.siteId == value){
+										if(key > 0){
+											leftSiteName = '上一站：' + siteList[key - 1].siteName;
+											leftEnName = 'Previous Station:' + getEnName(siteList[key - 1].siteName);
+										}else{
+											leftSiteName = '';
+											leftEnName = '';
+										}
+										if(key + 1 == siteList.length){
+											rightSiteName = '下一站：' + siteList[2].siteName;
+											rightEnName = 'Next Station:' + getEnName(siteList[2].siteName);
+										}else{
+											rightSiteName = '下一站：' + siteList[key + 1].siteName;
+											rightEnName = 'Next Station:' + getEnName(siteList[key + 1].siteName);
+										}
+									}
+								})
+								$('.nextCar p').eq(1).html(leftSiteName + '  <font class="nextTxt">暂无车辆运营</font> ' + rightSiteName +
+									'</br><font class="en">' + leftEnName + '  <font class="nextTxt">No vehicles in operation</font> ' + rightEnName + '</font>'
+								);
+								$('.nextCar p').eq(2).html(leftSiteName + '  <font class="nextTxt">暂无车辆运营</font> ' + rightSiteName +
+									'</br><font class="en">' + leftEnName + '  <font class="nextTxt">No vehicles in operation</font> ' + rightEnName + '</font>'
+								);
+							}
+						})
+					}
+				})
+				
+				app.getAjax('loopSite/name/get', {
+					lineNum: 'LINE20210207203329723'
+				}, function(res){
+					if(res.code == 'SUCCESS'){
+						var siteList = res.data;
+						var siteIdList = [];
+						siteList.forEach(function(value, key){
+							siteIdList.push(value.siteId);
+							if(currSiteList.indexOf(value.siteId.toString()) != -1){
+								if(key != '9' && key != '10' && key != '11' && key != '14' && key != '15'){
+									$('.siteList').eq(0).append(
+										'<div class="siteItem currItem">'+
+											'<div class="site">'+
+												'<img src="img/currSite.png" >'+
+												'<p class="siteName">'+ value.siteName +'</p>'+
+											'</div>'+
+										'</div>'
+									)
+								}
+								
+							}else{
+								if(key != '9' && key != '10' && key != '11' && key != '14' && key != '15'){
+									$('.siteList').eq(0).append(
+										'<div class="siteItem">'+
+											'<div class="site">'+
+												'<img src="img/site-unSelect.png" >'+
+												'<p class="siteName">'+ value.siteName +'</p>'+
+											'</div>'+
+										'</div>'
+									)
+								}
+								
+							}
+						})
+						
+						currSiteList.forEach(function(value, key){
+							console.log(value)
+							if(siteIdList.indexOf(parseInt(value)) != -1){
+								var leftSiteName = '';
+								var rightSiteName = '';
+								var leftEnName;
+								var rightEnName;
+								siteList.forEach(function(value1, key){
+									if(value1.siteId == value){
+										if(key > 0 && key + 3 != siteList.length){
+											leftSiteName = '上一站：' + siteList[key - 1].siteName;
+											leftEnName = 'Previous Station:' + getEnName(siteList[key - 1].siteName);
+											console.log('1')
+										}else if(key + 3 == siteList.length){
+											leftSiteName = '上一站：' + siteList[siteList.length - 2].siteName;
+											leftEnName = 'Previous Station:' + getEnName(siteList[siteList.length - 1].siteName);
+											console.log('2')
+										}else if(key == 0){
+											leftSiteName = '上一站：' + siteList[siteList.length - 2].siteName;
+											leftEnName = 'Previous Station:' + getEnName(siteList[siteList.length - 2].siteName);
+											console.log('3')
+										}else{
+											leftSiteName = '上一站：' + siteList[key + 1].siteName;
+											leftEnName = 'Previous Station:' + getEnName(siteList[key + 1].siteName);
+											console.log('4')
+										}
+										if(key + 1 == siteList.length){
+											rightSiteName = '下一站：' + siteList[siteList.length - 2].siteName;
+											rightEnName = 'Next Station:' + getEnName(siteList[siteList.length - 2].siteName);
+										}else if(key + 2 == siteList.length){
+											rightSiteName = '下一站：' + siteList[0].siteName;
+											rightEnName = 'Next Station:' + getEnName(siteList[0].siteName);
+										}else if(key + 3 == siteList.length){
+											rightSiteName = '下一站：' + siteList[14].siteName;
+											rightEnName = 'Next Station:' + getEnName(siteList[2].siteName);
+										}else{
+											rightSiteName = '下一站：' + siteList[key + 1].siteName;
+											rightEnName = 'Next Station:' + getEnName(siteList[key + 1].siteName);
+										}
+									}
+								})
+								$('.nextCar p').eq(0).html(leftSiteName + '  <font class="nextTxt">暂无车辆运营</font> ' + rightSiteName +
+									'</br><font class="en">' + leftEnName + '  <font class="nextTxt">No vehicles in operation</font> ' + rightEnName + '</font>'
+								);
+							}
+						})
+					}
+				})
+				var djs;
+				
+				
+				function buyClick(that,lineId){
+					var nowTimeString = new Date().getTime();
+					if(lineId == '1'){
+						if(trainStatus == '1'){
+							layer.alert(trainTip);
+							return;
+						}else{
+							if(trainStart > nowTimeString || nowTimeString > trainEnd){
+								layer.alert('不在营业时间');
+								return;
+							}
+						}
+						
+					}else{
+						if(batteryStatus == '1'){
+							layer.alert(batteryTip);
+							return;
+						}else{
+							if(batteryStart > nowTimeString || nowTimeString > batteryEnd){
+								layer.alert('不在营业时间');
+								return;
+							}
+						}
+					}
+					$(that).attr('onclick', '');
+					layer.load('1');
+					app.getAjax('deviceLeaseApp/getOperationTime', {}, function(res){
+						layer.closeAll();
+						var nowDate = new Date();
+						var nowYear = nowDate.getFullYear();
+						var nowMonth = nowDate.getMonth() + 1;
+						nowMonth = nowMonth>9?nowMonth:'0'+nowMonth;
+						var nowDay = nowDate.getDate();
+						nowDay = nowDay>9?nowDay:'0'+nowDay;
+						var shipStartDate = new Date(nowYear + '-' + nowMonth + '-' + nowDay + ' ' + res.data.trainOperationStartTime).getTime();
+						var shipEndDate = new Date(nowYear + '-' + nowMonth + '-' + nowDay + ' ' + res.data.trainOperationEndTime).getTime();
+						var batteryStartDate = new Date(nowYear + '-' + nowMonth + '-' + nowDay + ' ' + res.data.batteryOperationStartTime).getTime();
+						var batteryEndDate = new Date(nowYear + '-' + nowMonth + '-' + nowDay + ' ' + res.data.batteryOperationEndTime).getTime();
+						if(lineId == '1'){
+							if(shipStartDate > nowDate.getTime() || shipEndDate < nowDate.getTime()){
+								layer.open({
+									title: '不在营业时间',
+									content: '<div style="font-size: 23px;color: blue;font-weight:bold;line-height:35px;">火车运营时间:</br>' + res.data.trainOperationStartTime + '至' + res.data.trainOperationEndTime + '</div>',
+									time: 10000
+								});
+								$(that).attr('onclick', 'buyClick(this,'+lineId+')');
+							}else{
+								$('.closeBtn').attr('onclick', 'closeClick('+lineId+')');
+								if(lineId == '1'){
+									$('.qrcodeImg').attr('src', 'img/train.png');
+									$('.ticketView').css({
+										"background": "url(img/trainLine.jpg) no-repeat left top",
+										"background-size": "100% 100%"
+									})
+									$('.currLineName').text('火车环线');
+								}else if(lineId == '2'){
+									$('.qrcodeImg').attr('src', 'img/nx.png')
+									
+									$('.currLineName').text('环线南行');
+								}else if(lineId == '3'){
+									$('.qrcodeImg').attr('src', 'img/hx.png')
+									$('.ticketView').css({
+										"background": "url(img/hxLine.jpg) no-repeat left top",
+										"background-size": "100% 100%"
+									})
+									$('.currLineName').text('观光车环线');
+								}else if(lineId == '4'){
+									$('.qrcodeImg').attr('src', 'img/qj.png')
+									$('.ticketView').css({
+										"background": "url(img/hxLine.jpg) no-repeat left top",
+										"background-size": "100% 100%"
+									})
+									$('.currLineName').text('观光车单站票');
+								}
+								$('.hoverView').css({
+									'display': 'flex'
+								});
+								
+								var seconds = 30;
+								djs = setInterval(function(){
+									seconds -= 1;
+									if(seconds == 0){
+										$('.hoverView').hide();
+										$('.djs').text('30秒后自动关闭');
+										$(that).attr('onclick', 'buyClick(this,'+lineId+')');
+										clearInterval(djs);
+									}else{
+										$('.djs').text(seconds + '秒后自动关闭');
+									}
+								}, 1000);
+							}
+						}else{
+							if(batteryStartDate > nowDate.getTime() || batteryEndDate < nowDate.getTime()){
+								layer.open({
+									title: '不在营业时间',
+									content: '<div style="font-size: 23px;color: blue;font-weight:bold;line-height:35px;">观光车运营时间:</br>' + res.data.batteryOperationStartTime + '至' + res.data.batteryOperationEndTime + '</div>',
+									time: 10000
+								});
+								$(that).attr('onclick', 'buyClick(this,'+lineId+')');
+							}else{
+								$('.closeBtn').attr('onclick', 'closeClick('+lineId+')');
+								if(lineId == '1'){
+									$('.qrcodeImg').attr('src', 'img/train.png');
+									$('.ticketView').css({
+										"background": "url(img/trainLine.jpg) no-repeat left top",
+										"background-size": "100% 100%"
+									})
+									$('.currLineName').text('火车环线');
+								}else if(lineId == '2'){
+									$('.qrcodeImg').attr('src', 'img/nx.png')
+									
+									$('.currLineName').text('环线南行');
+								}else if(lineId == '3'){
+									$('.qrcodeImg').attr('src', 'img/hx.png')
+									$('.ticketView').css({
+										"background": "url(img/hxLine.jpg) no-repeat left top",
+										"background-size": "100% 100%"
+									})
+									$('.currLineName').text('观光车环线');
+								}else if(lineId == '4'){
+									$('.qrcodeImg').attr('src', 'img/qj.png')
+									$('.ticketView').css({
+										"background": "url(img/hxLine.jpg) no-repeat left top",
+										"background-size": "100% 100%"
+									})
+									$('.currLineName').text('观光车单站票');
+								}
+								$('.hoverView').css({
+									'display': 'flex'
+								});
+								
+								var seconds = 30;
+								djs = setInterval(function(){
+									seconds -= 1;
+									if(seconds == 0){
+										$('.hoverView').hide();
+										$('.djs').text('30秒后自动关闭');
+										$(that).attr('onclick', 'buyClick(this,'+lineId+')');
+										clearInterval(djs);
+									}else{
+										$('.djs').text(seconds + '秒后自动关闭');
+									}
+								}, 1000);
+							}
+						}
+						
+					},
+					function(){
+						layer.closeAll();
+						 $(that).attr('onclick', 'buyClick(this,'+lineId+')');
+					})
+					
+				}
+				
+				function closeClick(lineId){
+					clearInterval(djs);
+					if(lineId == '1'){
+						$('.buyBtn').eq(0).attr('onclick', 'buyClick(this,'+lineId+')');
+					}else if(lineId == '3'){
+						$('.buyBtn').eq(1).attr('onclick', 'buyClick(this,'+lineId+')');
+					}else if(lineId == '4'){
+						$('.buyBtn').eq(2).attr('onclick', 'buyClick(this,'+lineId+')');
+					}
+					$('.djs').text('30秒后自动关闭');
+					$('.hoverView').hide();
+				}
+				
+				function getEnName(siteName){
+					var enName;
+					if(siteName == '湖畔里站'){
+						enName = 'Hupanli';
+					}else if(siteName == '丹凤朝阳站'){
+						enName = 'Danfeng Chaoyang';
+					}else if(siteName == '植物馆站'){
+						enName = 'Botanical Pavilion';
+					}else if(siteName == '皮影乐园站'){
+						enName = 'Shadow Puppet Theme Park';
+					}else if(siteName == '国内园站'){
+						enName = 'Domestic Garden';
+					}else if(siteName == '凤凰台站'){
+						enName = 'Fenghuangtai';
+					}else if(siteName == '游客中心站'){
+						enName = 'Tourist Center';
+					}else if(siteName == '桃花潭站'){
+						enName = 'Taohuatan';
+					}else if(siteName == '云凤岛站'){
+						enName = 'Yunfeng Islet';
+					}else if(siteName == '龙山站'){
+						enName = 'Longshan';
+					}else if(siteName == '朝晖岛站'){
+						enName = 'Zhaohui Islet';
+					}else if(siteName == '鱼龙码头站'){
+						enName = 'Yulong Whar';
+					}
+					return enName;
+				}
+				
+			</script>
+		</div>
+	</body>
+</html>

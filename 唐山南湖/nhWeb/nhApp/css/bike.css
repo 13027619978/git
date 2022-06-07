@@ -1,0 +1,83 @@
+.container{
+	min-height: 100vh;
+	width: 100%;
+	background-color: #f0f0f0;
+	padding: 0.625rem;
+	padding-bottom: 3.75rem;
+}
+.box .title{
+	font-size: 0.875rem;
+	font-weight: bold;
+	color: #333;
+	line-height: 1.875rem;
+}
+.box-content{
+	background-color: #fff;
+	padding: 0.5rem;
+	border-radius: 0.1875rem;
+}
+.price{
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+.price .price-item{
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	flex-direction: column;
+}
+.price .price-item .price-txt{
+	font-size: 0.8125rem;
+	color: #333;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+}
+.price .price-item .price-txt p{
+	font-size: 1rem;
+	font-weight: bold;
+	color: #ff5500;
+}
+.price .price-item p{
+	font-size: 0.875rem;
+	color: #333;
+}
+
+.box-content .phone{
+	width: 100%;
+	height: 2.1875rem;
+	border: 0.0625rem solid #ddd;
+	border-radius: 0.1875rem;
+	padding: 0 0.3125rem;
+	font-size: 0.875rem;
+}
+
+.box-content .desc p{
+	font-size: 0.875rem;
+	color: #ff5500;
+	line-height: 1.375rem;
+	padding: 0.125rem 0;
+}
+
+.btnView{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 3.75rem;
+	padding: 0.625rem;
+}
+.btnView a{
+	width: 100%;
+	line-height: 2.5rem;
+	background-color: #ff5500;
+	color: #fff;
+	font-size: 0.9375rem;
+	text-align: center;
+	border-radius: 0.1875rem;
+}
+.btnView .disabled{
+	background-color: #ddd;
+	color: #666;;
+}

@@ -1,0 +1,62 @@
+.container{
+	min-height: 100vh;
+	background-color: #f0f0f0;
+	padding: 0.625rem 0;
+}
+.content{
+	background-color: #fff;
+	padding: 0 0.625rem;
+}
+.content .labelView{
+	padding: 0.625rem;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	border-top: 0.0625rem solid #ddd;
+}
+.content p{
+	font-size: 0.875rem;
+	flex: 1;
+}
+.content .nameTxt{
+	flex: 0 0 4.6875rem;
+}
+.descView{
+	padding: 0.625rem;
+}
+.descView .title{
+	font-size: 0.9375rem;
+	font-weight: bold;
+	color: #333;
+	line-height: 1.875rem;
+}
+.descView p{
+	font-size: 0.875rem;
+	color: #333;
+	line-height: 1.25rem;
+	margin-bottom: 0.3125rem;
+}
+.qrcodeView{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	border-top: 1px solid #ddd;
+}
+.content .deviceType, .content .ridingTime{
+	font-size: 25px;
+	font-weight: bold;
+}
+.content .deviceType{
+	color: red;
+}
+.content .year{
+	border-top: 1px solid #ddd;
+}
+.content .year, .content .hour{
+	font-size: 48px;
+	font-weight: bold;
+	color: #0000FF;
+	line-height: 80px;
+	text-align: center;
+}

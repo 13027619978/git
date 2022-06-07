@@ -1,0 +1,387 @@
+.container{
+	width: 100%;
+	background-color: #011548;
+	padding: 10px;
+	min-width: 1900px;
+	height: 100vh;
+	overflow: hidden;
+}
+.fullScreen{
+	transform-origin: top center;
+}
+
+.topView{
+	padding: 0 90px;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+}
+.topView .weatherView p, .topView .timeView p{
+	color: #fff;
+	font-size: 16px;
+	line-height: 25px;
+	width: 230px;
+	padding-bottom: 10px;
+}
+.topView .timeView p{
+	text-align: right;
+}
+.topView .titleView{
+	background: url(../img/titleBg.png) no-repeat left top;
+	background-size: 100% 100%;
+	margin-left: 15px;
+}
+.topView .titleView p{
+	width: 540px;
+	height: 70px;
+	text-align: center;
+	font-size: 30px;
+	color: #0f2d9f;
+	font-weight: bold;
+	line-height: 80px;
+}
+
+.content{
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	background: url(../img/content-bg.png) no-repeat left top;
+	background-size: 100% 100%;
+	padding: 0 30px;
+	padding-top: 25px;
+	padding-bottom: 30px;
+	margin-top: -35px;
+}
+.content-left{
+	width: 755px;
+	padding-top: 60px;
+}
+
+.currSite{
+	width: 100%;
+	height: 131px;
+	pointer-events: auto;
+	border-radius: 0px;
+	border-style: solid;
+	border-image: url(../img/border.png) 32 37 fill / 32px 37px / 0 stretch;
+	border-width: 1px;
+	background: none;
+	filter: blur(0px);
+	backdrop-filter: blur(0px);
+	font-size: 38px;
+	font-weight: bold;
+	color: yellow;
+}
+.currSite p{
+	line-height: 131px;
+	width: 100%;
+	text-align: center;
+}
+
+.lineList{
+	padding: 10px 0;
+}
+.lineItem{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	position: relative;
+	background: url(../img/lineBg.png) no-repeat left top;
+	background-size: 100% 100%;
+	padding: 20px;
+	margin-top: 34.5px;
+}
+.leftMap{
+	flex: 0 0 180px;
+	border-radius: 10px;
+}
+.leftMap img{
+	height: 75px;
+	margin: 0 auto;
+}
+.leftMap .lineTitle{
+	font-size: 24px;
+	font-weight: bold;
+	color: #ccc60d;
+	margin-bottom: 10px;
+	text-align: center;
+}
+.routeView{
+	flex: 1;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+.btnView{
+	flex: 0 0 150px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.btnView p{
+	font-size: 15px;
+	color: #ccc60d;
+	font-weight: bold;
+}
+.buyBtn{
+	display: block;
+	width: 100%;
+	color: #fff;
+	background-color: red;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 10px;
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+.buyBtn.disabled{
+	background-color: #E6E6E6;
+	color: #666;
+}
+.routeTitle{
+	color: #e40013;
+	background-color: #fff;
+	line-height: 25px;
+	padding: 0 10px;
+	border-radius: 20px;
+	font-size: 14px;
+	font-weight: bolder;
+	margin-top: 22px;
+}
+.routeContent{
+	flex: 1;
+	margin-top: -20px;
+}
+.nextCar{
+	color: yellow;
+	text-align: center;
+	font-size: 16px;
+}
+.nextCar .nextTxt{
+	font-size: 18px;
+	color: #fff;
+	margin: 0 10px;
+}
+.routeDetail{
+	position: relative;
+	width: 100%;
+	padding-top: 100px;
+}
+.routeDetail .line{
+	background-color: #777;
+	position: absolute;
+	left: 10px;
+	right: 60px;
+	top: 65%;
+	height: 5px;
+	margin-top: -2.5px;
+}
+.siteList{
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 65%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: -8px;
+	padding-right: 30px;
+	padding-left: 30px;
+}
+.siteList .siteItem{
+	height: 40px;	
+}
+.siteList .siteItem:nth-of-type(1){
+	margin-left: -50px;
+}
+.xx .siteItem:nth-of-type(1){
+	margin-left: -50px;
+}
+.siteList .currItem{
+	height: 60px;	
+	margin-top: -4px;
+}
+.siteList .siteItem img{
+	height: 20px;
+}
+.siteList .currItem img{
+	height: 25px;	
+}
+.siteList .active img{
+	height: 72px;
+}
+
+.site{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+.site .carInfo{
+	font-size: 16px;
+	color: #fff;
+	position: absolute;
+	left: 50%;
+	bottom: -25px;
+	width: 120px;
+	margin-left: -60px;
+	text-align: center;
+	display: none;
+}
+.site .siteName{
+	color: #fff;
+	font-size: 14px;
+	text-align: center;
+}
+.fx:nth-of-type(1){
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -28px;
+	margin-left: -50px;
+}
+.xx .fx:nth-of-type(1){
+	position: absolute;
+	top: 50%;
+	left: 33%;
+	margin-top: -28px;
+	margin-left: -50px;
+}
+.xx .fx:nth-of-type(2){
+	position: absolute;
+	top: 50%;
+	left: 66%;
+	margin-top: -28px;
+	margin-left: -50px;
+}
+/* .fx:nth-of-type(2){
+	position: absolute;
+	top: 50%;
+	left: 66%;
+	margin-top: -28px;
+	margin-left: -25px;
+} */
+.siteItem{
+	width: 70px;
+}
+
+
+.content-right{
+	padding-left: 30px;
+	padding-top: 60px;
+}
+.content-right .right-top{
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+.mapView{
+	pointer-events: auto;
+	border-radius: 0px;
+	border-style: solid;
+	border-image: url(../img/border.png) 32 37 fill / 32px 37px / 0 stretch;
+	border-width: 1px;
+	background: none;
+	filter: blur(0px);
+	backdrop-filter: blur(0px);
+	width: 490px;
+	height: 430px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 1005px;
+	height: 905px;
+	position: relative;
+	margin-right: 30px;
+}
+.mapView img{
+	height: 790px;
+	margin: 0 auto;
+}
+.mapView .mapTitle{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	text-align: center;
+	font-size: 28px;
+	font-weight: bold;
+	color: #fff;
+	line-height: 85px;
+}
+.mapView #container{
+	width: 950px;
+	height: 795px;
+	margin-top: 0;
+}
+.callView{
+	width: 230px;
+	margin-top: 26px;
+	display: none;
+}
+.callView img{
+	width: 100%;
+}
+.adView{
+	background: url(../img/adBg.png) no-repeat left top;
+	background-size: 100%;
+	width: 750px;
+	height: 495px;
+	display: none;
+}
+
+
+
+.hoverView{
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background-color: rgba(6, 19, 74, .7);
+	z-index: 999;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	display: none;
+}
+.hoverView .ticketView{
+	width: 800px;
+	height: 1000px;
+	background: url(../img/buyImg.png) no-repeat left top;
+	background-size: 100% 100%;
+	position: relative;
+}
+.closeBtn{
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: block;
+	width: 50px;
+	height: 50px;
+}
+.qrcodeImg{
+	position: absolute;
+	width: 180px;
+	left: 50%;
+	top: 70px;
+	margin-left: -90px;
+}
+.currLineName{
+	position: absolute;
+	left: 80px;
+	top: 80px;
+	line-height: 35px;
+	width: 200px;
+	font-size: 28px;
+	color: #fff;
+}
+.djs{
+	width: 100%;
+	text-align: center;
+	line-height: 50px;
+	font-size: 24px;
+	color: #fff;
+}

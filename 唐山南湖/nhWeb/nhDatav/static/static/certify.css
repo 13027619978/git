@@ -1,0 +1,20 @@
+@charset "utf-8";
+/* CSS Document */
+
+#certify {
+	position: relative;
+	width: 100%;
+	margin: 0 auto
+}
+
+#certify  .swiper-slide {
+	width: 290px;
+	height: 140px;
+}
+#certify  .swiper-slide p {
+	line-height: 20px;
+	text-align: left;
+	color: #fff;
+	font-size: 12px;
+	margin: 0;
+}

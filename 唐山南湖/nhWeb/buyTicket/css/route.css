@@ -1,0 +1,89 @@
+.container{
+	width: 100%;
+	background-color: #011548;
+	padding: 10px;
+	/* min-width: 1080px; */
+	height: 100vh;
+	overflow: hidden;
+}
+
+.topView{
+	padding: 0 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+}
+.topView .weatherView p, .topView .timeView p{
+	color: #fff;
+	font-size: 20px;
+	line-height: 25px;
+	width: 220px;
+	padding-bottom: 10px;
+}
+.topView .timeView p{
+	text-align: right;
+}
+.topView .titleView{
+	background: url(../img/titleBg.png) no-repeat left top;
+	background-size: 100% 100%;
+	margin-left: 15px;
+}
+.topView .titleView p{
+	width: 580px;
+	height: 80px;
+	text-align: center;
+	font-size: 26px;
+	color: #0f2d9f;
+	font-weight: bold;
+	line-height: 85px;
+}
+
+.ticketList{
+	padding: 20px 30px;
+}
+.ticketItem{
+	font-size: 24px;
+	color: #fff;
+	margin-bottom: 20px;
+	padding: 25px 30px;
+	margin-bottom: 15px;
+	background: url(../img/lineBg.png) no-repeat left top;
+	background-size: 100% 100%;
+}
+.ticketItem p{
+	line-height: 50px;
+}
+.ticketItem p font{
+	color: yellow;
+	font-weight: bold;
+}
+.qrcodeList{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 10px;
+	padding: 0 10px;
+}
+.qrcodeItem{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 0 60px;
+}
+.qrcodeItem img{
+	width: 150px;
+	margin-bottom: 5px;
+}
+.qrcodeItem p{
+	color: yellow;
+}
+
+.hoverView{
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 999;
+}

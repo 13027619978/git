@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/route.css?v=100">
+		<title></title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="fullScreen">
+				<div class="topView">
+					<div class="weatherView">
+						<p class="weatherTxt"></p>
+					</div>
+					<div class="titleView">
+						<p>唐山南湖·开滦旅游景区自助售票机</p>
+					</div>
+					<div class="timeView">
+						<p class="dateTxt"></p>
+					</div>
+				</div>
+				<div class="content">
+					<div class="ticketList">
+						<div class="ticketItem">
+							<p>票名：<font>唐山南湖·开滦旅游景区通票</font></p>
+							<p>电子票价：199元/人（2天有效）</p>
+							<p>可游览景点：</p>
+							<p>中国唐山皮影主题乐园、植物风情馆万象森林、开滦博物馆</p>
+							<p>井下探秘游、铁路源头博物馆</p>
+						</div>
+						<div class="ticketItem">
+							<p>票名：<font>开滦国家矿山公园：开滦博物馆</font></p>
+							<p>电子票价：36元/人（周一闭馆）</p>
+						</div>
+						<div class="ticketItem">
+							<p>票名：<font>开滦国家矿山公园：开滦博物馆+井下探秘游</font></p>
+							<p>电子票价：108元/人（周一闭馆）</p>
+						</div>
+						<div class="ticketItem">
+							<p>票名：<font>开滦国家矿山公园：中国铁路源头博物馆</font></p>
+							<p>电子票价：40元/人（周一闭馆）</p>
+						</div>
+						<div class="ticketItem">
+							<p>票名：<font>开滦国家矿山公园：开滦博物馆+中国铁路源头博物馆</font></p>
+							<p>电子票价：70元/人（周一闭馆）</p>
+						</div>
+						<div class="ticketItem">
+							<p>票名：<font>开滦国家矿山公园：开滦博物馆+井下探秘游+中国铁路源头博物馆</font></p>
+							<p>电子票价：138元/人（周一闭馆）</p>
+						</div>
+						<div class="ticketItem">
+							<p>票名：<font>唐山南湖旅游景区：植物风情馆万象森林日场票</font></p>
+							<p>电子票价：50元/人（周一闭馆）</p>
+						</div>
+						<div class="ticketItem">
+							<p>票名：<font>唐山南湖旅游景区：中国唐山皮影主题乐园单人票</font></p>
+							<p>电子票价：100元/人（周一闭园）</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="hoverView">
+				
+			</div>
+			
+			<script src="js/jquery.min.js"></script>
+			<script src="js/app.js"></script>
+			<script type="text/javascript">
+				// 获取天气信息
+				$.ajax({
+				    url:'https://restapi.amap.com/v3/weather/weatherInfo?key=773c4e4c196eb78e21f220e7e14160d2&extensions=all&city=110106',
+				    type:"GET",
+				    success:function(data){
+				    	console.log(data);
+						$('.weatherTxt').text('今日 ' + data.forecasts[0].casts[0].dayweather  + ' ' + data.forecasts[0].casts[0].nighttemp + '~' + data.forecasts[0].casts[0].daytemp + '℃')
+				    }
+				});
+				
+				// 初始化时间
+				setInterval(function(){
+					var year = new Date().getFullYear();
+					var month = new Date().getMonth() + 1;
+					month = month<10?'0'+month:month;
+					var day = new Date().getDate();
+					day = day<10?'0'+day:day;
+					var hour = new Date().getHours();
+					hour = hour<10?'0'+hour:hour;
+					var minutes = new Date().getMinutes();
+					minutes = minutes<10?'0'+minutes:minutes;
+					var seconds = new Date().getSeconds();
+					seconds = seconds<10?'0'+seconds:seconds;
+					$('.dateTxt').text(year+'/'+month+'/'+day+' '+hour+':'+minutes+':'+seconds);
+				}, 1000);
+				
+			</script>
+		</div>
+	</body>
+</html>

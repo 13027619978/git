@@ -1,0 +1,37 @@
+.container{
+	padding: 10px;
+	height: 100vh;
+	overflow: hidden;
+}
+.title{
+	font-size: 20px;
+	font-weight: bold;
+	color: #333;
+	text-align: center;
+	line-height: 50px;
+}
+.imgView{
+	width: 100%;
+}
+.imgView .imgTitle{
+	font-size: 16px;
+	color: #333;
+	border-left: 5px solid #e9d946;
+	padding-left: 10px;
+	line-height: 20px;
+	margin-bottom: 10px;
+}
+.imgView img{
+	width: 100%;
+	margin-bottom: 10px;
+}
+.formView{
+	width: 100%;
+	padding: 10px;
+}
+.formView p{
+	font-size: 16px;
+	color: #333;
+	padding: 7px 3px;
+	border-bottom: 1px solid #ddd;
+}

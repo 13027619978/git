@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/blRoute.css?v=200">
+		<style type="text/css">
+			.amap-logo, .amap-copyright{
+				display: none !important;
+			}
+			.btnView img{
+				width: 150px;
+				margin-bottom: 10px;
+			}
+			.qrcodeTitle{
+				color: greenyellow !important;
+			}
+			.red{
+				color: red !important;
+			}
+		</style>
+		<title></title>
+	</head>
+	<body>
+		<div class="hoverView">
+			<div class="ticketView">
+				<a class="closeBtn" href="javascript:;" onclick="closeClick()"></a>
+				<img class="qrcodeImg" src="" >
+				<p class="currLineName"></p>
+				<p class="djs">30秒后自动关闭</p>
+			</div>
+		</div>
+		<div class="container">
+			<div class="fullScreen">
+				<div class="topView">
+					<div class="weatherView">
+						<p class="weatherTxt"></p>
+					</div>
+					<div class="titleView">
+						<p>观光游船智慧运营系统<br><font class="en">Sightseeing Cruise Ship Intelligent Operation System</font></p>
+					</div>
+					<div class="timeView">
+						<p class="dateTxt"></p>
+					</div>
+				</div>
+				<div class="content">
+					<div class="content-left">
+						<!-- 当前站点 -->
+						<div class="currSite">
+							<p class="currSiteName">当前站点：白鹭码头<br><font class="en">Current site:Egret(Bailu) Wharf</font></p>
+						</div>
+						<!-- 路线 -->
+						<div class="lineList">
+							<div class="lineItem">
+								<div class="leftMap">
+									<p class="lineTitle">小型观光船<br><font class="en">Small sightseeing boat</font></p>
+									<img src="img/ship-icon.png" >
+								</div>
+								<div class="routeView">
+									<div class="routeContent">
+										<!-- <div class="nextCar">
+											<p>本站不停靠</p>
+										</div> -->
+										<div class="routeDetail">
+											<span class="line"></span>
+											<div class="siteList xx">
+												<img class="fx" src="img/double-icon.png" >
+												<img class="fx" src="img/double-icon.png" >
+												<div class="siteItem">
+													<div class="site">
+														<img src="img/site-unSelect.png" >
+														<p class="siteName">白鹭码头<br>Egret(Bailu) Wharf </p>
+													</div>
+												</div>
+												<div class="siteItem">
+													<div class="site">
+														<img src="img/site-unSelect.png" >
+														<p class="siteName">龙山码头<br>Longshan Wharf</p>
+													</div>
+												</div>
+												<div class="siteItem">
+													<div class="site">
+														<img src="img/site-unSelect.png" >
+														<p class="siteName">龙泉湾码头<br>Longquan Bay Wharf </p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="btnView">
+									<!-- <a class="buyBtn" href="javascript:;" onclick="buyClick(this,1)">购票</a> -->
+									<img src="img/bl-xx.jpg" >
+									<p>微信扫码购票<br><font class="en">Use WeChat to scan the QR code to buy tickets</font></p>
+									<p>票价：30元/位<br><font class="en">Ticket price: 30 yuan/Person</font></p>
+								</div>
+							</div>
+							
+							<div class="lineItem">
+								<div class="leftMap">
+									<p class="lineTitle">快艇<br><font class="en">speedboat</font></p>
+									<img src="img/ship-icon.png" >
+								</div>
+								<div class="routeView">
+									<div class="routeContent">
+										<!-- <div class="nextCar">
+											<p>本站不停靠</p>
+										</div> -->
+										<div class="routeDetail">
+											<span class="line"></span>
+											<div class="siteList">
+												<img class="fx" src="img/double-icon.png" >
+												<div class="siteItem">
+													<div class="site">
+														<img src="img/site-unSelect.png" >
+														<p class="siteName">白鹭码头<br>Egret(Bailu) Wharf</p>
+													</div>
+												</div>
+												<div class="siteItem">
+													<div class="site">
+														<img src="img/site-unSelect.png" >
+														<p class="siteName">龙泉湾码头<br>Longquan Bay Wharf</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="btnView">
+									<!-- <a class="buyBtn" href="javascript:;" onclick="buyClick(this,3)">购票</a> -->
+									<img src="img/bl-kt.jpg" >
+									<p>微信扫码购票<br><font class="en">Use WeChat to scan the QR code to buy tickets</font></p>
+									<p>票价：40元/位<br><font class="en">Ticket price: 35 yuan/Person</font></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+					<div class="content-right">
+						<div class="right-top">
+							<div class="mapView">
+								<p class="mapTitle">自驾船位置<br><font class="en">Self-driving boat location</font></p>
+								<div id="container"></div>
+							</div>
+							<div class="callView">
+								<img src="img/callBg.png" >
+							</div>
+						</div>
+						<div class="adView">
+							<img src="" >
+						</div>
+					</div>
+				
+					<div class="refundView">
+						<div class="refundContent">
+							<!-- 退款二维码 -->
+							<div class="qrcodeView">
+								<p class="qrcodeTitle">自驾船退押金二维码<br><font class="en">Self-driving boats refund deposit QR code</font></p>
+								<div class="qrcodeContent">
+									<div class="qrcode"></div>
+								</div>
+								<p>当前二维码为自驾船还船码，用微信扫码可进行游船还船<br><font class="en">This QR code is the return code for self-driving boat, use the WeChat to scan the QR code to return the boat.</font></p>
+							</div>
+							<span class="lineSpan"></span>
+							<!-- 租赁规则 -->
+							<div class="rulesView">
+								<p class="rulesTitle">乘船安全须知</p>
+								<p class="titleEn">Safety instructions for boating cruising</p>
+								<p>1.请您穿好救生衣，听从工作人员安排，先下船后上船，船未停稳不得擅自上下。</p>
+								<p class="en">Please wear a life jacket, follow the arrangement of the staff, wait for getting off the boat before getting on the boat, do not get on or off before the stopping of the boat.</p>
+								<p>2.请您照顾好身边的老人和小孩，保管好自己的物品，以防丢失或落水。</p>
+								<p class="en">Please take good care of the elderly and children around you, and take good care of your belongings in case of losing or falling.</p>
+								<p>3.严禁将身体探出船外，以免发生危险。</p>
+								<p class="en">It is strictly prohibited to lean out of the ship.</p>
+								<p>4.严禁在船上喝酒，禁止酒后乘船，禁止在船上追逐 、打闹、站立、吸烟。</p>
+								<p class="en">It is strictly prohibited to get on the boat after drinking, drink alcohol on board, chase, fight, stand or smoke on board.</p>
+								<p>5.请您根据自身情况乘船，有高血压、心脏病、严重晕水、以及不具备自理能力的游客、禁止乘船。</p>
+								<p class="en">Please cruise according to your own situation, tourists with high blood pressure, heart disease, severe water sickness, and who can not take care of themselves are prohibited to get on the cruise boat</p>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			
+			<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=c1b024a249b04326f11894fd0e35041d"></script>
+			<script src="js/echarts.min.js"></script>
+			<script src="js/jquery.min.js"></script>
+			<script src="layer/layer.js"></script>
+			<script src="js/jquery.qrcode.min.js"></script>
+			<script src="js/app.js?v=100"></script>
+			<script type="text/javascript">
+				// var siteId = app.getQueryString('siteId');
+				// siteId = siteId?siteId:'0';
+				var djs;
+				var scale =  $('.fullScreen').height() / window.innerHeight;
+				$('.fullScreen').css({
+					'transform': 'scaleY('+scale+')'
+				})
+				
+				// if(siteId == '1'){
+				// 	$('.currSiteName').text('当前站点：游客中心站');
+				// }else if(siteId == '2'){
+				// 	$('.currSiteName').text('当前站点：龙山码头');
+				// }else if(siteId == '3'){
+				// 	$('.currSiteName').text('当前站点：凤凰台站');
+				// }
+				
+				getQrcode();
+				setInterval(function(){
+					getQrcode();
+				}, 10000);
+				
+				function getQrcode(){
+					$('.qrcode').html('');
+					$('.qrcode').qrcode({
+						text: 'https://jqadmin.tangshannanhu.com/weixintest/rich2/index?time=' + new Date().getTime(),
+						background: '#fff',
+						foreground: '#000',
+						width: 210,
+						height: 210
+					});
+				}
+				
+				// 创建地图实例
+				var imageLayer = new AMap.ImageLayer({
+					url: './img/newMap.png',
+					bounds: new AMap.Bounds(
+						[118.141889,39.582176],
+						[118.180729,39.614957]
+					),
+					zooms: [12, 15]
+				});
+				map = new AMap.Map("container", {
+				    zoom: 14.5,
+				    center: [118.156071,39.593664],
+				    resizeEnable: false,
+					zoomEnable:false,
+					dragEnable: false,
+					layers: [
+						new AMap.TileLayer(),
+						imageLayer
+					]
+				});
+				map.setFeatures(['bg']);
+				initMap(map);
+				
+				// 获取天气信息
+				$.ajax({
+				    url:'https://restapi.amap.com/v3/weather/weatherInfo?key=773c4e4c196eb78e21f220e7e14160d2&extensions=all&city=110106',
+				    type:"GET",
+				    success:function(data){
+				    	console.log(data);
+						$('.weatherTxt').text('今日 ' + data.forecasts[0].casts[0].dayweather  + ' ' + data.forecasts[0].casts[0].nighttemp + '~' + data.forecasts[0].casts[0].daytemp + '℃')
+				    }
+				});
+				
+				// 初始化时间
+				setInterval(function(){
+					var year = new Date().getFullYear();
+					var month = new Date().getMonth() + 1;
+					month = month<10?'0'+month:month;
+					var day = new Date().getDate();
+					day = day<10?'0'+day:day;
+					var hour = new Date().getHours();
+					hour = hour<10?'0'+hour:hour;
+					var minutes = new Date().getMinutes();
+					minutes = minutes<10?'0'+minutes:minutes;
+					var seconds = new Date().getSeconds();
+					seconds = seconds<10?'0'+seconds:seconds;
+					$('.dateTxt').text(year+'/'+month+'/'+day+' '+hour+':'+minutes+':'+seconds);
+					if($('.qrcodeTitle').hasClass('red')){
+						$('.qrcodeTitle').removeClass('red');
+					}else{
+						$('.qrcodeTitle').addClass('red');
+					}
+				}, 1000);
+				
+				
+				function closeClick(lineId){
+					clearInterval(djs);
+					if(lineId == '1'){
+						$('.buyBtn').eq(0).attr('onclick', 'buyClick(this,'+lineId+')');
+					}else if(lineId == '3'){
+						$('.buyBtn').eq(1).attr('onclick', 'buyClick(this,'+lineId+')');
+					}
+					$('.djs').text('30秒后自动关闭');
+					$('.hoverView').hide();
+				}
+				
+				function initMap(map){
+					$.ajax({
+					    url:'https://lease.smart-ideas.com.cn/nhpark/operation/getDeviceLocation?type=ship',
+					    type:"GET",
+					    success:function(res){
+							var markers = [];
+							var resLength = res.length;
+					    	res.forEach(function(value, key){
+					    		var lnglat = value;
+					    		var icon = new AMap.Icon({
+					    		    size: new AMap.Size(15, 45),    // 图标尺寸
+					    		    image: './img/mark.png',  // Icon的图像
+					    		    imageOffset: new AMap.Pixel(0, 25),  // 图像相对展示区域的偏移量，适于雪碧图等
+					    		    imageSize: new AMap.Size(15, 15)   // 根据所设置的大小拉伸或压缩图片
+					    		});
+					    		// 创建点实例
+					    		if(lnglat.longitude && lnglat.latitude){
+					    			var gps = [lnglat.longitude, lnglat.latitude];
+					    			new AMap.convertFrom(gps, 'gps', function (status, result) {
+					    			  if (result.info === 'ok') {
+					    			    var lnglats = result.locations;
+					    				var marker = new AMap.Marker({
+					    				    position: new AMap.LngLat(lnglats[0].lng, lnglats[0].lat),
+					    				    icon: icon
+					    				});
+					    				markers.push(marker);
+					    			  }
+					    			});
+					    		}else{
+									resLength -= 1;
+								}
+					    	})
+							
+							var myInter = setInterval(function(){
+								if(markers.length == resLength){
+									console.log('123');
+									map.clearMap();
+									// 创建覆盖物群组，并将 marker 传给 OverlayGroup
+									overlayGroups = new AMap.OverlayGroup(markers);
+									map.add(overlayGroups);
+									clearInterval(myInter);
+								}
+							}, 100);
+					    }
+					});
+				}
+				
+				function buyClick(that,lineId){
+					$(that).attr('onclick', '');
+					layer.load('1');
+					app.getAjax('deviceLeaseApp/getOperationTime', {}, function(res){
+						layer.closeAll();
+						var nowDate = new Date();
+						var nowYear = nowDate.getFullYear();
+						var nowMonth = nowDate.getMonth() + 1;
+						nowMonth = nowMonth>9?nowMonth:'0'+nowMonth;
+						var nowDay = nowDate.getDate();
+						nowDay = nowDay>9?nowDay:'0'+nowDay;
+						var shipStartDate = new Date(nowYear + '-' + nowMonth + '-' + nowDay + ' ' + res.data.shipOperationStartTime).getTime();
+						var shipEndDate = new Date(nowYear + '-' + nowMonth + '-' + nowDay + ' ' + res.data.shipOperationEndTime).getTime();
+						if(shipStartDate > nowDate.getTime() || shipEndDate < nowDate.getTime()){
+							layer.open({
+								title: '不在营业时间(Operating hours)',
+								content: '<div style="font-size: 23px;color: blue;font-weight:bold;line-height:35px;">摆渡船运营时间:</br>' + res.data.shipOperationStartTime + '至' + res.data.trainOperationEndTime + '</div>',
+								time: 10000
+							});
+							$(that).attr('onclick', 'buyClick(this,'+lineId+')');
+						}else{
+							$('.closeBtn').attr('onclick', 'closeClick('+lineId+')');
+							$('.ticketView').css({
+								"background": "url(img/mapLine.png) no-repeat left top",
+								"background-size": "100% 100%"
+							})
+							if(lineId == '1'){
+								$('.qrcodeImg').attr('src', 'img/bl-xx.jpg');
+								$('.currLineName').text('小型观光船');
+							}else if(lineId == '3'){
+								$('.qrcodeImg').attr('src', 'img/bl-kt.jpg');
+								$('.currLineName').text('快艇');
+							}
+							$('.hoverView').css({
+								'display': 'flex'
+							});
+							
+							var seconds = 30;
+							djs = setInterval(function(){
+								seconds -= 1;
+								if(seconds == 0){
+									seconds = 30;
+									$('.hoverView').hide();
+									$('.djs').text('30秒后自动关闭');
+									$(that).attr('onclick', 'buyClick(this,'+lineId+')');
+									clearInterval(djs);
+								}else{
+									$('.djs').text(seconds + '秒后自动关闭');
+								}
+							}, 1000);
+						}
+					},
+					function(){
+						layer.closeAll();
+						 $(that).attr('onclick', 'buyClick(this,'+lineId+')');
+					})
+				}
+				
+				function closeClick(lineId){
+					clearInterval(djs);
+					if(lineId == '1'){
+						$('.buyBtn').eq(0).attr('onclick', 'buyClick(this,'+lineId+')');
+					}else if(lineId == '3'){
+						$('.buyBtn').eq(1).attr('onclick', 'buyClick(this,'+lineId+')');
+					}
+					$('.djs').text('30秒后自动关闭');
+					$('.hoverView').hide();
+				}
+				
+			</script>
+		</div>
+	</body>
+</html>
