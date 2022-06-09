@@ -43,39 +43,6 @@
 						<div class="lineList">
 							<div class="lineItem">
 								<div class="leftMap">
-									<p class="lineTitle">火车环线<font>Train route</font></p>
-									<img src="img/train-icon.png" >
-									<p class="yyTime">营业时间</br><font class="en">Business hours</font></br><font class="yyTxt">09:00-17:30</font></p>
-								</div>
-								<!-- <span class="icon"></span> -->
-								<div class="routeView">
-									<!-- <p class="routeTitle">火车线路</p> -->
-									<div class="routeContent">
-										<div class="nextCar">
-											<p>本站不停靠</br><font class="en">The tour cart doesn’t stop here</font></p>
-										</div>
-										<div class="routeDetail loopDetail train">
-											<span class="line"></span>
-											<div class="siteList loop">
-												<img class="fx" src="img/double-icon.png" >
-												<img class="fx" src="img/double-icon.png" >
-												<img class="fx" src="img/right-icon.png" >
-												<img class="fx" src="img/right-icon.png" >
-												<img class="fx" src="img/left-icon.png" >
-												<img class="fx" src="img/double-icon.png" >
-												<img class="fx" src="img/double-icon.png" >
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="btnView">
-									<a class="buyBtn trainBtn" href="javascript:;" onclick="buyClick(this,1)">购票</br>Buy tickets</a>
-									<p>票价：30元/人/圈</br><font class="en">RMB 30 per person per loop</font></p>
-								</div>
-							</div>
-							
-							<div class="lineItem">
-								<div class="leftMap">
 									<p class="lineTitle">观光车环线<font>Tour cart loop</font></p>
 									<img src="img/car-icon.png" >
 									<p class="yyTime">营业时间</br><font class="en">Business hours</font></br><font class="yyTxt">09:00-17:30</font></p>
@@ -139,6 +106,39 @@
 								<div class="btnView">
 									<a class="buyBtn carBtn" href="javascript:;" onclick="buyClick(this,4)">购票</br>Buy tickets</a>
 									<p>票价：5元/人/站</br><font class="en">RMB 5 per person per site</font></p>
+								</div>
+							</div>
+						
+							<div class="lineItem">
+								<div class="leftMap">
+									<p class="lineTitle">火车环线<font>Train route</font></p>
+									<img src="img/train-icon.png" >
+									<p class="yyTime">营业时间</br><font class="en">Business hours</font></br><font class="yyTxt">09:00-17:30</font></p>
+								</div>
+								<!-- <span class="icon"></span> -->
+								<div class="routeView">
+									<!-- <p class="routeTitle">火车线路</p> -->
+									<div class="routeContent">
+										<div class="nextCar">
+											<p>本站不停靠</br><font class="en">The tour cart doesn’t stop here</font></p>
+										</div>
+										<div class="routeDetail loopDetail train">
+											<span class="line"></span>
+											<div class="siteList loop">
+												<img class="fx" src="img/double-icon.png" >
+												<img class="fx" src="img/double-icon.png" >
+												<img class="fx" src="img/right-icon.png" >
+												<img class="fx" src="img/right-icon.png" >
+												<img class="fx" src="img/left-icon.png" >
+												<img class="fx" src="img/double-icon.png" >
+												<img class="fx" src="img/double-icon.png" >
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="btnView">
+									<a class="buyBtn trainBtn" href="javascript:;" onclick="buyClick(this,1)">购票</br>Buy tickets</a>
+									<p>票价：30元/人/圈</br><font class="en">RMB 30 per person per loop</font></p>
 								</div>
 							</div>
 						</div>
@@ -281,50 +281,37 @@
 					$('.mapView img').attr('src', 'img/ykzx.png');
 				}else if(currSiteList.indexOf('7') != -1 || currSiteList.indexOf('35') != -1){
 					$('.currSiteName').html('当前站点：湖畔里站</br>Current Station:Hupanli');
-					// $('.buyBtn').eq(2).attr('onclick', '').addClass('disabled');
 					$('.mapView img').attr('src', 'img/hpl.png');
 				}else if(currSiteList.indexOf('8') != -1 || currSiteList.indexOf('36') != -1){
 					$('.currSiteName').html('当前站点：丹凤朝阳站</br>Current Station:Danfeng Chaoyang');
-					// $('.buyBtn').eq(2).attr('onclick', '').addClass('disabled');
 					$('.mapView img').attr('src', 'img/dfcy.png');
 				}else if(currSiteList.indexOf('15') != -1 || currSiteList.indexOf('42') != -1){
 					$('.currSiteName').html('当前站点：朝晖岛站</br>Current Station:Zhaohui Islet');
-					// $('.buyBtn').eq(2).attr('onclick', '').addClass('disabled');
 					$('.mapView img').attr('src', 'img/chd.png');
 				}else if(currSiteList.indexOf('14') != -1 || currSiteList.indexOf('41') != -1){
 					$('.currSiteName').html('当前站点：桃花潭站</br>Current Station:Taohuatan');
-					// $('.buyBtn').eq(2).attr('onclick', '').addClass('disabled');
 					$('.mapView img').attr('src', 'img/thy.png');
 				}else if(currSiteList.indexOf('13') != -1 || currSiteList.indexOf('40') != -1){
 					$('.currSiteName').html('当前站点：鱼龙码头站</br>Current Station:Yulong Wharf');
-					// $('.buyBtn').eq(2).attr('onclick', '').addClass('disabled');
 					$('.mapView img').attr('src', 'img/ylmt.png');
 				}else if(currSiteList.indexOf('12') != -1 || currSiteList.indexOf('39') != -1){
 					$('.currSiteName').html('当前站点：国内园站</br>Current Station:Domestic Garden');
-					// $('.buyBtn').eq(2).attr('onclick', '').addClass('disabled');
 					$('.mapView img').attr('src', 'img/gny.png');
 				}else if( currSiteList.indexOf('11') != -1 || currSiteList.indexOf('38') != -1){
 					$('.currSiteName').html('当前站点：植物馆站</br>Current Station:Botanical Pavilion');
-					// $('.buyBtn').eq(2).attr('onclick', '').addClass('disabled');
 					$('.mapView img').attr('src', 'img/zwy.png');
 				}else if(currSiteList.indexOf('9') != -1 || currSiteList.indexOf('37') != -1){
 					$('.currSiteName').html('当前站点：龙山站</br>Current Station:Longshan');
-					// $('.buyBtn').eq(2).attr('onclick', '').addClass('disabled');
 					$('.mapView img').attr('src', 'img/ls.png');
 				}else if(currSiteList.indexOf('10') != -1){
 					$('.currSiteName').html('当前站点：皮影乐园站</br>Current Station:Shadow Puppet Theme Park');
-					$('.buyBtn').eq(0).attr('onclick', '').addClass('disabled');
-					// $('.buyBtn').eq(2).attr('onclick', '').addClass('disabled');
+					$('.buyBtn').eq(2).attr('onclick', '').addClass('disabled');
 					$('.mapView img').attr('src', 'img/pyly.png');
 				}else if(currSiteList.indexOf('4') != -1 || currSiteList.indexOf('47') != -1){
 					$('.currSiteName').html('当前站点：凤凰台站</br>Current Station:Fenghuangtai');
-					// $('.buyBtn').eq(1).attr('onclick', '').addClass('disabled');
-					// $('.buyBtn').eq(2).attr('onclick', '').addClass('disabled');
 					$('.mapView img').attr('src', 'img/fht.png');
 				}else if(currSiteList.indexOf('5') != -1 || currSiteList.indexOf('46') != -1){
 					$('.currSiteName').html('当前站点：云凤岛站</br>Current Station:Yunfeng Islet');
-					// $('.buyBtn').eq(1).attr('onclick', '').addClass('disabled');
-					// $('.buyBtn').eq(2).attr('onclick', '').addClass('disabled');
 					$('.mapView img').attr('src', 'img/yfd.png');
 				}
 				
@@ -674,11 +661,11 @@
 				function closeClick(lineId){
 					clearInterval(djs);
 					if(lineId == '1'){
-						$('.buyBtn').eq(0).attr('onclick', 'buyClick(this,'+lineId+')');
-					}else if(lineId == '3'){
-						$('.buyBtn').eq(1).attr('onclick', 'buyClick(this,'+lineId+')');
-					}else if(lineId == '4'){
 						$('.buyBtn').eq(2).attr('onclick', 'buyClick(this,'+lineId+')');
+					}else if(lineId == '3'){
+						$('.buyBtn').eq(0).attr('onclick', 'buyClick(this,'+lineId+')');
+					}else if(lineId == '4'){
+						$('.buyBtn').eq(1).attr('onclick', 'buyClick(this,'+lineId+')');
 					}
 					$('.djs').text('30秒后自动关闭');
 					$('.hoverView').hide();

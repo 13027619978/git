@@ -189,6 +189,8 @@
 						if(res.data.vipStatus == '0'){
 							layer.closeAll();
 							$('.czBtn').show();
+							// $('.jhBtn').hide();
+							// $('.btnView p').hide();
 							$('.qrcodeLabel').attr('onclick', 'qrcodeClick(1)');
 							// 有推荐码
 							if(code){
@@ -208,6 +210,9 @@
 							}
 						}else{
 							$('.czBtn').hide();
+							// $('.jhBtn').show();
+							// $('.btnView p').show();
+							// $('.qrcodeLabel').attr('onclick', 'qrcodeClick(0)');
 							app.postAjax('/prod-api/api/h5/register/activate', {
 								openId: app.getCookie('openid')
 							}, function(res){
@@ -222,6 +227,24 @@
 					}
 				})
 			}
+			
+			// 激活点击事件
+			// function activateClick(){
+			// 	layer.confirm('请先确认转卡金额是否正确后再激活', {
+			// 		btn: ['确认激活', '取消'],
+			// 		yes: function(){
+			// 			app.postAjax('/prod-api/api/h5/register/activate', {
+			// 				openId: app.getCookie('openid')
+			// 			}, function(res){
+			// 				if(res.code == '200'){
+			// 					getCardInfo();
+			// 				}else{
+			// 					layer.alert(res.msg);
+			// 				}
+			// 			})
+			// 		}
+			// 	})
+			// }
 			
 			// 充值点击事件
 			function rechargeClick(){

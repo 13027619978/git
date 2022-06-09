@@ -108,6 +108,8 @@
 									'</div>'
 								)
 							}else if(historyType == '1'){
+								let webOrder = value.webOrderId;
+								webOrder = webOrder?webOrder:'无';
 								if(value.refundInfo){
 									$('.historyList').append(
 										'<div class="historyItem">' +
@@ -140,8 +142,8 @@
 												'<p>已退款</p>' +
 											'</div>' +
 											'<div class="itemBox">' +
-												'<p class="boxName">消费时间：</p>' +
-												'<p>'+ value.createTime +'</p>' +
+												'<p class="boxName">web单号：</p>' +
+												'<p>'+ webOrder +'</p>' +
 											'</div>' +
 										'</div>'
 									)
@@ -171,6 +173,10 @@
 											'<div class="itemBox">' +
 												'<p class="boxName">消费时间：</p>' +
 												'<p>'+ value.createTime +'</p>' +
+											'</div>' +
+											'<div class="itemBox">' +
+												'<p class="boxName">web单号：</p>' +
+												'<p>'+ webOrder +'</p>' +
 											'</div>' +
 										'</div>'
 									)
