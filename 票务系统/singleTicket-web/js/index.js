@@ -92,6 +92,13 @@ $(function(){
 	var enterpriseCode = app.getCookie('enterpriseCode');
 	var ticketGroupNum = app.getCookie('ticketGroupNum');
 	ticketInfoId = app.getCookie('ticketId');
+	
+	// 旧宫社区
+	if(enterpriseCode == 'TgsEpcJgsq'){
+		window.location.replace('https://boss.smart-ideas.com.cn/singleTicket-web/jgTicket.html?ticketId='+ ticketInfoId +'&ticketGroupNum=TGN20220609145205907&enterpriseCode=TgsEpcJgsq')
+	}
+	
+	
 	if(enterpriseCode == 'TgsEpcFhl' && ticketGroupNum == 'TGN20201228152933458'){
 		$('.fhlNoticeView').show();
 		$('.fhlTime').show();

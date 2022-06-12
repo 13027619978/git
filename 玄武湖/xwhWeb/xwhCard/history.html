@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		<link rel="stylesheet" href="css/reset.css">
-		<link rel="stylesheet" href="css/index.css?v=1.0.0">
+		<link rel="stylesheet" href="css/index.css?v=1.0.1">
 		<style type="text/css">
 			.container{
 				background-color: #f0f0f0;
@@ -28,6 +28,7 @@
 				display: flex;
 				justify-content: flex-start;
 				align-items: center;
+				position: relative;
 			}
 			.historyList .itemBox p{
 				font-size: 13px;
@@ -39,6 +40,48 @@
 				text-align: right;
 				color: #333;
 			}
+			.itemBox .qrcodeBtn{
+				position: absolute;
+				right: 10px;
+				bottom: 0;
+				line-height: 25px;
+				background-color: #00A2ED;
+				color: #fff;
+				border-radius: 3px;
+				padding: 0 10px;
+				width: 75px;
+			}
+			.itemBox .qrcodeBtn.qrBtnHide{
+				display: none;
+			}
+			.qrcodeView{
+				position: fixed;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				background-color: rgba(0, 0, 0, .5);
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.qrcodeImg{
+				padding: 5px;
+				background-color: #fff;
+			}
+			.closeBtn{
+				position: absolute;
+				top: 10px;
+				right: 10px;
+				display: block;
+				width: 24px;
+				line-height: 20px;
+				text-align: center;
+				border-radius: 50%;
+				background-color: #fff;
+				border: 2px solid #333;
+				font-size: 14px;
+			}
 		</style>
 		<title>玄武湖景区一卡通</title>
 	</head>
@@ -48,11 +91,19 @@
 			<div class="historyList">
 				
 			</div>
+			<div class="qrcodeView">
+				<a class="closeBtn" href="javascript:;" onclick="closeClick()">X</a>
+				<div class="qrcodeImg">
+					<div class="qrcode"></div>
+				</div>
+			</div>
 		</div>
 		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.qrcode.min.js"></script>
 		<script src="layer/layer.js"></script>
 		<script src="js/app.js?v=1.0.1"></script>
 		<script type="text/javascript">
+			$('.qrcodeView').hide();
 			let historyType = app.getQueryString('type');
 			let url;
 			if(historyType == '0'){
@@ -65,6 +116,24 @@
 				url = 'iccard';
 			}
 			layer.load('1');
+			
+			function showQrcode(webOrder){
+				$('.qrcode').html('');
+				$('.qrcodeView').show();
+				webOrder = webOrder.toString();
+				webOrder = webOrder.split('/')[1].split('/')[0];
+				$('.qrcode').qrcode({
+					text: webOrder,
+					background: '#fff',
+					foreground: '#000',
+					width: 180,
+					height: 180
+				});
+			}
+			
+			function closeClick(){
+				$('.qrcodeView').hide();
+			}
 			$(function(){
 				app.getAjax('/prod-api/api/h5/query/order/' + url, {
 					openId: app.getCookie('openid'),
@@ -110,6 +179,10 @@
 							}else if(historyType == '1'){
 								let webOrder = value.webOrderId;
 								webOrder = webOrder?webOrder:'无';
+								let qrBtnHide = '';
+								if(webOrder == '无'){
+									qrBtnHide = 'qrBtnHide';
+								}
 								if(value.refundInfo){
 									$('.historyList').append(
 										'<div class="historyItem">' +
@@ -144,6 +217,7 @@
 											'<div class="itemBox">' +
 												'<p class="boxName">web单号：</p>' +
 												'<p>'+ webOrder +'</p>' +
+												'<a class="qrcodeBtn '+ qrBtnHide +'" href="javascript:;" onclick="showQrcode(/'+ webOrder +'/)">二维码</p>' +
 											'</div>' +
 										'</div>'
 									)
@@ -177,6 +251,7 @@
 											'<div class="itemBox">' +
 												'<p class="boxName">web单号：</p>' +
 												'<p>'+ webOrder +'</p>' +
+												'<a class="qrcodeBtn '+ qrBtnHide +'" href="javascript:;" onclick="showQrcode(/'+ webOrder +'/)">二维码</p>' +
 											'</div>' +
 										'</div>'
 									)

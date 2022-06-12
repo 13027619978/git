@@ -6,6 +6,14 @@ app = {
 		var enterpriseCode = app.getQueryString('enterpriseCode');
 		var ticketGroupNum = app.getQueryString('ticketGroupNum');
 		var ticketId = app.getQueryString('ticketId');
+		
+		// 旧宫社区
+		if(enterpriseCode == 'TgsEpcJgsq'){
+			if(window.location.href.indexOf('jgTicket') == -1){
+				window.location.replace('https://boss.smart-ideas.com.cn/singleTicket-web/jgTicket.html?ticketId='+ ticketId +'&ticketGroupNum=TGN20220609145205907&enterpriseCode=TgsEpcJgsq');
+			}
+		}
+		
 		if(enterpriseCode == 'TgsEpcYby' && ticketGroupNum == 'TGN20201210095942945' && ticketId == '2c9141f4776c370d01777ac477af6852'){
 			if(window.location.href.indexOf('ybyhsTicket') == -1){
 				window.location.replace('ybyhsTicket.html?ticketId=' + ticketId + '&ticketGroupNum=' + ticketGroupNum + '&enterpriseCode=' + enterpriseCode);

@@ -6,27 +6,76 @@
 		<link rel="stylesheet" href="./css/cropper.min.css">
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/index.css?v=30">
-		<title>在线预约</title>
+		<style type="text/css">
+			.itemInfo{
+				align-items: flex-start;
+				font-size: 15px;
+				flex-wrap: wrap;
+			}
+			.itemInfo>p{
+				flex: 0 0 100%;
+				text-align: left;
+				font-weight: bold;
+			}
+			.itemInfo input{
+				font-size: 15px;
+				background-color: #f5f5f5;
+				border-radius: 5px;
+				padding: 0 10px;
+				height: 45px;
+			}
+			.itemInfo .radioView{
+				flex: 1;
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+			}
+			.itemInfo .radioView label{
+				display: block;
+				width: 50%;
+				font-size: 15px;
+				color: #333;
+				line-height: 35px;
+				padding: 0 10px;
+				display: flex;
+				align-items: center;
+			}
+			.itemInfo .radioView label input{
+				width: 20px;
+				height: 20px;
+				margin-right: 10px;
+			}
+			.visitorTitle{
+				font-size: 17px;
+			}
+			.itemInfo .imgView p{
+				font-size: 15px;
+				flex: 0 0 140px;
+				color: #666666;
+				text-align: right;
+			}
+		</style>
+		<title>在线登记</title>
 	</head>
 	<body>
 		<div class="container">
 			<!-- 门票名称 -->
 			<div class="ticketName">
-				<p class="ticketNameTxt"><font class="ticketType"></font></p>
-				<p class="ticketDesc"></p>
+				<p class="ticketNameTxt" style="font-size: 18px;text-align: center;"><font class="ticketType"></font></p>
+				<!-- <p class="ticketDesc"></p> -->
 				<!-- <p class="checkTime"></p> -->
 			</div>
 			
 			<!-- 购票须知 -->
-			<div class="noticeView">
+			<!-- <div class="noticeView">
 				<p class="noticeTitle fhlTitle">购票须知</p>
 				<div class="noticeText">
 					
 				</div>
-			</div>
+			</div> -->
 			
 			<!-- 预定时间 -->
-			<div class="ticketTime">
+			<div class="ticketTime" style="display: none;">
 				<p class="timeTitle">预定时间</p>
 				<div class="timeView">
 					<input class="timeInput" type="text" readonly="readonly">
@@ -35,28 +84,9 @@
 				</div>
 			</div>
 			
-			<!-- 凤凰岭时间段 -->
-			<div class="ticketTime fhlTime">
-				<p class="timeTitle">预定时间段</p>
-				<select class="yyTime">
-					<option value ="0">上午</option>
-					<option value ="1">下午</option>
-				</select>
-			</div>
-			
-			<!-- 购票数量 -->
-			<div class="ticketNumber">
-				<p class="numberText">购票数量：</p>
-				<div class="numberView">
-					<a class="subBtn" href="javascript:;" onclick="subClick(this)">-</a>
-					<input class="numberInput" type="number" readonly="readonly" value="0">
-					<a class="addBtn" href="javascript:;" onclick="addClick(this)">+</a>
-				</div>
-			</div>
-			
 			<!-- 游客信息 -->
 			<div class="visitorInfo">
-				<p class="visitorTitle">游客信息</p>
+				<p class="visitorTitle">登记信息</p>
 				<div class="visitorList">
 					<!-- <div class="visitorItem">
 						<div class="itemInfo">
@@ -75,8 +105,12 @@
 				</div>
 			</div>
 			
+			<div class="txtView" style="padding: 10px;">
+				<p style="font-size: 15px;color: #333;">温馨提示：信息录入仅做疫情筛查通行使用，信息会做加密处理，请放心使用！</p>
+			</div>
+			
 			<!-- 疫情防控 -->
-			<div class="yqView">
+			<!-- <div class="yqView">
 				<div class="radioItem">
 					<div>14天内是否有中高风险地区旅行史</div>
 					<div class="radioView">
@@ -91,16 +125,16 @@
 						<label for="jcs2"><input type="radio" id="jcs2" name="jcs" value="1">否</label>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			
 			<!-- 价格合计 -->
 			<div class="priceView">
-				<div class="priceLeft">
+				<!-- <div class="priceLeft">
 					订单金额：<p class="priceText">0元</p>
-				</div>
-				<div class="priceRight">
-					<a class="orderBtn" href="order.html">我的订单</a>
-					<a class="payBtn" href="javascript:;" onclick="payClick()">在线支付</a>
+				</div> -->
+				<div class="priceRight" style="width: 100%;flex: 0 0 100%;">
+					<!-- <a class="orderBtn" href="order.html">我的订单</a> -->
+					<a style="width: 100%;flex: 0 0 100%;background-color: #00B3FD;" class="payBtn" href="javascript:;" onclick="payClick()">在线提交</a>
 				</div>
 				<!-- <div class="noSale">
 					<p>暂不售票</p>
@@ -141,6 +175,6 @@
 		<script src="js/cropper.min.js"></script>
 		<script src="js/app.js?v=1.0.0"></script>
 		<script src="js/region.js"></script>
-		<script src="js/index.js?v=1.0.7"></script>
+		<script src="js/jgsq/index.js?v=1.0.1"></script>
 	</body>
 </html>

@@ -245,7 +245,7 @@
 	font-weight: bold;
 	margin-bottom: 15px;
 }
-.historyList a{
+.historyList>a{
 	display: block;
 	width: 100%;
 	color: #333;
