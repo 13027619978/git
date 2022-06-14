@@ -446,6 +446,7 @@ function getSaleInfoList(enterpriseCode, ticketGroupNum){
 			// }
 			$('.scenicName').text(scenicData.groupName);
 			$('.scenicDesc').text(scenicData.tipContent);
+			$('.noticeText').html('<font class="ticketStatus">闭园</font>' + res.message);
 			var saleInfoList = scenicData.ticketSalesInfoList;
 			saleInfoList.forEach(function(value, key){
 				var nowDate = new Date().getTime();
@@ -465,8 +466,6 @@ function getSaleInfoList(enterpriseCode, ticketGroupNum){
 				ticketItem += '<a class="buyBtn disabled" href="javascript:;">立即预定</a>';
 				ticketItem += '</div></div>';
 				$('.ticketList').append(ticketItem);
-				$('.noticeText').html('<font class="ticketStatus">闭园</font>' + res.message);
-				
 			})
 		}else{
 			layer.closeAll();
