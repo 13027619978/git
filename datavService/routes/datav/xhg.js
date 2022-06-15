@@ -205,7 +205,6 @@ router.get('/addTicket', async function(req, res){
 	})
 })
 
-
 // 鲜花港10000序列号
 router.get('/getXhgNp', async function(req, res){
 	fs.readFile(path.resolve(__dirname, './jsonData/xhgNpList.json'), 'utf8', function(err, data){

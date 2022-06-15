@@ -12,6 +12,7 @@ var boss = require('./datav/boss.js');
 var fzp = require('./datav/fzp.js');
 var ylh = require('./datav/ylh.js');
 var uploadImg = require('./datav/uploadImg.js');
+var hongtu = require('./datav/hongtu.js');
 var router = express.Router(); 
 
 router.use('/yby',yby);
@@ -26,5 +27,6 @@ router.use('/boss',boss);
 router.use('/fzp',fzp);
 router.use('/ylh',ylh);
 router.use('/uploadImg',uploadImg);
+router.use('/hongtu',hongtu);
 router.use('/sch',sch);
 module.exports = router;

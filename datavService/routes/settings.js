@@ -6,7 +6,7 @@ module.exports = {
   website: '127.0.0.1:4000',
   //天气配置
   weatherConfig: {
-    gaodeWeatherUrl: 'http://restapi.amap.com/v3/weather/weatherInfo?key=4029e5ad93ef93ad8821cad8b05d5978&extensions=all&city=',
+    gaodeWeatherUrl: 'http://restapi.amap.com/v3/weather/weatherInfo?key=14feb380c4ef089bad9d4c8342e7e850&extensions=all&city=',
     weatherPicUrl: 'http://47.94.82.166:3001/static/images/tianqi2019/ico2/'
   },
   //园博园接口配置

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+		<link rel="stylesheet" href="./css/cropper.min.css">
+		<link rel="stylesheet" href="css/reset.css">
+		<style type="text/css">
+			.container{
+				background-color: #f5f5f5;
+				min-height: 100vh;
+			}
+			/* 头像裁剪 */
+			.face-upload-modal, .face-preview-modal{
+				position: fixed;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				top: 0;
+				background-color: #000;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				display: none;
+			}
+			.face-upload-imgView{
+				width: 90%;
+				height: 90vw;
+			}
+			.face-upload-imgView img, .face-upload-imgView img{
+				width: 100%;
+			}
+			.face-upload-control{
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+			.face-upload-control .face-upload-btn{
+				display: block;
+				width: 100px;
+				text-align: center;
+				line-height: 45px;
+				color: #fff;
+			}
+			.face-preview-modal{
+				background-color: rgba(0,0,0,.3);
+			}
+			.face-preview-content{
+				width: 280px;
+				background-color: #fff;
+				border-radius: 5px;
+			}
+			.face-preview-imgView{
+				width: 100%;
+				padding: 20px 30px;
+			}
+			.face-preview-imgView .face-preview-img{
+				width: 100%;
+			}
+			.face-preview-control{
+				width: 100%;
+			}
+			.face-preview-btn{
+				width: 100%;
+				text-align: center;
+				line-height: 40px;
+				border-top: 1px solid #D0D0D0;
+				font-size: 16px;
+			}
+			.face-preview-title{
+				line-height: 35px;
+				font-size: 16px;
+				color: #333;
+				text-align: center;
+			}
+			canvas{
+				display: none;
+			}
+			
+			.formView{
+				padding: 10px;
+				background-color: #fff;
+			}
+			.title{
+				font-size: 18px;
+				font-weight: bold;
+				text-align: center;
+				margin-bottom: 10px;
+				background-color: #fff;
+				padding: 10px 0;
+			}
+			.formItem{
+				margin-bottom: 10px;
+			}
+			.formItem p{
+				font-size: 15px;
+				color: #333;
+				font-weight: bold;
+				line-height: 40px;
+			}
+			.formItem input{
+				width: 100%;
+				border: none;
+				outline: none;
+				line-height: 45px;
+				border-radius: 5px;
+				padding: 0 10px;
+				background-color: #f5f5f5;
+				font-size: 15px;
+				color: #333;
+			}
+			.registBtn{
+				display: block;
+				width: 100%;
+				line-height: 45px;
+				text-align: center;
+				background-color: #1E9FFF;
+				color: #fff;
+				font-size: 15px;
+				border-radius: 5px;
+			}
+			.formItem .imgView{
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+				background-color: #f5f5f5;
+				height: 45px;
+				border-radius: 5px;
+				position: relative;
+			}
+			.formItem .imgView p{
+				font-size: 15px;
+				flex: 0 0 140px;
+				color: #666666;
+				text-align: right;
+				font-weight: normal;
+			}
+			.formItem .imgView img{
+				height: 35px;
+				margin-left: 10px;
+			}
+			.formItem .imgView input {
+			    position: absolute;
+			    left: 0;
+			    right: 0;
+			    bottom: 0;
+			    top: 0;
+			    opacity: 0;
+			}
+			.radioView{
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+			}
+			.radioView label{
+				width: 50%;
+				font-size: 15px;
+				color: #333;
+				line-height: 35px;
+				padding: 0 10px;
+				display: flex;
+				align-items: center;
+			}
+			.radioView input{
+				width: 20px;
+				height: 20px;
+				margin-right: 10px;
+			}
+			.noticeTxt{
+				font-size: 15px;
+				color: #333;
+				line-height: 25px;
+				margin-top: 10px;
+				padding: 0 10px;
+			}
+		</style>
+		<title>用户注册</title>
+	</head>
+	<body>
+		<div class="container">
+			<p class="title">用户注册</p>
+			<div class="formView">
+				<div class="formItem">
+					<p>*姓名</p>
+					<input class="name" type="text" placeholder="请输入姓名">
+				</div>
+				<div class="formItem">
+					<p>*手机号</p>
+					<input class="phone" type="text" placeholder="请输入手机号">
+				</div>
+				<div class="formItem">
+					<p>*身份证</p>
+					<input class="idCard" type="text" placeholder="请输入身份证">
+				</div>
+				<div class="formItem">
+					<p>*住户类型</p>
+					<div class="radioView">
+						<label for="jcs1"><input type="radio" id="jcs1" name="zh" value="房主">房主</label>
+						<label for="jcs2"><input type="radio" id="jcs2" name="zh" value="租户">租户</label>
+					</div>
+				</div>
+				<div class="formItem">
+					<p>*人脸照片</p>
+					<div class="imgView">
+						<input class="selectImg" type="file" accept="image/*" onchange="selectImg(this)">
+						<p>点击上传人脸照片</p>
+						<img src="img/user.png">
+					</div>
+				</div>
+				<div class="formItem">
+					<p>详细住址</p>
+					<input class="address" type="text" placeholder="xxx楼xxx单元xxx室">
+				</div>
+				<a class="registBtn" href="javascript:;" onclick="registClick()">立即注册</a>
+			</div>
+			<p class="noticeTxt">温馨提示：信息录入仅做疫情筛查通行使用，信息会做加密处理，请放心使用！</p>
+			<form id="myForm" method="post" action="http://192.168.0.64/v1/api/person/uploadImage" enctype="multipart/form-data"></form>
+		</div>
+		
+		<!-- 图片裁剪部分 -->
+		<div class="face-upload-modal">
+			<div class="face-upload-imgView">
+				<img class="face-upload-img" src="" >
+			</div>
+			<div class="face-upload-control">
+				<a class="face-upload-btn" href="javascript:;" onclick="cancelClick()">取消</a>
+				<a class="face-upload-btn" href="javascript:;" onclick="imgSubmit()">确定</a>
+			</div>
+		</div>
+		
+		<!-- 个人头像预览 -->
+		<div class="face-preview-modal">
+			<div class="face-preview-content">
+				<p class="face-preview-title">个人照片</p>
+				<div class="face-preview-imgView">
+					<img class="face-preview-img" src="" >
+				</div>
+				<div class="face-preview-control">
+					<a class="face-preview-btn" href="javascript:;" onclick="previewSure()">确定</a>
+				</div>
+			</div>
+		</div>
+		<script src="js/md5.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/cropper.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app.js"></script>
+		<script type="text/javascript">
+			let imgUri;
+			let uploadImg;
+			let uuid;
+			$(function(){
+				uuid = app.getQueryString('uuid');
+				switch(uuid){
+					case '946fabfbc65641e6a96fd6a6ba12458c':
+						$('.title').text('五环国际小区');
+					break;
+					
+					case '3340c64dc5da4f089c6f64c51c7e43e9':
+						$('.title').text('金惠园三里小区');
+					break;
+					
+					case '55922892db474a65832a286f142aef72':
+						$('.title').text('明月湾小区');
+					break;
+					
+					case '3c9638ce690f458bb8a4d2ede711e16a':
+						$('.title').text('佳和园小区');
+					break;
+					
+					case 'c1bf571985324c23b1f344631007f7e7':
+						$('.title').text('德茂楼小区');
+					break;
+				}
+			})
+			
+			
+			function registClick(){
+				let name = $('.name').val();
+				let phone = $('.phone').val();
+				let idCard = $('.idCard').val();
+				let zh =$('input[name="zh"]:checked').val();
+				let address = $('.address').val();
+				address = address?address:"";
+				if(name && phone && idCard && imgUri && zh && uuid){
+					if(phone.length != 11){
+					  layer.alert('请输入正确的手机号');
+					  return;
+					}
+					if(idCard.length != 18){
+					  layer.alert('请输入正确的身份证号');
+					  return;
+					}
+					let autograph = '住户类型:'+zh+',详细住址:'+address;
+					$('.registBtn').attr('onclick', '');
+					console.log('{"personList":[{"name":"'+name+'","phone":"'+phone+'","identifyNum":"'+idCard+'","type":1,"imageUri":"'+imgUri+'","autograph":"'+autograph+'"}]}')
+					$.ajax({
+					    url:'http://node.smart-ideas.com.cn:3001/datav/hongtu/addUser',
+					    type:"POST",
+					    dataType:"json",
+					    contentType:"application/json",
+					    data:JSON.stringify({
+							name:name,
+							phone:phone,
+							identifyNum:idCard,
+							imgUri: imgUri,
+							type: 1,
+							autograph: autograph,
+							groupList: [uuid],
+							header: getHeader('/v1/api/person/batchAdd', 'POST', '{"personList":[{"name":"'+name+'","phone":"'+phone+'","identifyNum":"'+idCard+'","type":1,"imageUri":"'+imgUri+'","autograph":"'+autograph+'","groupList":["'+uuid+'"]}]}')
+						}),
+					    success:function(res){
+							$('.registBtn').attr('onclick', 'registClick()');
+					    	if(res.code == '0'){
+					    	  layer.alert('注册成功');
+					    	}else{
+					    	  layer.alert(res.msg);
+					    	}
+					    }
+					});
+				}else{
+					if(!name){
+					  layer.alert('请先输入姓名');
+					  return;
+					}
+					if(!phone){
+					  layer.alert('请先输入手机号');
+					  return;
+					}
+					if(!idCard){
+					  layer.alert('请先输入身份证号');
+					  return;
+					}
+					if(!imgUri){
+					  layer.alert('请先上传人脸照');
+					  return;
+					}
+					if(!zh){
+						layer.alert('请先选择住户类型！');
+						return;
+					}
+					if(!uuid){
+						layer.alert('无效链接');
+					}
+				}
+				
+			}
+			
+			
+			function selectImg(that){
+				var imgSrc = window.URL.createObjectURL(document.getElementsByClassName('selectImg')[0].files[0]);
+				uploadImg = imgSrc;
+				$('.face-upload-img').attr('src', imgSrc);
+				$('.face-upload-img').cropper({
+				  aspectRatio: 1 / 1
+				});
+				$('.face-modal').hide();
+				$('.face-upload-modal').css({
+					'display': 'flex'
+				});
+			}
+			
+			
+			function base64ToFile(dataurl){
+				var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+			    bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+				while(n--){
+					u8arr[n] = bstr.charCodeAt(n);
+				}
+				return new File([u8arr], 'a.png', {type:mime});
+			}
+			
+			// 个人照片预览
+			function previewSure(){
+				$('.face-preview-modal').hide();
+			}
+			
+			// 提交个人照片
+			function imgSubmit(){
+				var i = 0;
+				if(i == 0){
+					layer.load('1');
+					i += 1;
+				}
+				
+				var myInter = setInterval(function(){
+					if(i == 1){
+						var result= $('.face-upload-img').cropper("getCroppedCanvas", {"width": 300, "height": 300});
+						$('.container').append(result);
+						var imgBase = document.getElementsByTagName('canvas')[0].toDataURL("image/png");
+						var myForm = document.getElementById("myForm");
+						var fileData = new FormData(myForm);
+						fileData.append('file', base64ToFile(imgBase), base64ToFile(imgBase).name);
+						$(result).remove();
+						$('.face-modal-input').val('');
+						$('.face-upload-img').cropper('destroy');
+						$('.face-upload-modal').hide(function(){
+							let headers = getHeader('/v1/api/person/uploadImage','POST');
+							app.filePostAjax('/ticketApi/inner/forward/person/uploadImage', fileData, function(res){
+								layer.closeAll();
+								if(res.data.code == 0){
+									imgUri = res.data.data.uri;
+									$('.imgView p').text('重新上传');
+									$('.imgView img').attr('src', uploadImg);
+									$('.selectImg').val('');
+								}else{
+									imgUri = '';
+									layer.alert(res.data.msg);
+									$('.imgView p').text('点击上传人脸照片');
+									$('.imgView img').attr('src', './img/user.png');
+									$('.selectImg').val('');
+								}
+							})
+						});
+						clearInterval(myInter);
+					}
+				}, 500)
+			}  
+			
+			function cancelClick(){
+				$('.selectImg').val('');
+				$('.face-modal-input').val('');
+				$('.face-upload-img').cropper('destroy');
+				$('.face-upload-modal').hide();
+			}
+			
+			function getHeader(uri, method, requestBodyMD5){
+				requestBodyMD5 = md5(requestBodyMD5);
+				let cnonce = randomPassword();
+				let cappkey = 'appkey1';
+				let secretKey = 'sdfajk3242324fa!djq7';
+				let ctimestamp = new Date().getTime();
+				let csign = md5(uri+'-'+method+'--'+requestBodyMD5+'-'+secretKey+'-'+ctimestamp+'-'+cnonce+'-'+cappkey);
+				return {
+					ctimestamp: ctimestamp,
+					cnonce: cnonce,
+					cappkey: cappkey,
+					csign: csign,
+					"Content-Type": "application/json"
+				};
+			}
+			
+			function randomPassword(){
+				var str = "",
+					range = 6,
+					arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+			 
+				// 随机产生
+				for(var i=0; i<range; i++){
+					pos = Math.round(Math.random() * (arr.length-1));
+					str += arr[pos];
+				}
+				return str;
+			}
+		</script>
+	</body>
+</html>
