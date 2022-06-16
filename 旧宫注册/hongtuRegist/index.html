@@ -314,10 +314,11 @@
 							header: getHeader('/v1/api/person/batchAdd', 'POST', '{"personList":[{"name":"'+name+'","phone":"'+phone+'","identifyNum":"'+idCard+'","type":1,"imageUri":"'+imgUri+'","autograph":"'+autograph+'","groupList":["'+uuid+'"]}]}')
 						}),
 					    success:function(res){
-							$('.registBtn').attr('onclick', 'registClick()');
 					    	if(res.code == '0'){
 					    	  layer.alert('注册成功');
+							  $('.registBtn').text('注册成功').attr('onclick', '');
 					    	}else{
+								$('.registBtn').attr('onclick', 'registClick()');
 					    	  layer.alert(res.msg);
 					    	}
 					    }

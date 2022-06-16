@@ -684,6 +684,7 @@ function payClick(){
 								title: '登记成功',
 								closeBtn: 0
 							});
+							$('.payBtn').text('登记成功').attr('onclick','successClick()');
 						}, 500);
 						$('.payBtn').attr('onclick', 'payClick()');
 						
@@ -699,4 +700,7 @@ function payClick(){
 	}, 100);
 }
 
+function successClick(){
+	layer.alert('已登记成功，重新登记请再次扫码');
+}
 
