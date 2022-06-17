@@ -376,45 +376,46 @@
 .nx .fx, .bx .fx{
 	width: 25px;
 }
-.nx .fx:nth-of-type(1), .bx .fx:nth-of-type(1){
+.nx .fx:nth-of-type(1), .bx .fx:nth-of-type(1), .train .fx:nth-of-type(1){
 	left: -58px;
 	margin-left: -30px;
 	top: 50%;
 	margin-top: -12px;
 }
-.nx .fx:nth-of-type(2), .bx .fx:nth-of-type(2){
+.nx .fx:nth-of-type(2), .bx .fx:nth-of-type(2), .train .fx:nth-of-type(2){
 	left: 0;
 	margin-left: -40px;
 	top: 50%;
 	margin-top: -12px;
 }
-.nx .fx:nth-of-type(3), .bx .fx:nth-of-type(3){
+.nx .fx:nth-of-type(3), .bx .fx:nth-of-type(3), .train .fx:nth-of-type(3){
 	left: 25%;
-	margin-left: 14px;
+	margin-left: 5px;
+	top: -15px;
+	margin-left: 0;
+}
+.nx .fx:nth-of-type(4), .bx .fx:nth-of-type(4), .train .fx:nth-of-type(4){
+	left: 50%;
+	margin-left: 5px;
 	top: -15px;
 }
-.nx .fx:nth-of-type(4), .bx .fx:nth-of-type(4){
+.nx .fx:nth-of-type(5), .bx .fx:nth-of-type(5), .train .fx:nth-of-type(5){
 	left: 50%;
-	margin-left: 14px;
-	top: -15px;
-}
-.nx .fx:nth-of-type(5), .bx .fx:nth-of-type(5){
-	left: 50%;
-	margin-left: 14px;
+	margin-left: 18px;
 	bottom: -15px;
 }
-.nx .fx:nth-of-type(6), .bx .fx:nth-of-type(6){
+.nx .fx:nth-of-type(6), .bx .fx:nth-of-type(6), .train .fx:nth-of-type(6){
 	left: 25%;
-	margin-left: 14px;
+	margin-left: 18px;
 	bottom: -15px;
 }
-.nx .fx:nth-of-type(7), .bx .fx:nth-of-type(7){
+.nx .fx:nth-of-type(7), .bx .fx:nth-of-type(7), .train .fx:nth-of-type(7){
 	left: 0;
 	margin-left: -143px;
 	top: 50%;
 	margin-top: -12px;
 }
-.nx .fx:nth-of-type(8), .bx .fx:nth-of-type(8){
+.nx .fx:nth-of-type(8), .bx .fx:nth-of-type(8), .train .fx:nth-of-type(8){
 	left: 0;
 	margin-left: -200px;
 	top: 50%;
@@ -439,45 +440,7 @@
 .train .fx{
 	width: 25px;
 }
-.train .fx:nth-of-type(1){
-	left: -58px;
-	margin-left: -30px;
-	top: 50%;
-	margin-top: -12px;
-}
-.train .fx:nth-of-type(2){
-	left: 0;
-	margin-left: -40px;
-	top: 50%;
-	margin-top: -12px;
-}
-.train .fx:nth-of-type(3){
-	left: 25%;
-	margin-left: 10px;
-	top: -15px;
-}
-.train .fx:nth-of-type(4){
-	left: 50%;
-	margin-left: 10px;
-	top: -15px;
-}
-.train .fx:nth-of-type(5){
-	left: 50%;
-	margin-left: -10px;
-	bottom: -15px;
-}
-.train .fx:nth-of-type(6){
-	left: 0;
-	margin-left: -143px;
-	top: 50%;
-	margin-top: -12px;
-}
-.train .fx:nth-of-type(7){
-	left: 0;
-	margin-left: -200px;
-	top: 50%;
-	margin-top: -12px;
-}
+
 .loopDetail{
 	margin-top: 30px;
 	padding: 0;
