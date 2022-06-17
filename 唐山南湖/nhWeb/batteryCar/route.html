@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<link rel="stylesheet" href="css/reset.css">
-		<link rel="stylesheet" href="css/route.css?v=500">
+		<link rel="stylesheet" href="css/route.css?v=1.0.0">
 		<style type="text/css">
 			.nextTxt{
 				display: none;
@@ -223,9 +223,9 @@
 				// 获取营业时间
 				function getYYTime(){
 					app.getAjax('deviceLeaseApp/getOperationTime', {}, function(res){
-						$('.yyTxt').eq(0).text(res.data.trainOperationStartTime.split(':')[0] + ':' + res.data.trainOperationStartTime.split(':')[1] + '至' + res.data.trainOperationEndTime.split(':')[0] + ':' + res.data.trainOperationEndTime.split(':')[1]);
+						$('.yyTxt').eq(2).text(res.data.trainOperationStartTime.split(':')[0] + ':' + res.data.trainOperationStartTime.split(':')[1] + '至' + res.data.trainOperationEndTime.split(':')[0] + ':' + res.data.trainOperationEndTime.split(':')[1]);
 						$('.yyTxt').eq(1).text(res.data.batteryOperationStartTime.split(':')[0] + ':' + res.data.batteryOperationStartTime.split(':')[1] + '至' + res.data.batteryOperationEndTime.split(':')[0] + ':' + res.data.batteryOperationEndTime.split(':')[1]);
-						$('.yyTxt').eq(2).text(res.data.batteryOperationStartTime.split(':')[0] + ':' + res.data.batteryOperationStartTime.split(':')[1] + '至' + res.data.batteryOperationEndTime.split(':')[0] + ':' + res.data.batteryOperationEndTime.split(':')[1]);
+						$('.yyTxt').eq(0).text(res.data.batteryOperationStartTime.split(':')[0] + ':' + res.data.batteryOperationStartTime.split(':')[1] + '至' + res.data.batteryOperationEndTime.split(':')[0] + ':' + res.data.batteryOperationEndTime.split(':')[1]);
 						
 						var nowYear = new Date().getFullYear();
 						var nowMonth = new Date().getMonth() + 1;
@@ -345,7 +345,7 @@
 							console.log(currSiteList);
 							if(currSiteList.indexOf(value.siteId.toString()) != -1){
 								if(key < 12){
-									$('.siteList').eq(1).append(
+									$('.siteList').eq(0).append(
 										'<div class="siteItem currItem">'+
 											'<div class="site">'+
 												'<img src="img/currSite.png" >'+
@@ -353,7 +353,7 @@
 											'</div>'+
 										'</div>'
 									)
-									$('.siteList').eq(2).append(
+									$('.siteList').eq(1).append(
 										'<div class="siteItem currItem">'+
 											'<div class="site">'+
 												'<img src="img/currSite.png" >'+
@@ -364,7 +364,7 @@
 								}
 							}else{
 								if(key < 12){
-									$('.siteList').eq(1).append(
+									$('.siteList').eq(0).append(
 										'<div class="siteItem">'+
 											'<div class="site">'+
 												'<img src="img/site-unSelect.png" >'+
@@ -372,7 +372,7 @@
 											'</div>'+
 										'</div>'
 									)
-									$('.siteList').eq(2).append(
+									$('.siteList').eq(1).append(
 										'<div class="siteItem">'+
 											'<div class="site">'+
 												'<img src="img/site-unSelect.png" >'+
@@ -409,10 +409,10 @@
 										}
 									}
 								})
-								$('.nextCar p').eq(1).html(leftSiteName + '  <font class="nextTxt">暂无车辆运营</font> ' + rightSiteName +
+								$('.nextCar p').eq(0).html(leftSiteName + '  <font class="nextTxt">暂无车辆运营</font> ' + rightSiteName +
 									'</br><font class="en">' + leftEnName + '  <font class="nextTxt">No vehicles in operation</font> ' + rightEnName + '</font>'
 								);
-								$('.nextCar p').eq(2).html(leftSiteName + '  <font class="nextTxt">暂无车辆运营</font> ' + rightSiteName +
+								$('.nextCar p').eq(1).html(leftSiteName + '  <font class="nextTxt">暂无车辆运营</font> ' + rightSiteName +
 									'</br><font class="en">' + leftEnName + '  <font class="nextTxt">No vehicles in operation</font> ' + rightEnName + '</font>'
 								);
 							}
@@ -430,7 +430,7 @@
 							siteIdList.push(value.siteId);
 							if(currSiteList.indexOf(value.siteId.toString()) != -1){
 								if(key != '9' && key != '10' && key != '11' && key != '14' && key != '15'){
-									$('.siteList').eq(0).append(
+									$('.siteList').eq(2).append(
 										'<div class="siteItem currItem">'+
 											'<div class="site">'+
 												'<img src="img/currSite.png" >'+
@@ -442,7 +442,7 @@
 								
 							}else{
 								if(key != '9' && key != '10' && key != '11' && key != '14' && key != '15'){
-									$('.siteList').eq(0).append(
+									$('.siteList').eq(2).append(
 										'<div class="siteItem">'+
 											'<div class="site">'+
 												'<img src="img/site-unSelect.png" >'+
