@@ -39,7 +39,6 @@ function getWeatherInfoPicUrl(dayweather){
 }
 
 function getDataVWeatherJson(jsonBody){
-	console.log(jsonBody);
 	var weatherInfos = new Array();
 	for (var i = 0; i < 4; i++) {
 		var weatherInfo = new WeatherInfo();  	

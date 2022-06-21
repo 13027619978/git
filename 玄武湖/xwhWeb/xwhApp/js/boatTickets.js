@@ -26,6 +26,9 @@ $(function(){
 	}else if(ticketsType == '16'){
 		ticketsType = 16;
 		$('.singlePrice').text('80元/张');
+	}else if(ticketsType == '17'){
+		ticketsType = 17;
+		$('.singlePrice').text('50元/张');
 	}
 })
 
@@ -65,11 +68,15 @@ function getTotalPrice(ticketsNumber){
 		singlePrice = 98;
 	}else if(ticketsType == '16'){
 		singlePrice = 80;
+	}else if(ticketsType == '17'){
+		singlePrice = 50;
 	}
 	var totalPrice = ticketsNumber * singlePrice;
 	$('.totalPrice').text(totalPrice.toFixed(2));
 	return totalPrice;
 }
+
+
 
 function buyClick(that){
 	var ticketsNumber = $('.num').val();

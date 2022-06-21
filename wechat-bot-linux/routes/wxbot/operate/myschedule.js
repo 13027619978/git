@@ -1568,6 +1568,7 @@ function scheduleStart(){
 				boss.getBrakeData('TgsEpcYby', 'TGN20201210095942945', ybybsRoom);
 				yby.getCheckTicketInfo('TgsEpcYby', 'TGN20201210095942945', ybybsRoom);
 				boss.getBossYYInfo('TgsEpcYby', 'TGN20201210095942945', ybybsRoom);
+				// yby.getYbyOtaInfo(ybybsRoom);
 				if(parseInt(hour) == 11){
 					yby.getTicketsIncome(ybybsRoom);
 				}
@@ -1639,8 +1640,8 @@ function scheduleStart(){
 		}
 		
 		if(parseInt(hour) == 19){
-			// const nhzjcbszRoom = await wechat.bot.Room.find({topic: "唐山南湖游船报数组"});
-			// nh.getIncome(nhzjcbszRoom, 'ship');
+			const nhzjcbszRoom = await wechat.bot.Room.find({topic: "唐山南湖游船报数组"});
+			nh.getIncome(nhzjcbszRoom, 'ship');
 		}
 	})
 	

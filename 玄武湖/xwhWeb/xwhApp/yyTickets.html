@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/boatTickets.css?v=4">
+		<title>摆渡船购票</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="banner">
+				<img src="img/yyImg2.jpg" >
+			</div>
+			<div class="buyInfo">
+				<div class="orderView">
+					<a class="orderBtn" href="chooseOrder.html">我的订单</a>
+				</div>
+				<div class="buy_item">
+					<p class="item_l">票价：</p>
+					<p class="singlePrice"></p>
+				</div>
+				<div class="buy_item">
+					<p class="item_l">票数：</p>
+					<div class="number">
+						<a href="javascript:;" onclick="sub(this)">-</a>
+						<div class="number_txt">
+							<input class="num" type="number" value="0" onchange="quantityChange(this)" disabled="true"/>
+							张
+						</div>
+						<a href="javascript:;" onclick="add(this)">+</a>
+					</div>
+				</div>
+			</div>
+			<div class="descView">
+				<p class="title">游客乘船安全须知：</p>
+				<p>1.请您先下船后上船，船未停稳不得擅自上下。</p>
+				<p>2.请您照顾好老人和小孩，保管好自己的物品，以防丢失或落入水中。</p>
+				<p>3.严禁将身体探出船外，以免发生危险。</p>
+				<p>4.严禁在船上喝酒，严禁酒后驾船、乘船，请勿在船上相互追逐打闹、站立、抽烟。</p>
+				<p class="title">优惠政策：</p>
+				<p>1.3米以上儿童购成人票，1.3米以下儿童免票，其他证件无效。</p>
+			</div>
+			<div class="detailInfo">
+				<p style="text-align: center;font-size: 14px;color: #333;line-height: 40px;text-indent: 0;">--图文详情--</p>
+				<p>乘船地点：环洲码头（假山瀑布旁）</p>
+				<p>游览范围：西南湖（时长约30分钟）</p>
+				<p>满5人即可发船，发船时间根据游客人数调整。</p>
+				<p>购买后凭核销码前往环洲码头核销乘船即可</p>
+				<img src="img/yyImg1.jpg" >
+				<p>时至夏日，夜晚的玄武湖，成为许多市民游客休闲纳凉的最佳选择，玄武湖也开启了<font style="font-weight: bold;color: red;">夜游模式</font>，而其中最精彩的，要属<font style="font-weight: bold;color: red;">豪华游船西南湖夜游</font>了。</p>
+				<img src="img/yyImg2.jpg" >
+				<img src="img/yyImg3.jpg" >
+				<img src="img/yyImg4.jpg" >
+				<p>西南湖水域宽阔，山、水、城、林相依，600余年历史明城墙的古朴延绵，钟山倒影龙盘苍翠，鸡鸣寺塔影婆娑，与紫峰大厦古今辉映......呈现出城外湖皓白，湖外山苍翠的美丽画卷。</p>
+				<img src="img/yyImg5.jpg" >
+				<img src="img/yyImg6.jpg" >
+			</div>
+			<div class="bottomView">
+				<p>总计：<font class="totalPrice">0.00</font>元</p>
+				<a href="javascript:;" onclick="buyClick(this)">购票</a>
+			</div>
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app.js?v=1.0.0"></script>
+		<script src="js/boatTickets.js?v=1.0.3"></script>
+	</body>
+</html>

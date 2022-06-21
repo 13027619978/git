@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css">
+		<style type="text/css">
+			.container{
+				background-color: #f5f5f5;
+				min-height: 100vh;
+			}
+			.container .btnList{
+				padding: 10px;
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-start;
+				flex-wrap: wrap;
+			}
+			.container .btnList a{
+				display: block;
+				width: 49%;
+				margin-bottom: 10px;
+				background-color: #fff;
+				border-radius: 5px;
+				overflow: hidden;
+				box-shadow: 0 0 5px #ddd;
+			}
+			.container .btnList img{
+				width: 100%;
+			}
+			.container .btnList a>p{
+				line-height: 35px;
+				font-size: 14px;
+				color: #333;
+				padding: 0 10px;
+				background: url(img/more-icon.png) no-repeat right center;
+				background-size: 15px auto;
+			}
+			
+			.cardView{
+				width: 100%;
+				background-color: #F0F0F0;
+				padding-bottom: 25px;
+			}
+			.card{
+				padding: 10px;
+			}
+			.cardInfo{
+				position: relative;
+				border-radius: 10px;
+				overflow: hidden;
+				box-shadow: 0 5px 5px #666;
+			}
+			.infoView{
+				background: url(img/ykt.png) no-repeat left top;
+				background-size: 100% 100%;
+			}
+			.infoContent{
+				background: rgba(232, 41, 31, .2);
+			}
+			.infoView .cardTitle{
+				font-size: 18px;
+				color: #e7b14c;
+				font-weight: bold;
+				text-align: center;
+				line-height: 45px;
+			}
+			.lastPrice{
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+				background-color: #b88e52;
+				padding: 5px 10px;
+				border-radius: 5px;
+			}
+			.lastPrice span{
+				display: block;
+				height: 30px;
+				color: #fff;
+				border-left: 1px solid #fff;
+				margin: 0 10px;
+			}
+			.totalMoney{
+				font-size: 14px;
+				color: #fff;
+			}
+			.totalMoney font{
+				font-size: 30px;
+				color: #e7b14c;
+				font-weight: bold;
+				margin-right: 5px;
+			}
+			.lastMoney{
+				font-size: 12px;
+				color: #fff;
+				text-align: center;
+			}
+			.lastMoney font{
+				color: #00ff00;
+				font-size: 14px;
+			}
+			.numberView{
+				padding: 5px 10px;
+				background: #453c37;
+			}
+			.cardNumber{
+				font-size: 12px;
+				color: #fff;
+			}
+			.container .btnList a>p{
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding-right: 20px;
+				font-weight: bold;
+			}
+			.imgView{
+				height: 128px;
+			}
+			.priceView{
+				padding: 10px;
+			}
+			.priceView p{
+				font-size: 14px;
+				color: #333;
+				line-height: 22px;
+				text-align: left;
+			}
+			.priceView .price{
+				font-size: 14px;
+				color: red;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-top: 5px;
+			}
+			.priceView .price font{
+				display: block;
+				font-size: 13px;
+				width: 65px;
+				line-height: 22px;
+				border: 1px solid red;
+				border-radius: 3px;
+				text-align: center;
+			}
+		</style>
+		<title>水上项目</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="btnList">
+				<a href="javascript:;" onclick="btnClick(1)">
+					<div class="imgView">
+						<img src="img/jb.jpg" >
+					</div>
+					<div class="priceView">
+						<p>玄武湖桨板票</p>
+						<p class="price">¥150<font>点击购票</font></p>
+					</div>
+				</a>
+				<a href="javascript:;" onclick="btnClick(2)">
+					<div class="imgView">
+						<img src="img/yy.jpg" >
+					</div>
+					<div class="priceView">
+						<p>玄武湖豪华游船夜游票</p>
+						<p class="price">¥50<font>点击购票</font></p>
+					</div>
+				</a>
+				<a href="javascript:;" onclick="btnClick(3)">
+					<div class="imgView">
+						<img src="img/canoeBanner.png" >
+					</div>
+					<div class="priceView">
+						<p>玄武湖皮划艇单人票</p>
+						<p class="price">¥100<font>点击购票</font></p>
+					</div>
+				</a>
+				<a href="javascript:;" onclick="btnClick(4)">
+					<div class="imgView">
+						<img src="img/canoeBanner.png" >
+					</div>
+					<div class="priceView">
+						<p>玄武湖皮划艇双人票</p>
+						<p class="price">¥180<font>点击购票</font></p>
+					</div>
+				</a>
+				<a href="javascript:;" onclick="btnClick(5)">
+					<div class="imgView">
+						<img src="img/canoeImg.jpg" >
+					</div>
+					<div class="priceView">
+						<p>玄武湖皮划艇体验票</p>
+						<p class="price">¥65<font>点击购票</font></p>
+					</div>
+				</a>
+			</div>
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jweixin-1.0.0.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				app.wxUserInfo(function(){
+					
+				});
+			})
+			
+			function btnClick(btnType){
+				if(btnType == 1){
+					window.location.href = 'http://hd.smart-ideas.com.cn/xwhWeb/xwhApp/canoeTickets.html?openid=' + app.getCookie('openid') + '&ticketType=4'
+				}else if(btnType == 2){
+					window.location.href = 'http://hd.smart-ideas.com.cn/xwhWeb/xwhApp/yyTickets.html?openid=' + app.getCookie('openid') + '&type=17'
+				}else if(btnType == 3){
+					window.location.href = 'http://hd.smart-ideas.com.cn/xwhWeb/xwhApp/canoeTickets.html?openid=' + app.getCookie('openid') + '&ticketType=1'
+				}else if(btnType == 4){
+					window.location.href = 'http://hd.smart-ideas.com.cn/xwhWeb/xwhApp/canoeTickets.html?openid=' + app.getCookie('openid') + '&ticketType=2'
+				}else if(btnType == 5){
+					window.location.href = 'http://hd.smart-ideas.com.cn/xwhWeb/xwhApp/canoeTickets.html?openid=' + app.getCookie('openid') + '&ticketType=5'
+				}
+			}
+		</script>
+	</body>
+</html>

@@ -185,7 +185,7 @@ function getDeviceType(deviceType, openid, qrCode){
 		break;
 		
 		case "canoeTickets":
-			window.location.href = 'canoeTickets.html';
+			window.location.href = 'canoeTickets.html?ticketType=' + qrCode;
 		break;
 		
 		case "lyTickets":

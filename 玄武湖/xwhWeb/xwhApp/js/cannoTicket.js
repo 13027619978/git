@@ -1,40 +1,117 @@
-let singleTicket;
+let singleTicket = 0;
 let ticketType;
+let timeValue;
 $(function(){
-	getSinglePrice();
 	if(app.getQueryString('openid')){
 		app.setCookie('openid', app.getQueryString('openid'));
 	}
+	
+	var ticketType = app.getQueryString('ticketType');
+	if(ticketType){
+		$('.num').val(1);
+	}
+	if(ticketType == 5){
+		$("#ticketType3").prop("checked",true);
+		$('.timeView').show();
+	}else if(ticketType == 4){
+		$("#ticketType4").prop("checked",true);
+	}else if(ticketType == 1){
+		$("#ticketType1").prop("checked",true);
+	}else if(ticketType == 2){
+		$("#ticketType2").prop("checked",true);
+	}
+	
+	getTotalPrice();
+	
+	var str = '<div>';
+	str += '<p style="font-size:16px;font-weight:bold;text-align:center;">免责声明</p>';
+	str += '<p style="font-size:12px;text-indent:2em;">根据玄武湖水上运动基地相关规定，手机、耳机、车钥匙等贵重物品严禁携带上船，本基地对游客携带上述物品的遗失、损坏不承担赔偿责任。</p>';
+	str += '<p style="font-size:12px;text-indent:2em;">本人已阅读以上声明，自愿携带。若发生遗失、损坏按以上规则处理，特此声明！</p>';
+	str += '</div>'
+	layer.open({
+		content: str,
+		closeBtn: false,
+		btn: ['我已阅读']
+	})
 })
 
 function ticketTypeChange(){
-	getSinglePrice();
+	$('.num').val('1');
+	$('.timeBtn').removeClass('active');
+	timeValue = '';
+	getTotalPrice();
 }
 
 function orderClick(){
 	$("#ticketType1").prop("checked",false);
 	$("#ticketType2").prop("checked",false);
+	$("#ticketType3").prop("checked",false);
+	$("#ticketType4").prop("checked",false);
 	window.location.href = 'chooseOrder.html';
 }
 
-function getSinglePrice(){
+function add(that){
 	ticketType = $("input[name='ticketType']:checked").val();
+	if(ticketType){
+		var ticketsNumber = parseInt($(that).parent().find('input').val());
+		if(ticketsNumber > 19){
+			layer.alert('单次最多购买20张');
+			return;
+		}
+		ticketsNumber += 1;
+		$(that).parent().find('input').val(ticketsNumber);
+		getTotalPrice(ticketsNumber);
+	}else{
+		layer.alert('请先选择购票种类')
+	}
+}
+
+function sub(that){
+	var ticketsNumber = parseInt($(that).parent().find('input').val());
+	if(ticketsNumber > 1){
+		ticketsNumber -= 1;
+		$(that).parent().find('input').val(ticketsNumber);
+	}
+	getTotalPrice(ticketsNumber);
+}
+
+function selectTime(that){
+	$(that).addClass('active').siblings().removeClass('active');
+	timeValue = 1;
+}
+
+function getTotalPrice(){
+	ticketType = $("input[name='ticketType']:checked").val();
+	$('.timeView').hide();
 	if(ticketType == '1'){
 		singleTicket = 100;
 	}else if(ticketType == '2'){
 		singleTicket = 180;
-	}else{
-		singleTicket = 0;
+	}else if(ticketType == '4'){
+		singleTicket = 150;
+	}else if(ticketType == '5'){
+		singleTicket = 65;
+		$('.timeView').show();
 	}
 	$('.singlePrice').text(singleTicket + '元/小时');
-	$('.totalPrice').text(parseFloat(singleTicket).toFixed(2));
+	if(ticketType == '5'){
+		$('.singlePrice').text(singleTicket + '元/人/小时(仅限周二至周日)');
+	}
+	var totalNumber = $('.num').val();
+	$('.totalPrice').text(singleTicket*totalNumber);
 }
 
 function buyClick(that){
-	var ticketsNumber = 1;
-	var totalMoney = singleTicket;
+	var ticketsNumber = $('.num').val();
+	var totalMoney = singleTicket*ticketsNumber;
 	var openid = app.getCookie('openid');
 	var phone = $('.phone').val();
+	if(ticketType == 5){
+		if(!timeValue){
+			layer.alert('请先选择时间');
+			return;
+		}
+	}
 	if(phone.length != 11){
 		layer.alert('请先输入正确的手机号');
 		return;
@@ -49,7 +126,7 @@ function buyClick(that){
 		openId: openid,
 		ticketId: ticketType,
 		phone: phone,
-		number: 1
+		number: ticketsNumber
 	}, function(res){
 		var orderId = res.data.canoeOrder.payId;
 		if(res.data.res){

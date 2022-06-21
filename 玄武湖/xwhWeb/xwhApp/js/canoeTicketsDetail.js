@@ -25,6 +25,12 @@ function getOrderInfo(orderId){
 				case 2:
 					ticketName = '双人皮划艇 ';
 				break;
+				case 4:
+					ticketName = '桨板 ';
+				break;
+				case 5:
+					ticketName = '皮划艇体验 ';
+				break;
 			}
 			$('.deviceType').text(ticketName);
 			var orderStatus;

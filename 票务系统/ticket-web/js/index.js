@@ -55,10 +55,10 @@ function getSaleInfoList(enterpriseCode, ticketGroupNum){
 			// 园博园提示
 			if(enterpriseCode == 'TgsEpcYby'){
 				var noticeString = '<p style="height:300px;overflow-y:auto;">尊敬的游客朋友们：<br>';
-				noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font style="color:red;font-weight:bold;">入园须持48小时内核酸阴性证明。</font><br>';
+				noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font style="color:red;font-weight:bold;">入园须持72小时内核酸阴性证明。</font><br>';
 				noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当前仍处在疫情防控时期，为了您与他人的健康和游览安全，请您认真阅读以下内容：<br>';
-				noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一、本人承诺：近期身体健康，无发热、咳嗽等异常情况；无流行病学接触史；无中高风险地区14天以内旅居史；无境外回国隔离不满21天的情况；48小时内核酸检测阴性。<br>';
-				noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;二、请提前1天以上在 “北京园博园见证精彩”微信公众号（官方指定购票平台）进行预约购票，并按照预约时段来园，凭购票二维码检票入园。入园门区为：2号门<font style="color:red;font-weight:bold;">（临时关闭）</font>、3号门、6号门。<br>';
+				noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一、本人承诺：近期身体健康，无发热、咳嗽等异常情况；无流行病学接触史；无中高风险地区14天以内旅居史；无境外回国隔离不满21天的情况；72小时内核酸检测阴性。<br>';
+				noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;二、请提前1天以上在 “北京园博园见证精彩”微信公众号（官方指定购票平台）进行预约购票，并按照预约时段来园，凭购票二维码检票入园。入园门区为：2号门、3号门、6号门。<br>';
 				noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;三、入园时请配合测温验码，出示北京健康宝绿码。请随身携带、科学佩戴口罩，参观游览时请保持1米以上社交距离。遇限流游览时，请有序排队，配合工作人员管理。<br>';
 				noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;四、谢绝持红码、黄码的游客入园，谢绝有14天内中高风险地区旅居使人员和入境未满21天人员入园。<br>';
 				noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;五、请遵守公园各项管理规定，不携带除轮椅、婴儿手推车和儿童脚踏手推车之外的其他种类轮制器械、电动平衡车、电动玩具车、电动行李箱以及各种渔具、风筝和无人飞行器入园。<br>';

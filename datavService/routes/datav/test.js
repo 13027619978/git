@@ -3,35 +3,19 @@ var router = express.Router();
 var http = require('http');
 
 router.get('/sendSms', async function(req1, res1){
-	let testText = '测试短信';
-	testText = str2utf8(text);
-	const options = {
-		hostname: '47.95.121.34:8888',
-		path: '/sms.aspx',
-		method: 'POST'
-	};
+	let testText = '【北京骑思妙享科技有限公司】测试短信';
+	testText = str2utf8(testText);
 	
-	const req = http.request(options, (res) => {
-		res.on('data', (d) => {
-			var res = JSON.parse(buffer.toString());
-			res1.send({
-				msg: 发送成功
-			});
-		});
-	});
+	let forms = new FormData();
+	forms.append('userid', 170);
+	forms.append('account', 'XZXC');
+	forms.append('password', '123456');
+	forms.append('mobile', '13027619978');
+	forms.append('content', testText);
+	forms.append('action', 'send');
+	forms.append('sendTime', '');
+	forms.append('extno', '');
 	
-	req.write({
-		userid: 114,
-		account: 'XZXC',
-		password: '123456',
-		mobile: '13027619978',
-		content: testText,
-		sendTime: '',
-		action: 'send',
-		extno: ''
-	});
-	
-	req.end();
 })
 
 function str2utf8(str){

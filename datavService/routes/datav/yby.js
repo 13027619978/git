@@ -1638,9 +1638,11 @@ function getBrakeData(enterpriseCode, ticketGroupNum, success){
 				var res = JSON.parse(d.toString());
 				var brakeList = res.data;
 				if(enterpriseCode == 'TgsEpcYby'){
-					getTeamTicketNumber(function(h5TeamTotal){
+					// getTeamTicketNumber(function(h5TeamTotal){
+						let h5TeamTotal = 0;
 						getCheckTicketNumber(enterpriseCode, ticketGroupNum, function(checkTotalNumber){
-							getYbyOtaInfo(function(dzTotal){
+							// getYbyOtaInfo(function(dzTotal){
+								let dzTotal = 0;
 								var totalInPeople = parseInt(h5TeamTotal) + parseInt(checkTotalNumber) + parseInt(dzTotal);
 								var totalOutPeople = 0;
 								var brakeString = '';
@@ -1655,24 +1657,28 @@ function getBrakeData(enterpriseCode, ticketGroupNum, success){
 								var liuIn = 0;
 								var liuOut = 0;
 								var sanOut = 0;
+								// 出园系数
+								var outNumber = 1.6;
 								brakeList.forEach(function(value, key){
 									var inTotal = parseInt(value.inTotal);
-									if(value.categoryName == '二号门闸机'){
-										erIn = inTotal;
-										erOut = value.outTotal;
-									}else if(value.categoryName == '四号门闸机'){
-										siIn = inTotal;
-										siOut = value.outTotal;
-									}else if(value.categoryName == '三号门闸机'){
-										sanOut = value.outTotal;
-									}else if(value.categoryName == '五号门闸机'){
-										wuIn = inTotal;
-										wuOut = value.outTotal;
-									}else if(value.categoryName == '六号门闸机'){
-										liuIn = inTotal;
-										liuOut = value.outTotal;
+									if(value.categoryName.indexOf('二号门') != -1){
+										erIn += inTotal;
+										erOut += parseInt(value.outTotal * outNumber);
+									}else if(value.categoryName.indexOf('四号门') != -1){
+										siIn += inTotal;
+										siOut += parseInt(value.outTotal * outNumber);
+									}else if(value.categoryName.indexOf('三号门') != -1){
+										sanOut += parseInt(value.outTotal * outNumber);
+									}else if(value.categoryName.indexOf('五号门') != -1){
+										wuIn += inTotal;
+										wuOut += parseInt(value.outTotal * outNumber);
+									}else if(value.categoryName.indexOf('六号门') != -1){
+										liuIn += inTotal;
+										liuOut += parseInt(value.outTotal * outNumber);
+									}else if(value.categoryName.indexOf('一号门') != -1){
+										erOut += parseInt(value.outTotal * outNumber);
 									}
-									totalOutPeople += parseInt(value.outTotal);
+									totalOutPeople += parseInt(value.outTotal * outNumber);
 								})
 								var sanIn = totalInPeople - parseInt(erIn) - parseInt(siIn) - parseInt(wuIn) - parseInt(liuIn);
 								sanIn = sanIn>0?sanIn:'0';
@@ -1694,9 +1700,9 @@ function getBrakeData(enterpriseCode, ticketGroupNum, success){
 								}
 								success(sendInfo);
 							})
-						})
+						// })
 						
-					})
+					// })
 				}
 			}
 		});
