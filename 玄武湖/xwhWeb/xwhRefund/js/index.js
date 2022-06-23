@@ -103,7 +103,7 @@ function getRefundInfo(host){
 			}else{
 				var dataMsg = data.msg;
 				if(dataMsg == '您的手机号没有可退款的订单'){
-					dataMsg = '<p style="color:red;font-weight:bold;">1、如果您已点击过"申请退款", 您的押金扣除消费后将原路退回<br></p>2、如果您使用微信支付请查询微<font style="color:blue;">"信支付记录"</font>; 如果您使用一卡通支付, 请查询<a style="color:blue;text-decoration: underline;font-weight:bold;" href="http://hd.smart-ideas.com.cn/xwhWeb/xwhCard/">"一卡通余额"</a><br>3、您的微信号暂时没有可退订单';
+					dataMsg = '<p style="color:red;font-weight:bold;">1、如果您已点击过"申请退款", 您的押金扣除消费后将原路退回<br></p>2、如果您使用微信支付请查询<font style="color:blue;">"微信支付记录"</font>; 如果您使用一卡通支付, 请查询<a style="color:blue;text-decoration: underline;font-weight:bold;" href="http://hd.smart-ideas.com.cn/xwhWeb/xwhCard/">"一卡通余额"</a><br>3、您的微信号暂时没有可退订单';
 				}
 				var str = '<div class="notice">' + dataMsg + '</div>';
 				$('.searchView').append(str);

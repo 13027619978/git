@@ -17,8 +17,10 @@
 			<div class="resulView">
 				<div class="thView">
 					<p>码头</p>
-					<p>充500送250</p>
-					<p>充1000送600</p>
+					<p>500（微信）</p>
+					<p>500（现金）</p>
+					<p>1000（微信）</p>
+					<p>1000（现金）</p>
 					<p>合计（元）</p>
 				</div>
 				<div class="tdView">
@@ -29,6 +31,8 @@
 					<p class="dark">合计</p>
 					<p class="dark rechargeOne">0</p>
 					<p class="dark rechargeTwo">0</p>
+					<p class="dark rechargeThree">0</p>
+					<p class="dark rechargeFour">0</p>
 					<p class="dark rechargeTotal">0</p>
 				</div>
 			</div>
@@ -62,7 +66,7 @@
 			
 			function searchClick(){
 				$('.tdView').html('');
-				app.getAjax('/api/datav/device/recharge', {
+				app.getAjax('/api/datav/device/recharge/v2', {
 					beginCreateTime: $('.startDate').val(),
 					endCreateTime: $('.endDate').val()
 				}, function(res){
@@ -75,19 +79,27 @@
 					})
 					let rechargeOneTotal = 0;
 					let rechargeTwoTotal = 0;
+					let rechargeThreeTotal = 0;
+					let rechargeFourTotal = 0;
 					let rechargeTotal = 0;
 					rechargeInfo.forEach(function(value, key){
 						if(value.deviceRemark != '吴东现场测试'){
-							let totalMoney = value.itemCollectList[0].realCashRecharge*1 + value.itemCollectList[1].realCashRecharge*1;
+							let totalMoney = value.itemCollectList[0].realCashRecharge*1 + value.itemCollectList[1].realCashRecharge*1 + value.itemCollectList[2].realCashRecharge*1 + value.itemCollectList[3].realCashRecharge*1;
 							rechargeOneTotal += value.itemCollectList[0].countRecharge*1;
 							rechargeTwoTotal += value.itemCollectList[1].countRecharge*1;
+							rechargeThreeTotal += value.itemCollectList[2].countRecharge*1;
+							rechargeFourTotal += value.itemCollectList[3].countRecharge*1;
 							rechargeTotal += value.itemCollectList[0].realCashRecharge;
 							rechargeTotal += value.itemCollectList[1].realCashRecharge;
+							rechargeTotal += value.itemCollectList[2].realCashRecharge;
+							rechargeTotal += value.itemCollectList[3].realCashRecharge;
 							$('.tdView').append(
 								'<div class="tdItem">' +
 									'<p>'+ value.deviceRemark +'</p>' +
 									'<p>'+ value.itemCollectList[0].countRecharge +'</p>' +
 									'<p>'+ value.itemCollectList[1].countRecharge +'</p>' +
+									'<p>'+ value.itemCollectList[2].countRecharge +'</p>' +
+									'<p>'+ value.itemCollectList[3].countRecharge +'</p>' +
 									'<p class="dark">'+ totalMoney +'</p>' +
 								'</div>'
 							)
@@ -95,6 +107,8 @@
 					})
 					$('.rechargeOne').text(rechargeOneTotal);
 					$('.rechargeTwo').text(rechargeTwoTotal);
+					$('.rechargeThree').text(rechargeThreeTotal);
+					$('.rechargeFour').text(rechargeFourTotal);
 					$('.rechargeTotal').text(rechargeTotal);
 				})
 			}
