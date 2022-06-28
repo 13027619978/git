@@ -45,6 +45,8 @@ function getxwhInfo(host, room){
 			var hzLoopIncome = parseInt(hzLoopShipIncome + hzLoopShipCardIncome);
 			var dkLoopIncome = parseInt(dkLoopShipIncome + dkLoopShipCardIncome);
 			var loopCardTotal = parseInt(hzLoopShipCardIncome + dkLoopShipCardIncome);
+			var hzLoopYtIncome = res.data.hzLoopYtIncome;
+			hzLoopYtIncome = hzLoopYtIncome?parseInt(hzLoopYtIncome):0;
 			
 			// 自驾船
 			var shipTotalIncome = res.data.shipTotalIncome;
@@ -96,7 +98,7 @@ function getxwhInfo(host, room){
 			botString += '阳光：' + ygShipIncome + '元\n';
 			botString += '芳桥：' + fqShipIncome + '元\n';
 			botString += '郭璞敦：' + gpdShipIncome + '元\n';
-			botString += '环洲：' + hzShipIncome + '元\n';
+			botString += '环洲：' + hzShipIncome + '元/'+ hzLoopYtIncome +'元\n';
 			botString += '台菱堤西：' + tltxShipIncome + '元\n';
 			
 			let path = require('path');

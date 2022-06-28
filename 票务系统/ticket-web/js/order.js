@@ -1,10 +1,12 @@
 var headPicUrl;
 var orderList = [];
 $(function(){
+	getOrderList();
+})
+
+function getOrderList(){
+	$('.orderList').html('');
 	var openid = app.getCookie('openid');
-	// if(openid){
-	// 	$('.homeBtn').attr('href', 'index.html?openid=' + openid);
-	// }
 	app.encryptGetAjax('order/encrypt/getDetailListByOpenId', {
 		openId: openid,
 		enterpriseCode: app.getCookie('enterpriseCode'),
@@ -80,6 +82,9 @@ $(function(){
 								'<p class="time">支付时间：'+ value.payTime +'</p>' +
 								'<p class="price">合计<font>￥'+ value.totalPrice +'</font></p>' +
 							'</div>' +
+							'<div class="deleteView">' +
+								'<a href="javascript:;" onclick="deleteClick(/'+ value.ticketOrderId +'/)">删除订单</a>' +
+							'</div>' +
 						'</div>';
 						
 					if(value.categoryName == '年票'){
@@ -109,7 +114,30 @@ $(function(){
 			$('.orderList').hide();
 		}
 	})
-})
+}
+
+function deleteClick(ticketId){
+	window.event? window.event.cancelBubble = true : e.stopPropagation();
+	console.log(ticketId);
+	layer.alert('确认删除此订单?', {
+		btn: ['确定','取消'],
+		yes: function(){
+			console.log('123');
+			layer.closeAll();
+			layer.load('1');
+			var ticketOrderId = ticketId.toString().split('/')[1];
+			app.getAjax('ticketOrder/visitor/del', {
+				ticketOrderId: ticketOrderId
+			}, function(res){
+				console.log(res);
+				if(res.success){
+					layer.closeAll();
+					layer.msg('删除成功');
+				}
+			})
+		}
+	})
+}
 
 function orderClick(ticketId){
 	orderList.forEach(function(value, key){
@@ -125,8 +153,8 @@ function orderClick(ticketId){
 	}else{
 		window.location.href = 'orderDetail.html?ticketId=' + ticketId;
 	}
-	
 }
+
 
 function homeClick(){
 	var fhlNp = app.getCookie('fhlNp');
