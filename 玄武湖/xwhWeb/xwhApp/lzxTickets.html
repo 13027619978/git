@@ -6,9 +6,27 @@
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/boatTickets.css?v=4">
 		<style type="text/css">
+			/* .container{
+				padding-bottom: 0;
+			}
+			.bottomView{
+				position: relative;
+			} */
 			.descView img{
 				width: 100%;
 				margin: 5px 0;
+			}
+			.timeBtn{
+				background-color: #E2E2E2;
+				line-height: 20px;
+				padding: 5px;
+				border-radius: 5px;
+				font-size: 14px;
+				width: 100%;
+			}
+			.timeBtn.active{
+				background-color: #40AFFE;
+				color: #fff;
 			}
 		</style>
 		<title>龙舟购票</title>
@@ -25,7 +43,7 @@
 				<p style="width: 100%;text-align: center;line-height: 50px;font-size: 16px;">2022玄武湖全民龙舟体验活动</p>
 				<div class="buy_item">
 					<p class="item_l">票价：</p>
-					<p class="singlePrice"></p>
+					<p class="singlePrice">120元/人</p>
 				</div>
 				<div class="buy_item">
 					<p class="item_l">票数：</p>
@@ -38,32 +56,53 @@
 						<a href="javascript:;" onclick="add(this)">+</a>
 					</div>
 				</div>
+				<div class="buy_item">
+					<p class="item_l">联系人：</p>
+					<input class="userName" type="text" placeholder="请输入联系人姓名">
+				</div>
+				<div class="buy_item">
+					<p class="item_l">手机号：</p>
+					<input class="phone" type="text" placeholder="请输入联系人手机号">
+				</div>
+				
+				<div class="buy_item timeView" style="align-items: flex-start;">
+					<p class="item_l" style="line-height: 30px;">时间：</p>
+					<div style="font-size: 15px;color: #333;line-height: 25px;display: flex;justify-content: flex-start;align-items: center;flex-wrap: wrap;">
+						<div class="timeBtn" onclick="selectTime(this, 1)"></div>
+						<div class="timeBtn" onclick="selectTime(this, 2)" style="margin-top: 10px;"></div>
+					</div>
+				</div>
 			</div>
 			<div class="descView">
 				<p style="text-align: center;font-size: 14px;color: #333;line-height: 40px;">--图文详情--</p>
-				<p style="font-size: 14px;color: red;line-height: 35px;">端午渐近，玄武湖的湖面上再次响起震天的擂鼓与呐喊声，彩旗飞舞间色彩斑斓的龙舟如离弦之箭在湖面上劈波斩浪。这个端午来玄武湖，不仅可以观看精彩的专业龙舟竞赛，还能亲自下水体验一回竞舟湖上的速度与激情。</p>
-				<p style="font-size: 12px;color: red;">龙舟活动预约咨询：陆先生13813889952/李先生17715250529</p>
-				<p style="display: inline;background-color: yellow;color: red;margin: 10px 0;">玄武湖龙舟赛事预告</p>
+				<!-- <p style="font-size: 14px;color: red;line-height: 35px;">端午渐近，玄武湖的湖面上再次响起震天的擂鼓与呐喊声，彩旗飞舞间色彩斑斓的龙舟如离弦之箭在湖面上劈波斩浪。这个端午来玄武湖，不仅可以观看精彩的专业龙舟竞赛，还能亲自下水体验一回竞舟湖上的速度与激情。</p> -->
+				<p style="font-size: 14px;color: red;">龙舟活动预约咨询：陆先生13813889952/李先生18005142325</p>
+				<div class="zxvx" style="display: flex;justify-content: flex-start;align-items: flex-start;">
+					<p>玄武湖公园管理处游览中心：</p>
+					<img style="width: 75px;" src="img/zxvx.png" >
+				</div>
+				<!-- <p style="display: inline;background-color: yellow;color: red;margin: 10px 0;">玄武湖龙舟赛事预告</p> -->
 				<img src="img/lz/lz1.jpg">
-				<p style="color: red;">5月28日 9：00——11：00</p>
+				<!-- <p style="color: red;">5月28日 9：00——11：00</p>
 				<p>专业龙舟竞赛（推荐观赛）</p>
 				<p style="color: red;">6月3日 9：00——11：00</p>
 				<p>亲子龙舟活动</p>
 				<p style="color: red;">6月4日 13：30——16：30</p>
 				<p>专业龙舟竞赛（推荐观赛）</p>
-				<p style="color: red;">6月5日 9：00——10：30</p>
+				<p style="color: red;">6月5日 9：00——10：30</p> -->
 				<p>玄武湖全民龙舟体验活动（可报名参与）</p>
-				<p>观赛地点：玄武湖水上运动基地（阳光码头）</p>
+				<p>地点：玄武湖水上运动基地（阳光码头）</p>
 				<img src="img/lz/lz2.jpg" >
 				<img src="img/lz/lz3.jpg" >
 				<p style="display: inline-block;background-color: yellow;color: red;margin: 10px 0;">武湖全民龙舟体验活动招募中</p>
 				<p>对于大部分人来说，龙舟赛虽然精彩热闹，但受于场地和参与人数的限制，很难真正参与其中。不过，机会来了！这个端午假期，玄武湖全民龙舟体验活动正在招募中！面向广大市民、游客，在专业教练的指导下，竞舟湖上，感受浓浓的节日氛围！</p>
 				<img src="img/lz/lz4.jpg" >
-				<p>招募时间：即日起至6月4日14：00（招完即止）</p>
+				<p>活动时间：每周六/日 16:00-17:30</p>
 				<p>活动地点：玄武湖水上运动基地（阳光码头）</p>
-				<p>活动启动条件：报名满10人即可成团，上限人数68人。儿童要求1.3米以上且需家长陪同，均按全票收费。</p>
-				<p>活动价格：限时优惠98元/人（原价150元/人）</p>
+				<p>活动启动条件：报名满10人即可成团，上限人数51人。儿童要求1.3米以上且需家长陪同，均按全票收费。</p>
+				<p>活动价格：120元/人</p>
 				<p>费用包含：教练员、救生衣、手机防水套。</p>
+				<p>其他条件：自备衣服一套</p>
 				<img src="img/lz/lz4.jpg" >
 				<img src="img/lz/lz5.jpg" >
 				<p style="display: inline;background-color: yellow;color: red;margin: 10px 0;">交通指南</p>
@@ -85,6 +124,11 @@
 				<img src="img/lz/lz13.jpg" >
 				<img src="img/lz/lz14.jpg" >
 				<img src="img/lz/lz15.jpg" >
+				<p>玩水枪。</p>
+				<img src="img/lz/lz17.jpg" >
+				<img src="img/lz/lz18.jpg" >
+				<img src="img/lz/lz19.jpg" >
+				<img src="img/lz/lz20.jpg" >
 			</div>
 			<div class="bottomView">
 				<p>总计：<font class="totalPrice">0.00</font>元</p>
@@ -94,6 +138,6 @@
 		<script src="js/jquery.min.js"></script>
 		<script src="layer/layer.js"></script>
 		<script src="js/app.js?v=1.0.0"></script>
-		<script src="js/lzTickets.js?v=1.0.2"></script>
+		<script src="js/lzTickets.js?v=1.0.6"></script>
 	</body>
 </html>

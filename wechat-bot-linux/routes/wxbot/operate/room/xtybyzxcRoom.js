@@ -1,6 +1,7 @@
 var wechat = require('../mybot.js');
 const http = require('http');
 const host = "rent.smart-ideas.com.cn";
+const xtyby = require('../common/xtyby.js');
 
 /********************/
 /***** 邢台园博园自行车 *******/
@@ -33,8 +34,11 @@ async function xtybyzxcRoomDeal(msg){
 			botString += '11)车号xxx查手机\n';
 			botString += '12)车号xxx已结订单退款xxx\n';
 			botString += '13)手机号xxx已结订单退款xxx\n';
+			botString += '14)手机号XXX按照优惠活动退款';
 			room.say(botString);
 		}
+		
+		
 		
 		if(content.indexOf('车号') != -1 && content.indexOf('开锁') != -1){
 			var code = content.split('车号')[1].split('开锁')[0];
@@ -61,6 +65,13 @@ async function xtybyzxcRoomDeal(msg){
 			var phone = content.split('手机号')[1].split('全额退款')[0];
 			if(isNumber(phone)){
 				refund(host, room, 1, phone, 2, 0, contact);
+			}
+		}
+		
+		if(content.indexOf('手机号') != -1 && content.indexOf('按照优惠活动退款') != -1){
+			var phone = content.split('手机号')[1].split('按照优惠活动退款')[0];
+			if(isNumber(phone)){
+				refund(host, room, 1, phone, 5, 0, contact);
 			}
 		}
 		
@@ -255,7 +266,7 @@ function getLastedPhone(host, room, code, contact){
 // 电瓶船|自行车租赁退款
 function refund(host, room, refundType, refundValue, refundWall, refundMoney, contact){
 	var data;
-	if(refundWall == '1' || refundWall == '2'){
+	if(refundWall == '1' || refundWall == '2' || refundWall == '5'){
 		data = {
 			refundType: refundType,
 			refundValue: refundValue,
@@ -284,7 +295,6 @@ function refund(host, room, refundType, refundValue, refundWall, refundMoney, co
 	const req = http.request(options, (res) => {
 	  res.on('data', (d) => {
 	    var res = JSON.parse(d.toString());
-		console.log(res);
 		room.say(res.msg);
 	  });
 	});

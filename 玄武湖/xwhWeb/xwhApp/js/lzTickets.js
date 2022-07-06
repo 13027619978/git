@@ -1,33 +1,58 @@
-var ticketsType;
+var ticketsType = 18;
+var singlePrice = 120;
+let timeValue;
+let satTime;
+let sunTime;
 $(function(){
+	var nowWeek = new Date().getDay();
+	nowWeek = nowWeek==0?7:nowWeek;
+	var nowHour = new Date().getHours();
+	var nowMinutes = new Date().getMinutes();
+	if(nowWeek == 6 && nowHour >= 16){
+		$('.timeBtn').eq(0).attr('onclick', 'closeClick()').addClass('disabled');
+	}
+	if(nowWeek == 7 && nowHour >= 16){
+		$('.timeBtn').attr('onclick', 'closeClick()').addClass('disabled');
+	}
+	var nowDateNum = new Date().getTime();
+	var satDateNum = (6 - nowWeek) * 60 * 60 * 24 * 1000 + nowDateNum;
+	var sunDateNum = (7 - nowWeek) * 60 * 60 * 24 * 1000 + nowDateNum;
+	var satDate = new Date(satDateNum);
+	var sunDate = new Date(sunDateNum);
+	satTime = getDateString(satDate);
+	sunTime = getDateString(sunDate);
+	app.getAjax('deviceLoopApp/getTicketStock', {
+		date1: satDate,
+		date2: sunDate
+	}, function(res){
+		let satLast = res.data[satDate].total - res.data[satDate].sell;
+		let sunLast = res.data[sunDate].total - res.data[sunDate].sell;
+		$('.timeBtn').eq(0).text(satTime +' 16:00-17:30 库存：' + satLast)
+		$('.timeBtn').eq(1).text(sunTime +' 16:00-17:30 库存：' + sunLast)
+	})
+	
 	if(app.getQueryString('openid')){
 		app.setCookie('openid', app.getQueryString('openid'));
+		
 	}
-	$('.num').val(0);
-	ticketsType = app.getQueryString('type');
-	if(ticketsType == '0'){
-		ticketsType = 1;
-		$('.singlePrice').text('15元/张');
-	}else if(ticketsType == '1'){
-		ticketsType = 2;
-		$('.singlePrice').text('20元/张');
-	}else if(ticketsType == '2'){
-		ticketsType = 4;
-		$('.singlePrice').text('20元/张');
-	}else if(ticketsType == '3'){
-		ticketsType = 5;
-		$('.singlePrice').text('15元/张');
-	}else if(ticketsType == '4'){
-		ticketsType = 3;
-		$('.singlePrice').text('30元/张');
-	}else if(ticketsType == '15'){
-		ticketsType = 15;
-		$('.singlePrice').text('98元/张');
-	}else if(ticketsType == '16'){
-		ticketsType = 16;
-		$('.singlePrice').text('80元/张');
-	}
+	$('.num').val(1);
+	getTotalPrice(1)
 })
+
+// 获取日期
+function getDateString(time){
+	let dateString = new Date(time);
+	let yearString = dateString.getFullYear();
+	let monthString = dateString.getMonth() + 1;
+	monthString = monthString > 9 ? monthString : '0' + monthString;
+	let dayString = dateString.getDate();
+	dayString = dayString > 9 ? dayString : '0' + dayString;
+	return yearString + '-' + monthString + '-' + dayString;
+}
+
+function closeClick(){
+	layer.alert('无法选择当前场次');
+}
 
 function add(that){
 	var ticketsNumber = parseInt($(that).parent().find('input').val());
@@ -42,30 +67,19 @@ function add(that){
 
 function sub(that){
 	var ticketsNumber = parseInt($(that).parent().find('input').val());
-	if(ticketsNumber > 0){
+	if(ticketsNumber > 1){
 		ticketsNumber -= 1;
 		$(that).parent().find('input').val(ticketsNumber);
 	}
 	getTotalPrice(ticketsNumber);
 }
 
+function selectTime(that, timeId){
+	$(that).addClass('active').siblings().removeClass('active');
+	timeValue = timeId;
+}
+
 function getTotalPrice(ticketsNumber){
-	var singlePrice;
-	if(ticketsType == '1'){
-		singlePrice = 15;
-	}else if(ticketsType == '2'){
-		singlePrice = 20;
-	}else if(ticketsType == '4'){
-		singlePrice = 20;
-	}else if(ticketsType == '5'){
-		singlePrice = 15;
-	}else if(ticketsType == '3'){
-		singlePrice = 30;
-	}else if(ticketsType == '15'){
-		singlePrice = 98;
-	}else if(ticketsType == '16'){
-		singlePrice = 80;
-	}
 	var totalPrice = ticketsNumber * singlePrice;
 	$('.totalPrice').text(totalPrice.toFixed(2));
 	return totalPrice;
@@ -75,75 +89,45 @@ function buyClick(that){
 	var ticketsNumber = $('.num').val();
 	var price = getTotalPrice(ticketsNumber);
 	var openid = app.getCookie('openid');
+	var userName = $('.userName').val();
+	var phone = $('.phone').val();
+	var visitDate;
 	if(ticketsNumber == 0){
 		layer.alert('请先选择购票数量');
 		return;
 	}
+	if(!phone){
+		layer.alert('请先输入手机号');
+		return;
+	}
+	if(!userName){
+		layer.alert('请先输入联系人姓名');
+		return;
+	}
+	if(!timeValue){
+		layer.alert('请先选择场次时间');
+		return;
+	}
 	$(that).attr('onclick', '');
-	app.getCardAjax('/prod-api/api/h5/query/vipInfo', {
-		openId: app.getCookie('openid') 
-	}, function(res){
-		if(res.code == '200'){
-			var cashBalance = res.data.cashBalance;
-			var giveBalance = res.data.giveBalance;
-			var oldBalance = res.data.oldBalance;
-			var totalBalance = cashBalance*1 + giveBalance*1 + oldBalance*1;
-			if(totalBalance >= price){
-				layer.confirm('您是玄武湖景区一卡通用户，请选择支付方式',{
-					btn: ['一卡通支付', '微信支付'],
-					skin: 'my=btnClass',
-					cancel: function(){
-						//取消禁用购买按钮
-						$(that).attr('onclick', 'buyClick(this)');
-					}
-				}, function(){
-					var params = {
-						openId: 'card',
-						itemSn: '2301',
-						consumeOpenId: openid,
-						totalNumber: ticketsNumber,
-						totalMoney: price,
-						type: ticketsType
-					};
-					wxPay(params, that);
-				}, function(){
-					var params = {
-						openId: openid,
-						totalNumber: ticketsNumber,
-						totalMoney: price,
-						type: ticketsType
-					};
-					wxPay(params, that);
-				})
-			}else{
-				layer.confirm('一卡通余额不足，请使用微信支付？',{
-					btn: ['前往支付'],
-					cancel: function(){
-						//取消禁用购买按钮
-						$(that).attr('onclick', 'buyClick(this)');
-					}
-				}, function(){
-					var params = {
-						openId: openid,
-						totalNumber: ticketsNumber,
-						totalMoney: price,
-						type: ticketsType
-					};
-					// 微信支付
-					wxPay(params, that);
-				})
-			}
-		}else{
-			var params = {
-				openId: openid,
-				totalNumber: ticketsNumber,
-				totalMoney: price,
-				type: ticketsType
-			};
-			// 微信支付
-			wxPay(params, that);
-		}
-	})
+	if(timeValue == '1'){
+		visitDate = satTime;
+	}
+	if(timeValue == '2'){
+		visitDate = sunTime;
+	}
+	var params = {
+		openId: openid,
+		totalNumber: ticketsNumber,
+		totalMoney: price,
+		type: ticketsType,
+		userName: userName,
+		phone: phone,
+		sessionId: timeValue,
+		visitDate: visitDate
+	};
+	console.log(params);
+	// 微信支付
+	wxPay(params, that);
 }
 
 function wxPay(params, that){
@@ -164,7 +148,7 @@ function wxPay(params, that){
 					function(res){
 						if(res.err_msg == "get_brand_wcpay_request:ok" ) {
 							$(that).attr('onclick', 'buyClick()');
-							window.location.replace("boatTicketsDetail.html?orderId=" + orderId);
+							window.location.replace("lzxTicketsOrderDetail.html?orderId=" + orderId);
 						}else{
 							//取消禁用购买按钮
 				      		$(that).attr('onclick', 'buyClick(this)');
@@ -173,13 +157,7 @@ function wxPay(params, that){
 				);
 			}else{
 				$(that).attr('onclick', 'buyClick()');
-				if(parseInt(ticketsType) == 15){
-					window.location.replace("lzxTicketsOrderDetail.html?orderId=" + orderId);
-				}else if(parseInt(ticketsType) == 16){
-					window.location.replace("lzTicketsOrderDetail.html?orderId=" + orderId);
-				}else{
-					window.location.replace("lzxTicketsOrderDetail.html?orderId=" + orderId);
-				}
+				window.location.replace("lzxTicketsOrderDetail.html?orderId=" + orderId);
 			}
 		}else{
 			layer.alert(res.msg);

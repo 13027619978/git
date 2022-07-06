@@ -2,7 +2,7 @@ var wechat = require('./mybot.js');
 var events = require('events');
 var eventEmitter = new events.EventEmitter()
 
-eventEmitter.setMaxListeners(76);
+eventEmitter.setMaxListeners(77);
 
 /**************************************************/
 /****************** 家长群代码 **********************/
@@ -304,6 +304,12 @@ async function xwhbszRoom(msg){
 	xwhbszRoomEven.xwhbszRoomDeal(msg);
 }
 
+/******************** 玄武湖龙舟报数组 *************************/
+var xwhlzRoomEven = require('./room/xwhlzRoom');
+async function xwhlzRoom(msg){
+	xwhlzRoomEven.xwhlzRoomDeal(msg);
+}
+
 /******************** 玄武湖电瓶车报数组 *************************/
 var xwhdpcbszRoomEven = require('./room/xwhdpcbszRoom');
 async function xwhdpcbszRoom(msg){
@@ -468,6 +474,7 @@ eventEmitter.on('yyhbszRoom', yyhbszRoom);
 
 eventEmitter.on('xwhzjcRoom', xwhzjcRoom);
 eventEmitter.on('xwhbszRoom', xwhbszRoom);
+eventEmitter.on('xwhlzRoom', xwhlzRoom);
 eventEmitter.on('xwhdpcbszRoom', xwhdpcbszRoom);
 
 eventEmitter.on('drjgyRoom', drjgyRoom);

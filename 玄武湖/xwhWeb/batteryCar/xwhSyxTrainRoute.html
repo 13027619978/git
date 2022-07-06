@@ -3,180 +3,8 @@
 	<head>
 		<meta charset="utf-8" />
 		<link rel="stylesheet" href="css/reset.css?v=10">
-		<link rel="stylesheet" href="css/xwhXwmRoute.css?v=1.0.0">
-		<style type="text/css">
-			.gpView{
-				position: absolute;
-				left: 50px;
-				right: 50px;
-				bottom: 90px;
-				top: 50px;
-				z-index: 999;
-			}
-			.gpView .gpIcon{
-				width: 72px;
-				height: 90px;
-			}
-			.gpView .gpIcon:nth-of-type(1){
-				left: 95px;
-				top: 10px;
-			}
-			.gpView .gpIcon:nth-of-type(2){
-				left: 285px;
-				top: 10px;
-			}
-			.gpView .gpIcon:nth-of-type(3){
-				left: 480px;
-				top: 10px;
-			}
-			.gpView .gpIcon:nth-of-type(4){
-				left: 670px;
-				top: 10px;
-			}
-			.gpView .gpIcon:nth-of-type(5){
-				right: -34px;
-				top: 30px;
-			}
-			.gpView .gpIcon:nth-of-type(6){
-				left: 670px;
-				top: 150px;
-			}
-			.gpView .gpIcon:nth-of-type(7){
-				left: 480px;
-				top: 150px;
-			}
-			.gpView .gpIcon:nth-of-type(8){
-				left: 285px;
-				top: 150px;
-			}
-			.gpView .gpIcon:nth-of-type(9){
-				left: 95px;
-				top: 150px;
-			}
-			.qly .siteList{
-				/* top: 28%; */
-			}
-			.qly .lineTitle{
-				line-height: 33px;
-			}
-			.qly .routeDetail{
-				/* padding-top: 85px; */
-			}
-			.qly .routeTitle{
-				margin-top: 0;
-			}
-			.qly .lineTitle{
-				font-size: 24px;
-			}
-			.qly .lineItem{
-				padding-top: 0;
-			}
-			.qly .siteItem{
-				position: absolute;
-			}
-			.qly .siteItem:nth-of-type(1){
-				left: -53px;
-				top: 50%;
-				margin-top: -29px;
-			}
-			.qly .siteItem:nth-of-type(2){
-				left: 60px;
-				top: -36px;
-				margin-left: 0;
-			}
-			.qly .siteItem:nth-of-type(3){
-				left: 220px;
-				top: -36px;
-				margin-left: 0;
-			}
-			.qly .siteItem:nth-of-type(4){
-				right: 220px;
-				top: -36px;
-				margin-left: 0;
-				margin-top: 0;
-			}
-			.qly .siteItem:nth-of-type(5){
-				right: 60px;
-				top: -36px;
-				margin-left: 0;
-				left: auto;
-			}
-			.qly .siteItem:nth-of-type(6){
-				right: -53px;
-				top: 50%;
-				margin-top: -29px;
-				margin-left: 0;
-				left: auto;
-			}
-			.qly .siteItem:nth-of-type(7){
-				right: 60px;
-				bottom: -29px;
-				margin-left: 0;
-				left: auto;
-			}
-			.qly .siteItem:nth-of-type(8){
-				right: 190px;
-				bottom: -29px;
-				margin-left: 0;
-				left: auto;
-			}
-			.qly .siteItem:nth-of-type(9){
-				left: 360px;
-				bottom: -29px;
-				margin-left: 0;
-			}
-			.qly .siteItem:nth-of-type(10){
-				left: 190px;
-				bottom: -29px;
-				margin-left: 0;
-			}
-			.qly .siteItem:nth-of-type(11){
-				left: 60px;
-				bottom: -29px;
-				margin-left: 0;
-			}
-			.qly .jtIcon{
-				position: absolute;
-				height: 40px;
-			}
-			.qly .jtIcon:nth-of-type(1){
-				left: 200px;
-				top: -22px;
-				margin-left: -40px;
-			}
-			.qly .jtIcon:nth-of-type(2){
-				left: 420px;
-				top: -22px;
-				margin-left: -40px;
-			}
-			.qly .jtIcon:nth-of-type(3){
-				right: 180px;
-				left: auto;
-				top: -22px;
-				margin-left: -40px;
-			}
-			.qly .jtIcon:nth-of-type(4){
-				left: 650px;
-				bottom: -22px;
-				margin-left: -20px;
-			}
-			.qly .jtIcon:nth-of-type(5){
-				left: 500px;
-				bottom: -22px;
-				margin-left: -20px;
-			}
-			.qly .jtIcon:nth-of-type(6){
-				left: 335px;
-				bottom: -22px;
-				margin-left: -20px;
-			}
-			.qly .jtIcon:nth-of-type(7){
-				left: 180px;
-				bottom: -22px;
-				margin-left: -20px;
-			}
-		</style>
-		<title>玄武湖电瓶车购票</title>
+		<link rel="stylesheet" href="css/train.css?v=1.0.1">
+		<title></title>
 	</head>
 	<body>
 		<div class="hoverView">
@@ -202,8 +30,8 @@
 						<!-- 购票流程 -->
 						<div class="progress">
 							<p class="siteNameTitle">当前站点：</p>
-							<div class="nextCar" style="display: none;">
-								<p>下班车：预计0分钟0空位</p>
+							<div class="nextCar">
+								<p></p>
 							</div>
 						</div>
 						
@@ -211,14 +39,16 @@
 							<!-- 路线 -->
 							<div class="lineList">
 								<div class="lineItem">
+									<p class="lineTitle">火车环线</p>
 									<div class="routeView">
 										<div>
 											<p class="routeTitle">火车环线</p>
 											<p class="routeSecondTitle">单向行驶</p>
 										</div>
 										<div class="routeContent">
-											
 											<div class="routeDetail">
+												<span class="line"></span>
+												<p class="noSaleTxt">因疫情原因 此站点暂时不开放购票</p>
 												<div class="gpView">
 													<div class="gpIcon upIcon">点击购票</div>
 													<div class="gpIcon upIcon">点击购票</div>
@@ -230,141 +60,30 @@
 													<div class="gpIcon">点击购票</div>
 													<div class="gpIcon">点击购票</div>
 												</div>
-												<span class="line"></span>
-												<div class="siteList train">
-													<img class="jtIcon" src="img/left-icon.png" >
-													<img class="jtIcon" src="img/left-icon.png" >
-													<img class="jtIcon" src="img/right-icon.png" >
-													<img class="jtIcon" src="img/right-icon.png" >
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								
-								<div class="lineItem qly">
-									<div class="routeView">
-										<div>
-											<p class="routeTitle">赏樱线</p>
-											<p class="routeSecondTitle">单向行驶</p>
-										</div>
-										<div class="routeContent">
-											<div class="routeDetail">
-												<span class="line"></span>
 												<div class="siteList nhx">
+													<img class="jtIcon" src="img/left-icon1.png" >
+													<img class="jtIcon" src="img/left-icon1.png" >
 													<img class="jtIcon" src="img/right-icon1.png" >
 													<img class="jtIcon" src="img/right-icon1.png" >
-													<img class="jtIcon" src="img/right-icon1.png" >
-													<img class="jtIcon" src="img/left-icon1.png" >
-													<img class="jtIcon" src="img/left-icon1.png" >
-													<img class="jtIcon" src="img/left-icon1.png" >
-													<img class="jtIcon" src="img/left-icon1.png" >
-													<div class="siteItem">
-														<div class="site">
-															<p class="siteName">当前位置</p>
-															<img src="img/currSite.png" >
-															<p class="siteName active">十里长堤站</p>
-														</div>
-													</div>
-													<div class="siteItem">
-														<div class="site">
-															<p class="siteName"></p>
-															<img src="img/site-unSelect.png" >
-															<p class="siteName">太平堤</p>
-														</div>
-													</div>
-													<div class="siteItem">
-														<div class="site">
-															<p class="siteName"></p>
-															<img src="img/site-unSelect.png" >
-															<p class="siteName">解放门</p>
-														</div>
-													</div>
-													<div class="siteItem">
-														<div class="site">
-															<p class="siteName"></p>
-															<img src="img/site-unSelect.png" >
-															<p class="siteName">菱洲草龙</p>
-														</div>
-													</div>
-													<div class="siteItem">
-														<div class="site">
-															<p class="siteName"></p>
-															<img src="img/site-unSelect.png" >
-															<p class="siteName">环菱桥东</p>
-														</div>
-													</div>
-													<div class="siteItem">
-														<div class="site">
-															<p class="siteName"></p>
-															<img src="img/site-unSelect.png" >
-															<p class="siteName">月影桥东</p>
-														</div>
-													</div>
-													<div class="siteItem">
-														<div class="site">
-															<p class="siteName"></p>
-															<img src="img/site-unSelect.png" >
-															<p class="siteName">樱桥东</p>
-														</div>
-													</div>
-													<div class="siteItem">
-														<div class="site">
-															<p class="siteName"></p>
-															<img src="img/site-unSelect.png" >
-															<p class="siteName">莲花广场</p>
-														</div>
-													</div>
-													<div class="siteItem">
-														<div class="site">
-															<p class="siteName"></p>
-															<img src="img/site-unSelect.png" >
-															<p class="siteName">玄武门</p>
-														</div>
-													</div>
-													<div class="siteItem">
-														<div class="site">
-															<p class="siteName"></p>
-															<img src="img/site-unSelect.png" >
-															<p class="siteName">解放门</p>
-														</div>
-													</div>
-													<div class="siteItem">
-														<div class="site">
-															<p class="siteName"></p>
-															<img src="img/site-unSelect.png" >
-															<p class="siteName">太平堤</p>
-														</div>
-													</div>
+													
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							
 						</div>
 						
 						<!-- 购票 -->
 						<div class="ticketView">
 							<div class="ticketItem">
-								<div class="gpIcon" style="top: -25px;">点击购票</div>
-								<p class="itemTitle">赏樱线</p>
-								<p class="ticketTitle">票价：40元/人</p>
-								<p>1. 身高1.1米以下儿童可免费乘坐观光车（不占座），身高1.1米及以上需购票乘车。</p>
-								<p>2. 出于对安全乘车考虑，每位成人只可携带1名身高1.1米以下儿童免费乘车。</p>
-								<p>3. 营运时间: <font class="yytime"></font></p>
-								<p>服务电话：025-83615961</p>
-								<p class="flashing">持一卡通实体卡购票的游客请联系客服：025-83615961</p>
-							</div>
-							<div class="ticketItem trainTicket">
-								<p class="itemTitle">观光小火车</p>
-								<p style="margin-top: 15px;">1. 玄武门为始发站及终点站, 必须下车</p>
-								<p>2. 车辆整点,半点发车</p>
+								<p class="itemTitle">购票须知</p>
+								<p>1. 玄武门为始发站及终点站, 必须下车</p>
+								<p>2. 车辆整点,半点发车, 间隔20分钟左右</p>
 								<p>3. 每站10元/站/人，全程优惠票价50元/人</p>
 								<p>4. 身高1.1米以下儿童可免费乘坐观光车（不占座），身高1.1米及以上需购票乘车。</p>
 								<p>5. 出于对安全乘车考虑，每位成人只可携带1名身高1.1米以下儿童免费乘车。</p>
-								<p>6. 运营时间：<font class="yyhctime"></font></p>
+								<p>6. 营运时间: <font class="yy40time"></font></p>
 								<p>服务电话：025-83615961</p>
 								<p class="flashing">持一卡通实体卡购票的游客请联系客服：025-83615961</p>
 							</div>
@@ -374,12 +93,11 @@
 					<div class="content-right">
 						<div class="right-top">
 							<div class="salesList">
-								
 							</div>
 							<div class="mapView">
 								<p class="mapTitle">地图</p>
 								<div class="mapImg">
-									<img src="img/xwhSyxImg.jpg" >
+									<img src="img/hchhRouteImg.jpg" >
 								</div>
 							</div>
 						</div>
@@ -401,13 +119,95 @@
 				// 当前站点
 				var siteId = app.getQueryString('siteId');
 				siteId = siteId?siteId:'4';
-				$('.gpView .gpIcon').eq('0').hide();
-				$('.gpView .gpIcon').eq('1').hide();
 				
-				// $('.gpView .gpIcon').eq(5).hide();
-				// $('.gpView .gpIcon').eq(6).hide();
+				if(siteId == '3'){
+					$('.gpView .gpIcon').eq('0').hide();
+					
+					// 疫情期间暂停售票
+					$('.gpView .gpIcon').hide();
+					$('.noSaleTxt').show();
+				}else if(siteId == '4'){
+					$('.gpView .gpIcon').eq('0').hide();
+					$('.gpView .gpIcon').eq('1').hide();
+					
+					// $('.gpView .gpIcon').eq('5').hide();
+					// $('.gpView .gpIcon').eq('6').hide();
+				}else if(siteId == '5'){
+					$('.gpView .gpIcon').eq('0').hide();
+					$('.gpView .gpIcon').eq('1').hide();
+					$('.gpView .gpIcon').eq('2').hide();
+					
+					// $('.gpView .gpIcon').eq('6').hide();
+					// $('.gpView .gpIcon').eq('7').hide();
+				}else if(siteId == '6'){
+					$('.gpView .gpIcon').eq('0').hide();
+					$('.gpView .gpIcon').eq('1').hide();
+					$('.gpView .gpIcon').eq('2').hide();
+					$('.gpView .gpIcon').eq('3').hide();
+					
+					// $('.gpView .gpIcon').eq('7').hide();
+					// $('.gpView .gpIcon').eq('8').hide();
+				}else if(siteId == '7'){
+					$('.gpView .gpIcon').eq('0').hide();
+					$('.gpView .gpIcon').eq('1').hide();
+					$('.gpView .gpIcon').eq('2').hide();
+					$('.gpView .gpIcon').eq('3').hide();
+					$('.gpView .gpIcon').eq('4').hide();
+					
+					// 疫情期间暂停售票
+					$('.gpView .gpIcon').hide();
+					$('.noSaleTxt').show();
+				}else if(siteId == '8'){
+					$('.gpView .gpIcon').eq('0').hide();
+					$('.gpView .gpIcon').eq('1').hide();
+					$('.gpView .gpIcon').eq('2').hide();
+					$('.gpView .gpIcon').eq('3').hide();
+					$('.gpView .gpIcon').eq('4').hide();
+					$('.gpView .gpIcon').eq('5').hide();
+					
+					// 疫情期间暂停售票
+					$('.gpView .gpIcon').hide();
+					$('.noSaleTxt').show();
+				}else if(siteId == '9'){
+					$('.gpView .gpIcon').eq('0').hide();
+					$('.gpView .gpIcon').eq('1').hide();
+					$('.gpView .gpIcon').eq('2').hide();
+					$('.gpView .gpIcon').eq('3').hide();
+					$('.gpView .gpIcon').eq('4').hide();
+					$('.gpView .gpIcon').eq('5').hide();
+					$('.gpView .gpIcon').eq('6').hide();
+				}else if(siteId == '10'){
+					$('.gpView .gpIcon').eq('0').hide();
+					$('.gpView .gpIcon').eq('1').hide();
+					$('.gpView .gpIcon').eq('2').hide();
+					$('.gpView .gpIcon').eq('3').hide();
+					$('.gpView .gpIcon').eq('4').hide();
+					$('.gpView .gpIcon').eq('5').hide();
+					$('.gpView .gpIcon').eq('6').hide();
+					$('.gpView .gpIcon').eq('7').hide();
+				}else if(siteId == '1'){
+					$('.gpView .gpIcon').eq(7).hide();
+					$('.gpView .gpIcon').eq(3).hide();
+					$('.gpView .gpIcon').eq(2).hide();
+				}else if(siteId == '2'){
+					// $('.gpView .gpIcon').eq(8).hide();
+					// $('.gpView .gpIcon').eq(4).hide();
+					// $('.gpView .gpIcon').eq(3).hide();
+				}
 				
 				var siteList = [
+					{
+						siteName: '玄武门',
+						siteId: 1
+					},
+					{
+						siteName: '解放门',
+						siteId: 2
+					},
+					{
+						siteName: '太平堤',
+						siteId: 3
+					},
 					{
 						siteName: '十里长堤',
 						siteId: 4
@@ -436,20 +236,403 @@
 						siteName: '后湖印月',
 						siteId: 10
 					},
-					{
-						siteName: '玄武门',
-						siteId: 1
-					},
-					{
-						siteName: '解放门',
-						siteId: 2
-					},
-					{
-						siteName: '太平堤',
-						siteId: 3
-					}
-					
 				];
+				
+				if(siteId == '2'){
+					siteList = [
+						{
+							siteName: '解放门',
+							siteId: 2
+						},
+						{
+							siteName: '太平堤',
+							siteId: 3
+						},
+						{
+							siteName: '十里长堤',
+							siteId: 4
+						},
+						{
+							siteName: '水岸听风',
+							siteId: 5
+						},
+						{
+							siteName: '翠洲门',
+							siteId: 6
+						},
+						{
+							siteName: '南京站（南）站',
+							siteId: 7
+						},
+						{
+							siteName: '和平门',
+							siteId: 8
+						},
+						{
+							siteName: '和平门湿地',
+							siteId: 9
+						},
+						{
+							siteName: '后湖印月',
+							siteId: 10
+						},
+						{
+							siteName: '玄武门',
+							siteId: 1
+						}
+					];
+				}else if(siteId == '3'){
+					siteList = [
+						{
+							siteName: '太平堤',
+							siteId: 3
+						},
+						{
+							siteName: '十里长堤',
+							siteId: 4
+						},
+						{
+							siteName: '水岸听风',
+							siteId: 5
+						},
+						{
+							siteName: '翠洲门',
+							siteId: 6
+						},
+						{
+							siteName: '南京站（南）站',
+							siteId: 7
+						},
+						{
+							siteName: '和平门',
+							siteId: 8
+						},
+						{
+							siteName: '和平门湿地',
+							siteId: 9
+						},
+						{
+							siteName: '后湖印月',
+							siteId: 10
+						},
+						{
+							siteName: '玄武门',
+							siteId: 1
+						},
+						{
+							siteName: '解放门',
+							siteId: 2
+						}
+						
+					];
+				}else if(siteId == '4'){
+					siteList = [
+						{
+							siteName: '十里长堤',
+							siteId: 4
+						},
+						{
+							siteName: '水岸听风',
+							siteId: 5
+						},
+						{
+							siteName: '翠洲门',
+							siteId: 6
+						},
+						{
+							siteName: '南京站（南）站',
+							siteId: 7
+						},
+						{
+							siteName: '和平门',
+							siteId: 8
+						},
+						{
+							siteName: '和平门湿地',
+							siteId: 9
+						},
+						{
+							siteName: '后湖印月',
+							siteId: 10
+						},
+						{
+							siteName: '玄武门',
+							siteId: 1
+						},
+						{
+							siteName: '解放门',
+							siteId: 2
+						},
+						{
+							siteName: '太平堤',
+							siteId: 3
+						}
+						
+					];
+				}else if(siteId == '5'){
+					siteList = [
+						{
+							siteName: '水岸听风',
+							siteId: 5
+						},
+						{
+							siteName: '翠洲门',
+							siteId: 6
+						},
+						{
+							siteName: '南京站（南）站',
+							siteId: 7
+						},
+						{
+							siteName: '和平门',
+							siteId: 8
+						},
+						{
+							siteName: '和平门湿地',
+							siteId: 9
+						},
+						{
+							siteName: '后湖印月',
+							siteId: 10
+						},
+						{
+							siteName: '玄武门',
+							siteId: 1
+						},
+						{
+							siteName: '解放门',
+							siteId: 2
+						},
+						{
+							siteName: '太平堤',
+							siteId: 3
+						},
+						{
+							siteName: '十里长堤',
+							siteId: 4
+						}
+						
+					];
+				}else if(siteId == '6'){
+					siteList = [
+						{
+							siteName: '翠洲门',
+							siteId: 6
+						},
+						{
+							siteName: '南京站（南）站',
+							siteId: 7
+						},
+						{
+							siteName: '和平门',
+							siteId: 8
+						},
+						{
+							siteName: '和平门湿地',
+							siteId: 9
+						},
+						{
+							siteName: '后湖印月',
+							siteId: 10
+						},
+						{
+							siteName: '玄武门',
+							siteId: 1
+						},
+						{
+							siteName: '解放门',
+							siteId: 2
+						},
+						{
+							siteName: '太平堤',
+							siteId: 3
+						},
+						{
+							siteName: '十里长堤',
+							siteId: 4
+						},
+						{
+							siteName: '水岸听风',
+							siteId: 5
+						}
+					];
+				}else if(siteId == '7'){
+					siteList = [
+						{
+							siteName: '南京站（南）站',
+							siteId: 7
+						},
+						{
+							siteName: '和平门',
+							siteId: 8
+						},
+						{
+							siteName: '和平门湿地',
+							siteId: 9
+						},
+						{
+							siteName: '后湖印月',
+							siteId: 10
+						},
+						{
+							siteName: '玄武门',
+							siteId: 1
+						},
+						{
+							siteName: '解放门',
+							siteId: 2
+						},
+						{
+							siteName: '太平堤',
+							siteId: 3
+						},
+						{
+							siteName: '十里长堤',
+							siteId: 4
+						},
+						{
+							siteName: '水岸听风',
+							siteId: 5
+						},
+						{
+							siteName: '翠洲门',
+							siteId: 6
+						},
+						
+					];
+				}else if(siteId == '8'){
+					siteList = [
+						{
+							siteName: '和平门',
+							siteId: 8
+						},
+						{
+							siteName: '和平门湿地',
+							siteId: 9
+						},
+						{
+							siteName: '后湖印月',
+							siteId: 10
+						},
+						{
+							siteName: '玄武门',
+							siteId: 1
+						},
+						{
+							siteName: '解放门',
+							siteId: 2
+						},
+						{
+							siteName: '太平堤',
+							siteId: 3
+						},
+						{
+							siteName: '十里长堤',
+							siteId: 4
+						},
+						{
+							siteName: '水岸听风',
+							siteId: 5
+						},
+						{
+							siteName: '翠洲门',
+							siteId: 6
+						},
+						{
+							siteName: '南京站（南）站',
+							siteId: 7
+						},
+						
+					];
+				}else if(siteId == '9'){
+					siteList = [
+						{
+							siteName: '和平门湿地',
+							siteId: 9
+						},
+						{
+							siteName: '后湖印月',
+							siteId: 10
+						},
+						{
+							siteName: '玄武门',
+							siteId: 1
+						},
+						{
+							siteName: '解放门',
+							siteId: 2
+						},
+						{
+							siteName: '太平堤',
+							siteId: 3
+						},
+						{
+							siteName: '十里长堤',
+							siteId: 4
+						},
+						{
+							siteName: '水岸听风',
+							siteId: 5
+						},
+						{
+							siteName: '翠洲门',
+							siteId: 6
+						},
+						{
+							siteName: '南京站（南）站',
+							siteId: 7
+						},
+						{
+							siteName: '和平门',
+							siteId: 8
+						},
+						
+					];
+				}else if(siteId == '10'){
+					siteList = [
+						{
+							siteName: '后湖印月',
+							siteId: 10
+						},
+						{
+							siteName: '玄武门',
+							siteId: 1
+						},
+						{
+							siteName: '解放门',
+							siteId: 2
+						},
+						{
+							siteName: '太平堤',
+							siteId: 3
+						},
+						{
+							siteName: '十里长堤',
+							siteId: 4
+						},
+						{
+							siteName: '水岸听风',
+							siteId: 5
+						},
+						{
+							siteName: '翠洲门',
+							siteId: 6
+						},
+						{
+							siteName: '南京站（南）站',
+							siteId: 7
+						},
+						{
+							siteName: '和平门',
+							siteId: 8
+						},
+						{
+							siteName: '和平门湿地',
+							siteId: 9
+						},
+						
+					];
+				}
 				
 				$('.siteNameTitle').text('当前站点：' + siteList[0].siteName);
 				
@@ -465,8 +648,8 @@
 				
 				// 当前显示购票列表
 				var currList = [];
-				var interSecond = 0;
 				// 初始化时间
+				var interSecond = 0;
 				setInterval(function(){
 					interSecond += 1;
 					var year = new Date().getFullYear();
@@ -509,24 +692,14 @@
 							var startDate;
 							var endDate;
 							res.data.forEach(function(value, key){
-								if(value.ticketName == '赏櫻线票'){
+								if(value.ticketName == '小火车圈票'){
 									var yyTimeList = value.list;
 									startDate = yyTimeList[nowDay].startTime;
 									endDate = yyTimeList[nowDay].endTime;
 									if(yyTimeList[nowDay].state == '0'){
-										$('.yytime').text(startDate + '至' + endDate);
+										$('.yy40time').text(startDate + '至' + endDate);
 									}else{
-										$('.yytime').text(yyTimeList[nowDay].tip);
-									}
-								}
-								if(value.ticketName == '小火车单站票'){
-									var yyTimeList = value.list;
-									startDate = yyTimeList[nowDay].startTime;
-									endDate = yyTimeList[nowDay].endTime;
-									if(yyTimeList[nowDay].state == '0'){
-										$('.yyhctime').text(startDate + '至' + endDate);
-									}else{
-										$('.yyhctime').text(yyTimeList[nowDay].tip);
+										$('.yy40time').text(yyTimeList[nowDay].tip);
 									}
 								}
 							})
@@ -631,6 +804,97 @@
 					}
 					
 				})
+				
+				setInterval(function(){
+					// initMap(map);
+					app.getAjax('/loopDataV/getVehicleMountedLocation', {
+						lineId: 2
+					}, function(res){
+						console.log(res);
+						// 预计到站时间
+						let site1;
+						let site2;
+						let site3;
+						let site4;
+						let site5;
+						let site6;
+						let site7;
+						let site8;
+						let site9;
+						let site10;
+						if (res.length > 0) {
+							res.forEach(function(value, key) {
+								if(value.state == '0' && value.id != 500){
+									let currentId = value.id;
+									if (550 <= currentId && currentId < 565) {
+										currentId = currentId - 35;
+									} else if (600 <= currentId && currentId < 608) {
+										currentId = currentId - 70;
+									} else if (650 <= currentId && currentId < 656) {
+										currentId = currentId - 112;
+									} else if (700 <= currentId && currentId < 705) {
+										currentId = currentId - 158;
+									} else if (750 <= currentId && currentId < 764) {
+										currentId = currentId - 205;
+									} else if (800 <= currentId && currentId < 804) {
+										currentId = currentId - 243;
+									} else if (850 <= currentId && currentId < 855) {
+										currentId = currentId - 291;
+									} else if (900 <= currentId && currentId < 909) {
+										currentId = currentId - 338;
+									} else if (950 <= currentId && currentId < 958) {
+										currentId = currentId - 381;
+									} else if (currentId == 1000) {
+										currentId = currentId - 423;
+									}
+									currentId -= 500;
+									console.log(currentId);
+									let site1Item = 15 - currentId;
+									let site2Item = 31 - currentId;
+									let site3Item = 39 - currentId;
+									let site4Item = 45 - currentId;
+									let site5Item = 50 - currentId;
+									let site6Item = 64 - currentId;
+									let site7Item = 68 - currentId;
+									let site8Item = 73 - currentId;
+									let site9Item = 82 - currentId;
+									let site10Item = 90 - currentId;
+									site1 = getSiteShortTime(site1, site1Item);
+									site2 = getSiteShortTime(site2, site2Item);
+									site3 = getSiteShortTime(site3, site3Item);
+									site4 = getSiteShortTime(site4, site4Item);
+									site5 = getSiteShortTime(site5, site5Item);
+									site6 = getSiteShortTime(site6, site6Item);
+									site7 = getSiteShortTime(site7, site7Item);
+									site8 = getSiteShortTime(site8, site8Item);
+									site9 = getSiteShortTime(site9, site9Item);
+									site10 = getSiteShortTime(site10, site10Item);
+								}
+							})
+							let siteTimeList = [site1,site2,site3,site4,site5,site6,site7,site8,site9,site10];
+							let nextTime = Math.ceil((siteTimeList[siteId - 2])*30/60);
+							console.log(siteTimeList)
+							if(nextTime){
+								$('.nextCar p').text('预计到站' + nextTime + '分钟');
+							}else{
+								$('.nextCar p').text('');
+							}
+						}
+					})
+				}, 5000);
+				
+				// 获取到达站点较短时间
+				function getSiteShortTime(site, siteItem){
+					if(siteItem >= 0){
+						if(site || site == 0){
+							site = site>siteItem?siteItem:site;
+						}else{
+							site = siteItem;
+						}
+					}
+					return site;
+				}		
+				
 				
 				function initMap(map){
 					app.getAjax('/batteryDataView/getLocation', {}, function(res){

@@ -191,6 +191,10 @@ function getDeviceType(deviceType, openid, qrCode){
 		case "lyTickets":
 			window.location.href = 'lyTickets.html';
 		break;
+		
+		case "lzTickets":
+			window.location.href = 'lzxTickets.html';
+		break;
 	}
 }
 

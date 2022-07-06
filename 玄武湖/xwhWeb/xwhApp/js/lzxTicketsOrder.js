@@ -8,7 +8,7 @@ $(function(){
 			var orderList = res.data;
 			if(orderList.length > 0){
 				orderList.forEach(function(value, key){
-					if(value.type == '15'){
+					if(value.type == '18' || value.type == '15'){
 						$('.orderList').append(
 							'<li class="orderItem">'+
 								'<a href="javascript:;" onclick="orderClick(\''+value.id+'\')">'+

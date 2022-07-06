@@ -205,49 +205,49 @@ function scheduleStart(){
 	scheduleJobStart = true;
 	
 	/*** 雪圈报数 ***/
-	c = schedule.scheduleJob({hour: 17, minute: 30}, async function(){
-		if(wechat.bot.logonoff()){
-			const room = await wechat.bot.Room.find({topic: "奥森运营组"});
-			var nowDate = new Date();
-			var nowYear = nowDate.getFullYear();
-			var nowMonth = nowDate.getMonth() + 1;
-			nowMonth = nowMonth>9?nowMonth:'0'+nowMonth;
-			var nowDay = nowDate.getDate();
-			nowDay = nowDay>9?nowDay:'0'+nowDay;
-			var startDate = nowYear + '-' + nowMonth + '-' + nowDay + ' 00:00:00';
-			var searchStartDate = encodeURI(startDate);
-			var endDate = nowYear + '-' + nowMonth + '-' + nowDay + ' 17:30:00';
-			var searchEndDate = encodeURI(endDate);
-			const options = {
-				hostname: host1,
-				path: '/orson/clt/getClt?startDate=' + searchStartDate + '&endDate=' + searchEndDate,
-				method: 'GET'
-			};
+	// c = schedule.scheduleJob({hour: 17, minute: 30}, async function(){
+	// 	if(wechat.bot.logonoff()){
+	// 		const room = await wechat.bot.Room.find({topic: "奥森运营组"});
+	// 		var nowDate = new Date();
+	// 		var nowYear = nowDate.getFullYear();
+	// 		var nowMonth = nowDate.getMonth() + 1;
+	// 		nowMonth = nowMonth>9?nowMonth:'0'+nowMonth;
+	// 		var nowDay = nowDate.getDate();
+	// 		nowDay = nowDay>9?nowDay:'0'+nowDay;
+	// 		var startDate = nowYear + '-' + nowMonth + '-' + nowDay + ' 00:00:00';
+	// 		var searchStartDate = encodeURI(startDate);
+	// 		var endDate = nowYear + '-' + nowMonth + '-' + nowDay + ' 17:30:00';
+	// 		var searchEndDate = encodeURI(endDate);
+	// 		const options = {
+	// 			hostname: host1,
+	// 			path: '/orson/clt/getClt?startDate=' + searchStartDate + '&endDate=' + searchEndDate,
+	// 			method: 'GET'
+	// 		};
 			
-			const req = https.request(options, (res) => {
-			  res.on('data', (d) => {
+	// 		const req = https.request(options, (res) => {
+	// 		  res.on('data', (d) => {
 			  	
-			    var res = JSON.parse(d.toString());
-			    console.log(res);
-			    var xueQTotal = res.data.otherOrderCltVo.xueQTotal;
-			    if(!xueQTotal){
-			    	xueQTotal = "0.00";
-			    }
-			    try{
-					room.say("\n时间："+ endDate +"\n当前营业额："+ xueQTotal +"元");
-				}catch(e){
+	// 		    var res = JSON.parse(d.toString());
+	// 		    console.log(res);
+	// 		    var xueQTotal = res.data.otherOrderCltVo.xueQTotal;
+	// 		    if(!xueQTotal){
+	// 		    	xueQTotal = "0.00";
+	// 		    }
+	// 		    try{
+	// 				room.say("\n时间："+ endDate +"\n当前营业额："+ xueQTotal +"元");
+	// 			}catch(e){
 					
-				}
-			  });
-			});
+	// 			}
+	// 		  });
+	// 		});
 			
-			req.on('error', (e) => {
-			  console.error(`problem with request: ${e.message}`);
-			});
+	// 		req.on('error', (e) => {
+	// 		  console.error(`problem with request: ${e.message}`);
+	// 		});
 			
-			req.end();
-		}
-	});
+	// 		req.end();
+	// 	}
+	// });
 	
 	
 	scheduleJob19_00 = schedule.scheduleJob({hour: 19, minute: 0}, async function(){

@@ -563,6 +563,57 @@ function isJSON(str) {
     console.log('It is not a string!')
 }
 
+function getlzInfo(room){
+	var nowWeek = new Date().getDay();
+	nowWeek = nowWeek==0?7:nowWeek;
+	var nowHour = new Date().getHours();
+	var nowMinutes = new Date().getMinutes();
+	if(nowWeek == 6 && nowHour >= 16){
+		$('.timeBtn').eq(0).attr('onclick', 'closeClick()').addClass('disabled');
+	}
+	if(nowWeek == 7 && nowHour >= 16){
+		$('.timeBtn').attr('onclick', 'closeClick()').addClass('disabled');
+	}
+	var nowDateNum = new Date().getTime();
+	var satDateNum = (6 - nowWeek) * 60 * 60 * 24 * 1000 + nowDateNum;
+	var sunDateNum = (7 - nowWeek) * 60 * 60 * 24 * 1000 + nowDateNum;
+	var satDate = new Date(satDateNum);
+	var sunDate = new Date(sunDateNum);
+	satTime = getDateString(satDate);
+	sunTime = getDateString(sunDate);
+
+	const options = {
+		hostname: host,
+		path: '/xwhpark/deviceLoopApp/getTicketStock',
+		method: 'GET'
+	};
+	const req = https.request(options, (res) => {
+		res.on('data', (d) => {
+			var res = JSON.parse(d.toString());
+			let satSell = res.data[satDate].sell;
+			let sunSell = res.data[sunDate].sell;
+			room.say('*****玄武湖龙舟体验报数*****\n' + satDate + '：' + satSell + '张\n' + sunDate + '：' + sunSell + '张');
+		});
+	})
+	
+	req.on('error', (e) => {
+	  console.error(`problem with request: ${e.message}`);
+	});
+	
+	req.end();
+}
+
+// 获取日期
+function getDateString(time){
+	let dateString = new Date(time);
+	let yearString = dateString.getFullYear();
+	let monthString = dateString.getMonth() + 1;
+	monthString = monthString > 9 ? monthString : '0' + monthString;
+	let dayString = dateString.getDate();
+	dayString = dayString > 9 ? dayString : '0' + dayString;
+	return yearString + '-' + monthString + '-' + dayString;
+}
+
 
 module.exports = {
 	getxwhInfo,
@@ -570,5 +621,6 @@ module.exports = {
 	writeOutlineInfo,
 	writeOnlineGps,
 	getPaperInfo,
-	getXwhdpcInfo
+	getXwhdpcInfo,
+	getlzInfo
 }
