@@ -61,7 +61,7 @@ const qsmxRoomTopic = {
 	QSMX_YYHBSZ_ROOM: "野鸭湖自行车报数组",
 	QSMX_XWHZJC_ROOM: "玄武湖自驾船客服组",
 	QSMX_XWHBSZ_ROOM: "玄武湖报数组",
-	QSMX_XWHLZBSZ_ROOM: "玄武湖龙舟报数组",
+	QSMX_XWHLZBSZ_ROOM: "玄武湖喷泉服务组",
 	QSMX_XWHDPCBSZ_ROOM: "玄武湖电瓶车报数组",
 	QSMX_DRJGY_ROOM: "狄仁杰文化园预约服务组",
 	QSMX_SCHBSZ_ROOM: "三海运营报数组",

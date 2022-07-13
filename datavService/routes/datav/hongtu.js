@@ -4,6 +4,40 @@ var http = require('http');
 const axios = require('axios');
 const FormData = require('form-data');
 
+router.get('/sendSmsTest', async function(req1, res1){
+	// let dataInfo = JSON.parse(req1.body.data);
+	// let healthyStateDesc = dataInfo.healthyStateDesc;
+	// let xqName = dataInfo.deviceName;
+	// let autograph = dataInfo.autograph;
+	// let userName = dataInfo.personName;
+	let smsContent = '【健康码异常】测试短信';
+	const form = new FormData();
+	form.append('userid', 170);
+	form.append('account', 'XZXC');
+	form.append('password', '123456');
+	form.append('mobile', '13901148743,13027619978');
+	form.append('content', smsContent);
+	form.append('sendTime', '');
+	form.append('action', 'send');
+	form.append('extno', '');
+	
+	axios({
+		url: 'http://47.95.121.34:8888/sms.aspx',
+		method: 'post',
+		data: form,
+		headers: {
+			'content-type':'application/x-www-form-urlencoded',
+		}
+	})
+	.then(function(res){
+		console.log(res);
+		res1.send('发送成功');
+	})
+	.catch(function(err){
+		console.log(err);
+	})
+})
+
 router.post('/sendSms', async function(req1, res1){
 	let dataInfo = JSON.parse(req1.body.data);
 	let healthyStateDesc = dataInfo.healthyStateDesc;
@@ -11,13 +45,14 @@ router.post('/sendSms', async function(req1, res1){
 	let autograph = dataInfo.autograph;
 	let userName = dataInfo.personName;
 	let smsContent = '【健康码异常】' + xqName + ',姓名：' + userName + ',' + autograph + ',健康码：' + healthyStateDesc;
-	console.log(healthyStateDesc);
+	console.log('健康码=============' + healthyStateDesc);
+	console.log(smsContent);
 	if(healthyStateDesc == '黄码' || healthyStateDesc == '红码'){
 		const form = new FormData();
 		form.append('userid', 170);
 		form.append('account', 'XZXC');
 		form.append('password', '123456');
-		form.append('mobile', '13027619978');
+		form.append('mobile', '13901148743');
 		form.append('content', smsContent);
 		form.append('sendTime', '');
 		form.append('action', 'send');
@@ -56,6 +91,7 @@ router.post('/addUser', async function(req1, res1){
 	let header = req1.body.header;
 	let ext = req1.body.ext;
 	let groupList = req1.body.groupList;
+	// let autograph = req1.body.autograph;
 	const options = {
 		hostname: '211.103.164.198',
 		path: '/v1/api/person/batchAdd',
@@ -104,6 +140,7 @@ router.post('/addUser/v1', async function(req1, res1){
 	let header = req1.body.header;
 	let ext = req1.body.ext;
 	let groupList = req1.body.groupList;
+	let orguuid = req1.body.orguuid;
 	const options = {
 		hostname: '223.71.29.67',
 		port: '10080',
@@ -139,7 +176,7 @@ router.post('/addUser/v1', async function(req1, res1){
 		})
 	});
 	
-	req.write(JSON.stringify({personList:[{name:name,phone:phone,identifyNum:idCard,type:type,imageUri:imgUri,ext:ext,groupList:groupList}]}));
+	req.write(JSON.stringify({personList:[{name:name,phone:phone,identifyNum:idCard,type:type,imageUri:imgUri,ext:ext,groupList:groupList,orgUuid:orguuid}]}));
 	
 	req.end();
 })

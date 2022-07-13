@@ -4,7 +4,7 @@ $(function(){
 	var openid = app.getCookie('openid');
 	var qrCode = app.getCookie('qrCode');
 	if(qrCode == '1238887' || qrCode == '1238889'){
-		$('.descTxt').text('喊泉开放时间：9:00--16:30')
+		$('.descTxt').text('喊泉开放时间：9:00--20:30')
 	}
 	app.getAjax('deviceLeaseApp/getDeviceInfo',{
 		deviceSn: app.getCookie('qrCode'),

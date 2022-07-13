@@ -53,7 +53,9 @@
 				'滚筒',
 				'飞车',
 				'水弹枪',
-				'碰碰船'
+				'碰碰船',
+				'捕鱼儿童票',
+				'捕鱼成人票'
 			];
 			$(function(){
 				var nowDate = new Date();
@@ -87,6 +89,7 @@
 						if(lyxmName.indexOf(value.itemName) != -1){
 							rechargeInfo.push(value);
 						}
+						
 					})
 					let rechargeTotal = 0;
 					rechargeInfo.forEach(function(value, key){

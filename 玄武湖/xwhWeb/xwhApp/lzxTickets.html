@@ -138,6 +138,15 @@
 		<script src="js/jquery.min.js"></script>
 		<script src="layer/layer.js"></script>
 		<script src="js/app.js?v=1.0.0"></script>
-		<script src="js/lzTickets.js?v=1.0.6"></script>
+		<script type="text/javascript">
+			if(!app.getCookie('openid') && !app.getQueryString('openid')){
+				window.location.replace('http://hd.smart-ideas.com.cn/xwhWeb/xwhApp/?type=lzTickets&code=0');
+			}else{
+				if(app.getQueryString('openid') == 'oW0iIt8cFHRmh9ZuUu0MHEn3VrZM' && app.getQueryString('code') == 18){
+					window.location.replace('http://hd.smart-ideas.com.cn/xwhWeb/xwhApp/?type=lzTickets&code=0');
+				}
+			}
+		</script>
+		<script src="js/lzTickets.js?v=1.0.10"></script>
 	</body>
 </html>

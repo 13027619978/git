@@ -122,11 +122,10 @@ function deleteClick(ticketId){
 	layer.alert('确认删除此订单?', {
 		btn: ['确定','取消'],
 		yes: function(){
-			console.log('123');
 			layer.closeAll();
 			layer.load('1');
 			var ticketOrderId = ticketId.toString().split('/')[1];
-			app.getAjax('ticketOrder/visitor/del', {
+			app.getAjax('order/visitor/del', {
 				ticketOrderId: ticketOrderId
 			}, function(res){
 				console.log(res);

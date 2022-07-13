@@ -640,7 +640,7 @@ function base64ToFile(dataurl){
 
 // 在线支付
 function payClick(payType){
-	if(orderEndTime){
+	if(orderEndTime && ticketType != '年票'){
 		var visitTime = new Date($('.timeSelectBtn').text().replace(/-/, '/').replace(/-/, '/') + ' ' + orderEndTime).getTime();
 		if(new Date().getTime() > visitTime){
 			layer.alert(orderEndTime + '后不支持购买当日票，请预约其他时间！');

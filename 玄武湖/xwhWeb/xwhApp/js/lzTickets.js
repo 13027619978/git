@@ -8,32 +8,55 @@ $(function(){
 	nowWeek = nowWeek==0?7:nowWeek;
 	var nowHour = new Date().getHours();
 	var nowMinutes = new Date().getMinutes();
-	if(nowWeek == 6 && nowHour >= 16){
-		$('.timeBtn').eq(0).attr('onclick', 'closeClick()').addClass('disabled');
+	var nextSat = 6;
+	var nextSun = 7;
+	if(nowWeek == 6){
+		if(nowHour == 17 && nowMinutes >= 30){
+			$('.timeBtn').eq(0).attr('onclick', 'closeClick()').addClass('disabled');
+		}else if(nowHour > 17){
+			$('.timeBtn').eq(0).attr('onclick', 'closeClick()').addClass('disabled');
+		}
 	}
-	if(nowWeek == 7 && nowHour >= 16){
-		$('.timeBtn').attr('onclick', 'closeClick()').addClass('disabled');
+	if(nowWeek == 7 && nowHour >= 17){
+		if(nowHour == 17 && nowMinutes >= 30){
+			nextSat = 13;
+			nextSun = 14;
+		}else if(nowHour > 17){
+			nextSat = 13;
+			nextSun = 14;
+		}else{
+			
+		}
+		// $('.timeBtn').attr('onclick', 'closeClick()').addClass('disabled');
+		
 	}
 	var nowDateNum = new Date().getTime();
-	var satDateNum = (6 - nowWeek) * 60 * 60 * 24 * 1000 + nowDateNum;
-	var sunDateNum = (7 - nowWeek) * 60 * 60 * 24 * 1000 + nowDateNum;
+	var satDateNum = (nextSat - nowWeek) * 60 * 60 * 24 * 1000 + nowDateNum;
+	var sunDateNum = (nextSun - nowWeek) * 60 * 60 * 24 * 1000 + nowDateNum;
 	var satDate = new Date(satDateNum);
 	var sunDate = new Date(sunDateNum);
 	satTime = getDateString(satDate);
 	sunTime = getDateString(sunDate);
 	app.getAjax('deviceLoopApp/getTicketStock', {
-		date1: satDate,
-		date2: sunDate
+		date1: satTime,
+		date2: sunTime
 	}, function(res){
-		let satLast = res.data[satDate].total - res.data[satDate].sell;
-		let sunLast = res.data[sunDate].total - res.data[sunDate].sell;
+		let satLast = res.data[satTime].total - res.data[satTime].sell;
+		satLast = satLast>0?satLast:0;
+		let sunLast = res.data[sunTime].total - res.data[sunTime].sell;
+		sunLast = sunLast>0?sunLast:0;
 		$('.timeBtn').eq(0).text(satTime +' 16:00-17:30 库存：' + satLast)
 		$('.timeBtn').eq(1).text(sunTime +' 16:00-17:30 库存：' + sunLast)
+		if(satLast == 0){
+			$('.timeBtn').eq(0).attr('onclick', 'closeClick()').addClass('disabled');
+		}
+		if(sunLast == 0){
+			$('.timeBtn').eq(1).attr('onclick', 'closeClick()').addClass('disabled');
+		}
 	})
 	
 	if(app.getQueryString('openid')){
 		app.setCookie('openid', app.getQueryString('openid'));
-		
 	}
 	$('.num').val(1);
 	getTotalPrice(1)
@@ -96,8 +119,8 @@ function buyClick(that){
 		layer.alert('请先选择购票数量');
 		return;
 	}
-	if(!phone){
-		layer.alert('请先输入手机号');
+	if(phone.length != 11){
+		layer.alert('请先输入正确的手机号');
 		return;
 	}
 	if(!userName){

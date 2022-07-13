@@ -1,58 +1,153 @@
 var wechat = require('../mybot.js');
-const https = require('https');
-let host = 'iot.smart-ideas.com.cn';
-const { FileBox } = require('file-box');
-const fs = require('fs');
-const { UrlLink } = require('wechaty');
-const request = require('request');
-const apiHost = 'api.smart-ideas.com.cn';
 const http = require('http');
-const yqh = require('../common/yqh.js');
-const yby = require('../common/yby.js');
-const boss = require('../common/boss.js');
-const xwh = require('../common/xwh.js');
-const xhg = require('../common/xhg.js');
-const nh = require('../common/nh.js');
-const fhl = require('../common/fhl.js');
-const ssgy = require('../common/ssgy.js');
-const sch = require('../common/sch.js');
+const host = "rent.smart-ideas.com.cn";
 const xtyby = require('../common/xtyby.js');
-const test = require('../common/test.js');
 
-var express=require('express');
-var router = express.Router();
-
+/********************/
+/***** 邢台园博园自行车 *******/
+/********************/
 async function testRoomDeal(msg){
 	const content = msg.text();
 	const contact = msg.talker();
 	const room = msg.room();
 	const fromRoomAlias = await room.alias(contact);
 	var fromName;
-	
 	if(fromRoomAlias){
 		fromName = fromRoomAlias;
 	}else{
 		fromName = contact.name();
 	}
-	
-	
-	
 	if(msg.type() == wechat.bot.Message.Type.Text){
-		
-		if (content == '使用方法') {
+		if(content == '使用方法'){
+			const roomTopic = await room.topic();
 			var botString = '机器人使用方法:\n----------\n';
-			// botString += '1)邢台园博园报数\n';
+			botString += '1)车号xxx开锁\n';
+			botString += '2)车号xxx关锁\n';
+			botString += '3)手机号xxx按时间退款\n';
+			botString += '4)手机号xxx全额退款\n';
+			botString += '5)手机号xxx退款xxx\n';
+			botString += '6)车号xxx按时间退款\n';
+			botString += '7)车号xxx全额退款\n';
+			botString += '8)车号xxx退款xxx\n';
+			botString += '9)车号xxx报修\n';
+			botString += '10)车号xxx启用\n';
+			botString += '11)车号xxx查手机\n';
+			botString += '12)车号xxx已结订单退款xxx\n';
+			botString += '13)手机号xxx已结订单退款xxx\n';
+			botString += '14)手机号XXX按照优惠活动退款';
 			room.say(botString);
 		}
 		
-		if(content == '玄武湖自驾船报数'){
-			test.getxwhInfo('hd.smart-ideas.com.cn', room);
+		
+		
+		if(content.indexOf('车号') != -1 && content.indexOf('开锁') != -1){
+			var code = content.split('车号')[1].split('开锁')[0];
+			if(isNumber(code)){
+				sendCommand('open', host, room, code, contact);
+			}
 		}
 		
-		if(content == '玄武湖电瓶车报数'){
-			test.getXwhdpcInfo(room);
+		if(content.indexOf('车号') != -1 && content.indexOf('关锁') != -1){
+			var code = content.split('车号')[1].split('关锁')[0];
+			if(isNumber(code)){
+				sendCommand('close', host, room, code, contact);
+			}
 		}
 		
+		if(content.indexOf('手机号') != -1 && content.indexOf('按时间退款') != -1){
+			var phone = content.split('手机号')[1].split('按时间退款')[0];
+			if(isNumber(phone)){
+				refund(host, room, 1, phone, 1, 0, contact);
+			}
+		}
+		
+		if(content.indexOf('手机号') != -1 && content.indexOf('全额退款') != -1){
+			var phone = content.split('手机号')[1].split('全额退款')[0];
+			if(isNumber(phone)){
+				refund(host, room, 1, phone, 2, 0, contact);
+			}
+		}
+		
+		if(content.indexOf('手机号') != -1 && content.indexOf('按照优惠活动退款') != -1){
+			var phone = content.split('手机号')[1].split('按照优惠活动退款')[0];
+			if(isNumber(phone)){
+				refund(host, room, 1, phone, 5, 0, contact);
+			}
+		}
+		
+		if(content.indexOf('手机号') != -1 && content.indexOf('退款') != -1 && content.indexOf('按时间') == -1 && content.indexOf('全额') == -1){
+			var phone = content.split('手机号')[1].split('退款')[0];
+			var money = content.split('退款')[1];
+			if(isNumber(phone) && isNumber(money)){
+				refund(host, room, 1, phone, 3, money, contact);
+			}
+		}
+		
+		if(content.indexOf('车号') != -1 && content.indexOf('按时间退款') != -1){
+			var code = content.split('车号')[1].split('按时间退款')[0];
+			if(isNumber(code)){
+				refund(host, room, 2, code, 1, 0, contact);
+			}
+		}
+		
+		if(content.indexOf('车号') != -1 && content.indexOf('全额退款') != -1){
+			var code = content.split('车号')[1].split('全额退款')[0];
+			if(isNumber(code)){
+				refund(host, room, 2, code, 2, 0, contact);
+			}
+		}
+		
+		if(content.indexOf('车号') != -1 && content.indexOf('退款') != -1 && content.indexOf('按时间') == -1 && content.indexOf('全额') == -1){
+			var code = content.split('车号')[1].split('退款')[0];
+			var money = content.split('退款')[1];
+			if(isNumber(code) && isNumber(money)){
+				refund(host, room, 2, code, 3, money, contact);
+			}
+		}
+		
+		if(content.indexOf('车号') != -1 && content.indexOf('报修') != -1){
+			var code = content.split('车号')[1].split('报修')[0];
+			if(isNumber(code)){
+				updateStatus(2, host, room, code, contact);
+			}
+		}
+		
+		if(content.indexOf('车号') != -1 && content.indexOf('启用') != -1){
+			var code = content.split('车号')[1].split('启用')[0];
+			if(isNumber(code)){
+				updateStatus(0, host, room, code, contact);
+			}
+		}
+		
+		if(content.indexOf('车号') != -1 && content.indexOf('查手机') != -1){
+			var code = content.split('车号')[1].split('查手机')[0];
+			if(isNumber(code)){
+				getLastedPhone(host, room, code, contact);
+			}
+		}	
+		
+		if(content.indexOf('车号') != -1 && content.indexOf('已结订单退款') != -1){
+			var code = content.split('车号')[1].split('已结订单退款')[0];
+			var money = content.split('已结订单退款')[1];
+			if(isNumber(code) && isNumber(money)){
+				refund(host, room, 2, code, 4, money, contact);
+			}
+		}	
+		
+		if (content.indexOf('手机号') != -1 && content.indexOf('已结订单退款') != -1) {
+			var phone = content.split('手机号')[1].split('已结订单退款')[0];
+			var money = content.split('已结订单退款')[1];
+			if (isNumber(phone) && isNumber(money)) {
+				refund(host, room, 1, phone, 4, money, contact);
+			}
+		}
+		
+		if(content.indexOf('车号') != -1 && content.indexOf('救援完成') != -1){
+			var code = content.split('车号')[1].split('救援完成')[0];
+			if(isNumber(code)){
+				completeRescue(host, room, code, contact);
+			}
+		}	
 	}else if(msg.type() == wechat.bot.Message.Type.Video){
 		console.log('~~~~~~~~~~视频消息~~~~~~~~~');
 
@@ -61,84 +156,26 @@ async function testRoomDeal(msg){
 
 	}else if(msg.type() == wechat.bot.Message.Type.Image){
 		console.log('~~~~~~~~~~图片消息~~~~~~~~~');
-		const file = await msg.toFileBox();
-		room.say(file);
-		
+
 	}else{
 		console.log('~~~~~~~~其它类型消息~~~~~~~');
 	}
 }
 
-// 优惠券核销
-function useCoupons(room, phone, source) {
-	const options = {
-		hostname: 'rent.smart-ideas.com.cn',
-		path: '/ylhpark/couponsOrder/robot/use',
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	};
-	var buffers = [];
-	var nread = 0;
-	const req = http.request(options, (res) => {
-		res.on('data', (d) => {
-			buffers.push(d);
-			nread += d.length;
-		});
-		
-		res.on('end', () => {
-			var buffer = null;
-			switch(buffers.length) {
-				case 0: buffer = new Buffer(0);
-					break;
-				case 1: buffer = buffers[0];
-					break;
-				default:
-					buffer = new Buffer(nread);
-					for (var i = 0, pos = 0, l = buffers.length; i < l; i++) {
-						var chunk = buffers[i];
-						chunk.copy(buffer, pos);
-						pos += chunk.length;
-					}
-				break;
-			}
-			var res = JSON.parse(buffer.toString());
-			console.log(res);
-			if(res.data){
-				room.say('手机号：' + phone + '\n' + res.msg);
-			}else{
-				room.say(res.msg);
-			}
-		})
-	});
-	
-	req.write(JSON.stringify({
-		phone: phone,
-		source: source
-	}));
-	
-	req.on('error', (e) => {
-	  console.error(`problem with request: ${e.message}`);
-	});
-	
-	req.end();
-}
-
-// 电瓶船&自行车开关锁
-function sendCommand(type, host, room, code){
+// 完成救援
+function completeRescue(host, room, code, contact){
 	const options = {
 		hostname: host,
-		path: '/ymypark/deviceRobot/sendCommand?deviceSn='+ code +'&type=' + type,
+		path: '/xtybypark/deviceRobot/removeRescue?deviceSn='+ code,
 		method: 'GET'
 	};
 	
 	const req = http.request(options, (res) => {
-	  res.on('data', (d) => {
-	  	console.log(d);
-	    var res = JSON.parse(d.toString());
-		room.say('\n船号:' + code + '\n' + res.msg);
-	  });
+	    res.on('data', (d) => {
+			console.log(d);
+			var res = JSON.parse(d.toString());
+			room.say('\n车号:' + code + '\n' + res.msg);
+	    });
 	});
 	
 	req.on('error', (e) => {
@@ -158,18 +195,84 @@ function isNumber(val) {
     }
 }
 
+// 电瓶船&自行车开关锁
+function sendCommand(type, host, room, code, contact){
+	const options = {
+		hostname: host,
+		path: '/xtybypark/deviceRobot/sendShipCommand?deviceSn='+ code +'&type=' + type,
+		method: 'GET'
+	};
+	
+	const req = http.request(options, (res) => {
+	    res.on('data', (d) => {
+			var res = JSON.parse(d.toString());
+			room.say('\n车号:' + code + '\n' + res.msg);
+	    });
+	});
+	
+	req.on('error', (e) => {
+	  console.error(`problem with request: ${e.message}`);
+	});
+	
+	req.end();
+}
 
+// 电瓶船|自行车报修或者启用
+function updateStatus(status, host, room, code, contact){
+	const options = {
+		hostname: host,
+		path: '/xtybypark/deviceRobot/updateStatus?deviceSn='+ code +'&status=' + status,
+		method: 'GET'
+	};
+	
+	const req = http.request(options, (res) => {
+	  res.on('data', (d) => {
+	  	console.log(d);
+	    var res = JSON.parse(d.toString());
+	    room.say('\n车号:' + code + '\n' + res.msg);
+	  });
+	});
+	
+	req.on('error', (e) => {
+	  console.error(`problem with request: ${e.message}`);
+	});
+	
+	req.end();
+}
+
+// 电瓶船|自行车查询手机号
+function getLastedPhone(host, room, code, contact){
+	const options = {
+		hostname: host,
+		path: '/xtybypark/deviceRefundRobot/getLastedPhone?deviceSn='+ code,
+		method: 'GET'
+	};
+	
+	const req = http.request(options, (res) => {
+	  res.on('data', (d) => {
+	  	console.log(d);
+	    var res = JSON.parse(d.toString());
+	    room.say('\n' + res.msg + '\n车号：' + code + '\n最后订单手机号：' + res.data);
+	  });
+	});
+	
+	req.on('error', (e) => {
+	  console.error(`problem with request: ${e.message}`);
+	});
+	
+	req.end();
+}
 
 // 电瓶船|自行车租赁退款
-function refund(host, room, refundType, refundValue, refundWall, refundMoney, contact) {
+function refund(host, room, refundType, refundValue, refundWall, refundMoney, contact){
 	var data;
-	if (refundWall == '1' || refundWall == '2') {
+	if(refundWall == '1' || refundWall == '2' || refundWall == '5'){
 		data = {
 			refundType: refundType,
 			refundValue: refundValue,
 			refundWall: refundWall
 		}
-	} else {
+	}else{
 		data = {
 			refundType: refundType,
 			refundValue: refundValue,
@@ -177,40 +280,31 @@ function refund(host, room, refundType, refundValue, refundWall, refundMoney, co
 			refundMoney: refundMoney
 		}
 	}
-
+	
 	console.log(JSON.stringify(data));
-
+	
 	const options = {
 		hostname: host,
-		path: '/ymypark/deviceRefundRobot/refund',
+		path: '/xtybypark/deviceRefundRobot/refund',
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
 		}
 	};
-
+	
 	const req = http.request(options, (res) => {
-		res.on('data', (d) => {
-			console.log(d);
-			var res = JSON.parse(d.toString());
-			console.log(res);
-			if(res.data){
-				if(res.data['normalDeposit']){
-					room.say('退款金额：' + res.data.normalDeposit + '\n' + res.msg);
-				}else{
-					room.say(res.msg);
-				}
-			}else{
-				room.say(res.msg);
-			}
-		});
+	  res.on('data', (d) => {
+	    var res = JSON.parse(d.toString());
+		room.say(res.msg);
+	  });
 	});
-
+	
 	req.write(JSON.stringify(data));
 	req.on('error', (e) => {
 	  console.error(`problem with request: ${e.message}`);
 	});
 	req.end();
 }
+
 
 module.exports = {testRoomDeal};

@@ -6,7 +6,6 @@
 		<link rel="stylesheet" href="css/swiper.min.css">
 		<link rel="stylesheet" href="css/reset.css">
 		<style type="text/css">
-			
 			.container{
 				background-color: #f5f5f5;
 				min-height: 100vh;
@@ -171,7 +170,7 @@
 				width: 100%;
 			}
 			.swiper{
-			    --swiper-pagination-color: #00ff33;/* 两种都可以 */
+			    --swiper-pagination-color: #00ff33;
 			  }
 			.swiper-pagination-bullet-active{
 				background: #00ff33 !important;
@@ -296,12 +295,12 @@
 					    url:'http://hd.smart-ideas.com.cn/xwhpark/deviceLoopApp/getTicketStock',
 					    type:"GET",
 					    data:{
-							date1: satDate,
-							date2: sunDate
+							date1: satTime,
+							date2: sunTime
 						},
 					    success:function(res){
-					    	let satSells = res.data[satDate].sell;
-					    	let sunSells = res.data[sunDate].sell;
+					    	let satSells = res.data[satTime].sell;
+					    	let sunSells = res.data[sunTime].sell;
 					    	let totalSell = satSells + sunSells;
 					    	$('.sells').text('已售：' + totalSell)
 					    }

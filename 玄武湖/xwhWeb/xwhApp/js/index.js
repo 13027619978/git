@@ -132,7 +132,7 @@ function getDeviceType(deviceType, openid, qrCode){
 								var nowMonth = nowDate.getMonth()+1;
 								var nowDay = nowDate.getDate();
 								var startDate = new Date(nowYear + '/' + nowMonth + '/' + nowDay + ' 09:00:00');
-								var endDate = new Date(nowYear + '/' + nowMonth + '/' + nowDay + ' 16:30:00');
+								var endDate = new Date(nowYear + '/' + nowMonth + '/' + nowDay + ' 20:30:00');
 								var currDate = new Date().getTime();
 								if(startDate <= currDate && endDate >= currDate){
 									window.location.href = 'fountain.html';
