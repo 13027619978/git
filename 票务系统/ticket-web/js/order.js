@@ -81,11 +81,15 @@ function getOrderList(){
 							'<div class="timeView">' +
 								'<p class="time">支付时间：'+ value.payTime +'</p>' +
 								'<p class="price">合计<font>￥'+ value.totalPrice +'</font></p>' +
-							'</div>' +
-							'<div class="deleteView">' +
+							'</div>';
+						
+					if(checkQuantity != restCheckQuantity){
+						orderItem += '<div class="deleteView">' +
 								'<a href="javascript:;" onclick="deleteClick(/'+ value.ticketOrderId +'/)">删除订单</a>' +
-							'</div>' +
-						'</div>';
+							'</div>';
+					}
+					
+					orderItem += '</div>';
 						
 					if(value.categoryName == '年票'){
 						orderItem = '<div class="orderItem" onclick="orderClick(/'+ value.ticketOrderId +'/)">' +
