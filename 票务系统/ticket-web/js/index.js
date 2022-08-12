@@ -1,7 +1,13 @@
 $(function(){
 	var enterpriseCode = app.getCookie('enterpriseCode');
 	var ticketGroupNum = app.getCookie('ticketGroupNum');
+	
 	app.wxUserInfo(function(){
+		// 西山森林公园
+		let indexUrl = window.location.href;
+		if(enterpriseCode == 'TgsEpcXsslgy' && indexUrl.indexOf('xsslgyIndex') == -1){
+			window.location.replace('http://boss.smart-ideas.com.cn/ticket-web/xsslgyIndex.html?enterpriseCode=TgsEpcXsslgy&ticketGroupNum=TGN20220726105538295')
+		}
 		layer.load(2);
 		if(app.getCookie('ybyNp60') == '1'){
 			window.location.href = 'ticket.html?ticketInfoId=/2c9141f47d377f26017d50e8fb664c68/';
@@ -489,6 +495,9 @@ function ticketClick(ticketInfoId){
 	if(enterpriseCode == 'TgsEpcSch'){
 		// 什刹海购票页
 		window.location.href = 'schTicket.html?ticketInfoId=' + ticketInfoId;
+	}else if(enterpriseCode == 'TgsEpcXsslgy'){
+		// 森林公园购票页
+		window.location.href = 'xsslgyTicket.html?ticketInfoId=' + ticketInfoId;
 	}else{
 		window.location.href = 'ticket.html?ticketInfoId=' + ticketInfoId;
 	}

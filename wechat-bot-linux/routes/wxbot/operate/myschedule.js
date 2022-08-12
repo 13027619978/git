@@ -37,6 +37,8 @@ const ssgy = require('./common/ssgy.js');
 const sch = require('./common/sch.js');
 // 邢台园博园
 const xtyby = require('./common/xtyby.js');
+// 园博园创森
+const ybycs = require('./common/ybycs.js');
 
 // 运营预警
 var warningString = '';
@@ -280,7 +282,7 @@ function scheduleStart(){
 				var tellMember = [];
 				for(var i = 0; i < allMember.length; i++){
 					for(var j = 0; j < noReportMember.length; j++){
-					if(noReportMember[j] == allMember[i].payload.name && noReportMember[j] != "技术支撑-小享"){
+					if(noReportMember[j] == allMember[i].payload.name && noReportMember[j] != "技术支撑-小享" && noReportMember[j] != "运营实习生-小思"){
 							var memberName = allMember[i].payload.name;
 							tellMember.push(memberName);
 						}
@@ -289,7 +291,7 @@ function scheduleStart(){
 				if(tellMember.length != 0){
 					var botString = '';
 					tellMember.forEach(function(value, key){
-						botString += value + ' ';
+						botString += value + '，';
 					})
 					room.say(botString + '请发送本日工作总结！');
 				}else{
@@ -1281,6 +1283,14 @@ function scheduleStart(){
 				if(parseInt(hour) == 11){
 					yby.getTicketsIncome(ybybsRoom);
 				}
+				
+				const bgslgyRoom = await wechat.bot.Room.find({topic: "北宫森林公园报数组"});
+				boss.getBossInfo('TgsEpcBgslgy', 'TGN20220727162132879', bgslgyRoom);
+				boss.getBossYYInfo('TgsEpcBgslgy', 'TGN20220727162132879', bgslgyRoom);
+				
+				const ybycsRoom = await wechat.bot.Room.find({topic: "园博园创森报数组"});
+				ybycs.getCheckTicketNumberInfo(ybycsRoom);
+				ybycs.getYYInfo(ybycsRoom);
 			}
 			
 			// 园博园记录总入园人数
@@ -1526,6 +1536,11 @@ function scheduleStart(){
 			xtyby.getxtybyInfo('rent.smart-ideas.com.cn', xtybybszRoom);
 			xtyby.xtybydpcInfo(xtybybszRoom);
 		}
+		
+		if(parseInt(hour) == 18){
+			const yqhbszRoom = await wechat.bot.Room.find({topic: "雁栖湖报数组"});
+			yqh.getOpenNumber('api.smart-ideas.com.cn',yqhbszRoom);
+		}
 	})
 	
 	schedule.scheduleJob('*/5 * * * * *', async function(){
@@ -1615,16 +1630,18 @@ function scheduleStart(){
 		var hour = new Date().getHours();
 		if(parseInt(hour) == 17 || parseInt(hour) == 19){
 			const ymybszRoom = await wechat.bot.Room.find({topic: "圆明园报数组"});
-			const yqhbszRoom = await wechat.bot.Room.find({topic: "雁栖湖报数组"});
 			getymyInfo('api.smart-ideas.com.cn', ymybszRoom);
 			boss.getTicketInfo('TgsEpcYmy', 'TGN20201125101904070', 'MINI', ymybszRoom);
 			boss.getBossYYInfo('TgsEpcYmy', 'TGN20201125101904070', ymybszRoom);
-			yqh.getOpenNumber('api.smart-ideas.com.cn',yqhbszRoom);
-			
 			if(parseInt(hour) == 19){
 				const nhdpcbszRoom = await wechat.bot.Room.find({topic: "唐山南湖电瓶车报数组"});
 				nh.getIncome(nhdpcbszRoom, 'battery');
 			}
+		}
+		
+		if(parseInt(hour) == 18 || parseInt(hour) == 17 || parseInt(hour) == 19){
+			const yqhbszRoom = await wechat.bot.Room.find({topic: "雁栖湖报数组"});
+			yqh.getOpenNumber('api.smart-ideas.com.cn',yqhbszRoom);
 		}
 	})
 	

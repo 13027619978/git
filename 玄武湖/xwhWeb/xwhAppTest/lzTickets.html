@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/gzhTickets.css">
+		<style type="text/css">
+			.descView img{
+				width: 100%;
+				margin: 5px 0;
+			}
+		</style>
+		<title>龙舟专线购票</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="shopView">
+				<div class="shopContent">
+					<a class="closeBtn" href="javascript:;" onclick="closeClick()">
+						<img src="img/close.png" >
+					</a>
+					<div class="shopContentView">
+						<div class="shopTop">
+							<div class="shopImg">
+								<img src="img/lzx/lzx2.jpg">
+							</div>
+							<div class="shopPrice">
+								<p>¥120</p>
+							</div>
+						</div>
+						
+						<div class="numberView">
+							<p>数量</p>
+							<div class="number">
+								<a href="javascript:;" onclick="sub(this)">-</a>
+								<div class="number_txt">
+									<input class="num" type="number" value="0" onchange="quantityChange(this)" disabled="true"/>
+								</div>
+								<a href="javascript:;" onclick="add(this)">+</a>
+							</div>
+						</div>
+					</div>
+					
+					<a class="buyBtn" href="javascript:;" onclick="buyClick(this)">立即购票</a>
+				</div>
+			</div>
+			
+			<div class="banner">
+				<img src="img/lzx/lzx2.jpg" >
+			</div>
+			<div class="buyInfo">
+				<div class="ticketView">
+					<p>2022玄武湖东南湖游览专线（龙舟专线）</p>
+					<p class="price">¥<font>120</font></p>
+				</div>
+				
+				<div class="chooseView">
+					<div class="chooseTitle" onclick="showClick()">
+						<div class="chooseBtn">请选择规格</div>
+					</div>
+				</div>
+				<!-- <p style="width: 100%;text-align: center;line-height: 50px;font-size: 16px;">2022玄武湖东南湖游览专线（龙舟专线）</p>
+				<div class="buy_item">
+					<p class="item_l">票价：</p>
+					<p class="singlePrice"></p>
+				</div>
+				<div class="buy_item">
+					<p class="item_l">票数：</p>
+					<div class="number">
+						<a href="javascript:;" onclick="sub(this)">-</a>
+						<div class="number_txt">
+							<input class="num" type="number" value="0" onchange="quantityChange(this)" disabled="true"/>
+							张
+						</div>
+						<a href="javascript:;" onclick="add(this)">+</a>
+					</div>
+				</div> -->
+			</div>
+			<div class="descView">
+				<p style="text-align: center;font-size: 14px;color: #333;line-height: 40px;">--图文详情--</p>
+				<p style="font-size: 18px;color: red;line-height: 35px;">购买完成后，在我的订单——订单详情查看核销码，前往对应码头核销即可。</p>
+				<img src="img/lzx/lzx1.jpg">
+				<p>水上观赛指南——豪华游船游览 </p>
+				<p>龙舟赛事比赛区域为玄武湖东南湖水域，由于十里长堤区域狭窄，为了减少聚集丰富观赏方式，景区推出了东南湖豪华游船专线。上周末首班线路开通，受到了游客的普遍好评。</p>
+				<img src="img/lzx/lzx2.jpg">
+				<img src="img/lzx/lzx3.jpg">
+				<p>游览线路：环洲码头——天鹅岛——东南湖游览——古阅武台——西南湖游览</p>
+				<p>发船码头：环洲码头（假山瀑布旁）</p>
+				<p>游览时长：约1小时</p>
+				<img src="img/lzx/lzx4.jpg">
+				<p>活动价格：单人80元。1.2米以下儿童免票，每位成年人最多携带一名儿童乘船。</p>
+				<img src="img/lzx/lzx5.jpg">
+				<img src="img/lzx/lzx6.jpg">
+				<img src="img/lzx/lzx7.jpg">
+				<p style="font-size: 18px;font-weight: bold;line-height: 35px;">水上观赛指南——小船观赛</p>
+				<p>游客还可在翠洲门码头、芳桥码头、解放门码头，自行乘坐电动游船自行观赏。观看时请勿进入比赛赛道。</p>
+				<img src="img/lzx/lzx8.jpg">
+				<img src="img/lzx/lzx9.jpg">
+				<img src="img/lzx/lzx10.jpg">
+				<p style="font-size: 18px;font-weight: bold;line-height: 35px;">陆上观赛指南——浪漫环路小火车</p>
+				<p>龙舟赛比赛区域为玄武湖东南湖水域，陆上最佳观赛地点在太阳宫至水岸听风沿线，乘坐浪漫的环湖小火车与激情四射的龙舟赛来一场偶遇，也是很好的选择。</p>
+				<img src="img/lzx/lzx11.jpg">
+				<img src="img/lzx/lzx12.jpg">
+				<p style="text-align: center;color: red;font-weight: bold;">票价：10元/站（50元封顶）</p>
+				<img src="img/lzx/lzx13.jpg">
+				<img src="img/lzx/lzx14.jpg">
+				<p>交通指南</p>
+				<img src="img/lzx/lzx15.jpg">
+				<img src="img/lzx/lzx16.jpg">
+				<p>地铁：地铁四号线岗子村站3号口出，沿阳光路步行454米至玄武湖阳光码头。</p>
+				<img src="img/lzx/lzx17.jpg">
+				<p>公交：乘坐2路、17路、24路、36路、40路、125路至龙蟠路·岗子村公交站步行400多米至阳光码头；乘坐6路、11路、10路、68路、70路至板仓街·岗子村步行700多米至阳光码头。</p>
+				<img src="img/lzx/lzx18.jpg">
+				<p>自驾：地图搜索玄武湖景区停车场龙蟠路100号即可到达情侣园停车场，可选择步行或乘坐观光车前往阳光码头。</p>
+				<img src="img/lzx/lzx19.jpg">
+				<p>园内交通：在梁洲白苑、翠洲门等站点乘坐景区观光车（情侣园线）至阳光码头站即可。</p>
+				<img src="img/lzx/lzx20.jpg">
+				<img src="img/lzx/lzx21.jpg">
+			</div>
+			<div class="bottomView">
+				<p>总计：<font class="totalPrice">0.00</font>元</p>
+				<a class="orderBtn" href="chooseOrder.html">我的订单</a>
+				<a href="javascript:;" onclick="showClick()">购票</a>
+			</div>
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app.js?v=1.0.0"></script>
+		<script src="js/lzTickets.js?v=1.0.2"></script>
+		<script type="text/javascript">
+			function showClick(){
+				$('.shopView').show();
+			}
+			
+			function closeClick(){
+				$('.shopView').hide();
+			}
+		</script>
+	</body>
+</html>

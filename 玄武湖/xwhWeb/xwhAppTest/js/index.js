@@ -77,9 +77,9 @@ function getDeviceType(deviceType, openid, qrCode){
 			qrCode = '1230022';
 		break;
 		
-		case "1230022":
-			qrCode = '1230023';
-		break;
+		// case "1230022":
+		// 	qrCode = '1230023';
+		// break;
 		
 		case "1230023":
 			qrCode = '1230024';
@@ -127,7 +127,18 @@ function getDeviceType(deviceType, openid, qrCode){
 						if(res.data){
 							var deviceType = res.data.device.deviceType;
 							if(deviceType == '10'){
-								window.location.href = 'fountain.html';
+								var nowDate = new Date();
+								var nowYear = nowDate.getFullYear();
+								var nowMonth = nowDate.getMonth()+1;
+								var nowDay = nowDate.getDate();
+								var startDate = new Date(nowYear + '/' + nowMonth + '/' + nowDay + ' 09:00:00');
+								var endDate = new Date(nowYear + '/' + nowMonth + '/' + nowDay + ' 20:30:00');
+								var currDate = new Date().getTime();
+								if(startDate <= currDate && endDate >= currDate){
+									window.location.href = 'fountain.html';
+								}else{
+									layer.alert('不在运营时间');
+								}
 							}else{
 								window.location.href = 'boat.html';
 							}
@@ -171,6 +182,18 @@ function getDeviceType(deviceType, openid, qrCode){
 		
 		case "boatTickets":
 			window.location.href = 'boatTickets.html?type=' + qrCode;
+		break;
+		
+		case "canoeTickets":
+			window.location.href = 'canoeTickets.html?ticketType=' + qrCode;
+		break;
+		
+		case "lyTickets":
+			window.location.href = 'lyTickets.html';
+		break;
+		
+		case "lzTickets":
+			window.location.href = 'lzxTickets.html';
 		break;
 	}
 }

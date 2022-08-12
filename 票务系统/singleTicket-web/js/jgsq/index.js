@@ -92,7 +92,7 @@ function getSaleInfo(enterpriseCode, ticketGroupNum, ticketInfoId){
 				'</div>' +
 				'<div class="itemInfo">' +
 					'<p>*手机号：</p>' +
-					'<input class="phone" type="text" placeholder="请输入手机号">' +
+					'<input class="phone" type="number" placeholder="请输入手机号">' +
 				'</div>' +
 				'<div class="itemInfo">' +
 					'<p>*身份证：</p>' +
@@ -372,10 +372,17 @@ function base64ToFile(dataurl){
 // 在线支付
 function payClick(){
 	
+	if(!headPicUrl){
+		layer.alert('请先上传人脸照片');
+		$('.payBtn').attr('onclick', 'payClick()');
+		return;
+	}
+	
 	// 住户类型
 	var zh =$('input[name="zh"]:checked').val();
 	if(!zh){
 		layer.alert('请先选择住户类型！');
+		$('.payBtn').attr('onclick', 'payClick()');
 		return;
 	}
 	
@@ -449,6 +456,13 @@ function payClick(){
 					return;
 				}
 				
+				var regx = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+				if(!regx.test(idCard)){
+					layer.alert('请输入正确的身份证号');
+					// 启用支付按钮
+					$('.payBtn').attr('onclick', 'payClick()');
+					return;
+				}
 				
 			}
 		}else{
@@ -544,13 +558,6 @@ function payClick(){
 		}
 	}
 	
-	if(!headPicUrl){
-		layer.alert('请先上传头像！');
-		// 启用支付按钮
-		$('.payBtn').attr('onclick', 'payClick()');
-		return;
-	}
-	
 	var visitors = [];
 	
 	for(var i = 0; i < ticketNumber; i++){
@@ -601,7 +608,7 @@ function payClick(){
 	var myInter = setInterval(function(){
 		if(healthCode == visitors.length){
 			clearInterval(myInter);
-			var params = {
+			params = {
 				source: 'WEB',
 				payWay: 'WXPAY',
 				ticketInfoId: ticketInfoId,
@@ -610,25 +617,10 @@ function payClick(){
 				unitPrice: settlePrice,
 				visitDate: $('.timeSelectBtn').text(),
 				buyQuantity: 1,
+				headPicUrl: headPicUrl,
 				visitors: visitors
 			}
-			
-			console.log(params);
-			if(headPicUrl){
-				params = {
-					source: 'WEB',
-					payWay: 'WXPAY',
-					ticketInfoId: ticketInfoId,
-					openId: app.getCookie('openid'),
-					totalPrice: 0,
-					unitPrice: settlePrice,
-					visitDate: $('.timeSelectBtn').text(),
-					buyQuantity: 1,
-					headPicUrl: headPicUrl,
-					visitors: visitors
-				}
-				app.setCookie('headPicUrl', headPicUrl);
-			}
+			app.setCookie('headPicUrl', headPicUrl);
 			console.log(params);
 			layer.load(2);
 			app.postAjax('order/create', params, function(res){

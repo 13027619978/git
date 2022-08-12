@@ -98,7 +98,9 @@ app = {
 	        success:function(data){
 	        	callback(data);
 	        }
-	    });
+	    }).fail(function(err){
+			layer.alert('数据请求失败，请联系管理员')
+		});
 	},
 	getAjax:function(u,params,callback){
 		$.ajax({
@@ -108,7 +110,9 @@ app = {
 	        success:function(data){
 	        	callback(data);
 	        }
-	    });
+	    }).fail(function(err){
+			layer.alert('数据请求失败，请联系管理员')
+		});
 	},
 	getCardAjax:function(u,params,callback, failback){
 		$.ajax({
@@ -118,6 +122,8 @@ app = {
 		    success:function(data){
 		    	callback(data);
 		    }
+		}).fail(function(err){
+			failback();
 		});
 	},
 }

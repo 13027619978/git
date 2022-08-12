@@ -180,6 +180,11 @@ function getBossInfo(enterpriseCode, ticketGroupNum, room, state){
 			botString += '总检票金额：' + parseFloat(totalMoney).toFixed(2) + '元\n';
 			botString += '--------------------\n';
 			botString += ListString;
+			// 北宫森林公园
+			if(enterpriseCode == 'TgsEpcBgslgy'){
+				botString = '*****'+ parkName +'核销报数*****\n日期:'+eDate +'\n';
+				botString += '总检票：' + totalNumber + '张';
+			}
  			try{
  				room.say(botString);
  			}catch(e){
@@ -1305,6 +1310,8 @@ function getParkName(enterpriseCode, ticketGroupNum){
 		parkName = '冰雪嘉年华';
 	}else if(enterpriseCode == 'TgsEpcSsgy' && ticketGroupNum == 'TGN20211201163921241'){
 		parkName = '水上公园';
+	}else if(enterpriseCode == 'TgsEpcBgslgy'){
+		parkName = '北宫森林公园';
 	}
 	return parkName;
 }

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/gzhTickets.css">
+		<style type="text/css">
+			.descView img{
+				width: 100%;
+				margin: 5px 0;
+			}
+			
+		</style>
+		<title>龙舟购票</title>
+	</head>
+	<body>
+		<div class="container">
+			<!-- 购买界面 -->
+			<div class="shopView">
+				<div class="shopContent">
+					<a class="closeBtn" href="javascript:;" onclick="closeClick()">
+						<img src="img/close.png" >
+					</a>
+					<div class="shopContentView">
+						<div class="shopTop">
+							<div class="shopImg">
+								<img src="img/lz/lz4.jpg">
+							</div>
+							<div class="shopPrice">
+								<p>¥120</p>
+							</div>
+						</div>
+						
+						<div class="ggContent">
+							<div class="dateView">
+								<p>日期</p>
+								<div class="dateList">
+									<div class="timeBtn" onclick="selectTime(this, 1)"></div>
+									<div class="timeBtn" onclick="selectTime(this, 2)" style="margin-top: 10px;"></div>
+								</div>
+							</div>
+							
+							<div class="ywrView">
+								<p>游玩人信息</p>
+								<div class="ywrInfo">
+									<div class="ywrItem">
+										<p>姓名：</p>
+										<input class="userName" type="text" placeholder="请输入游玩人姓名">
+									</div>
+									<div class="ywrItem">
+										<p>手机号：</p>
+										<input class="phone" type="number" placeholder="请输入游玩人手机号">
+									</div>
+								</div>
+							</div>
+							
+							<div class="numberView">
+								<p>数量</p>
+								<div class="number">
+									<a href="javascript:;" onclick="sub(this)">-</a>
+									<div class="number_txt">
+										<input class="num" type="number" value="0" onchange="quantityChange(this)" disabled="true"/>
+									</div>
+									<a href="javascript:;" onclick="add(this)">+</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<a class="buyBtn" href="javascript:;" onclick="buyClick(this)">立即购票</a>
+				</div>
+			</div>
+			
+			<div class="banner">
+				<img src="img/lz/lz4.jpg" >
+			</div>
+			<div class="buyInfo">
+				<div class="ticketView">
+					<p>2022玄武湖全民龙舟体验活动</p>
+					<p class="price">¥<font>120</font></p>
+				</div>
+				
+				<div class="chooseView">
+					<div class="chooseTitle" onclick="showClick()">
+						<div class="chooseBtn">请选择规格</div>
+					</div>
+				</div>
+			</div>
+			<div class="descView">
+				<p style="text-align: center;font-size: 14px;color: #333;line-height: 40px;">--图文详情--</p>
+				<p style="font-size: 14px;color: red;">龙舟活动预约咨询：陆先生13813889952/李先生18005142325</p>
+				<div class="zxvx" style="display: flex;justify-content: flex-start;align-items: flex-start;">
+					<p>玄武湖公园管理处游览中心：</p>
+					<img style="width: 75px;" src="img/zxvx.png" >
+				</div>
+				<img src="img/lz/lz1.jpg">
+				<p>玄武湖全民龙舟体验活动（可报名参与）</p>
+				<p>地点：玄武湖水上运动基地（阳光码头）</p>
+				<img src="img/lz/lz2.jpg" >
+				<img src="img/lz/lz3.jpg" >
+				<p style="display: inline-block;background-color: yellow;color: red;margin: 10px 0;">武湖全民龙舟体验活动招募中</p>
+				<p>对于大部分人来说，龙舟赛虽然精彩热闹，但受于场地和参与人数的限制，很难真正参与其中。不过，机会来了！这个端午假期，玄武湖全民龙舟体验活动正在招募中！面向广大市民、游客，在专业教练的指导下，竞舟湖上，感受浓浓的节日氛围！</p>
+				<img src="img/lz/lz4.jpg" >
+				<p>活动时间：每周六/日 16:00-17:30</p>
+				<p>活动地点：玄武湖水上运动基地（阳光码头）</p>
+				<p>活动启动条件：报名满10人即可成团，上限人数51人。儿童要求1.3米以上且需家长陪同，均按全票收费。</p>
+				<p>活动价格：120元/人</p>
+				<p>费用包含：教练员、救生衣、手机防水套。</p>
+				<p>其他条件：自备衣服一套</p>
+				<img src="img/lz/lz4.jpg" >
+				<img src="img/lz/lz5.jpg" >
+				<p style="display: inline;background-color: yellow;color: red;margin: 10px 0;">交通指南</p>
+				<p>地铁：地铁四号线岗子村站3号口出，沿阳光路步行454米至玄武湖阳光码头。</p>
+				<p>公交：乘坐2路、17路、24路、36路、40路、125路至龙蟠路·岗子村公交站步行400多米至阳光码头；乘坐6路、11路、10路、68路、70路至板仓街·岗子村步行700多米至阳光码头。</p>
+				<p>自驾：地图搜索玄武湖景区停车场龙蟠路100号即可到达情侣园停车场，可选择步行或乘坐观光车前往阳光码头。</p>
+				<img src="img/lz/lz6.jpg" >
+				<p style="display: inline;background-color: yellow;color: red;margin: 10px 0;">登上央视的玄武湖龙舟</p>
+				<p>玄武湖开阔的水域环境与秀美的自然风光，是开展龙舟运动的绝佳场地，近年来玄武湖已经成为各类龙舟团建、赛事的首选场地。</p>
+				<img src="img/lz/lz7.jpg" >
+				<img src="img/lz/lz8.jpg" >
+				<p>“2019‘艾佳生活杯’玄武湖龙舟邀请赛”“2021‘领航杯’龙舟赛”等多场大型龙舟赛事均在此举办。2020年南京马拉松赛事直播期间，玄武湖的龙舟还登上了央视的舞台。</p>
+				<img src="img/lz/lz9.jpg" >
+				<img src="img/lz/lz10.jpg" >
+				<img src="img/lz/lz11.jpg" >
+				<p>龙舟是中国民间传统水上体育娱乐项目，是一种多人集体划桨竞赛，多是在喜庆节日举行，现流行于中国及世界上一些国家与地区。</p>
+				<img src="img/lz/lz12.jpg" >
+				<p>龙舟不仅是一种体育娱乐活动，更体现出我国传统的悠久历史文化继承性和人们的集体主义精神。</p>
+				<img src="img/lz/lz13.jpg" >
+				<img src="img/lz/lz14.jpg" >
+				<img src="img/lz/lz15.jpg" >
+				<p>玩水枪。</p>
+				<img src="img/lz/lz17.jpg" >
+				<img src="img/lz/lz18.jpg" >
+				<img src="img/lz/lz19.jpg" >
+				<img src="img/lz/lz20.jpg" >
+			</div>
+			<div class="bottomView">
+				<p>总计：<font class="totalPrice">0.00</font>元</p>
+				<a class="orderBtn" href="chooseOrder.html">我的订单</a>
+				<a href="javascript:;" onclick="showClick()">购票</a>
+			</div>
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app.js?v=1.0.0"></script>
+		<script src="js/lzTickets.js?v=1.0.10"></script>
+		<script type="text/javascript">
+			function showClick(){
+				$('.shopView').show();
+			}
+			
+			function closeClick(){
+				$('.shopView').hide();
+			}
+		</script>
+	</body>
+</html>

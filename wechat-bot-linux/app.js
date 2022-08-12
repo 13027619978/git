@@ -1,6 +1,7 @@
 var home =require('./routes/home.js');
 var wxbot =require('./routes/wxbot.js');
 var warning = require('./routes/warning.js');
+var xsslgy = require('./routes/xsslgy.js');
 var path=require('path')					
 var express=require('express');				
 var session = require("express-session");	
@@ -21,4 +22,5 @@ app.use( express.static(path.join(__dirname, './public')));
 app.use('/home',home);
 app.use('/wxbot',wxbot);
 app.use('/warning',warning);
+app.use('/xsslgy',xsslgy);
 app.listen(3000);

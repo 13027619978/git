@@ -110,7 +110,7 @@ app = {
 	        }
 	    });
 	},
-	getCardAjax:function(u,params,callback,failback){
+	getCardAjax:function(u,params,callback, failback){
 		$.ajax({
 		    url:"http://xwhykt.smart-ideas.com.cn" + u,
 		    type:"GET",
@@ -118,8 +118,6 @@ app = {
 		    success:function(data){
 		    	callback(data);
 		    }
-		}).fail(function(err){
-			failback()
 		});
 	},
 }

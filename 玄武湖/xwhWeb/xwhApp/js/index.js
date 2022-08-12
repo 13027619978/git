@@ -77,9 +77,9 @@ function getDeviceType(deviceType, openid, qrCode){
 			qrCode = '1230022';
 		break;
 		
-		case "1230022":
-			qrCode = '1230023';
-		break;
+		// case "1230022":
+		// 	qrCode = '1230023';
+		// break;
 		
 		case "1230023":
 			qrCode = '1230024';

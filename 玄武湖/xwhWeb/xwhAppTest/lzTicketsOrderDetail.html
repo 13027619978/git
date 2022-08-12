@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/orderDetail.css?v=20">
+		<style type="text/css">
+			.content .deviceType{
+				font-size: 16px;
+			}
+			.content .nameTxt{
+				text-align: right;
+			}
+		</style>
+		<title>龙舟专线订单</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="content">
+				<!-- <div class="labelView"><p class="nameTxt">票名：2022玄武湖东南湖游览专线（龙舟专线）</p><p class="deviceType"></p></div> -->
+				<div class="labelView"><p class="nameTxt">支付金额：</p><p class="price"></p></div>
+				<div class="labelView"><p class="nameTxt">订单状态：</p><p class="status"></p></div>
+				<div class="labelView"><p class="nameTxt">购票数量：</p><p class="number"></p></div>
+				<div class="labelView"><p class="nameTxt">支付时间：</p></div>
+				<p class="year"></p>
+				<p class="hour"></p>
+				<div class="qrcodeView">
+					<div class="qrcode"></div>
+				</div>
+			</div>
+			<div class="descView">
+				
+			</div>
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/jquery.qrcode.min.js"></script>
+		<script src="js/boatTicketsDetail.js?v=1.0.0"></script>
+	</body>
+</html>

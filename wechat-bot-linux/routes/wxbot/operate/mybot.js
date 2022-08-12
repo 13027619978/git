@@ -81,7 +81,10 @@ const qsmxRoomTopic = {
 	QSMX_TGYJDCSBSZ_ROOM: "天宫院街道城市管理平台",
 	QSMX_TGYWGYBSZ_ROOM: "天宫院网格员小组001",
 	QSMX_XTYBYZXC_ROOM: "邢台园博园自行车客服组",
-	QSMX_XTYBYBSZ_ROOM: "邢台园博园智慧交通报数组"
+	QSMX_XTYBYBSZ_ROOM: "邢台园博园智慧交通报数组",
+	QSMX_BGSLGYBSZ_ROOM: "北宫森林公园报数组",
+	QSMX_YBYCSBSZ_ROOM: "园博园创森报数组"
+	
 };
 
 function onScan (qrcode, status) {
@@ -330,6 +333,12 @@ async function onMessage (msg) {
 		}else if(roomTopic == qsmxRoomTopic.QSMX_XTYBYBSZ_ROOM){
 			// 邢台园博园自行车客服群
 			eventsParse.eventEmitter.emit('xtybybszRoom', msg);
+		}else if(roomTopic == qsmxRoomTopic.QSMX_BGSLGYBSZ_ROOM){
+			// 北宫森林公园报数组
+			eventsParse.eventEmitter.emit('bgslgybszRoom', msg);
+		}else if(roomTopic == qsmxRoomTopic.QSMX_YBYCSBSZ_ROOM){
+			// 园博园创森报数组
+			eventsParse.eventEmitter.emit('ybycsbszRoom', msg);
 		}
 	}else{
 		console.log(`Message not in room:Content:${content},Contact:${contact.name()}`)

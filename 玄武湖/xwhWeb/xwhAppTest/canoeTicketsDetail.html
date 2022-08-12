@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/orderDetail.css?v=20">
+		<style type="text/css">
+			.content .deviceType{
+				font-size: 16px;
+			}
+			.content .nameTxt{
+				text-align: right;
+			}
+		</style>
+		<title>皮划艇订单</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="content">
+				<div class="labelView"><p class="nameTxt">票名：</p><p class="deviceType"></p></div>
+				<div class="labelView"><p class="nameTxt">支付金额：</p><p class="price"></p></div>
+				<div class="labelView"><p class="nameTxt">订单状态：</p><p class="status"></p></div>
+				<div class="labelView"><p class="nameTxt">购票数量：</p><p class="number"></p></div>
+				<div class="labelView"><p class="nameTxt">支付时间：</p></div>
+				<p class="year"></p>
+				<p class="hour"></p>
+				<div class="qrcodeView">
+					<div class="qrcode"></div>
+				</div>
+			</div>
+			<div class="descView">
+				<p class="title">注意事项：</p>
+				<p>1，患有心脑血管系统疾病，患有“三高”疾病的人员不适合参与</p>
+				<p>2，严禁未穿好救生衣上船，严禁酒后上船</p>
+				<p>3，参与人员应全程听从教练员或管理员的指挥</p>
+				<p>4，严禁在船，艇上嬉戏打闹，禁止摇摆船，艇，严禁站立</p>
+				<p>5，贵重物品自行保管，为免落水，勿将贵重物品带上船，艇，因保管不善造成的后果自行承担</p>
+			</div>
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/jquery.qrcode.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				var orderId = app.getQueryString('orderId');
+				getOrderInfo(orderId);
+				$('.qrcodeView').hide();
+			})
+			
+			function getOrderInfo(orderId){
+				$('.refundView').hide();
+				app.getAjax('canoeOrder/getByPayId', {
+					payId: orderId
+				}, function(res){
+					console.log(res);
+					if(res.code == 'SUCCESS'){
+						$('.price').text(res.data.totalMoney + '元');
+						var createYear = res.data.createDate.split(' ')[0];
+						var createHour = res.data.createDate.split(' ')[1];
+						$('.year').text(createYear);
+						$('.hour').text(createHour);
+						$('.number').text(res.data.buyQuantity);
+						var ticketName;
+						switch(res.data.ticketId){
+							case 1:
+								ticketName = '单人皮划艇 ';
+							break;
+							case 2:
+								ticketName = '双人皮划艇 ';
+							break;
+							case 4:
+								ticketName = '桨板 ';
+							break;
+							case 5:
+								ticketName = '皮划艇体验 ';
+							break;
+							case 6:
+								ticketName = '七夕皮划艇套票 ';
+							break;
+						}
+						$('.deviceType').text(ticketName);
+						var orderStatus;
+						switch(res.data.payStatus){
+							case "0":
+								orderStatus = '支付失败';
+								$('.qrcodeView').hide();
+							break;
+							case "1":
+								orderStatus = '支付成功';
+								$('.qrcodeView').show();
+							break;
+							case "2":
+								orderStatus = '退款成功';
+								$('.qrcodeView').hide();
+							break;
+							case "5":
+								orderStatus = '结算成功';
+							break;
+							case "8":
+								orderStatus = '申请退款成功';
+							break;
+							case "9":
+								orderStatus = '退款失败';
+							break;
+						}
+						$('.status').text(orderStatus);
+						$('.qrcode').eq($('.qrcode').length - 1).qrcode({
+							text: res.data.orderCode,
+							background: '#fff',
+							foreground: '#000',
+							width: 180,
+							height: 180
+						});
+					}else{
+						layer.alert(res.msg);
+					}
+				})
+			}
+			
+			function refundClick(orderCode){
+				orderCode = orderCode.toString().split('/')[1];
+				app.getAjax('deviceLoopApp/refund', {
+					orderCode: orderCode
+				}, function(res){
+					layer.alert(res.msg);
+					var orderId = app.getQueryString('orderId');
+					getOrderInfo(orderId);
+				})
+			}
+			
+			function randomNum(minNum,maxNum){ 
+			    switch(arguments.length){ 
+			        case 1: 
+			            return parseInt(Math.random()*minNum+1,10); 
+			        break; 
+			        case 2: 
+			            return parseInt(Math.random()*(maxNum-minNum+1)+minNum,10); 
+			        break; 
+					default: 
+						return 0; 
+					break; 
+			    } 
+			}
+		</script>
+	</body>
+</html>

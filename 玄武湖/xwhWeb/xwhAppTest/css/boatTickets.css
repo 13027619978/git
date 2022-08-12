@@ -39,6 +39,29 @@
 	height: 35px;
 	font-size: 14px;
 	background-color: #fff;
+	border: 1px solid #ddd;
+	outline: none;
+}
+.radioView{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-wrap: wrap;
+	width: 100%;
+}
+.radioView label{
+	width: 50%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	font-size: 16px;
+	color: #333;
+	line-height: 35px;
+}
+.radioView label input{
+	width: 20px;
+	height: 20px;
+	margin-right: 10px;
 }
 .item_l{
 	flex: 0 0 75px;
@@ -122,7 +145,13 @@
 	color: #fff;
 }
 
-.layui-layer-btn .layui-layer-btn1{
-	background-color: #07c160;
-	color: #fff;
+.detailInfo p{
+	font-size: 14px;
+	color: #333;
+	line-height: 25px;
+	text-indent: 2em;
+}
+.detailInfo img{
+	width: 100%;
+	margin: 10px 0;
 }

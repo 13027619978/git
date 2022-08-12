@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/gzhTickets.css">
+		<style type="text/css">
+			.radioView label{
+				font-size: 14px;
+			}
+			.ticketDesc{
+				font-size: 13px;
+				color: red;
+				padding-left: 25px;
+				line-height: 20px;
+			}
+			.srp{
+				border-bottom: 1px solid #f6f6f6;
+				padding: 10px 0;
+			}
+			.srp p{
+				font-size: 14px;
+				color: #333;
+				line-height: 20px;
+				padding: 2px 0;
+				color: red;
+			}
+		</style>
+		<title>皮划艇购票</title>
+	</head>
+	<body>
+		<div class="container">
+			<!-- 购买界面 -->
+			<div class="shopView">
+				<div class="shopContent">
+					<a class="closeBtn" href="javascript:;" onclick="closeClick()">
+						<img src="img/close.png" >
+					</a>
+					<div class="shopContentView">
+						<div class="shopTop">
+							<div class="shopImg">
+								<img src="img/canoeBanner.png">
+							</div>
+							<div class="shopPrice">
+								<p>¥0</p>
+							</div>
+						</div>
+						
+						<div class="ggContent">
+							<div class="typeView">
+								<p>票种</p>
+								<div class="typeList">
+									<div class="typeItem" onclick="typeClick(this, 7)">水上运动三人票</div>
+									<!-- <div class="typeItem" onclick="typeClick(this, 6)">七夕皮划艇套票(8月4日至8月7日使用)</div> -->
+									<div class="typeItem" onclick="typeClick(this, 1)">单人皮划艇</div>
+									<div class="typeItem" onclick="typeClick(this, 2)">双人皮划艇</div>
+									<div class="typeItem" onclick="typeClick(this, 4)">桨板票</div>
+									<div class="typeItem" onclick="typeClick(this, 5)">皮划艇体验票(仅限周二至周日使用)</div>
+								</div>
+							</div>
+							
+							<div class="srp" style="display: none;">
+								<p>1、含双人皮划艇和桨板一次。</p>
+								<p>2、此票限当天使用，可三人同时使用，不可单人多次使用。</p>
+								<p>3、桨板游玩需有游泳基础，可自备衣服一套。</p>
+								<p>4、有限期自购买之日起至2022年8月24日，逾期自动退票。</p>
+							</div>
+							<!-- 
+							<div class="dateView">
+								<p>日期</p>
+								<div class="dateList">
+									<div class="timeBtn" onclick="selectDate(this, 1)"></div>
+									<div class="timeBtn" onclick="selectDate(this, 2)" style="margin-top: 10px;"></div>
+								</div>
+							</div> -->
+							
+							<div class="dateView">
+								<p>时间</p>
+								<div class="dateList">
+									<div class="timeBtn" onclick="selectTime(this, 1)">10:00-11:00</div>
+									<div class="timeBtn" onclick="selectTime(this, 2)" style="margin-top: 10px;">14:00-15:00</div>
+								</div>
+							</div>
+							
+							<div class="ywrView">
+								<p>游玩人信息</p>
+								<div class="ywrInfo">
+									<div class="ywrItem">
+										<p>手机号：</p>
+										<input class="phone" type="number" placeholder="请输入游玩人手机号">
+									</div>
+								</div>
+							</div>
+							
+							<div class="numberView">
+								<p>数量</p>
+								<div class="number">
+									<a href="javascript:;" onclick="sub(this)">-</a>
+									<div class="number_txt">
+										<input class="num" type="number" value="0" onchange="quantityChange(this)" disabled="true"/>
+									</div>
+									<a href="javascript:;" onclick="add(this)">+</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<a class="buyBtn" href="javascript:;" onclick="buyClick(this)">立即购票</a>
+				</div>
+			</div>
+			
+			<div class="banner">
+				<img src="img/canoeBanner.png" >
+			</div>
+			<div class="buyInfo">
+				<div class="ticketView">
+					<p class="ticketName">七夕皮划艇套票</p>
+					<p class="price">¥<font>0</font></p>
+				</div>
+				
+				<div class="chooseView">
+					<div class="chooseTitle" onclick="showClick()">
+						<div class="chooseBtn">请选择规格</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="descView">
+				<p class="title">活动地点：</p>
+				<p>阳光码头（太阳宫旁）</p>
+			</div>
+			<div class="descView">
+				<p class="title">注意事项：</p>
+				<p>1，自备衣服一套</p>
+				<p>2，要有游泳基础</p>
+				<p>3，患有心脑血管系统疾病，患有“三高”疾病的人员不适合参与</p>
+				<p>4，严禁未穿好救生衣上船，严禁酒后上船</p>
+				<p>5，参与人员应全程听从教练员或管理员的指挥</p>
+				<p>6，严禁在船，艇上嬉戏打闹，禁止摇摆船，艇，严禁站立</p>
+				<p>7，贵重物品自行保管，为免落水，勿将贵重物品带上船，艇，因保管不善造成的后果自行承担</p>
+			</div>
+			<div class="detailInfo">
+				<p style="text-align: center;font-size: 14px;color: #333;line-height: 40px;text-indent: 0;">--图文详情--</p>
+				<p>咨询电话：18005142325</p>
+				<div class="zxvx" style="display: flex;justify-content: flex-start;align-items: flex-start;">
+					<p>咨询微信：</p>
+					<img style="width: 75px;" src="img/zxvx.png" >
+				</div>
+				<p>玄武湖2022水上运动将再次扬帆起航，期间活动不断，精彩纷呈，还有限时优惠活动哦！一起来玄武湖参与水上健身运动吧！</p>
+				<p>皮划艇</p>
+				<p>皮划艇分皮艇和划艇两个项目。皮艇起源于格陵兰岛上的因纽特人所制作的一种小船，这种船用鲸鱼皮、水獭皮包在骨头架子上，用两端有桨叶的桨划动。划艇则起源于加拿大，因此又称加拿大划艇。</p>
+				<img src="img/canoeImg1.jpg" >
+				<img src="img/canoeImg2.jpg" >
+				<img src="img/canoeImg3.jpg" >
+				<img src="img/canoeImg4.jpg" >
+				<p>桨  板</p>
+				<p>桨板运动，源于美国夏威夷的桨板冲浪，是一种简单易学，老少咸宜的运动，目前已然成为全球发展最快的娱乐时尚水上运动之一。（该项目预计在六月上线）</p>
+				<img src="img/canoeImg5.jpg" >
+				<img src="img/canoeImg6.jpg" >
+				<img src="img/canoeImg7.jpg" >
+				<img src="img/canoeImg8.jpg" >
+			</div>
+			<div class="bottomView">
+				<p>总计：<font class="totalPrice">0.00</font>元</p>
+				<a class="orderBtn" href="chooseOrder.html">我的订单</a>
+				<a href="javascript:;" onclick="showClick()">购票</a>
+			</div>
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app.js?v=1.0.0"></script>
+		<script type="text/javascript">
+			let singleTicket = 0;
+			let ticketType;
+			let timeValue;
+			$(function(){
+				if(app.getQueryString('openid')){
+					app.setCookie('openid', app.getQueryString('openid'));
+				}
+				
+				ticketType = app.getQueryString('ticketType');
+				if(ticketType){
+					$('.num').val(1);
+				}
+				
+				$('.dateView').hide();
+				if(ticketType == 5){
+					$('.typeItem').eq(4).addClass('active').siblings().removeClass('active');
+					$('.dateView').show();
+					$('.ticketName').text('皮划艇体验票');
+				}else if(ticketType == 4){
+					$('.typeItem').eq(3).addClass('active').siblings().removeClass('active');
+					$('.ticketName').text('桨板票');
+				}else if(ticketType == 1){
+					$('.typeItem').eq(1).addClass('active').siblings().removeClass('active');
+					$('.ticketName').text('单人皮划艇');
+				}else if(ticketType == 2){
+					$('.typeItem').eq(2).addClass('active').siblings().removeClass('active');
+					$('.ticketName').text('双人皮划艇');
+				}else if(ticketType == 6){
+					$('.typeItem').eq(0).addClass('active').siblings().removeClass('active');
+					$('.ticketName').text('七夕皮划艇套票');
+				}else if(ticketType == 7){
+					$('.typeItem').eq(0).addClass('active').siblings().removeClass('active');
+					$('.ticketName').text('水上运动三人票');
+					$('.srp').show();
+				}
+				
+				
+				getTotalPrice();
+				
+				var str = '<div>';
+				str += '<p style="font-size:16px;font-weight:bold;text-align:center;">免责声明</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">根据玄武湖水上运动基地相关规定，手机、耳机、车钥匙等贵重物品严禁携带上船，本基地对游客携带上述物品的遗失、损坏不承担赔偿责任。</p>';
+				str += '<p style="font-size:12px;text-indent:2em;">本人已阅读以上声明，自愿携带。若发生遗失、损坏按以上规则处理，特此声明！</p>';
+				str += '</div>'
+				layer.open({
+					content: str,
+					closeBtn: false,
+					btn: ['我已阅读']
+				})
+			})
+			
+			function ticketTypeChange(){
+				$('.num').val('1');
+				$('.timeBtn').removeClass('active');
+				timeValue = '';
+				getTotalPrice();
+			}
+			
+			function orderClick(){
+				window.location.href = 'chooseOrder.html';
+			}
+			
+			function add(that){
+				if(ticketType){
+					var ticketsNumber = parseInt($(that).parent().find('input').val());
+					if(ticketsNumber > 19){
+						layer.alert('单次最多购买20张');
+						return;
+					}
+					ticketsNumber += 1;
+					$(that).parent().find('input').val(ticketsNumber);
+					getTotalPrice();
+				}else{
+					layer.alert('请先选择购票种类')
+				}
+			}
+			
+			function sub(that){
+				var ticketsNumber = parseInt($(that).parent().find('input').val());
+				if(ticketsNumber > 1){
+					ticketsNumber -= 1;
+					$(that).parent().find('input').val(ticketsNumber);
+				}
+				getTotalPrice();
+			}
+			
+			function selectTime(that){
+				$(that).addClass('active').siblings().removeClass('active');
+				timeValue = 1;
+			}
+			
+			function getTotalPrice(){
+				$('.timeView').hide();
+				$('.ticketDesc').hide();
+				if(ticketType == '1'){
+					singleTicket = 100;
+				}else if(ticketType == '2'){
+					singleTicket = 180;
+				}else if(ticketType == '4'){
+					singleTicket = 150;
+				}else if(ticketType == '5'){
+					singleTicket = 65;
+					$('.timeView').show();
+				}else if(ticketType == '6'){
+					singleTicket = 80;
+					$('.ticketDesc').show();
+				}else if(ticketType == '7'){
+					singleTicket = 150;
+					$('.srp').show();
+				}
+				
+
+				$('.price font').text(singleTicket);
+				$('.shopPrice p').text('¥' + singleTicket);
+			
+				var totalNumber = $('.num').val();
+				$('.totalPrice').text(singleTicket*totalNumber);
+			}
+			
+			function showClick(){
+				$('.shopView').show();
+			}
+			
+			function closeClick(){
+				$('.shopView').hide();
+			}
+			
+			function typeClick(that, type){
+				$('.dateView').hide();
+				$('.srp').hide();
+				$(that).addClass('active').siblings().removeClass('active');
+				ticketType = type;
+				$('.num').val('1');
+				getTotalPrice();
+				if(type == 5){
+					$('.dateView').show();
+				}
+				
+				if(ticketType == 5){
+					$('.ticketName').text('皮划艇体验票');
+				}else if(ticketType == 4){
+					$('.ticketName').text('桨板票');
+				}else if(ticketType == 1){
+					$('.ticketName').text('单人皮划艇');
+				}else if(ticketType == 2){
+					$('.ticketName').text('双人皮划艇');
+				}else if(ticketType == 6){
+					$('.ticketName').text('七夕皮划艇套票');
+				}else if(ticketType == 7){
+					$('.ticketName').text('水上运动三人票');
+					$('.srp').show();
+				}
+			}
+			
+			function buyClick(that){
+				var ticketsNumber = $('.num').val();
+				var totalMoney = singleTicket*ticketsNumber;
+				var openid = app.getCookie('openid');
+				var phone = $('.phone').val();
+				if(ticketType == 5){
+					if(!timeValue){
+						layer.alert('请先选择时间');
+						return;
+					}
+				}
+				if(phone.length != 11){
+					layer.alert('请先输入正确的手机号');
+					return;
+				}
+				if(!ticketType){
+					layer.alert('请先选择购票类型');
+					return;
+				}
+				$(that).attr('onclick', '');
+				app.postAjax('canoeOrder/web/pay', {
+					totalMoney: totalMoney,
+					openId: openid,
+					ticketId: ticketType,
+					phone: phone,
+					number: ticketsNumber
+				}, function(res){
+					var orderId = res.data.canoeOrder.payId;
+					if(res.data.res){
+						var res_o = JSON.parse(res.data.res);
+						WeixinJSBridge.invoke(
+							'getBrandWCPayRequest', {
+						       "appId":res_o.appId,     //公众号名称，由商户传入
+						       "timeStamp":res_o.timeStamp,  //时间戳，自1970年以来的秒数
+						       "nonceStr":res_o.nonceStr, //随机串
+						       "package":res_o.package,
+						       "signType":res_o.signType,//微信签名方式：
+						       "paySign":res_o.paySign //微信签名
+							},
+							function(res){
+								if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+									$("#ticketType1").prop("checked",false);
+									$("#ticketType2").prop("checked",false);
+									$(that).attr('onclick', 'buyClick(this)');
+									window.location.replace("canoeTicketsDetail.html?orderId=" + orderId);
+								}else{
+									//取消禁用购买按钮
+						      		$(that).attr('onclick', 'buyClick(this)');
+								}
+							}
+						);
+					}
+				})
+			}
+		</script>
+	</body>
+</html>

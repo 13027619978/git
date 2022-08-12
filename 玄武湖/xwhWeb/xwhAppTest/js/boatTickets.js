@@ -1,6 +1,9 @@
 var ticketsType;
 $(function(){
-	$('.num').val(0);
+	if(app.getQueryString('openid')){
+		app.setCookie('openid', app.getQueryString('openid'));
+	}
+	$('.num').val(1);
 	ticketsType = app.getQueryString('type');
 	if(ticketsType == '0'){
 		ticketsType = 1;
@@ -14,6 +17,20 @@ $(function(){
 	}else if(ticketsType == '3'){
 		ticketsType = 5;
 		$('.singlePrice').text('15元/张');
+	}else if(ticketsType == '4'){
+		ticketsType = 3;
+		$('.singlePrice').text('30元/张');
+	}else if(ticketsType == '15'){
+		ticketsType = 15;
+		$('.singlePrice').text('98元/张');
+	}else if(ticketsType == '16'){
+		ticketsType = 16;
+		$('.singlePrice').text('80元/张');
+	}else if(ticketsType == '17'){
+		ticketsType = 17;
+		$('.singlePrice').text('50元/张');
+		$('.shopPrice p').text('¥50');
+		$('.price font').text('50');
 	}
 })
 
@@ -30,7 +47,7 @@ function add(that){
 
 function sub(that){
 	var ticketsNumber = parseInt($(that).parent().find('input').val());
-	if(ticketsNumber > 0){
+	if(ticketsNumber > 1){
 		ticketsNumber -= 1;
 		$(that).parent().find('input').val(ticketsNumber);
 	}
@@ -47,11 +64,21 @@ function getTotalPrice(ticketsNumber){
 		singlePrice = 20;
 	}else if(ticketsType == '5'){
 		singlePrice = 15;
+	}else if(ticketsType == '3'){
+		singlePrice = 30;
+	}else if(ticketsType == '15'){
+		singlePrice = 98;
+	}else if(ticketsType == '16'){
+		singlePrice = 80;
+	}else if(ticketsType == '17'){
+		singlePrice = 50;
 	}
 	var totalPrice = ticketsNumber * singlePrice;
 	$('.totalPrice').text(totalPrice.toFixed(2));
 	return totalPrice;
 }
+
+
 
 function buyClick(that){
 	var ticketsNumber = $('.num').val();
@@ -125,15 +152,6 @@ function buyClick(that){
 			// 微信支付
 			wxPay(params, that);
 		}
-	}, function(){
-		var params = {
-			openId: openid,
-			totalNumber: ticketsNumber,
-			totalMoney: price,
-			type: ticketsType
-		};
-		// 微信支付
-		wxPay(params, that);
 	})
 }
 
@@ -164,7 +182,13 @@ function wxPay(params, that){
 				);
 			}else{
 				$(that).attr('onclick', 'buyClick()');
-				window.location.replace("boatTicketsDetail.html?orderId=" + orderId);
+				if(ticketsType == '15'){
+					window.location.replace("lzxTicketsOrderDetail.html?orderId=" + orderId);
+				}else if(ticketsType == '16'){
+					window.location.replace("lzTicketsOrderDetail.html?orderId=" + orderId);
+				}else{
+					window.location.replace("boatTicketsDetail.html?orderId=" + orderId);
+				}
 			}
 		}else{
 			layer.alert(res.msg);

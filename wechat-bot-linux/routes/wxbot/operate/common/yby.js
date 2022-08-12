@@ -136,9 +136,11 @@ function getTicketsIncome(room){
 			var totalMoney = 0;
 			var totalNumber = 0;
 			checkList.forEach(function(value, key){
-				var money = parseFloat(value.checkMoney);
+				if(value.name != '年票'){
+					var money = parseFloat(value.checkMoney);
+					totalMoney += money;
+				}
 				var number = parseInt(value.checkQuantity);
-				totalMoney += money;
 				totalNumber += number;
 			})
 			

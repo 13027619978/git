@@ -39,11 +39,21 @@ router.get('/sendSmsTest', async function(req1, res1){
 })
 
 router.post('/sendSms', async function(req1, res1){
+	let phoneList = "13522499341,13810823848,13910956019,13051139396,18911647146,13811001778,18500025118";
 	let dataInfo = JSON.parse(req1.body.data);
 	let healthyStateDesc = dataInfo.healthyStateDesc;
 	let xqName = dataInfo.deviceName;
 	let autograph = dataInfo.autograph;
 	let userName = dataInfo.personName;
+	if(xqName('B区') != -1){
+		phoneList += "18701302944,13671034264,16622103919";
+	}else if(xqName.indexOf('C区') != -1){
+		phoneList += "18701302944,13693636323,16622103919";
+	}else if(xqName.indexOf('G区') != -1){
+		phoneList += "18701302944,18515957099,16622103919";
+	}else if(xqName.indexOf('19号院') != -1){
+		phoneList += "13901044360,13552131082";
+	}
 	let smsContent = '【健康码异常】' + xqName + ',姓名：' + userName + ',' + autograph + ',健康码：' + healthyStateDesc;
 	console.log('健康码=============' + healthyStateDesc);
 	console.log(smsContent);
@@ -52,7 +62,7 @@ router.post('/sendSms', async function(req1, res1){
 		form.append('userid', 170);
 		form.append('account', 'XZXC');
 		form.append('password', '123456');
-		form.append('mobile', '13901148743');
+		form.append('mobile', phoneList);
 		form.append('content', smsContent);
 		form.append('sendTime', '');
 		form.append('action', 'send');

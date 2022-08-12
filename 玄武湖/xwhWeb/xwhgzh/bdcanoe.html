@@ -203,6 +203,24 @@
 				</div>
 			</div>
 			<div class="btnList">
+				<a href="javascript:;" onclick="btnClick(8)">
+					<div class="imgView">
+						<img src="img/canoeBanner.png" >
+					</div>
+					<div class="priceView">
+						<p>玄武湖皮划艇</p>
+						<div class="price"><div>¥65-180<p class="sells">已售：0</p></div><font>点击购票</font></div>
+					</div>
+				</a>
+				<!-- <a href="javascript:;" onclick="btnClick(7)">
+					<div class="imgView">
+						<img src="img/canoeBanner.png" >
+					</div>
+					<div class="priceView">
+						<p>七夕皮划艇套票</p>
+						<div class="price"><div>¥80<p class="sells">已售：0</p></div><font>点击购票</font></div>
+					</div>
+				</a> -->
 				<a href="javascript:;" onclick="btnClick(6)">
 					<div class="imgView">
 						<img src="img/lz1.png" >
@@ -212,13 +230,13 @@
 						<div class="price"><div>¥120<p class="sells">已售：0</p></div><font>点击购票</font></div>
 					</div>
 				</a>
-				<a href="javascript:;" onclick="btnClick(5)">
+				<!-- <a href="javascript:;" onclick="btnClick(5)">
 					<div class="imgView">
 						<img src="img/canoeImg.jpg" >
 					</div>
 					<div class="priceView">
 						<p>玄武湖皮划艇体验票</p>
-						<p class="price">¥65<font>点击购票</font></p>
+						<div class="price"><div>¥65<p class="sells">已售：0</p></div><font>点击购票</font></div>
 					</div>
 				</a>
 				<a href="javascript:;" onclick="btnClick(1)">
@@ -227,25 +245,25 @@
 					</div>
 					<div class="priceView">
 						<p>玄武湖桨板票</p>
-						<p class="price">¥150<font>点击购票</font></p>
+						<div class="price"><div>¥150<p class="sells">已售：0</p></div><font>点击购票</font></div>
 					</div>
-				</a>
+				</a> -->
 				<a href="javascript:;" onclick="btnClick(2)">
 					<div class="imgView">
 						<img src="img/yy.jpg" >
 					</div>
 					<div class="priceView">
-						<p>玄武湖豪华游船夜游票</p>
-						<p class="price">¥50<font>点击购票</font></p>
+						<p>玄武湖豪华游船</p>
+						<div class="price"><div>¥50<p class="sells">已售：0</p></div><font>点击购票</font></div>
 					</div>
 				</a>
-				<a href="javascript:;" onclick="btnClick(3)">
+				<!-- <a href="javascript:;" onclick="btnClick(3)">
 					<div class="imgView">
 						<img src="img/drcanoe.jpg" >
 					</div>
 					<div class="priceView">
 						<p>玄武湖皮划艇单人票</p>
-						<p class="price">¥100<font>点击购票</font></p>
+						<div class="price"><div>¥100<p class="sells">已售：0</p></div><font>点击购票</font></div>
 					</div>
 				</a>
 				<a href="javascript:;" onclick="btnClick(4)">
@@ -254,9 +272,9 @@
 					</div>
 					<div class="priceView">
 						<p>玄武湖皮划艇双人票</p>
-						<div class="price"><div>¥180</div><font>点击购票</font></div>
+						<div class="price"><div>¥180<p class="sells">已售：0</p></div><font>点击购票</font></div>
 					</div>
-				</a>
+				</a> -->
 			</div>
 		</div>
 		<script src="js/jquery.min.js"></script>
@@ -291,18 +309,62 @@
 					var sunDate = new Date(sunDateNum);
 					satTime = getDateString(satDate);
 					sunTime = getDateString(sunDate);
+					// $.ajax({
+					//     url:'http://hd.smart-ideas.com.cn/xwhpark/deviceLoopApp/getTicketStock',
+					//     type:"GET",
+					//     data:{
+					// 		date1: satTime,
+					// 		date2: sunTime
+					// 	},
+					//     success:function(res){
+					//     	let satSells = res.data[satTime].sell;
+					//     	let sunSells = res.data[sunTime].sell;
+					//     	let totalSell = satSells + sunSells;
+					//     	$('.sells').text('已售：' + totalSell)
+					//     }
+					// });
+					
 					$.ajax({
-					    url:'http://hd.smart-ideas.com.cn/xwhpark/deviceLoopApp/getTicketStock',
+					    url:'http://hd.smart-ideas.com.cn/xwhpark/canoeOrder/sales/collection',
 					    type:"GET",
-					    data:{
-							date1: satTime,
-							date2: sunTime
-						},
 					    success:function(res){
-					    	let satSells = res.data[satTime].sell;
-					    	let sunSells = res.data[sunTime].sell;
-					    	let totalSell = satSells + sunSells;
-					    	$('.sells').text('已售：' + totalSell)
+							let totalNumber = 0;
+							res.data.forEach(function(value, key){
+								if(value.id == 6){
+									// $('.price').eq(0).find('.sells').text('已售：' + value.number);
+									totalNumber += parseInt(value.number);
+								}else if(value.id == 1){
+									totalNumber += parseInt(value.number);
+									// $('.price').eq(5).find('.sells').text('已售：' + value.number);
+								}else if(value.id == 2){
+									totalNumber += parseInt(value.number);
+									// $('.price').eq(6).find('.sells').text('已售：' + value.number);
+								}else if(value.id == 4){
+									totalNumber += parseInt(value.number);
+									// $('.price').eq(3).find('.sells').text('已售：' + value.number);
+								}else if(value.id == 5){
+									totalNumber += parseInt(value.number);
+									// $('.price').eq(2).find('.sells').text('已售：' + value.number);
+								}else if(value.id == 7){
+									totalNumber += parseInt(value.number);
+									// $('.price').eq(0).find('.sells').text('已售：' + value.number);
+								}
+							})
+							$('.price').eq(0).find('.sells').text('已售：' + totalNumber);
+					    }
+					});
+					
+					$.ajax({
+					    url:'http://hd.smart-ideas.com.cn/xwhpark/deviceLoopApp/sales/collection',
+					    type:"GET",
+					    success:function(res){
+					    	res.data.forEach(function(value, key){
+					    		if(value.id == 18){
+					    			$('.price').eq(1).find('.sells').text('已售：' + value.number);
+					    		}else if(value.id == 17){
+					    			$('.price').eq(2).find('.sells').text('已售：' + value.number);
+					    		}
+					    	})
 					    }
 					});
 				});
@@ -332,6 +394,10 @@
 					window.location.href = 'http://hd.smart-ideas.com.cn/xwhWeb/xwhApp/canoeTickets.html?openid=' + app.getCookie('openid') + '&ticketType=5'
 				}else if(btnType == 6){
 					window.location.href = 'http://hd.smart-ideas.com.cn/xwhWeb/xwhApp/lzxTickets.html?openid=' + app.getCookie('openid') + '&code=18'
+				}else if(btnType == 7){
+					window.location.href = 'http://hd.smart-ideas.com.cn/xwhWeb/xwhApp/canoeTickets.html?openid=' + app.getCookie('openid') + '&ticketType=6'
+				}else if(btnType == 8){
+					window.location.href = 'http://hd.smart-ideas.com.cn/xwhWeb/xwhApp/canoeTickets.html?openid=' + app.getCookie('openid') + '&ticketType=7'
 				}
 			}
 		</script>

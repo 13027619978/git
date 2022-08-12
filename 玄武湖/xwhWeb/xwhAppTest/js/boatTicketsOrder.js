@@ -8,15 +8,17 @@ $(function(){
 			var orderList = res.data;
 			if(orderList.length > 0){
 				orderList.forEach(function(value, key){
-					$('.orderList').append(
-						'<li class="orderItem">'+
-							'<a href="javascript:;" onclick="orderClick(\''+value.id+'\')">'+
-								'<p>支付金额：<font class="depositTxt">'+value.totalMoney+'元</font></p>'+
-								'<p>购票数量：<font class="numbers">'+value.totalNumber+'</font></p>'+
-								'<p>订单时间：<font class="dateTxt">'+value.createDate+'</font></p>'+
-							'</a>'+
-						'</li>'
-					)
+					if(value.type != '16' && value.type != '15' && value.type != '18'){
+						$('.orderList').append(
+							'<li class="orderItem">'+
+								'<a href="javascript:;" onclick="orderClick(\''+value.id+'\')">'+
+									'<p>支付金额：<font class="depositTxt">'+value.totalMoney+'元</font></p>'+
+									'<p>购票数量：<font class="numbers">'+value.totalNumber+'</font></p>'+
+									'<p>订单时间：<font class="dateTxt">'+value.createDate+'</font></p>'+
+								'</a>'+
+							'</li>'
+						)
+					}
 				})
 			}else{
 				$('.noData').show();

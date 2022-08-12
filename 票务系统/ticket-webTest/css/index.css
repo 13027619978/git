@@ -1,0 +1,252 @@
+.container {
+	min-height: 100vh;
+	background-color: #f5f5f5;
+	padding-bottom: 61px;
+}
+
+.banner {
+	width: 100%;
+}
+
+.banner img {
+	margin: 0;
+	width: 100%;
+}
+.banner .bannerImg{
+	line-height: 200px;
+	text-align: center;
+	background-color: #ff5500;
+	color: #fff;
+}
+
+.swiper-container {
+	--swiper-theme-color: #fff;
+	--swiper-pagination-color: #333;
+}
+
+.moreView{
+	position: fixed;
+	bottom: 51px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	font-size: 12px;
+	color: #fff;
+	width: 120px;
+	left: 50%;
+	margin-left: -60px;
+	background-color: rgba(0,0,0,.5);
+	border-radius: 5px;
+	padding-bottom: 10px;
+	display: none;
+}
+@keyframes moreImg {
+  0% {top: 0;}
+  50% {top: 5px;}
+  100% {top: 0;}
+}
+.moreView img{
+	width: 40px;
+	height: 30px;
+	position: relative;
+	animation: moreImg 1s infinite;
+}
+
+/* 景区名称 */
+.scenicInfo {
+	background-color: #fff;
+	padding: 10px 15px;
+	border-bottom: 1px solid #f5f5f5;
+}
+
+.scenicInfo .scenicName {
+	font-size: 16px;
+	color: #333;
+	font-weight: bold;
+	line-height: 30px;
+}
+
+.scenicInfo .scenicDesc{
+	font-size: 12px;
+	color: #666;
+	line-height: 25px;
+	overflow: hidden;
+	position: relative;
+	padding-bottom: 25px;
+}
+.scenicInfo .maxHeight{
+	max-height: 75px;
+}
+.scenicInfo .scenicDesc .allBtn{
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 75px;
+	line-height: 25px;
+	color: #00B6FC;
+	text-align: center;
+	background-color: #fff;
+}
+.scenicInfo .scenicDesc p{
+	font-size: 12px;
+	color: #666;
+	line-height: 25px;
+}
+.scenicInfo .checkTime{
+	font-size: 12px;
+	color: #00b3fd;
+}
+
+/* 通知 */
+.noticeView{
+	background-color: #fff;
+	padding: 10px 15px;
+}
+.noticeText{
+	background: url(../img/notice_icon.png) no-repeat left center;
+	background-size: 20px auto;
+	padding-left: 30px;
+	font-size: 13px;
+	color: #333;
+	line-height: 20px;
+}
+.noticeText .ticketStatus{
+	font-size: 12px;
+	padding: 0 5px;
+	color: #00b3fd;
+	border: 1px solid #00b3fd;
+	border-radius: 5px;
+	margin-right: 10px;
+}
+/* 景区定位 */
+.scenicPlace {
+	background-color: #fff;
+	padding: 0 10px;
+}
+
+.scenicPlace .positionBtn {
+	background: url(../img/right_icon.png) no-repeat right center;
+	background-size: 16px auto;
+	line-height: 50px;
+	font-size: 14px;
+	color: #333;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+}
+
+.scenicPlace .positionBtn img {
+	width: 20px;
+	margin-right: 10px;
+}
+
+/* 门票列表 */
+.ticketView {
+	margin-top: 10px;
+	background-color: #fff;
+	padding: 0 10px;
+}
+
+.ticketView .ticketTile {
+	font-size: 15px;
+	color: #333;
+	font-weight: bold;
+	background: url(../img/ticket_icon.png) no-repeat left center;
+	background-size: 25px auto;
+	padding-left: 30px;
+	line-height: 35px;
+	border-bottom: 1px solid #f5f5f5;
+}
+.ticketList .ticketItem{
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	padding: 10px 0;
+	border-bottom: 1px solid #f5f5f5;
+}
+.ticketItem .itemLeft{
+	flex: 1;
+	padding-right: 5px;
+}
+.ticketItem .itemLeft .ticketName{
+	font-size: 16px;
+	color: #333;
+	line-height: 23px;
+}
+.ticketItem .itemLeft .ticketName .ticketType{
+	display: inline-block;
+	font-size: 12px;
+	color: #00b3fd;
+	line-height: 23px;
+	padding: 0 5px;
+	border-radius: 5px;
+	margin-left: 10px;
+	background-color: #ddf3ff;
+}
+.ticketItem .itemLeft .ticketDesc{
+	font-size: 12px;
+	color: #009F95;
+	line-height: 20px;
+	padding: 5px 0;
+	max-height: 50px;
+	overflow: hidden;
+}
+.ticketItem .itemLeft .ticketDesc.maxHeight{
+	height: 25px;
+	overflow: hidden;
+}
+.ticketItem .itemLeft .allBtn{
+	font-size: 12px;
+	color: #00B6FC;
+	padding-bottom: 5px;
+	display: block;
+	width: 100%;
+	line-height: 20px;
+	position: relative;
+	display: flex;
+	justify-content: flex-end;
+}
+.ticketItem .itemLeft .allBtn p{
+	background-color: #fff;
+	width: 75px;
+	text-align: center;
+}
+.ticketItem .itemLeft .allBtn.close{
+	margin-top: -20px;
+}
+.ticketItem .itemLeft .checkTime{
+	font-size: 12px;
+	color: #00b3fd;
+	line-height: 25px;
+}
+.ticketItem .itemLeft .effectTime{
+	font-size: 12px;
+	color: #00b3fd;
+}
+.ticketItem .itemRight{
+	flex: 0 0 75px;
+	text-align: center;
+}
+.ticketItem .itemRight .ticketPrice{
+	font-size: 20px;
+	color: #ff5500;
+	line-height: 30px;
+}
+.ticketItem .itemRight .buyBtn{
+	font-size: 14px;
+	color: #fff;
+	background-color: #ff5500;
+	line-height: 30px;
+	border-radius: 30px;
+	margin-top: 3px;
+}
+
+.ticketItem .itemRight .disabled{
+	color: #666;
+	background-color: #ddd;
+}
+.layui-layer-title-red{
+	color: red !important;
+	font-weight: bold;
+}

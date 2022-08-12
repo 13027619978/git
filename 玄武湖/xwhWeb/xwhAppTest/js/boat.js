@@ -1,6 +1,7 @@
 var deviceId;
 var deposit;
 var cardDeposit;
+
 $(function(){
 	var openid = app.getCookie('openid');
 	app.getAjax('deviceLeaseApp/getDeviceInfo',{
@@ -32,8 +33,6 @@ $(function(){
 			layer.alert(res.msg);
 		}
 	})
-	
-	
 })
 
 function payClick(that){
@@ -113,7 +112,7 @@ function payClick(that){
 							wxPay(params, that);
 						},
 						btn2: function(){
-							window.location.replace('http://hd.smart-ideas.com.cn/xwhWeb/xwhCard/')
+							window.location.replace('http://hd.smart-ideas.com.cn/xwhWeb/xwhCard/?openid=' + app.getCookie('openid'));
 						}
 					})
 				}

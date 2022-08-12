@@ -1,7 +1,6 @@
 /**
  * 地灾监控机器人预警
  */
-
 var express=require('express');
 var router = express.Router();
 var wechat = require('./wxbot/operate/mybot.js');

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/index.css?v=200">
+		<style type="text/css">
+			.layui-layer-btn .layui-layer-btn0.disabled{
+				background-color: #ddd;
+				color: #666;
+				border: 1px solid #ddd;
+			}
+			
+			.ticketTimeView{
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: rgba(0,0,0,.5);
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				display: none;
+			}
+			.ticketTimeContent{
+				width: 90%;
+				background-color: #fff;
+				border-radius: 5px;
+			}
+			.ticketTimeTitle{
+				font-size: 14px;
+				font-weight: bold;
+				text-align: center;
+				line-height: 45px;
+				color: #333;
+				border-bottom: 1px solid #ddd;
+			}
+			.ticketTimeList{
+				padding: 5px 10px;
+			}
+			.ticketTimeItem{
+				width: 100%;
+				line-height: 35px;
+				border: 1px solid #D0D0D0;
+				color: #333;
+				font-size: 13px;
+				border-radius: 3px;
+				margin: 5px 0;
+				padding: 0 10px;
+				background-color: #F2F2F2;
+			}
+			.ticketTimeItem.active{
+				background-color: #00B3FD;
+				color: #fff;
+				border-color: #00B3FD;
+			}
+			.btnView{
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+				border-top: 1px solid #ddd;
+			}
+			.btnView a{
+				display: block;
+				width: 50%;
+				text-align: center;
+				line-height: 40px;
+			}
+		</style>
+		<title>无名英雄纪念广场团体预约</title>
+	</head>
+	<body>
+		<div class="container">
+			<!-- 景区名称 -->
+			<div class="scenicInfo">
+				<p class="scenicName"></p>
+				<div class="scenicDesc maxHeight">
+					<div class="descContent">
+						
+					</div>
+					<a class="allBtn" href="javascript:;" onclick="showAll(this)">展开全部</a>
+				</div>
+			</div>
+			
+			<!-- 通知 -->
+			<div class="noticeView">
+				<p class="noticeText"><font class="ticketStatus">开园</font>正常售票</p>
+			</div>
+			
+			<!-- 时间段选择 -->
+			<div class="ticketTimeView">
+				<div class="ticketTimeContent">
+					<p class="ticketTimeTitle">请选择预约时间段</p>
+					<div class="ticketTimeList">
+						
+					</div>
+					<div class="btnView">
+						<a onclick="cancelClick()" href="javascript:;">取消</a>
+						<a onclick="sureClick()" href="javascript:;">确定</a>
+					</div>
+				</div>
+			</div>
+			
+			<!-- 门票列表 -->
+			<div class="ticketView">
+				<p class="ticketTile">门票</p>
+				<div class="ticketList">
+					<!-- <div class="ticketItem">
+						<div class="itemLeft">
+							<div class="ticketName">
+								无名英雄纪念广场团体上午票预约
+								<font class="ticketType">团体票</font>
+							</div>
+							<div class="ticketDesc">
+								<p>无名英雄纪念广场团体上午票预约</p>
+							</div>
+						</div>
+						<div class="itemRight">
+							<a class="buyBtn disabled" href="javascript:;" onclick="chooseTime(1)">立即预定</a>
+						</div>
+					</div> -->
+				</div>
+			</div>
+		</div>
+		
+		<div class="moreView">
+			<img src="img/more-icon.png" >
+			向下滑动查看更多
+		</div>
+		
+		<!-- tabbar -->
+		<div class="tabbar">
+			<a class="homeBtn active" href="javascript:;">首页</a>
+			<a class="userBtn" href="order.html">我的</a>
+		</div>
+		
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/md5.js?v=1.0.0"></script>
+		<script src="js/encrypt.js?v=1.0.2"></script>
+		<script src="js/jweixin-1.0.0.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app5.js?v=1.0.4"></script>
+		<script src="js/slgy/index.js?v=1.0.0"></script>
+	</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="./css/cropper.min.css">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/slgy/ticket.css?v=1.0.1">
+		<title>提交订单</title>
+	</head>
+	<body>
+		<div class="container">
+			<!-- 门票名称 -->
+			<div class="ticketName">
+				<p class="ticketNameTxt"><font class="ticketType"></font></p>
+				<p class="ticketDesc"></p>
+				<!-- <p class="checkTime"></p> -->
+			</div>
+			
+			<!-- 购票须知 -->
+			<div class="noticeView">
+				<p class="noticeTitle fhlTitle">无名英雄纪念广场活动须知</p>
+				<!-- <div class="noticeText">
+					
+				</div> -->
+				<div style="font-size: 13px;color: #333;;line-height: 20px;">
+					<p>一、服务活动</p>
+					<p>1、活动一：免费提供党旗，入党誓词。活动时间10-15分钟。</p>
+					<p>2、活动二：免费提供党旗，入党誓词。专人协助定制花篮的摆放及依次向英烈敬献单支菊花，协助现场拍照。活动时间20-25分钟。</p>
+					<p>3、活动三：免费提供党旗，入党誓词。专人协助定制花篮的摆放及依次向英烈敬献单支菊花，协助现场拍照。预约全程讲解服务。活动时间30-45分钟。</p>
+					<p>二、收费标准</p>
+					<p>1、菊花10元/枝</p>
+					<p>2、定制花篮600元/个 高度约1.6米。上联：无名英雄永垂不朽 下联：缅怀英烈牢记使命****单位</p>
+					<p>3、讲解500元/次（由无名英雄纪念广场第一层逐层介绍建筑理念、建筑意义及主要英烈英雄事迹等。讲解时长约20分钟）</p>
+					<p>三、游客须知</p>
+					<p>1、请游客自觉保持无名英雄纪念广场环境卫生。</p>
+					<p>2、请勿在无名英雄纪念广场雕塑做攀爬、搂抱、倚靠等不文明行为。</p>
+					<p>3、禁止进入草坪区域内。</p>
+					<p>4、禁止大声喧哗或说不正当言论。</p>
+					<p>5、请游客自觉遵守秩序。</p>
+				</div>
+			</div>
+			
+			<!-- 预定时间 -->
+			<div class="ticketTime">
+				<p class="timeTitle">预定时间</p>
+				<div class="timeView">
+					<input class="timeInput" type="text" readonly="readonly">
+					<p class="ticketPrice"></p>
+					<a class="timeSelectBtn" href="javascript:;"></a>
+				</div>
+			</div>
+			
+			<!-- 证件类型 -->
+			<div class="ticketTime cetTypeView">
+				<p class="timeTitle">证件类型</p>
+				<div class="cetTypeSelect">
+					<label for="cetType1"><input class="cetType" type="radio" id="cetType1" name="cetType" value="0" onchange="certTypeChange(this)" checked="checked">身份证</label>
+					<label for="cetType2"><input class="cetType" type="radio" id="cetType2" name="cetType" value="1" onchange="certTypeChange(this)">护照</label>
+				</div>
+			</div>
+			
+			<!-- 购票数量 -->
+			<div class="ticketNumber">
+				<p class="numberText">购票数量：</p>
+				<div class="numberView">
+					<a class="subBtn" href="javascript:;" onclick="subClick(this)">-</a>
+					<input class="numberInput" type="number" readonly="readonly" value="1">
+					<a class="addBtn" href="javascript:;" onclick="addClick(this)">+</a>
+				</div>
+			</div>
+			
+			<!-- 游客信息 -->
+			<div class="visitorInfo">
+				<p class="visitorTitle">团体信息</p>
+				<div class="visitorList">
+					<!-- <div class="visitorItem">
+						<div class="itemInfo">
+							<p>姓名：</p>
+							<input class="name" type="text" placeholder="请输入姓名">
+						</div>
+						<div class="itemInfo">
+							<p>手机号：</p>
+							<input class="phone" type="text" placeholder="请输入手机号">
+						</div>
+						<div class="itemInfo">
+							<p>身份证：</p>
+							<input class="idCard" type="text" placeholder="请输入身份证">
+						</div>
+						<div class="itemInfo">
+							<p>头像：</p>
+							<div class="imgView">
+								<input type="file">
+								<p>点击上传头像</p>
+								<img src="img/user.png" >
+							</div>
+						</div>
+					</div> -->
+				</div>
+			</div>
+			
+			<!-- 疫情防控 -->
+			<div class="yqView">
+				<div class="radioItem">
+					<div>14天内是否有中高风险地区旅行史</div>
+					<div class="radioView">
+						<label for="lxs1"><input type="radio" id="lxs1" name="lxs" value="0">是</label>
+						<label for="lxs2"><input type="radio" id="lxs2" name="lxs" value="1">否</label>
+					</div>
+				</div>
+				<div class="radioItem">
+					<div>14天内是否与新冠检测阳性人员密切接触</div>
+					<div class="radioView">
+						<label for="jcs1"><input type="radio" id="jcs1" name="jcs" value="0">是</label>
+						<label for="jcs2"><input type="radio" id="jcs2" name="jcs" value="1">否</label>
+					</div>
+				</div>
+				<div class="radioItem sfyx" style="display: none;">
+					<div>48小时内核酸检测结果是否阳性</div>
+					<div class="radioView">
+						<label for="sfyx1"><input type="radio" id="sfyx1" name="sfyx" value="0">是</label>
+						<label for="sfyx2"><input type="radio" id="sfyx2" name="sfyx" value="1">否</label>
+					</div>
+				</div>
+			</div>
+			
+			<!-- 价格合计 -->
+			<div class="priceView">
+				<div class="priceLeft">
+					订单金额：<p class="priceText">0元</p>
+				</div>
+				<a class="payBtn" href="javascript:;" onclick="payClick(0)">在线支付</a>
+				<a class="szPayBtn" href="javascript:;" onclick="payClick(1)" style="display: none;">数字货币支付</a>
+			</div>
+		</div>
+		
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/md5.js?v=1.0.0"></script>
+		<script src="js/encrypt.js?v=1.0.2"></script>
+		<script src="js/laydate.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/cropper.min.js"></script>
+		<script src="js/app4.js?v=1.0.1"></script>
+		<script src="js/region.js"></script>
+		<script src="js/holiday.js"></script>
+		<script src="js/slgy/ticket.js?v=1.0.2"></script>
+	</body>
+</html>

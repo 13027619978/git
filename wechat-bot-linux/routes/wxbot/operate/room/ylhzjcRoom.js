@@ -50,7 +50,8 @@ async function ylhzjcRoomDeal(msg) {
 			botString += '14)船号xxx救援完成\n';
 			botString += '15)船号xxx挪船\n';
 			botString += '16)天时手机号xxx优惠券核销\n';
-			botString += '17)微信手机号xxx优惠券核销';
+			botString += '17)微信手机号xxx优惠券核销\n';
+			botString += '18)趣游手机号xxx优惠券核销';
 			room.say(botString);
 		}
 		
@@ -67,6 +68,14 @@ async function ylhzjcRoomDeal(msg) {
 				useCoupons(room, phone, 'WEB');
 			}
 		}
+		
+		if(content.indexOf('趣游手机号') != -1 && content.indexOf('优惠券核销') != -1){
+			var phone = content.split('趣游手机号')[1].split('优惠券核销')[0];
+			if (isNumber(phone)) {
+				useCoupons(room, phone, 'TS_DIS');
+			}
+		}
+		
 
 		if (content.indexOf('船号') != -1 && content.indexOf('开锁') != -1) {
 			var code = content.split('船号')[1].split('开锁')[0];
