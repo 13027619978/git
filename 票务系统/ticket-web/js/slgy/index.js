@@ -200,7 +200,7 @@ function getSaleInfoList(enterpriseCode, ticketGroupNum){
 					salesStartDate = new Date(salesStartDate + ' 00:00:00').getTime();
 					var ticketItem = '<div class="ticketItem">' +
 					'<div class="itemLeft">' +
-					'<p class="ticketName">无名英雄纪念广场团体上午场预约<font class="ticketType">团体票</font></p>' +
+					'<p class="ticketName">无名英雄纪念广场团体上午场预约</p>' +
 					'<div class="ticketDesc"></div>';
 					ticketItem += '</div>' +
 					'<div class="itemRight">';
@@ -220,7 +220,7 @@ function getSaleInfoList(enterpriseCode, ticketGroupNum){
 					salesStartDate = new Date(salesStartDate + ' 00:00:00').getTime();
 					var ticketItem = '<div class="ticketItem">' +
 					'<div class="itemLeft">' +
-					'<p class="ticketName">无名英雄纪念广场团体下午场预约<font class="ticketType">团体票</font></p>' +
+					'<p class="ticketName">无名英雄纪念广场团体下午场预约</p>' +
 					'<div class="ticketDesc"></div>';
 					ticketItem += '</div>' +
 					'<div class="itemRight">';

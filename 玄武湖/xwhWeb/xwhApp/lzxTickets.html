@@ -4,92 +4,97 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		<link rel="stylesheet" href="css/reset.css">
-		<link rel="stylesheet" href="css/boatTickets.css?v=4">
+		<link rel="stylesheet" href="css/gzhTickets.css">
 		<style type="text/css">
-			/* .container{
-				padding-bottom: 0;
-			}
-			.bottomView{
-				position: relative;
-			} */
 			.descView img{
 				width: 100%;
 				margin: 5px 0;
 			}
-			.timeBtn{
-				background-color: #E2E2E2;
-				line-height: 20px;
-				padding: 5px;
-				border-radius: 5px;
-				font-size: 14px;
-				width: 100%;
-			}
-			.timeBtn.active{
-				background-color: #40AFFE;
-				color: #fff;
-			}
+			
 		</style>
 		<title>龙舟购票</title>
 	</head>
 	<body>
 		<div class="container">
+			<!-- 购买界面 -->
+			<div class="shopView">
+				<div class="shopContent">
+					<a class="closeBtn" href="javascript:;" onclick="closeClick()">
+						<img src="img/close.png" >
+					</a>
+					<div class="shopContentView">
+						<div class="shopTop">
+							<div class="shopImg">
+								<img src="img/lz/lz4.jpg">
+							</div>
+							<div class="shopPrice">
+								<p>¥120</p>
+							</div>
+						</div>
+						
+						<div class="ggContent">
+							<div class="dateView">
+								<p>日期</p>
+								<div class="dateList">
+									<div class="timeBtn" onclick="selectTime(this, 1)"></div>
+									<div class="timeBtn" onclick="selectTime(this, 2)" style="margin-top: 10px;"></div>
+								</div>
+							</div>
+							
+							<div class="ywrView">
+								<p>游玩人信息</p>
+								<div class="ywrInfo">
+									<div class="ywrItem">
+										<p>姓名：</p>
+										<input class="userName" type="text" placeholder="请输入游玩人姓名">
+									</div>
+									<div class="ywrItem">
+										<p>手机号：</p>
+										<input class="phone" type="number" placeholder="请输入游玩人手机号">
+									</div>
+								</div>
+							</div>
+							
+							<div class="numberView">
+								<p>数量</p>
+								<div class="number">
+									<a href="javascript:;" onclick="sub(this)">-</a>
+									<div class="number_txt">
+										<input class="num" type="number" value="0" onchange="quantityChange(this)" disabled="true"/>
+									</div>
+									<a href="javascript:;" onclick="add(this)">+</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<a class="buyBtn" href="javascript:;" onclick="buyClick(this)">立即购票</a>
+				</div>
+			</div>
+			
 			<div class="banner">
 				<img src="img/lz/lz4.jpg" >
 			</div>
 			<div class="buyInfo">
-				<div class="orderView">
-					<a class="orderBtn" href="chooseOrder.html">我的订单</a>
-				</div>
-				<p style="width: 100%;text-align: center;line-height: 50px;font-size: 16px;">2022玄武湖全民龙舟体验活动</p>
-				<div class="buy_item">
-					<p class="item_l">票价：</p>
-					<p class="singlePrice">120元/人</p>
-				</div>
-				<div class="buy_item">
-					<p class="item_l">票数：</p>
-					<div class="number">
-						<a href="javascript:;" onclick="sub(this)">-</a>
-						<div class="number_txt">
-							<input class="num" type="number" value="0" onchange="quantityChange(this)" disabled="true"/>
-							张
-						</div>
-						<a href="javascript:;" onclick="add(this)">+</a>
-					</div>
-				</div>
-				<div class="buy_item">
-					<p class="item_l">联系人：</p>
-					<input class="userName" type="text" placeholder="请输入联系人姓名">
-				</div>
-				<div class="buy_item">
-					<p class="item_l">手机号：</p>
-					<input class="phone" type="text" placeholder="请输入联系人手机号">
+				<div class="ticketView">
+					<p>2022玄武湖全民龙舟体验活动</p>
+					<p class="price">¥<font>120</font></p>
 				</div>
 				
-				<div class="buy_item timeView" style="align-items: flex-start;">
-					<p class="item_l" style="line-height: 30px;">时间：</p>
-					<div style="font-size: 15px;color: #333;line-height: 25px;display: flex;justify-content: flex-start;align-items: center;flex-wrap: wrap;">
-						<div class="timeBtn" onclick="selectTime(this, 1)"></div>
-						<div class="timeBtn" onclick="selectTime(this, 2)" style="margin-top: 10px;"></div>
+				<div class="chooseView">
+					<div class="chooseTitle" onclick="showClick()">
+						<div class="chooseBtn">请选择规格</div>
 					</div>
 				</div>
 			</div>
 			<div class="descView">
 				<p style="text-align: center;font-size: 14px;color: #333;line-height: 40px;">--图文详情--</p>
-				<!-- <p style="font-size: 14px;color: red;line-height: 35px;">端午渐近，玄武湖的湖面上再次响起震天的擂鼓与呐喊声，彩旗飞舞间色彩斑斓的龙舟如离弦之箭在湖面上劈波斩浪。这个端午来玄武湖，不仅可以观看精彩的专业龙舟竞赛，还能亲自下水体验一回竞舟湖上的速度与激情。</p> -->
 				<p style="font-size: 14px;color: red;">龙舟活动预约咨询：陆先生13813889952/李先生18005142325</p>
 				<div class="zxvx" style="display: flex;justify-content: flex-start;align-items: flex-start;">
 					<p>玄武湖公园管理处游览中心：</p>
 					<img style="width: 75px;" src="img/zxvx.png" >
 				</div>
-				<!-- <p style="display: inline;background-color: yellow;color: red;margin: 10px 0;">玄武湖龙舟赛事预告</p> -->
 				<img src="img/lz/lz1.jpg">
-				<!-- <p style="color: red;">5月28日 9：00——11：00</p>
-				<p>专业龙舟竞赛（推荐观赛）</p>
-				<p style="color: red;">6月3日 9：00——11：00</p>
-				<p>亲子龙舟活动</p>
-				<p style="color: red;">6月4日 13：30——16：30</p>
-				<p>专业龙舟竞赛（推荐观赛）</p>
-				<p style="color: red;">6月5日 9：00——10：30</p> -->
 				<p>玄武湖全民龙舟体验活动（可报名参与）</p>
 				<p>地点：玄武湖水上运动基地（阳光码头）</p>
 				<img src="img/lz/lz2.jpg" >
@@ -132,21 +137,22 @@
 			</div>
 			<div class="bottomView">
 				<p>总计：<font class="totalPrice">0.00</font>元</p>
-				<a href="javascript:;" onclick="buyClick(this)">购票</a>
+				<a class="orderBtn" href="chooseOrder.html">我的订单</a>
+				<a href="javascript:;" onclick="showClick()">购票</a>
 			</div>
 		</div>
 		<script src="js/jquery.min.js"></script>
 		<script src="layer/layer.js"></script>
 		<script src="js/app.js?v=1.0.0"></script>
+		<script src="js/lzTickets.js?v=1.0.10"></script>
 		<script type="text/javascript">
-			if(!app.getCookie('openid') && !app.getQueryString('openid')){
-				window.location.replace('http://hd.smart-ideas.com.cn/xwhWeb/xwhApp/?type=lzTickets&code=0');
-			}else{
-				if(app.getQueryString('openid') == 'oW0iIt8cFHRmh9ZuUu0MHEn3VrZM' && app.getQueryString('code') == 18){
-					window.location.replace('http://hd.smart-ideas.com.cn/xwhWeb/xwhApp/?type=lzTickets&code=0');
-				}
+			function showClick(){
+				$('.shopView').show();
+			}
+			
+			function closeClick(){
+				$('.shopView').hide();
 			}
 		</script>
-		<script src="js/lzTickets.js?v=1.0.10"></script>
 	</body>
 </html>

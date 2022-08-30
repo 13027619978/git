@@ -64,6 +64,10 @@ function getOrderList(){
 						categoryName = '多人票';
 					}
 					
+					if(app.getCookie('enterpriseCode') == 'TgsEpcXsslgy'){
+						categoryName = '';
+					}
+					
 					var orderItem = '<div class="orderItem" onclick="orderClick(/'+ value.ticketOrderId +'/)">' +
 							'<div class="ticketName">' +
 								'<p class="name">'+ value.ticketName + '<font>'+ categoryName +'</font></p>' +
@@ -83,7 +87,7 @@ function getOrderList(){
 								'<p class="price">合计<font>￥'+ value.totalPrice +'</font></p>' +
 							'</div>';
 						
-					if(checkQuantity != restCheckQuantity){
+					if(checkQuantity != restCheckQuantity || value.payStatus != '1'){
 						orderItem += '<div class="deleteView">' +
 								'<a href="javascript:;" onclick="deleteClick(/'+ value.ticketOrderId +'/)">删除订单</a>' +
 							'</div>';
@@ -136,6 +140,7 @@ function deleteClick(ticketId){
 				if(res.success){
 					layer.closeAll();
 					layer.msg('删除成功');
+					getOrderList();
 				}
 			})
 		}

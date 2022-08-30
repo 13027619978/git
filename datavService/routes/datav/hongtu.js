@@ -45,7 +45,7 @@ router.post('/sendSms', async function(req1, res1){
 	let xqName = dataInfo.deviceName;
 	let autograph = dataInfo.autograph;
 	let userName = dataInfo.personName;
-	if(xqName('B区') != -1){
+	if(xqName.indexOf('B区') != -1){
 		phoneList += "18701302944,13671034264,16622103919";
 	}else if(xqName.indexOf('C区') != -1){
 		phoneList += "18701302944,13693636323,16622103919";

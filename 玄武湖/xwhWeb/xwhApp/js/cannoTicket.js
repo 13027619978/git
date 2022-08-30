@@ -19,8 +19,6 @@ $(function(){
 		$("#ticketType1").prop("checked",true);
 	}else if(ticketType == 2){
 		$("#ticketType2").prop("checked",true);
-	}else if(ticketType == 6){
-		$("#ticketType5").prop("checked",true);
 	}
 	
 	getTotalPrice();
@@ -85,7 +83,6 @@ function selectTime(that){
 function getTotalPrice(){
 	ticketType = $("input[name='ticketType']:checked").val();
 	$('.timeView').hide();
-	$('.ticketDesc').hide();
 	if(ticketType == '1'){
 		singleTicket = 100;
 	}else if(ticketType == '2'){
@@ -95,15 +92,11 @@ function getTotalPrice(){
 	}else if(ticketType == '5'){
 		singleTicket = 65;
 		$('.timeView').show();
-	}else if(ticketType == '6'){
-		singleTicket = 80;
-		$('.ticketDesc').show();
 	}
 	$('.singlePrice').text(singleTicket + '元/小时');
 	if(ticketType == '5'){
 		$('.singlePrice').text(singleTicket + '元/人/小时(仅限周二至周日)');
 	}
-
 	var totalNumber = $('.num').val();
 	$('.totalPrice').text(singleTicket*totalNumber);
 }

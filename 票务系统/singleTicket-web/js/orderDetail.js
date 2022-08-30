@@ -420,6 +420,11 @@ function getOrderDetail(){
 						$('.visitorView .detailBtn>p').text('查看用户信息');
 						$('.checkView .detailBtn>p').text('查看停车记录');
 					}
+					
+					if(app.getCookie('ticketId') == '2c9141f482881f900182b39e573e1e32'){
+						$('.headPic').hide();
+						$('.ticketName').text(orderInfo.ticketName);
+					}
 				}
 			}
 			

@@ -301,38 +301,38 @@ function padding2(num) {
     return padding2("0" + num)
 }
 
-// router.get('/addXhgNp', async function(req, res){
-// 	fs.readFile(path.resolve(__dirname, './jsonData/xhgNpList.json'), 'utf8', function(err, data){
-// 		if(err){
-// 	        return console.error(err);
-// 		}
-// 		data = JSON.parse(data);
-// 		var ticketList = data;
-// 		for(var i = 40000; i < 100000; i++){
-// 			var ticketItem = {};
-// 			ticketItem.code = padding2(i+1);
-// 			ticketItem.password = randomPassword();
-// 			ticketList.push(ticketItem);
-// 		}
+router.get('/addXhgNp', async function(req, res){
+	fs.readFile(path.resolve(__dirname, './jsonData/xhgNpList.json'), 'utf8', function(err, data){
+		if(err){
+	        return console.error(err);
+		}
+		data = JSON.parse(data);
+		var ticketList = data;
+		for(var i = 0; i < 20000; i++){
+			var ticketItem = {};
+			ticketItem.code = padding2(i+1);
+			ticketItem.password = randomPassword();
+			ticketList.push(ticketItem);
+		}
 		
-// 		var jsonData = ticketList;
+		var jsonData = ticketList;
 		
-// 		fs.writeFile(path.resolve(__dirname, './jsonData/xhgNpList.json'), JSON.stringify(jsonData),function(err){
-// 			if(err){
-// 				console.error(err);
-// 				res.send({
-// 					"code": "fail",
-// 					"message": "异常错误，核销失败"
-// 				});
-// 				return;
-// 			}
-// 			res.send({
-// 				msg: '添加成功',
-// 				code: 'success'
-// 			});
-// 		})
-// 	})
-// })
+		fs.writeFile(path.resolve(__dirname, './jsonData/xhgNpList.json'), JSON.stringify(jsonData),function(err){
+			if(err){
+				console.error(err);
+				res.send({
+					"code": "fail",
+					"message": "异常错误，添加失败"
+				});
+				return;
+			}
+			res.send({
+				msg: '添加成功',
+				code: 'success'
+			});
+		})
+	})
+})
 
 router.get('/getToken', async function(req, res){
 	fs.readFile(path.resolve(__dirname, './jsonData/xhgToken.json'), 'utf8', function(err, data){

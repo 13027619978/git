@@ -4,19 +4,8 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		<link rel="stylesheet" href="css/reset.css">
-		<link rel="stylesheet" href="css/boatTickets.css?v=1.0.2">
+		<link rel="stylesheet" href="css/gzhTickets.css">
 		<style type="text/css">
-			.timeBtn{
-				background-color: #E2E2E2;
-				line-height: 30px;
-				padding: 0 10px;
-				margin: 0 5px;
-				border-radius: 5px;
-			}
-			.timeBtn.active{
-				background-color: #40AFFE;
-				color: #fff;
-			}
 			.radioView label{
 				font-size: 14px;
 			}
@@ -26,11 +15,15 @@
 				padding-left: 25px;
 				line-height: 20px;
 			}
+			.srp{
+				border-bottom: 1px solid #f6f6f6;
+				padding: 10px 0;
+			}
 			.srp p{
 				font-size: 14px;
 				color: #333;
 				line-height: 20px;
-				padding: 2px 10px;
+				padding: 2px 0;
 				color: red;
 			}
 		</style>
@@ -38,57 +31,101 @@
 	</head>
 	<body>
 		<div class="container">
+			<!-- 购买界面 -->
+			<div class="shopView">
+				<div class="shopContent">
+					<a class="closeBtn" href="javascript:;" onclick="closeClick()">
+						<img src="img/close.png" >
+					</a>
+					<div class="shopContentView">
+						<div class="shopTop">
+							<div class="shopImg">
+								<img src="img/canoeBanner.png">
+							</div>
+							<div class="shopPrice">
+								<p>¥0</p>
+							</div>
+						</div>
+						
+						<div class="ggContent">
+							<div class="typeView">
+								<p>票种</p>
+								<div class="typeList">
+									<!-- <div class="typeItem" onclick="typeClick(this, 7)">水上运动三人票</div> -->
+									<!-- <div class="typeItem" onclick="typeClick(this, 6)">七夕皮划艇套票(8月4日至8月7日使用)</div> -->
+									<div class="typeItem" onclick="typeClick(this, 1)">单人皮划艇</div>
+									<div class="typeItem" onclick="typeClick(this, 2)">双人皮划艇</div>
+									<div class="typeItem" onclick="typeClick(this, 4)">桨板票</div>
+									<div class="typeItem" onclick="typeClick(this, 5)">皮划艇体验票(仅限周二至周日使用)</div>
+								</div>
+							</div>
+							
+							<div class="srp" style="display: none;">
+								<p>1、含双人皮划艇和桨板一次。</p>
+								<p>2、此票限当天使用，可三人同时使用，不可单人多次使用。</p>
+								<p>3、桨板游玩需有游泳基础，可自备衣服一套。</p>
+								<p>4、有限期自购买之日起至2022年8月24日，逾期自动退票。</p>
+							</div>
+							<!-- 
+							<div class="dateView">
+								<p>日期</p>
+								<div class="dateList">
+									<div class="timeBtn" onclick="selectDate(this, 1)"></div>
+									<div class="timeBtn" onclick="selectDate(this, 2)" style="margin-top: 10px;"></div>
+								</div>
+							</div> -->
+							
+							<div class="dateView">
+								<p>时间</p>
+								<div class="dateList">
+									<div class="timeBtn" onclick="selectTime(this, 1)">10:00-11:00</div>
+									<div class="timeBtn" onclick="selectTime(this, 2)" style="margin-top: 10px;">14:00-15:00</div>
+								</div>
+							</div>
+							
+							<div class="ywrView">
+								<p>游玩人信息</p>
+								<div class="ywrInfo">
+									<div class="ywrItem">
+										<p>手机号：</p>
+										<input class="phone" type="number" placeholder="请输入游玩人手机号">
+									</div>
+								</div>
+							</div>
+							
+							<div class="numberView">
+								<p>数量</p>
+								<div class="number">
+									<a href="javascript:;" onclick="sub(this)">-</a>
+									<div class="number_txt">
+										<input class="num" type="number" value="0" onchange="quantityChange(this)" disabled="true"/>
+									</div>
+									<a href="javascript:;" onclick="add(this)">+</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<a class="buyBtn" href="javascript:;" onclick="buyClick(this)">立即购票</a>
+				</div>
+			</div>
+			
 			<div class="banner">
 				<img src="img/canoeBanner.png" >
 			</div>
 			<div class="buyInfo">
-				<div class="orderView">
-					<a class="orderBtn" onclick="orderClick()" href="javascript:;">我的订单</a>
+				<div class="ticketView">
+					<p class="ticketName">七夕皮划艇套票</p>
+					<p class="price">¥<font>0</font></p>
 				</div>
-				<div class="buy_item">
-					<div class="radioView">
-						<label for="ticketType6"><input id="ticketType6" type="radio" value="7" name="ticketType" onchange="ticketTypeChange()" >水上运动三人票</label>
-						<!-- <label for="ticketType5"><input id="ticketType5" type="radio" value="6" name="ticketType" onchange="ticketTypeChange()" >七夕皮划艇套票</label> -->
-						<label for="ticketType1"><input id="ticketType1" type="radio" value="1" name="ticketType" onchange="ticketTypeChange()" >单人皮划艇</label>
-						<label for="ticketType2"><input id="ticketType2" type="radio" value="2" name="ticketType" onchange="ticketTypeChange()" >双人皮划艇</label>
-						<label for="ticketType4"><input id="ticketType4" type="radio" value="4" name="ticketType" onchange="ticketTypeChange()" >桨板票</label>
-						<label for="ticketType3"><input id="ticketType3" type="radio" value="5" name="ticketType" onchange="ticketTypeChange()" >皮划艇体验票</label>
+				
+				<div class="chooseView">
+					<div class="chooseTitle" onclick="showClick()">
+						<div class="chooseBtn">请选择规格</div>
 					</div>
-				</div>
-				<div class="srp" style="display: none;">
-					<p>1、含双人皮划艇和桨板一次。</p>
-					<p>2、此票限当天使用，可三人同时使用，不可单人多次使用。</p>
-					<p>3、桨板游玩需有游泳基础，可自备衣服一套。</p>
-					<p>4、有限期自购买之日起至2022年8月24日，逾期自动退票。</p>
-				</div>
-				<div class="buy_item">
-					<p class="item_l">票价：</p>
-					<p class="singlePrice">0元/小时</p>
-				</div>
-				<p class="ticketDesc">七夕皮划艇套票，双人使用</br>仅限2022-08-04至2022-08-07使用</br>过期未使用将自动退票</p>
-				<div class="buy_item">
-					<p class="item_l">票数：</p>
-					<div class="number">
-						<a href="javascript:;" onclick="sub(this)">-</a>
-						<div class="number_txt">
-							<input class="num" type="number" value="0" onchange="quantityChange(this)" disabled="true"/>
-							张
-						</div>
-						<a href="javascript:;" onclick="add(this)">+</a>
-					</div>
-				</div>
-				<div class="buy_item timeView" style="align-items: flex-start;display: none;">
-					<p class="item_l" style="line-height: 30px;">时间：</p>
-					<div style="font-size: 16px;color: #333;line-height: 25px;display: flex;justify-content: flex-start;align-items: center;flex-wrap: wrap;">
-						<div class="timeBtn" onclick="selectTime(this)">10:00-11:00</div>
-						<div class="timeBtn" onclick="selectTime(this)">14:00-15:00</div>
-					</div>
-				</div>
-				<div class="buy_item">
-					<p class="item_l">手机号：</p>
-					<input class="phone" type="number" />
 				</div>
 			</div>
+			
 			<div class="descView">
 				<p class="title">活动地点：</p>
 				<p>阳光码头（太阳宫旁）</p>
@@ -126,12 +163,13 @@
 			</div>
 			<div class="bottomView">
 				<p>总计：<font class="totalPrice">0.00</font>元</p>
-				<a href="javascript:;" onclick="buyClick(this)">购票</a>
+				<a class="orderBtn" href="chooseOrder.html">我的订单</a>
+				<a href="javascript:;" onclick="showClick()">购票</a>
 			</div>
 		</div>
 		<script src="js/jquery.min.js"></script>
 		<script src="layer/layer.js"></script>
-		<script src="js/app.js?v=1.0.2"></script>
+		<script src="js/app.js?v=1.0.0"></script>
 		<script type="text/javascript">
 			let singleTicket = 0;
 			let ticketType;
@@ -141,25 +179,34 @@
 					app.setCookie('openid', app.getQueryString('openid'));
 				}
 				
-				var ticketType = app.getQueryString('ticketType');
+				ticketType = app.getQueryString('ticketType');
 				if(ticketType){
 					$('.num').val(1);
 				}
+				
+				$('.dateView').hide();
 				if(ticketType == 5){
-					$("#ticketType3").prop("checked",true);
-					$('.timeView').show();
+					$('.typeItem').eq(3).addClass('active').siblings().removeClass('active');
+					$('.dateView').show();
+					$('.ticketName').text('皮划艇体验票');
 				}else if(ticketType == 4){
-					$("#ticketType4").prop("checked",true);
+					$('.typeItem').eq(2).addClass('active').siblings().removeClass('active');
+					$('.ticketName').text('桨板票');
 				}else if(ticketType == 1){
-					$("#ticketType1").prop("checked",true);
+					$('.typeItem').eq(0).addClass('active').siblings().removeClass('active');
+					$('.ticketName').text('单人皮划艇');
 				}else if(ticketType == 2){
-					$("#ticketType2").prop("checked",true);
+					$('.typeItem').eq(1).addClass('active').siblings().removeClass('active');
+					$('.ticketName').text('双人皮划艇');
 				}else if(ticketType == 6){
-					$("#ticketType5").prop("checked",true);
+					// $('.typeItem').eq(0).addClass('active').siblings().removeClass('active');
+					// $('.ticketName').text('七夕皮划艇套票');
 				}else if(ticketType == 7){
-					$("#ticketType6").prop("checked",true);
-					$('.srp').show();
+					// $('.typeItem').eq(0).addClass('active').siblings().removeClass('active');
+					// $('.ticketName').text('水上运动三人票');
+					// $('.srp').show();
 				}
+				
 				
 				getTotalPrice();
 				
@@ -183,16 +230,10 @@
 			}
 			
 			function orderClick(){
-				$("#ticketType1").prop("checked",false);
-				$("#ticketType2").prop("checked",false);
-				$("#ticketType3").prop("checked",false);
-				$("#ticketType4").prop("checked",false);
-				$("#ticketType5").prop("checked",false);
 				window.location.href = 'chooseOrder.html';
 			}
 			
 			function add(that){
-				ticketType = $("input[name='ticketType']:checked").val();
 				if(ticketType){
 					var ticketsNumber = parseInt($(that).parent().find('input').val());
 					if(ticketsNumber > 19){
@@ -201,7 +242,7 @@
 					}
 					ticketsNumber += 1;
 					$(that).parent().find('input').val(ticketsNumber);
-					getTotalPrice(ticketsNumber);
+					getTotalPrice();
 				}else{
 					layer.alert('请先选择购票种类')
 				}
@@ -213,7 +254,7 @@
 					ticketsNumber -= 1;
 					$(that).parent().find('input').val(ticketsNumber);
 				}
-				getTotalPrice(ticketsNumber);
+				getTotalPrice();
 			}
 			
 			function selectTime(that){
@@ -222,11 +263,8 @@
 			}
 			
 			function getTotalPrice(){
-				ticketType = $("input[name='ticketType']:checked").val();
 				$('.timeView').hide();
 				$('.ticketDesc').hide();
-				// 三人票描述
-				$('.srp').hide();
 				if(ticketType == '1'){
 					singleTicket = 100;
 				}else if(ticketType == '2'){
@@ -243,13 +281,48 @@
 					singleTicket = 150;
 					$('.srp').show();
 				}
-				$('.singlePrice').text(singleTicket + '元/小时');
-				if(ticketType == '5'){
-					$('.singlePrice').text(singleTicket + '元/人/小时(仅限周二至周日)');
-				}
+				
+
+				$('.price font').text(singleTicket);
+				$('.shopPrice p').text('¥' + singleTicket);
 			
 				var totalNumber = $('.num').val();
 				$('.totalPrice').text(singleTicket*totalNumber);
+			}
+			
+			function showClick(){
+				$('.shopView').show();
+			}
+			
+			function closeClick(){
+				$('.shopView').hide();
+			}
+			
+			function typeClick(that, type){
+				$('.dateView').hide();
+				$('.srp').hide();
+				$(that).addClass('active').siblings().removeClass('active');
+				ticketType = type;
+				$('.num').val('1');
+				getTotalPrice();
+				if(type == 5){
+					$('.dateView').show();
+				}
+				
+				if(ticketType == 5){
+					$('.ticketName').text('皮划艇体验票');
+				}else if(ticketType == 4){
+					$('.ticketName').text('桨板票');
+				}else if(ticketType == 1){
+					$('.ticketName').text('单人皮划艇');
+				}else if(ticketType == 2){
+					$('.ticketName').text('双人皮划艇');
+				}else if(ticketType == 6){
+					$('.ticketName').text('七夕皮划艇套票');
+				}else if(ticketType == 7){
+					$('.ticketName').text('水上运动三人票');
+					$('.srp').show();
+				}
 			}
 			
 			function buyClick(that){
@@ -271,6 +344,7 @@
 					layer.alert('请先选择购票类型');
 					return;
 				}
+				$(that).attr('onclick', '');
 				app.postAjax('canoeOrder/web/pay', {
 					totalMoney: totalMoney,
 					openId: openid,
@@ -278,7 +352,6 @@
 					phone: phone,
 					number: ticketsNumber
 				}, function(res){
-					$(that).attr('onclick', '');
 					var orderId = res.data.canoeOrder.payId;
 					if(res.data.res){
 						var res_o = JSON.parse(res.data.res);
@@ -295,9 +368,6 @@
 								if(res.err_msg == "get_brand_wcpay_request:ok" ) {
 									$("#ticketType1").prop("checked",false);
 									$("#ticketType2").prop("checked",false);
-									$("#ticketType3").prop("checked",false);
-									$("#ticketType4").prop("checked",false);
-									$("#ticketType5").prop("checked",false);
 									$(that).attr('onclick', 'buyClick(this)');
 									window.location.replace("canoeTicketsDetail.html?orderId=" + orderId);
 								}else{

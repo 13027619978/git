@@ -291,7 +291,7 @@ async function ybyRoomDeal(msg){
 				
 				req.end();
 			}else{
-				room.say("格式错误！\n正确格式:\n车辆号xxx查手机");
+				room.say("格式错误！\n正确格式:\n车辆号xxx启用");
 			}
 		}
 		

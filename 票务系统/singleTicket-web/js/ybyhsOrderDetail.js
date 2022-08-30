@@ -103,7 +103,9 @@ $(function(){
 					$('.visitDate').text(orderInfo.visitDate + '至2022-01-31');
 					$('.checkItem').hide();
 					$('.headPic').show();
+					
 					$('.headImg').attr('src', app.getCookie('headPicUrl'));
+					
 				}
 				if(orderInfo.payStatus == '1'){
 					if(checkQuantity != restCheckQuantity){

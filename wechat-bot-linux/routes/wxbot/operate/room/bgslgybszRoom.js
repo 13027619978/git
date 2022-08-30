@@ -40,9 +40,6 @@ async function bgslgybszRoomDeal(msg){
 
 	}else if(msg.type() == wechat.bot.Message.Type.Image){
 		console.log('~~~~~~~~~~图片消息~~~~~~~~~');
-		const file = await msg.toFileBox();
-		room.say(file);
-		
 	}else{
 		console.log('~~~~~~~~其它类型消息~~~~~~~');
 	}

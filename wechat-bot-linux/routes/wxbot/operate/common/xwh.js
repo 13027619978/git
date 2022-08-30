@@ -32,8 +32,8 @@ function getxwhInfo(host, room){
 	    var res = JSON.parse(d.toString());
 	    if(res.code == "SUCCESS"){
 			// 摆渡船
-			var loopShipIncome = res.data.loopShipIncome;
-			loopShipIncome = loopShipIncome?parseInt(loopShipIncome):0;
+			// var loopShipIncome = res.data.loopShipIncome;
+			// loopShipIncome = loopShipIncome?parseInt(loopShipIncome):0;
 			var hzLoopShipCardIncome = res.data.hzLoopShipCardIncome;
 			hzLoopShipCardIncome = hzLoopShipCardIncome?parseInt(hzLoopShipCardIncome):0;
 			var hzLoopShipIncome = res.data.hzLoopShipIncome;
@@ -47,6 +47,7 @@ function getxwhInfo(host, room){
 			var hzLoopIncome = parseInt(hzLoopShipIncome + hzLoopShipCardIncome + hzLoopYtIncome);
 			var dkLoopIncome = parseInt(dkLoopShipIncome + dkLoopShipCardIncome);
 			var loopCardTotal = parseInt(hzLoopShipCardIncome + dkLoopShipCardIncome);
+			var loopShipIncome = parseInt(hzLoopIncome) + parseInt(dkLoopIncome);
 			
 			
 			// 自驾船
@@ -569,12 +570,6 @@ function getlzInfo(room){
 	nowWeek = nowWeek==0?7:nowWeek;
 	var nowHour = new Date().getHours();
 	var nowMinutes = new Date().getMinutes();
-	if(nowWeek == 6 && nowHour >= 16){
-		$('.timeBtn').eq(0).attr('onclick', 'closeClick()').addClass('disabled');
-	}
-	if(nowWeek == 7 && nowHour >= 16){
-		$('.timeBtn').attr('onclick', 'closeClick()').addClass('disabled');
-	}
 	var nowDateNum = new Date().getTime();
 	var satDateNum = (6 - nowWeek) * 60 * 60 * 24 * 1000 + nowDateNum;
 	var sunDateNum = (7 - nowWeek) * 60 * 60 * 24 * 1000 + nowDateNum;

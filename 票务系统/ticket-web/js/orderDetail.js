@@ -125,6 +125,20 @@ $(function(){
 						$('.checkQuantity').addClass('red');
 					}
 				}
+				
+				// 西山森林公园
+				if(app.getCookie('enterpriseCode') == 'TgsEpcXsslgy'){
+					$('.xsslgy').show();
+					$('.checkView').hide();
+					$('.ticketDetail').hide();
+					$('.ticketNumber').hide();
+					$('.ticketTime .desc').text('预约场次：');
+					var cc = orderInfo.ticketName.split('（')[1].split('）')[0];
+					$('.visitDate').text(orderInfo.visitDate + ' ' + cc);
+					ticketView = '<div class="ticket">' +
+						'<p class="ticketName">'+ orderInfo.ticketName + '</p>' +
+					'</div>';
+				}
 				$('.ticketList').append(ticketView);
 			})
 			

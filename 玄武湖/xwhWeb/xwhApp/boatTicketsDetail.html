@@ -6,10 +6,45 @@
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/orderDetail.css?v=20">
 		<title>摆渡船订单</title>
+		<style type="text/css">
+			.container{
+				padding-bottom: 55px;
+			}
+			.content .deviceType{
+				font-size: 16px;
+			}
+			.content .nameTxt{
+				text-align: right;
+			}
+			.refundView{
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				padding: 10px;
+			}
+			.refundView a{
+				display: block;
+				width: 100%;
+				text-align: center;
+				line-height: 35px;
+				border-radius: 5px;
+				background-color: #fff;
+				box-shadow: 0 0 5px #ddd;
+				font-size: 13px;
+				color: #333;
+			}
+			.refundView a.disabled{
+				background-color: #ddd;
+				color: #666;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="container">
 			<div class="content">
+				<div class="labelView pzlx" style="display: none;"><p class="nameTxt">票种类型：</p><p class="ticketType"></p></div>
+				<div class="labelView ywrq" style="display: none;"><p class="nameTxt">游玩日期：</p><p class="visitDate"></p></div>
 				<div class="labelView"><p class="nameTxt">支付金额：</p><p class="price"></p></div>
 				<div class="labelView"><p class="nameTxt">订单状态：</p><p class="status"></p></div>
 				<div class="labelView"><p class="nameTxt">购票数量：</p><p class="number"></p></div>
@@ -32,6 +67,101 @@
 		<script src="layer/layer.js"></script>
 		<script src="js/app.js"></script>
 		<script src="js/jquery.qrcode.min.js"></script>
-		<script src="js/boatTicketsDetail.js?v=1.0.0"></script>
+		<script type="text/javascript">
+			var orderId = app.getQueryString('orderId');
+			$(function(){
+				getOrderInfo(orderId);
+				$('.qrcodeView').hide();
+			})
+			
+			function getOrderInfo(orderId){
+				app.getAjax('deviceLoopApp/getByDeviceLoopId', {
+					deviceLoopId: orderId
+				}, function(res){
+					layer.closeAll();
+					if(res.code == 'SUCCESS'){
+						// 显示票种类型
+						let ticketType = res.data.type;
+						let sessionId = res.data.sessionId;
+						let visitDate = res.data.visitDate;
+						if(ticketType == 17){
+							$('.pzlx').show().find('.ticketType').text('玄武湖豪华游船夜游票');
+						}else if(ticketType == 19){
+							$('.pzlx').show().find('.ticketType').text('画舫游览');
+							$('.ywrq').show();
+							if(sessionId == 3){
+								$('.visitDate').text(visitDate + ' ' + '10:30');
+							}else if(sessionId == 4){
+								$('.visitDate').text(visitDate + ' ' + '16:30');
+							}else if(sessionId == 5){
+								$('.visitDate').text(visitDate + ' ' + '18:00');
+							}else if(sessionId == 6){
+								$('.visitDate').text(visitDate + ' ' + '19:20');
+							}
+						}else if(ticketType == 20){
+							$('.pzlx').show().find('.ticketType').text('双人VIP特价票');
+							$('.ywrq').show();
+							if(sessionId == 7){
+								$('.visitDate').text(visitDate + ' ' + '10:30');
+							}else if(sessionId == 8){
+								$('.visitDate').text(visitDate + ' ' + '16:30');
+							}else if(sessionId == 9){
+								$('.visitDate').text(visitDate + ' ' + '18:00');
+							}else if(sessionId == 10){
+								$('.visitDate').text(visitDate + ' ' + '19:20');
+							}
+						}
+						
+						$('.price').text(res.data.totalMoney + '元');
+						var createYear = res.data.createDate.split(' ')[0];
+						var createHour = res.data.createDate.split(' ')[1];
+						$('.year').text(createYear);
+						$('.hour').text(createHour);
+						$('.number').text(res.data.totalNumber);
+						var orderStatus;
+						switch(res.data.payStatus){
+							case "0":
+								orderStatus = '支付失败';
+								$('.qrcodeView').hide();
+							break;
+							case "1":
+								orderStatus = '支付成功';
+								$('.qrcodeView').show();
+							break;
+							case "2":
+								orderStatus = '退款成功';
+								$('.qrcodeView').hide();
+							break;
+						}
+						$('.status').text(orderStatus);
+						$('.qrcode').eq($('.qrcode').length - 1).qrcode({
+							text: res.data.orderCode,
+							background: '#fff',
+							foreground: '#000',
+							width: 180,
+							height: 180
+						});
+					}else{
+						layer.alert(res.msg);
+					}
+				})
+			}
+			
+			
+			function randomNum(minNum,maxNum){ 
+			    switch(arguments.length){ 
+			        case 1: 
+			            return parseInt(Math.random()*minNum+1,10); 
+			        break; 
+			        case 2: 
+			            return parseInt(Math.random()*(maxNum-minNum+1)+minNum,10); 
+			        break; 
+					default: 
+						return 0; 
+					break; 
+			    } 
+			}
+			
+		</script>
 	</body>
 </html>

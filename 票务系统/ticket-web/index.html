@@ -559,6 +559,25 @@
 				}else if(enterpriseCode == 'TgsEpcXsslgy'){
 					// 森林公园购票页
 					window.location.href = 'xsslgyTicket.html?ticketInfoId=' + ticketInfoId;
+				}else if(enterpriseCode == 'TgsEpcYby'){
+					// 北京园博园
+					var noticeString1 = '<p style="height:300px;overflow-y:auto;">尊敬的游客朋友们：<br>';
+					noticeString1 += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为贯彻落实北京市创建国家森林城市总体规划，坚持以人民为中心，将更多的绿色生态空间回馈百姓，真正做到还绿于民，加快推进创建国家森林城市各项工作。北京园博园将于2022年8月1日启动“创森惠民”主题活动，现将相关情况公告如下：<br>';
+					noticeString1 += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自8月1日起每日面向社会公众发放5000张创森惠民优惠票，游客可通过扫描下方二维码或微信搜索“丰台创森”公众号，点击活动公告文章或“门票预约”按钮，按程序进行实名登记预约后取得二维码门票，按照预约日期在园博园2、3、6号门区扫码检票入园。<br>';
+					noticeString1 += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;游客凭身份证进行预约，当日有效，请您按照预约时间到园游览，鉴于目前仍属疫情期间，按照北京市统一规定，公园按照75%限流，请您遵守园区防疫规定，有序入园。<br>';
+					noticeString1 += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;谢谢您的支持，祝您游园愉快！<br>';
+					layer.open({
+						content: noticeString1,
+						closeBtn: 0,
+						btn: ['我去预约惠民优惠票', '我已知悉, 仍要购票'],
+						title: '北京园博园创森惠民活动公告',
+						yes: function(index,layero){
+							window.location.href = 'https://mp.weixin.qq.com/s/VZ5tZG7IWHVYpzfHxJwkVw';
+						},
+						btn2: function(index,layero){
+							window.location.href = 'ticket.html?ticketInfoId=' + ticketInfoId;
+						}
+					})
 				}else{
 					window.location.href = 'ticket.html?ticketInfoId=' + ticketInfoId;
 				}

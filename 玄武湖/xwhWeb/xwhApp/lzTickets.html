@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		<link rel="stylesheet" href="css/reset.css">
-		<link rel="stylesheet" href="css/boatTickets.css?v=4">
+		<link rel="stylesheet" href="css/gzhTickets.css">
 		<style type="text/css">
 			.descView img{
 				width: 100%;
@@ -15,14 +15,52 @@
 	</head>
 	<body>
 		<div class="container">
+			<div class="shopView">
+				<div class="shopContent">
+					<a class="closeBtn" href="javascript:;" onclick="closeClick()">
+						<img src="img/close.png" >
+					</a>
+					<div class="shopContentView">
+						<div class="shopTop">
+							<div class="shopImg">
+								<img src="img/lzx/lzx2.jpg">
+							</div>
+							<div class="shopPrice">
+								<p>¥120</p>
+							</div>
+						</div>
+						
+						<div class="numberView">
+							<p>数量</p>
+							<div class="number">
+								<a href="javascript:;" onclick="sub(this)">-</a>
+								<div class="number_txt">
+									<input class="num" type="number" value="0" onchange="quantityChange(this)" disabled="true"/>
+								</div>
+								<a href="javascript:;" onclick="add(this)">+</a>
+							</div>
+						</div>
+					</div>
+					
+					<a class="buyBtn" href="javascript:;" onclick="buyClick(this)">立即购票</a>
+				</div>
+			</div>
+			
 			<div class="banner">
 				<img src="img/lzx/lzx2.jpg" >
 			</div>
 			<div class="buyInfo">
-				<div class="orderView">
-					<a class="orderBtn" href="chooseOrder.html">我的订单</a>
+				<div class="ticketView">
+					<p>2022玄武湖东南湖游览专线（龙舟专线）</p>
+					<p class="price">¥<font>120</font></p>
 				</div>
-				<p style="width: 100%;text-align: center;line-height: 50px;font-size: 16px;">2022玄武湖东南湖游览专线（龙舟专线）</p>
+				
+				<div class="chooseView">
+					<div class="chooseTitle" onclick="showClick()">
+						<div class="chooseBtn">请选择规格</div>
+					</div>
+				</div>
+				<!-- <p style="width: 100%;text-align: center;line-height: 50px;font-size: 16px;">2022玄武湖东南湖游览专线（龙舟专线）</p>
 				<div class="buy_item">
 					<p class="item_l">票价：</p>
 					<p class="singlePrice"></p>
@@ -37,7 +75,7 @@
 						</div>
 						<a href="javascript:;" onclick="add(this)">+</a>
 					</div>
-				</div>
+				</div> -->
 			</div>
 			<div class="descView">
 				<p style="text-align: center;font-size: 14px;color: #333;line-height: 40px;">--图文详情--</p>
@@ -82,12 +120,22 @@
 			</div>
 			<div class="bottomView">
 				<p>总计：<font class="totalPrice">0.00</font>元</p>
-				<a href="javascript:;" onclick="buyClick(this)">购票</a>
+				<a class="orderBtn" href="chooseOrder.html">我的订单</a>
+				<a href="javascript:;" onclick="showClick()">购票</a>
 			</div>
 		</div>
 		<script src="js/jquery.min.js"></script>
 		<script src="layer/layer.js"></script>
 		<script src="js/app.js?v=1.0.0"></script>
 		<script src="js/lzTickets.js?v=1.0.2"></script>
+		<script type="text/javascript">
+			function showClick(){
+				$('.shopView').show();
+			}
+			
+			function closeClick(){
+				$('.shopView').hide();
+			}
+		</script>
 	</body>
 </html>

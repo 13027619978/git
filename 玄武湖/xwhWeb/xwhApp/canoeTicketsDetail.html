@@ -62,18 +62,15 @@
 				<p>4，严禁在船，艇上嬉戏打闹，禁止摇摆船，艇，严禁站立</p>
 				<p>5，贵重物品自行保管，为免落水，勿将贵重物品带上船，艇，因保管不善造成的后果自行承担</p>
 			</div>
-			
-			<div class="refundView">
-				<a href="javascript:;" onclick=""></a>
-			</div>
 		</div>
 		<script src="js/jquery.min.js"></script>
 		<script src="layer/layer.js"></script>
 		<script src="js/app.js"></script>
 		<script src="js/jquery.qrcode.min.js"></script>
 		<script type="text/javascript">
+			var orderId = app.getQueryString('orderId');
+			
 			$(function(){
-				var orderId = app.getQueryString('orderId');
 				getOrderInfo(orderId);
 				$('.qrcodeView').hide();
 			})
@@ -136,16 +133,6 @@
 								orderStatus = '退款失败';
 							break;
 						}
-						if(res.data.buyQuantity == res.data.restQuantity && res.data.payStatus == '1'){
-							$('.refundView a').attr('onclick', 'refundClick(/' + res.data.orderCode + '/)').text('申请退票');
-						}else{
-							if(orderStatus == '申请退款成功'){
-								$('.refundView a').attr('onclick', '').text('申请退款成功').addClass('disabled');
-							}else{
-								$('.refundView a').attr('onclick', '').text('已核销').addClass('disabled');
-							}
-							
-						}
 						$('.status').text(orderStatus);
 						$('.qrcode').eq($('.qrcode').length - 1).qrcode({
 							text: res.data.orderCode,
@@ -158,29 +145,6 @@
 						layer.alert(res.msg);
 					}
 				})
-			}
-			
-			function refundClick(orderCode){
-				orderCode = orderCode.toString().split('/')[1];
-				layer.confirm('是否确认申请退票。', {
-				    btn: ['确认','取消'],
-				    yes: function(){
-						layer.load(2);
-						app.postAjax('canoeOrder/refund', {
-							orderCode: orderCode
-						}, function(res){
-							layer.closeAll();
-							layer.alert(res.msg);
-							$('.qrcode').html('');
-							var orderId = app.getQueryString('orderId');
-							getOrderInfo(orderId);
-						})
-					},
-					btn2: function(){
-						layer.closeAll();
-					}
-				})
-				
 			}
 			
 			function randomNum(minNum,maxNum){ 

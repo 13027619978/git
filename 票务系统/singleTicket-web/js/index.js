@@ -146,6 +146,10 @@ $(function(){
 		if(enterpriseCode == 'TgsEpcYby' && ticketGroupNum == 'TGN20201210095942945' && ticketInfoId == '2c9141f4776c370d01777ac477af6852'){
 			window.location.replace('ybyhsTicket.html?openid=' + app.getCookie('openid'));
 		}
+		// 园博园园票
+		if(enterpriseCode == 'TgsEpcYby' && ticketInfoId == '2c9141f482881f900182b39e573e1e32'){
+			window.location.replace('ybyyp.html?openid=' + app.getCookie('openid'));
+		}
 		if(ticketInfoId == '2c9141f47f9ac6d1017fb580c5806c47'){
 			if(window.location.href.indexOf('https://') != -1){
 				window.location.replace('http://' + window.location.href.split('https://')[1]);

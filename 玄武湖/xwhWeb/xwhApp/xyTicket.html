@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/gzhTickets.css?v=1.0.0">
+		<style type="text/css">
+			.timeBtn.disabled{
+				background-color: #F0F0F0;
+				color: #666;
+			}
+			.timeBtn{
+				margin: 5px 0;
+			}
+			.kcTxt{
+				font-size: 12px;
+				color: #8D8D8D;
+			}
+		</style>
+		<title>摆渡船购票</title>
+	</head>
+	<body>
+		<div class="container">
+			<!-- 购买界面 -->
+			<div class="shopView">
+				<div class="shopContent">
+					<a class="closeBtn" href="javascript:;" onclick="closeClick()">
+						<img src="img/close.png" >
+					</a>
+					<div class="shopContentView">
+						<div class="shopTop">
+							<div class="shopImg">
+								<img src="img/yyImg2.jpg">
+							</div>
+							<div class="shopPrice">
+								<p class="priceTxt">¥30</p>
+								<p class="kcTxt">库存：443</p>
+							</div>
+						</div>
+						
+						<div class="ggContent">
+							<div class="dateView">
+								<p>日期</p>
+								<div class="dateList">
+									<div class="timeBtn btn1" href="javascript:;" onclick="selectDate(this, 1)"></div>
+									<div class="timeBtn btn2" href="javascript:;" onclick="selectDate(this, 2)"></div>
+									<div class="timeBtn btn3" href="javascript:;" onclick="selectDate(this, 3)"></div>
+								</div>
+							</div>
+							
+							<div class="dateView">
+								<p>班次</p>
+								<div class="dateList">
+									<div class="timeBtn" href="javascript:;" onclick="selectTime(this, 1)">10:30</div>
+									<div class="timeBtn" href="javascript:;" onclick="selectTime(this, 2)">16:30</div>
+									<div class="timeBtn" href="javascript:;" onclick="selectTime(this, 3)">18:00(晚霞线)</div>
+									<div class="timeBtn" href="javascript:;" onclick="selectTime(this, 4)">19:20(喷泉线)</div>
+								</div>
+							</div>
+							
+							<div class="typeView">
+								<p>票种</p>
+								<div class="typeList">
+									<div class="typeItem active" onclick="typeClick(this, 19)">
+										画舫游览（可陪同一名1.1米以下儿童）
+									</div>
+									<div class="typeItem" onclick="typeClick(this, 20)">
+										双人VIP特价票（可陪同一名1.4米以下儿童）
+									</div>
+								</div>
+							</div>
+							
+							<div class="numberView">
+								<p>数量</p>
+								<div class="number">
+									<a href="javascript:;" onclick="sub(this)">-</a>
+									<div class="number_txt">
+										<input class="num" type="number" value="0" onchange="quantityChange(this)" disabled="true"/>
+									</div>
+									<a href="javascript:;" onclick="add(this)">+</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<a class="buyBtn" href="javascript:;" onclick="buyClick(this)">立即购票</a>
+				</div>
+			</div>
+			
+			<div class="banner">
+				<img src="img/wx/wx2.jpg" >
+			</div>
+			
+			<div class="buyInfo">
+				<div class="ticketView">
+					<p>东南湖画舫游览</p>
+					<p class="price">¥<font>30-198</font></p>
+				</div>
+				
+				<div class="chooseView">
+					<div class="chooseTitle" onclick="showClick()">
+						<div class="chooseBtn">请选择规格</div>
+					</div>
+				</div>
+			</div>
+			<div class="detailInfo">
+				<p style="text-align: center;font-size: 14px;color: #333;line-height: 40px;text-indent: 0;">--图文详情--</p>
+				<p style="color: red;font-weight: bold;">购买完成后，在我的订单-摆渡船订单-订单详情查看核销码，现场由工组人员核销后即可（无需换票）。</p>
+				<p>发船码头：芳桥码头（环洲麦当劳对面）</p>
+				<p>发船班次：本周五——周日，10:30/16:30/18:00（赏晚霞推荐班次）/19:20（喷泉线）</p>
+				<p>咨询电话：025-83613166</p>
+				<img src="img/wx/wx1.jpg" >
+				<p>在玄武湖，追落日的方式有很多，最浪漫的要属乘着画舫赏晚霞了。景区在东南湖画舫游览线路基础上，增设了<font style="color: greenyellow;font-weight: bold;">赏晚霞班次</font>，来玄武湖邂逅一场浪漫的日落吧！</p>
+				<img src="img/wx/wx2.jpg" >
+				<img src="img/wx/wx3.jpg" >
+				<p>票价：30元/人，1.1米以下儿童免票，每位成年人最多陪同一位儿童。</p>
+				<p style="text-indent: 2em;">除了古朴典雅的画舫船，今年景区全新引进了12座小型豪华游艇，船上空间舒适并配有皮质沙发。景区也开通了双人VIP特价票（可陪同一名1.4米以下儿童）快来感受一下吧！</p>
+				<img src="img/wx/wx4.jpg" >
+				<img src="img/wx/wx5.jpg" >
+				<p>票价：198元/组（原价400元/组），双人票，可陪同一名1.4米以下儿童。</p>
+				<img src="img/wx/wx6.jpg" >
+				<img src="img/wx/wx7.jpg" >
+			</div>
+			<div class="bottomView">
+				<p>总计：<font class="totalPrice">0.00</font>元</p>
+				<a class="orderBtn" href="chooseOrder.html">我的订单</a>
+				<a href="javascript:;" onclick="showClick()">购票</a>
+			</div>
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app.js?v=1.0.0"></script>
+		<script type="text/javascript">
+			let timeValue;
+			let bcValue;
+			let ticketsType = 19;
+			let visitDate;
+			let kc = 443;
+			let kcList = [];
+			
+			function showClick(){
+				$('.shopView').show();
+			}
+			
+			function closeClick(){
+				$('.shopView').hide();
+			}
+			
+			function typeClick(that, type){
+				$(that).addClass('active').siblings().removeClass('active');
+				ticketsType = type;
+				$('.num').val(1);
+				getTotalPrice(1);
+				if(type == 19){
+					$('.shopPrice .priceTxt').text('￥30');
+				}else if(type == 20){
+					$('.shopPrice .priceTxt').text('￥198');
+				}
+				if(visitDate){
+					getkcInfo(visitDate, type, kc);
+				}
+			}
+			
+			function selectTime(that, type){
+				$(that).addClass('active').siblings().removeClass('active');
+				timeValue = type;
+				kc = kcList[type-1];
+				console.log(type-1);
+				$('.kcTxt').text('库存：'+kc);
+			}
+			
+			function selectDate(that, type){
+				$(that).addClass('active').siblings().removeClass('active');
+				bcValue = type;
+				visitDate = $(that).text();
+				getkcInfo(visitDate, ticketsType, kc);
+			}
+			
+			// 获取日期
+			function getDateString(time){
+				let dateString = new Date(time);
+				let yearString = dateString.getFullYear();
+				let monthString = dateString.getMonth() + 1;
+				monthString = monthString > 9 ? monthString : '0' + monthString;
+				let dayString = dateString.getDate();
+				dayString = dayString > 9 ? dayString : '0' + dayString;
+				return yearString + '-' + monthString + '-' + dayString;
+			}
+			
+			function getBtnTime(){
+				var nowWeek = new Date().getDay();
+				nowWeek = nowWeek==0?7:nowWeek;
+				var nowHour = new Date().getHours();
+				var nowMinutes = new Date().getMinutes();
+				var btn1 = 5;
+				var btn2 = 6;
+				var btn3 = 7;
+				if(nowWeek == 5){
+					if(nowHour == 19 && nowMinutes > 20){
+						$('.timeBtn').eq(0).attr('onclick', 'noSale()').addClass('disabled');
+					}
+				}else if(nowWeek == 6){
+					$('.timeBtn').eq(0).attr('onclick', 'noSale()').addClass('disabled');
+					if(nowHour == 19 && nowMinutes > 20){
+						$('.timeBtn').eq(1).attr('onclick', 'noSale()').addClass('disabled');
+					}
+				}else if(nowWeek == 7){
+					$('.timeBtn').eq(0).attr('onclick', 'noSale()').addClass('disabled');
+					$('.timeBtn').eq(1).attr('onclick', 'noSale()').addClass('disabled');
+					if(nowHour == 19 && nowMinutes > 20){
+						$('.timeBtn').eq(2).attr('onclick', 'noSale()').addClass('disabled');
+					}
+				}
+				var nowDateNum = new Date().getTime();
+				var btn1DateNum = (btn1 - nowWeek) * 60 * 60 * 24 * 1000 + nowDateNum;
+				var btn2DateNum = (btn2 - nowWeek) * 60 * 60 * 24 * 1000 + nowDateNum;
+				var btn3DateNum = (btn3 - nowWeek) * 60 * 60 * 24 * 1000 + nowDateNum;
+				var btn1Date = new Date(btn1DateNum);
+				var btn2Date = new Date(btn2DateNum);
+				var btn3Date = new Date(btn3DateNum);
+				btn1Time = getDateString(btn1Date);
+				btn2Time = getDateString(btn2Date);
+				btn3Time = getDateString(btn3Date);
+				$('.btn1').text(btn1Time);
+				$('.btn2').text(btn2Time);
+				$('.btn3').text(btn3Time);
+			}
+			
+			function noSale(){
+				layer.alert('不支持购买当前日期，请选择其他日期')
+			}
+			
+			// 获取库存数据
+			function getkcInfo(date, type, kcNumber){
+				kcList = [];
+				layer.load('1');
+				app.getAjax('/deviceLoopApp/getTicketSessionStock?ticketId='+type +'&visitDate=' + date, {}, function(res){
+					setTimeout(function(){
+						layer.closeAll();
+					}, 350)
+					res.data.forEach(function(value,key){
+						let kcItem = value.total - value.sell;
+						kcItem = kcItem>0?kcItem:0;
+						kcList.push(kcItem);
+					})
+					if(timeValue){
+						$('.kcTxt').text('库存：'+kcList[timeValue-1]);
+					}
+				})
+			}
+			
+			$(function(){
+				if(app.getQueryString('openid')){
+					app.setCookie('openid', app.getQueryString('openid'));
+				}
+				$('.num').val(1);
+				getTotalPrice(1);
+				
+				// 获取时间
+				getBtnTime();
+			})
+			
+			function add(that){
+				var ticketsNumber = parseInt($(that).parent().find('input').val());
+				if(ticketsNumber > 19){
+					layer.alert('单次最多购买20张');
+					return;
+				}
+				ticketsNumber += 1;
+				$(that).parent().find('input').val(ticketsNumber);
+				getTotalPrice(ticketsNumber);
+			}
+			
+			function sub(that){
+				var ticketsNumber = parseInt($(that).parent().find('input').val());
+				if(ticketsNumber > 1){
+					ticketsNumber -= 1;
+					$(that).parent().find('input').val(ticketsNumber);
+				}
+				getTotalPrice(ticketsNumber);
+			}
+			
+			function getTotalPrice(ticketsNumber){
+				var singlePrice;
+				if(ticketsType == '19'){
+					singlePrice = 30;
+				}else if(ticketsType == '20'){
+					singlePrice = 198;
+				}
+				var totalPrice = ticketsNumber * singlePrice;
+				$('.totalPrice').text(totalPrice.toFixed(2));
+				return totalPrice;
+			}
+			
+			function buyClick(that){
+				var ticketsNumber = $('.num').val();
+				var price = getTotalPrice(ticketsNumber);
+				var openid = app.getCookie('openid');
+				if(kc == 0){
+					layer.alert('当前库存不足，请选择其他时间预约');
+					return;
+				}
+				if(ticketsNumber == 0){
+					layer.alert('请先选择购票数量');
+					return;
+				}
+				if(!timeValue || !bcValue){
+					layer.alert('请先选择规格');
+					return;
+				}
+				$(that).attr('onclick', '');
+				
+				let sessionId;
+				if(ticketsType == '19'){
+					if(timeValue == '1'){
+						sessionId = 3;
+					}else if(timeValue == '2'){
+						sessionId = 4;
+					}else if(timeValue == '3'){
+						sessionId = 5;
+					}else if(timeValue == '4'){
+						sessionId = 6;
+					}
+				}else if(ticketsType == '20'){
+					if(timeValue == '1'){
+						sessionId = 7;
+					}else if(timeValue == '2'){
+						sessionId = 8;
+					}else if(timeValue == '3'){
+						sessionId = 9;
+					}else if(timeValue == '4'){
+						sessionId = 10;
+					}
+				}
+				
+				var params = {
+					openId: openid,
+					totalNumber: ticketsNumber,
+					totalMoney: price,
+					type: ticketsType,
+					visitDate: visitDate,
+					sessionId: sessionId
+				};
+				wxPay(params, that);
+			}
+			
+			function wxPay(params, that){
+				app.getAjax('deviceLoopApp/getWebPayInfo', params, function(res){
+					if(res.code == 'SUCCESS'){
+						var orderId = res.data.orderId;
+						if(res.data.res){
+							var res_o = JSON.parse(res.data.res);
+							WeixinJSBridge.invoke(
+								'getBrandWCPayRequest', {
+							       "appId":res_o.appId,     //公众号名称，由商户传入
+							       "timeStamp":res_o.timeStamp,  //时间戳，自1970年以来的秒数
+							       "nonceStr":res_o.nonceStr, //随机串
+							       "package":res_o.package,
+							       "signType":res_o.signType,//微信签名方式：
+							       "paySign":res_o.paySign //微信签名
+								},
+								function(res){
+									if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+										$(that).attr('onclick', 'buyClick()');
+										window.location.replace("boatTicketsDetail.html?orderId=" + orderId);
+									}else{
+										//取消禁用购买按钮
+							      		$(that).attr('onclick', 'buyClick(this)');
+									}
+								}
+							);
+						}else{
+							$(that).attr('onclick', 'buyClick()');
+							window.location.replace("boatTicketsDetail.html?orderId=" + orderId);
+						}
+					}else{
+						layer.alert(res.msg);
+						//取消禁用购买按钮
+						$(that).attr('onclick', 'buyClick(this)');
+					}
+				})
+			}
+		</script>
+	</body>
+</html>
