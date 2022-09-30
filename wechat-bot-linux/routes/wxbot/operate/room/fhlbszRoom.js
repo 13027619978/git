@@ -18,9 +18,6 @@ async function fhlbszRoomDeal(msg){
 	if(msg.type() == wechat.bot.Message.Type.Text){
 		if(content == '使用方法'){
 			var botString = '机器人使用方法:\n----------';
-			// botString += '\n1)老系统预约报数';
-			// botString += '\n2)老系统微信上账统计';
-			// botString += '\n3)老系统核销报数';
 			botString += '\n1)新系统微信报数';
 			botString += '\n2)新系统携程报数';
 			botString += '\n3)新系统美团报数';
@@ -28,22 +25,15 @@ async function fhlbszRoomDeal(msg){
 			botString += '\n5)新系统核销渠道报数';
 			botString += '\n6)新系统微信核销报数';
 			botString += '\n7)凤凰岭上账统计';
+			botString += '\n8)凤凰岭京津冀核销报数';
 			botString += '\n----------';
 			
 			room.say(botString);
 		}
 		
-		// if(content == '老系统微信上账统计'){
-		// 	fhlGetWxInfo(host,room);
-		// }
-		
-		// if(content == '老系统预约报数'){
-		// 	fhlGetAppointmentInfo(host,room);
-		// }
-		
-		// if(content == '老系统核销报数'){
-		// 	fhl.fhlGetHxInfo(room);
-		// }
+		if(content == '凤凰岭京津冀核销报数'){
+			fhl.getJJJInfo(room);
+		}
 		
 		if(content == '新系统微信报数'){
 			var enterpriseCode = 'TgsEpcFhl';

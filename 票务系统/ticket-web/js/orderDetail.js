@@ -357,7 +357,7 @@ function homeClick(){
 			window.location.replace('index.html?enterpriseCode=' + enterpriseCode + '&ticketGroupNum=' + ticketGroupNum);
 		}
 	}else{
-		window.location.replace('index.html?openid=' + app.getCookie('openid'));
+		window.location.replace('index.html?enterpriseCode=' + enterpriseCode + '&ticketGroupNum=' + ticketGroupNum;
 	}
 }
 

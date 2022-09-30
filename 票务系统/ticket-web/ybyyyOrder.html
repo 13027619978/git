@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/order.css?v=10">
+		<title>我的订单</title>
+	</head>
+	<body>
+		<div class="container">
+			<p class="noData">--暂无数据--</p>
+			<!-- 订单列表 -->
+			<div class="orderList">
+				
+			</div>
+		</div>
+		
+		<!-- tabbar -->
+		<div class="tabbar">
+			<a class="homeBtn" href="javascript:;" onclick="homeClick()">首页</a>
+			<a class="userBtn active" href="javascript:;">我的</a>
+		</div>
+		
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/md5.js?v=1.0.0"></script>
+		<script src="js/encrypt.js?v=1.0.2"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app4.js?v=1.0.0"></script>
+		<script type="text/javascript">
+			var headPicUrl;
+			var orderList = [];
+			$(function(){
+				getOrderList();
+			})
+			
+			function getOrderList(){
+				$('.orderList').html('');
+				var openid = app.getCookie('openid');
+				app.encryptGetAjax('order/encrypt/getDetailListByOpenId', {
+					openId: openid,
+					enterpriseCode: app.getCookie('enterpriseCode'),
+					ticketGroupNum: app.getCookie('ticketGroupNum')
+				}, function(res){
+					console.log(res);
+					if(res.success){
+						orderList = res.data;
+						if(orderList.length == 0){
+							$('.noData').show();
+							$('.orderList').hide();
+						}else{
+							orderList.forEach(function(value, key){
+								// 可检票次数
+								var checkQuantity = parseInt(value.checkQuantity);
+								// 剩余检票次数
+								var restCheckQuantity = parseInt(value.restCheckQuantity);
+								var checkStatus;
+								var className;
+								var ywShow = 'block';
+								if(value.payStatus == '1'){
+									if(value.categoryName != '年票' && value.ticketName != '团体年票'){
+										if(new Date(value.visitDate.replace(/-/, '/').replace(/-/, '/') + ' 23:59:59').getTime() >= new Date().getTime()){
+											if(checkQuantity == restCheckQuantity){
+												checkStatus = '未核销';
+											}else if(restCheckQuantity > 0){
+												checkStatus = '部分核销';
+											}else{
+												checkStatus = '已核销';
+											}
+											className = 'black';
+										}else{
+											checkStatus = '已过期';
+											className = 'red';
+										}
+									}else{
+										if(checkQuantity == restCheckQuantity){
+											checkStatus = '未核销';
+										}else if(restCheckQuantity > 0){
+											checkStatus = '部分核销';
+										}else{
+											checkStatus = '已核销';
+										}
+										className = 'black';
+										ywShow = 'none';
+									}
+								}else{
+									checkStatus = '退票成功';
+									className = 'red';
+								}
+								
+								var categoryName = value.categoryName;
+								
+								if(app.getCookie('enterpriseCode') == 'TgsEpcFhl' && value.ticketName.indexOf('全价+') != -1){
+									categoryName = '多人票';
+								}
+								
+								if(app.getCookie('enterpriseCode') == 'TgsEpcXsslgy'){
+									categoryName = '';
+								}
+								
+								var orderItem = '<div class="orderItem" onclick="orderClick(/'+ value.ticketOrderId +'/)">' +
+										'<div class="ticketName">' +
+											'<p class="name">'+ value.ticketName + '<font>'+ categoryName +'</font></p>' +
+											'<p class="status '+className+'">'+ checkStatus +'</p>' +
+										'</div>' +
+										'<div class="timeView">' +
+											'<p class="time">订单编号：'+ value.orderNum +'</p>' +
+										'</div>' +
+										'<div class="timeView">' +
+											'<p class="time">购买张数：'+ value.buyQuantity +'</p>' +
+										'</div>' +
+										'<div class="timeView" style="display:'+ ywShow +';">' +
+											'<p class="time">游玩时间：'+ value.visitDate +'</p>' +
+										'</div>' +
+										'<div class="timeView">' +
+											'<p class="time">支付时间：'+ value.payTime +'</p>' +
+											'<p class="price">合计<font>￥'+ value.totalPrice +'</font></p>' +
+										'</div>';
+									
+								if(checkQuantity != restCheckQuantity || value.payStatus != '1'){
+									orderItem += '<div class="deleteView">' +
+											'<a href="javascript:;" onclick="deleteClick(/'+ value.ticketOrderId +'/)">删除订单</a>' +
+										'</div>';
+								}
+								
+								orderItem += '</div>';
+									
+								if(value.categoryName == '年票'){
+									orderItem = '<div class="orderItem" onclick="orderClick(/'+ value.ticketOrderId +'/)">' +
+											'<div class="ticketName">' +
+												'<p class="name">'+ value.ticketName + '<font>'+ value.categoryName +'</font></p>' +
+												'<p class="status '+className+'">'+ checkStatus +'</p>' +
+											'</div>' +
+											'<div class="timeView">' +
+												'<p class="time">订单编号：'+ value.orderNum +'</p>' +
+											'</div>' +
+											'<div class="timeView">' +
+												'<p class="time">购买张数：'+ value.buyQuantity +'</p>' +
+											'</div>' +
+											'<div class="timeView">' +
+												'<p class="time">支付时间：'+ value.payTime +'</p>' +
+												'<p class="price">合计<font>￥'+ value.totalPrice +'</font></p>' +
+											'</div>' +
+										'</div>';
+								}
+								$('.orderList').append(orderItem);
+							})
+						}
+					}else{
+						layer.alert(res.message);
+						$('.nowData').show();
+						$('.orderList').hide();
+					}
+				})
+			}
+			
+			function deleteClick(ticketId){
+				window.event? window.event.cancelBubble = true : e.stopPropagation();
+				console.log(ticketId);
+				layer.alert('确认删除此订单?', {
+					btn: ['确定','取消'],
+					yes: function(){
+						layer.closeAll();
+						layer.load('1');
+						var ticketOrderId = ticketId.toString().split('/')[1];
+						app.getAjax('order/visitor/del', {
+							ticketOrderId: ticketOrderId
+						}, function(res){
+							console.log(res);
+							if(res.success){
+								layer.closeAll();
+								layer.msg('删除成功');
+								getOrderList();
+							}
+						})
+					}
+				})
+			}
+			
+			function orderClick(ticketId){
+				orderList.forEach(function(value, key){
+					console.log(ticketId.toString().split('/'));
+					if(value.ticketOrderId == ticketId.toString().split('/')[1]){
+						console.log(value.headPicUrl);
+						headPicUrl = value.headPicUrl;
+					}
+				})
+				app.setCookie('headPicUrl', headPicUrl);
+				if(app.getCookie('enterpriseCode') == 'TgsEpcFhl' && app.getCookie('headPicUrl')){
+					window.location.href = 'fhlDetail.html?ticketId=' + ticketId;
+				}else{
+					window.location.href = 'orderDetail.html?ticketId=' + ticketId;
+				}
+			}
+			
+			
+			function homeClick(){
+				window.location.replace('ybyyyIndex.html?openid=' + app.getCookie('openid'));
+			}
+		</script>
+	</body>
+</html>

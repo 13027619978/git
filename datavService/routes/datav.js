@@ -14,6 +14,7 @@ var ylh = require('./datav/ylh.js');
 var uploadImg = require('./datav/uploadImg.js');
 var hongtu = require('./datav/hongtu.js');
 var xwhpark = require('./datav/xwhpark.js');
+var fhl = require('./datav/fhl.js');
 // 测试
 var test = require('./datav/test.js');
 var router = express.Router(); 
@@ -34,4 +35,5 @@ router.use('/hongtu',hongtu);
 router.use('/sch',sch);
 router.use('/test',test);
 router.use('/xwhpark',xwhpark);
+router.use('/fhl',fhl);
 module.exports = router;

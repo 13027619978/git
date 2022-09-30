@@ -1,0 +1,73 @@
+.container{
+	min-height: 100vh;
+	background-color: #F2F2F2;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	padding-top: 20px;
+}
+.shopName{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px 0;
+	border-bottom: 1px solid #f2f2f2;
+	margin-bottom: 20px;
+}
+.shopName img{
+	width: 35px;
+	margin-right: 5px;
+}
+.payTitle{
+	text-align: center;
+	font-size: 24px;
+	color: #ff5500;
+	font-family: "微软雅黑";
+}
+
+.collectionView{
+	width: 90%;
+	padding: 20px 10px 10px 10px;
+}
+
+.inputView{
+	width: 100%;
+	font-size: 22px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	padding: 10px 20px;
+}
+.inputView input{
+	border: none;
+	outline: none;
+	border-radius: none;
+	width: 100px;
+	font-size: 18px;
+	margin-right: 15px;
+	height: 35px;
+	flex: 1;
+}
+.inputView p{
+	line-height: 35px;
+	flex: 0 0 35px;
+}
+.payBtn{
+	display: block;
+	width: 100%;
+	background-color: #ff5500;
+	color: #fff;
+	text-align: center;
+	line-height: 45px;
+	border-radius: 5px;
+	margin-top: 30px;
+}
+
+
+.disabled{
+	background-color: #ddd;
+	color: #666;
+}

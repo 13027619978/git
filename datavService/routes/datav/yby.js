@@ -1087,10 +1087,12 @@ router.post('/getUserInfo', async function(req, res) {
 			"msg": "获取信息成功"
 		})
 		buyTicket(name, idCard, function(ticketId){
-			getCheckInfoByBrake(idCard, function(ticketOrderId, ticketOrderDetailsId, categoryCode, detailsType, salesChannelsNum){
-				checkByBrake(ticketOrderId, ticketOrderDetailsId, categoryCode, detailsType, salesChannelsNum, function(){
-					upload(deviceid, idCard);
-				});
+			getOrderDetail(ticketId, function(qrcode){
+				getCheckInfoByBrake(qrcode, function(ticketOrderId, ticketOrderDetailsId, categoryCode, detailsType, salesChannelsNum){
+					checkByBrake(ticketOrderId, ticketOrderDetailsId, categoryCode, detailsType, salesChannelsNum, function(){
+						upload(deviceid, qrcode);
+					});
+				})
 			})
 		})
 	}, function(){
@@ -1232,11 +1234,53 @@ function buyTicket(name, idCard, success){
 	req.end();
 }
 
-// 闸机获取检票详情
-function getCheckInfoByBrake(idCard, success){
+function getOrderDetail(ticketOrderId, success){
 	const options = {
 		hostname: "boss.smart-ideas.com.cn",
-		path: '/ticketApi/orderCheck/getCheckInfoByBrake?enterpriseCode=TgsEpcYby&ticketGroupNum=TGN20201210095942945&checkWay=idcard&checkValue=' + idCard,
+		path: '/ticketApi/order/getDetailsById?ticketOrderId=' + ticketOrderId,
+		method: 'GET'
+	};
+	
+	var buffers = [];
+	var nread = 0;
+	const req = https.request(options, (res) => {
+	    res.on('data', (d) => {
+			buffers.push(d);
+			nread += d.length;
+	    });
+		
+		res.on('end', () => {
+			var buffer = null;
+			switch(buffers.length) {
+				case 0: buffer = new Buffer(0);
+					break;
+				case 1: buffer = buffers[0];
+					break;
+				default:
+					buffer = new Buffer(nread);
+					for (var i = 0, pos = 0, l = buffers.length; i < l; i++) {
+						var chunk = buffers[i];
+						chunk.copy(buffer, pos);
+						pos += chunk.length;
+					}
+				break;
+			}
+			var res = JSON.parse(buffer.toString());
+			if(res.success){
+				success(res.data.checkCode);
+			}else{
+				console.log('获取闸机检票详情失败')
+			}
+		})
+	});
+	req.end();
+}
+
+// 闸机获取检票详情
+function getCheckInfoByBrake(qrcode, success){
+	const options = {
+		hostname: "boss.smart-ideas.com.cn",
+		path: '/ticketApi/orderCheck/getCheckInfoByBrake?enterpriseCode=TgsEpcYby&ticketGroupNum=TGN20201210095942945&checkWay=qr&checkValue=' + qrcode,
 		method: 'GET'
 	};
 	
@@ -1329,7 +1373,7 @@ function checkByBrake(ticketOrderId, ticketOrderDetailsId, categoryCode, details
 }
 
 // 闸机开关闸上传数据
-function upload(deviceid, idCard){
+function upload(deviceid, qrcode){
 	 const options = {
 	 	hostname: "boss.smart-ideas.com.cn",
 	 	path: '/ticketApi/brakeData/upload',
@@ -1360,8 +1404,8 @@ function upload(deviceid, idCard){
 	 var data = {
 	 	brakeNum: brakeNum,
 	 	type: 'in',
-	 	checkWay: 'idCard',
-	 	checkValue: idCard,
+	 	checkWay: 'qr',
+	 	checkValue: qrcode,
 	 	number: 1
 	 };
 	 var buffers = [];

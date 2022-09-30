@@ -95,7 +95,7 @@
 						var orderList = res.data;
 						orderList.forEach(function(value, key){
 							if(type == 1){
-								if(value.type != '16' && value.type != '15' && value.type != '18'){
+								if(value.type != '16' && value.type != '15' && value.type != '18' && value.type != '21'){
 									if(value.payStatus == '1' && value.totalNumber == value.restNumber){
 										$('.orderList').append(
 											'<li class="orderItem">'+
@@ -114,7 +114,7 @@
 								
 							}
 							if(type == 2){
-								if(value.type != '16' && value.type != '15' && value.type != '18'){
+								if(value.type != '16' && value.type != '15' && value.type != '18' && value.type != '21'){
 									if(value.payStatus != '1' || value.totalNumber != value.restNumber){
 										$('.orderList').append(
 											'<li class="orderItem">'+

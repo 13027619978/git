@@ -159,6 +159,7 @@
 								<p class="itemTitle">多次票</p>
 								<p class="ticketTitle">票价：40元/6次</p>
 								<p>购票须知</p>
+								<p class="flashing" style="font-size: 17px;font-weight: bold;position: absolute;top: 100px;">国庆假期内环交通线40元环线票暂停营运，敬请谅解。</p>
 								<p>1. 票价40元/人/6次，换乘站必须下车</p>
 								<p>2. 车辆每15分钟一班车</p>
 								<p>3. 一票限一人使用</p>
@@ -531,9 +532,7 @@
 										}
 									})
 									let siteTimeList = [site1,site2,site3,site4,site5,site6,site7];
-									console.log(siteTimeList);
 									let nextTime = Math.ceil(siteTimeList[timeSite - 2]*30/60);
-									console.log(siteTimeList[timeSite - 2]);
 									if(nextTime){
 										$('.nextCar p').text('预计到站' + nextTime + '分钟');
 									}else{

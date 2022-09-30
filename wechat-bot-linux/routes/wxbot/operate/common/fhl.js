@@ -2,10 +2,67 @@ const http = require('http');
 const host = "api.smart-ideas.com.cn";
 const fs = require('fs');
 
-function fhlGetHxInfo(room){
-	// var nowDate = new Date().getTime() - (60*60*24*1000);
+function getJJJInfo(room){
 	var nowDate = new Date();
-	// nowDate = new Date(nowDate);
+	var year = nowDate.getFullYear();
+	var month = nowDate.getMonth()+1;
+	month = month>9?month:'0'+month;
+	var day = nowDate.getDate();
+	day = day>9?day:'0'+day;
+	var dateString = year + '-' + month + '-' + day;
+	const options = {
+		hostname: 'node.smart-ideas.com.cn',
+		path: '/datav/fhl/getUserInfo',
+		port: 3001,
+		method: 'GET'
+	};
+	var buffers = [];
+	var nread = 0;
+	const req = http.request(options, (res) => {
+		res.on('data', (d) => {
+			buffers.push(d);
+			nread += d.length;
+		});
+		res.on('end', () => {
+			var buffer = null;
+			switch(buffers.length) {
+				case 0: buffer = new Buffer(0);
+					break;
+				case 1: buffer = buffers[0];
+					break;
+				default:
+					buffer = new Buffer(nread);
+					for (var i = 0, pos = 0, l = buffers.length; i < l; i++) {
+						var chunk = buffers[i];
+						chunk.copy(buffer, pos);
+						pos += chunk.length;
+					}
+				break;
+			}
+			var res = JSON.parse(buffer.toString());
+			if(res.success == 'true'){
+				let useList = res.data;
+				let currList = useList[useList.length - 1];
+				let useNumber = currList.useList.length;
+				var botString;
+				botString = '*****凤凰岭京津冀年卡核销报数*****\n时间：' + dateString;
+				botString += '\n京津冀年卡：' + useNumber + '张';
+				room.say(botString);
+			}else{
+				room.say(res.msg);
+			}
+		})
+	});
+	
+	req.on('error', (e) => {
+	  console.error(`problem with request: ${e.message}`);
+	});
+	
+	req.end();
+}
+
+function fhlGetHxInfo(room){
+	var nowDate = new Date();
 	var year = nowDate.getFullYear();
 	var month = nowDate.getMonth()+1;
 	month = month>9?month:'0'+month;
@@ -275,5 +332,6 @@ function getBossInfo(enterpriseCode, ticketGroupNum, room, state){
 module.exports = {
 	fhlGetHxInfo,
 	getCheckTicketInfo,
-	getBossInfo
+	getBossInfo,
+	getJJJInfo
 }

@@ -32,4 +32,3 @@ $(function(){
 function orderClick(orderId){
 	window.location.href = "boatTicketsDetail.html?orderId=" + orderId;
 }
-

@@ -18,13 +18,26 @@
 		
 		<!-- tabbar -->
 		<div class="tabbar">
-			<a class="homeBtn" href="index.html">首页</a>
+			<a class="homeBtn" href="javascript:;" onclick="homeClick()">首页</a>
 			<a class="userBtn active" href="javascript:;">我的</a>
 		</div>
 		
 		<script src="js/jquery-2.1.4.min.js"></script>
 		<script src="layer/layer.js"></script>
 		<script src="js/app.js?v=10"></script>
-		<script src="js/order.js?v=1.0.4"></script>
+		<script src="js/order.js?v=1.0.5"></script>
+		<script>
+			function homeClick(){
+				if(app.getCookie('ticketId') == '2c9141f4834be77901835511c4cd7b10'){
+					app.clearAllCookie();
+					window.location.replace("http://boss.smart-ideas.com.cn/singleTicket-web/xhgCountTicket.html?ticketId=2c9141f4834be77901835511c4cd7b10&ticketGroupNum=TGN20210628140233051&enterpriseCode=TgsEpcXhg")
+				}else if(app.getCookie('ticketId') == '2c9141f4834be779018359c42c182bd8'){
+					app.clearAllCookie();
+					window.location.replace("http://boss.smart-ideas.com.cn/singleTicket-web/xhgCountTicket.html?ticketId=2c9141f4834be779018359c42c182bd8&ticketGroupNum=TGN20210628140233051&enterpriseCode=TgsEpcXhg")
+				}else{
+					window.location.href = 'index.html?openid=' + app.getCookie('openid');
+				}
+			}
+		</script>
 	</body>
 </html>

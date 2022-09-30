@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/pay_success.css" />
+		<style type="text/css">
+			.sucTitle{
+				font-size: 24px;
+				font-weight: bold;
+				color: green;
+				margin-bottom: 10px;
+			}
+			.shopName{
+				font-size: 24px;
+				font-weight: bold;
+				color: red;
+			}
+			.date{
+				font-size: 24px;
+				font-weight: bold;
+				color: blue;
+			}
+			.bottomView{
+				position: relative;
+				margin-top: 10px;
+			}
+		</style>
+		<title>二维码收款</title>
+	</head>
+	<body>
+		<div class="completeView">
+			<img src="img/pay_icon.png"/>
+			<p class="money">￥0.00</p>
+			<p class="sucTitle">支付成功</p>
+			<p class="shopName"></p>
+		</div>
+		<div class="bottomView">
+			<p class="date"></p>
+		</div>
+		
+		<script src="js/jquery.min.js"></script>
+		<script src="js/app.js"></script>
+		<script type="text/javascript">
+			var money =  app.getQueryString('money');
+			var currentdate =  app.getQueryString('date');
+			currentdate = decodeURI(currentdate);
+			currentdate = decodeURI(currentdate);
+			currentdate = decodeURI(currentdate);
+			var itemName = decodeURI(app.getQueryString('itemName'));
+			console.log(currentdate);
+			itemName = decodeURI(itemName);
+			itemName = decodeURI(itemName);
+			$('.money').text('￥' + money);
+	        $('.date').text('支付时间：' + currentdate);
+	        $('.shopName').text("商家：" + itemName);
+		</script>
+	</body>
+</html>

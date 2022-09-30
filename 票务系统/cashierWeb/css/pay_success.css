@@ -1,0 +1,36 @@
+*{
+	font-family: "微软雅黑";
+}
+.completeView{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	padding-top: 150px;
+}
+
+.completeView img{
+	width: 75px;
+}
+
+.completeView .money{
+	font-size: 40px;
+	margin-top: 40px;
+	margin-bottom: 20px;
+}
+
+.completeView{
+	font-size: 16px;
+	color: #000;
+}
+
+.bottomView{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	color: #666;
+	padding-bottom: 10px;
+	font-size: 14px;
+}

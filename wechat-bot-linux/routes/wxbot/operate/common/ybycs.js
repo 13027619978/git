@@ -38,7 +38,7 @@ function getCheckTicketNumberInfo(room){
 			checkList.forEach(function(value, key){
 				var number = parseInt(value.checkQuantity);
 				var ticketName = value.name;
-				if(ticketName == '北京园博园惠民优惠票'){
+				if(ticketName == '北京园博园惠民优惠票' || ticketName == '爱上丰台预约（上午）' || ticketName == '爱上丰台预约（下午）'){
 					totalNumber += number;
 				}
 			})

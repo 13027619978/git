@@ -94,7 +94,7 @@ $(function(){
 	if(enterpriseCode == 'TgsEpcYby'){
 		$('.sfyx').show();
 		$('.szPayBtn').show();
-		if(ticketInfoId != '2c9141f47d377f26017d50e432814c39' && ticketInfoId != '2c9141f47d377f26017d50e8fb664c68'){
+		if(ticketInfoId != '2c9141f47d377f26017d50e432814c39' && ticketInfoId != '2c9141f47d377f26017d50e8fb664c68' && ticketInfoId != '2c9141f482881f900182f37e52e55eaa' &&  ticketInfoId != '2c9141f482881f900182f37f95c15eb0'){
 			$('.fhlTime').show();
 			var nowHour = new Date().getHours();
 			if(nowHour < 12){

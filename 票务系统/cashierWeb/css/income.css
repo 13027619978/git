@@ -1,0 +1,130 @@
+.container{
+	min-height: 100vh;
+	background-color: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	padding-top: 20px;
+	width: 100vw;
+}
+.shopName{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px 0;
+	border-bottom: 1px solid #f2f2f2;
+	margin-bottom: 20px;
+}
+.shopName img{
+	width: 38px;
+	margin-right: 10px;
+}
+.payTitle{
+	text-align: center;
+	font-size: 24px;
+	color: #ff5500;
+}
+
+.money-view{
+	font-size: 14px;
+	color: #333;
+	margin-top: 20px;
+}
+.money-view .money{
+	font-size: 14px;
+	color: #333;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 10px;
+}
+.money-view .money-txt{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	font-size: 14px;
+	color: #333;
+	padding: 10px 0;
+	border-bottom: 1px solid #ddd;
+}
+.money-view .money-txt .money-num{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+.money-view .money-txt .money-num p{
+	font-size: 28px;
+	color: #ff5500;
+}
+.dateItem{
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	border: 1px solid #E2E2E2;
+	border-radius: 5px;
+	overflow: hidden;
+	margin: 10px 0;
+}
+.dateItem p{
+	font-size: 14px;
+	color: #333;
+	background-color: #D0D0D0;
+	border-right: 1px solid #E2E2E2;
+	line-height: 35px;
+	width: 120px;
+	text-align: center;
+}
+.dateItem input{
+	font-size: 14px;
+	height: 35px;
+	border: none;
+	text-align: center;
+}
+.control-view{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px;
+	padding: 0 10px;
+}
+.control-view a{
+	width: 100%;
+	line-height: 40px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	color: #fff;
+	text-align: center;
+	font-size: 16px;
+	background-color: #ff5500;
+}
+
+.detailView{
+	width: 100vw;
+	padding: 10px;
+}
+.detailView .detailTile{
+	font-size: 16px;
+	font-weight: bold;
+	color: #333;
+	border-left: 5px solid #1E9FFF;
+	line-height: 20px;
+	padding-left: 10px;
+}
+.detailList{
+	padding: 10px;
+}
+.detailList .detailItem{
+	width: 100%;
+	padding: 5px;
+	border-bottom: 1px solid #ddd;
+}
+.detailList .detailItem p{
+	font-size: 14px;
+	color: #333;
+	line-height: 20px;
+}
+.detailList .detailItem font{
+	color: #6969ff;
+}

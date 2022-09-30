@@ -186,6 +186,8 @@
 									qrBtnHide = 'qrBtnHide';
 								}
 								if(value.refundInfo){
+									let refundTime = value.refundInfo.createTime;
+									refundTime = refundTime?refundTime:'暂未退款';
 									$('.historyList').append(
 										'<div class="historyItem">' +
 											'<div class="itemBox">' +
@@ -215,6 +217,14 @@
 											'<div class="itemBox">' +
 												'<p class="boxName">订单状态：</p>' +
 												'<p>已退款</p>' +
+											'</div>' +
+											'<div class="itemBox">' +
+												'<p class="boxName">消费时间：</p>' +
+												'<p>'+ value.createTime +'</p>' +
+											'</div>' +
+											'<div class="itemBox">' +
+												'<p class="boxName">退款时间：</p>' +
+												'<p>'+ refundTime +'</p>' +
 											'</div>' +
 											'<div class="itemBox">' +
 												'<p class="boxName">web单号：</p>' +

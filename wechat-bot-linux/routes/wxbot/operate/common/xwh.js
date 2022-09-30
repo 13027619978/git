@@ -136,20 +136,80 @@ function getxwhInfo(host, room){
 				botString += '郭璞敦：' + gpd + '次\n';
 				botString += '环洲：' + hz + '次\n';
 				botString += '台菱堤西：' + tldx + '次\n';
-				botString += '*****玄武湖摆渡船报数*****\n日期:'+eDate +'\n';
-				botString += '摆渡船总收入：' + loopShipIncome + '元\n';
-				botString += '包含一卡通：' + loopCardTotal + '元\n';
-				botString += '环洲收入：' + hzLoopIncome + '元\n';
-				botString += '渡口收入：' + dkLoopIncome + '元\n';
-				try{
-					room.say(botString);
-				}catch(e){
-					
-				}
+				// botString += '*****玄武湖摆渡船报数*****\n日期:'+eDate +'\n';
+				// botString += '摆渡船总收入：' + loopShipIncome + '元\n';
+				// botString += '包含一卡通：' + loopCardTotal + '元\n';
+				// botString += '环洲收入：' + hzLoopIncome + '元\n';
+				// botString += '渡口收入：' + dkLoopIncome + '元\n';
+				getBdcInfo(botString, room);
 			})
 	    }
 	  });
 	});
+	
+	req.on('error', (e) => {
+	  console.error(`problem with request: ${e.message}`);
+	});
+	
+	req.end();
+}
+
+function getBdcInfo(botString, room){
+	var nowDate = new Date();
+	var year = nowDate.getFullYear();
+	var month = nowDate.getMonth()+1;
+	month = month>9?month:'0'+month;
+	var day = nowDate.getDate();
+	day = day>9?day:'0'+day;
+	var hour = nowDate.getHours();
+	hour = hour>9?hour:'0'+hour;
+	var minutes = nowDate.getMinutes();
+	minutes = minutes>9?minutes:'0'+minutes;
+	var seconds = nowDate.getSeconds();
+	seconds = seconds>9?seconds:'0'+seconds;
+	var sDate = year + '-' + month + '-' + day + ' 00:00:00';
+	var eDate = year + '-' + month + '-' + day + ' ' + hour + ':' + minutes + ':' + seconds;
+	var searchSdate = encodeURI(sDate);
+	var searchEdate = encodeURI(eDate);
+	const options = {
+		hostname: host,
+		path: '/xwhpark/deviceIncomeRobot/getLoopIncome?startDate='+ searchSdate +'&endDate=' + searchEdate,
+		method: 'GET'
+	};
+	
+	const req = http.request(options, (res) => {
+	  res.on('data', (d) => {
+	    var res = JSON.parse(d.toString());
+		let dataList = res.data;
+		let totalIncome = 0;
+		let cardIncome = 0;
+		let dkIncome = 0;
+		let hzIncome = 0;
+		let ssydjd = 0;
+		dataList.forEach(function(value, key){
+			if(value.name == '渡口码头'){
+				dkIncome += parseInt(value.wxIncome);
+				dkIncome += parseInt(value.cardIncome);
+				totalIncome += parseInt(value.wxIncome);
+				totalIncome += parseInt(value.cardIncome);
+				cardIncome += parseInt(value.cardIncome);
+			}
+			if(value.name == '环洲码头'){
+				hzIncome += parseInt(value.wxIncome);
+				hzIncome += parseInt(value.cardIncome);
+				totalIncome += parseInt(value.wxIncome);
+				totalIncome += parseInt(value.cardIncome);
+				cardIncome += parseInt(value.cardIncome);
+			}
+		})
+		botString += '*****玄武湖摆渡船报数*****\n日期:'+eDate +'\n';
+		botString += '摆渡船总收入：' + totalIncome + '元\n';
+		botString += '包含一卡通：' + cardIncome + '元\n';
+		botString += '环洲收入：' + hzIncome + '元\n';
+		botString += '渡口收入：' + dkIncome + '元\n';
+		room.say(botString);
+	  })
+	})
 	
 	req.on('error', (e) => {
 	  console.error(`problem with request: ${e.message}`);

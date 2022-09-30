@@ -1,6 +1,10 @@
 var wechat = require('../mybot.js');
 const http = require('http');
 const host = "hd.smart-ideas.com.cn";
+const xwh = require('../common/xwh.js');
+const xhg = require('../common/xhg.js');
+const fhl = require('../common/fhl.js');
+
 
 async function testRoomDeal(msg){
 	const content = msg.text();
@@ -14,12 +18,24 @@ async function testRoomDeal(msg){
 		fromName = contact.name();
 	}
 	if(msg.type() == wechat.bot.Message.Type.Text){
+		if(content == '凤凰岭京津冀报数'){
+			fhl.getJJJInfo(room);
+		}
+		if(content == '玄武湖报数'){
+			xwh.getxwhInfo(host, room);
+		}
 		if(content == '使用方法'){
 			var botString = '机器人使用方法:\n----------\n';
 			botString += '1)查询设备通信通道\n';
 			botString += '2)切换sim\n';
 			botString += '3)切换mqtt';
 			room.say(botString);
+		}
+		
+		if(content == '鲜花港全平台报数'){
+			var enterpriseCode = 'TgsEpcXhg';
+			var ticketGroupNum = 'TGN20210628140233051';
+			xhg.getPeopleMoneyInfo(enterpriseCode, ticketGroupNum, room);
 		}
 		
 		if(content == '查询设备通信通道'){

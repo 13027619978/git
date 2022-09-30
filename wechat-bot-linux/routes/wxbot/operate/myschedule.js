@@ -1214,6 +1214,7 @@ function scheduleStart(){
 			const fhlbszRoom = await wechat.bot.Room.find({topic: "凤凰岭报数组"});
 			fhl.getCheckTicketInfo('TgsEpcFhl', 'TGN20201228152933458', fhlbszRoom, 'WEB');
 			boss.getCheckTicketInfo('TgsEpcFhl', 'TGN20201228152933458', fhlbszRoom, 'XC');
+			fhl.getJJJInfo(fhlbszRoom);
 		}
 		
 		if(parseInt(hour) >= 9 && parseInt(hour) <= 17){
@@ -1375,6 +1376,7 @@ function scheduleStart(){
 			// boss.getBossInfo('TgsEpcXhg', 'TGN20210629121602397', xhgpwdxqRoom, 1);
 			boss.getTicketInfo('TgsEpcXhg', 'TGN20210629121602397', 'WEB', xhgpwdxqRoom);
 			xhg.getBxjnhInfo(xhgpwdxqRoom);
+			xhg.getPeopleMoneyInfo('TgsEpcXhg','TGN20210628140233051',xhgpwdxqRoom);
 			// xhg.getXqIncome(xhgpwdxqRoom);
 			// boss.getBossInfo('TgsEpcXhg', 'TGN20211210160317254', xhgpwdxqRoom, 1);
 			// xhg.getBsxmIncome(xhgpwdxqRoom);
@@ -1595,11 +1597,11 @@ function scheduleStart(){
 		var hour = new Date().getHours();
 		if(parseInt(hour) == 8){
 			const fhlbszRoom = await wechat.bot.Room.find({topic: "凤凰岭报数组"});
-			// const xhgcwzRoom = await wechat.bot.Room.find({topic: "鲜花港财务组"});
 			boss.getBossYYInfo('TgsEpcFhl', 'TGN20201228152933458', fhlbszRoom);
 			fhl.getBossInfo('TgsEpcFhl', 'TGN20201228152933458', fhlbszRoom);
 			boss.getCheckTicketInfo('TgsEpcFhl', 'TGN20201228152933458', fhlbszRoom);
 			boss.getAllTicketsBuyInfo('TgsEpcFhl', 'TGN20201228152933458', fhlbszRoom);
+			fhl.getJJJInfo(fhlbszRoom);
 		}
 	})
 	

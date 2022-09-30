@@ -53,10 +53,16 @@ function getPeopleInfo(enterpriseCode, ticketGroupNum, room){
 								totalMoney += money;
 								totalNumber += number;
 								if(ticketName == '成人票'){
+									totalNumber -= activeList[2].checkQuantity;
+									number -= activeList[2].checkQuantity;
 									totalNumber -= activeList[3].checkQuantity;
-									totalMoney -= activeList[3].checkMoney;
 									number -= activeList[3].checkQuantity;
-									money -= activeList[3].checkMoney;
+									totalNumber -= activeList[4].checkQuantity;
+									number -= activeList[4].checkQuantity;
+									totalNumber -= activeList[5].checkQuantity;
+									number -= activeList[5].checkQuantity;
+									totalNumber -= activeList[6].checkQuantity;
+									number -= activeList[6].checkQuantity;
 								}
 								ListString += ticketName + '：' + number + '人\n';	
 							}
@@ -69,6 +75,27 @@ function getPeopleInfo(enterpriseCode, ticketGroupNum, room){
 							totalNumber += number;
 							ListString += ticketName + '：' + number + '人\n';
 						})
+						var nowHour = nowDate.getHours();
+						if(nowHour == 10){
+							outPeopleNumber = parseInt(totalNumber * 0.18);
+						}else if(nowHour == 11){
+							outPeopleNumber = parseInt(totalNumber * 0.27);
+						}else if(nowHour == 12){
+							outPeopleNumber = parseInt(totalNumber * 0.39);
+						}else if(nowHour == 13){
+							outPeopleNumber = parseInt(totalNumber * 0.5);
+						}else if(nowHour == 14){
+							outPeopleNumber = parseInt(totalNumber * 0.58);
+						}else if(nowHour == 15){
+							outPeopleNumber = parseInt(totalNumber * 0.69);
+						}else if(nowHour == 16){
+							outPeopleNumber = parseInt(totalNumber * 0.77);
+						}else if(nowHour == 17){
+							outPeopleNumber = parseInt(totalNumber * 0.87);
+						}else if(nowHour == 18){
+							outPeopleNumber = parseInt(totalNumber * 0.94);
+						}
+						
 						var inPeople = parseInt(totalNumber) - outPeopleNumber;
 						inPeople = inPeople > 0?inPeople:0;
 						var noInPeople;
@@ -84,6 +111,139 @@ function getPeopleInfo(enterpriseCode, ticketGroupNum, room){
 						botString += '出园人数：' + outPeopleNumber + '人\n';
 						botString += '总预约数：' + yyPeopleNumber + '人\n';
 						botString += '未入园：' + noInPeople + '人\n';
+						botString += '--------------------\n';
+						botString += ListString;
+						try{
+							room.say(botString);
+						}catch(e){
+							
+						}
+					});
+				});
+				
+				req.on('error', (e) => {
+				  console.error(`problem with request: ${e.message}`);
+				});
+				
+				req.end();
+			})
+		});
+	})
+}
+
+
+function getPeopleMoneyInfo(enterpriseCode, ticketGroupNum, room){
+	getYYInfo(enterpriseCode, ticketGroupNum, function(yyPeopleNumber){
+		getOutPeopleInfo(function(peopleInfo){
+			getActiveTicketsInfo(function(activeList){
+				var outPeopleNumber = peopleInfo.content[2].out;
+				var parkName = '北京国际鲜花港';
+				if(ticketGroupNum == 'TGN20210629121602397'){
+					parkName = '蝴蝶大世界'
+				}
+				var nowDate = new Date();
+				var year = nowDate.getFullYear();
+				var month = nowDate.getMonth()+1;
+				month = month>9?month:'0'+month;
+				var day = nowDate.getDate();
+				day = day>9?day:'0'+day;
+				var hour = nowDate.getHours();
+				hour = hour>9?hour:'0'+hour;
+				var minutes = nowDate.getMinutes();
+				minutes = minutes>9?minutes:'0'+minutes;
+				var seconds = nowDate.getSeconds();
+				seconds = seconds>9?seconds:'0'+seconds;
+				var sDate = year + '-' + month + '-' + day + ' 00:00:00';
+				var eDate = year + '-' + month + '-' + day + ' ' + hour + ':' + minutes + ':' + seconds;
+				var searchSdate = encodeURI(sDate);
+				var searchEdate = encodeURI(eDate);
+				
+				const options = {
+					hostname: host1,
+					path: '/ticketApi/robotCollection/check/salesChannel/get?enterpriseCode=' + enterpriseCode + '&ticketGroupNum=' + ticketGroupNum + '&checkStartTime=' + searchSdate + '&checkEndTime=' + searchEdate,
+					method: 'GET'
+				};
+				
+				const req = http.request(options, (res) => {
+					res.on('data', (d) => {
+						var res = JSON.parse(d.toString());
+						var checkList = res.data;
+						var botString = '*****'+ parkName +'核销报数*****\n日期:'+eDate +'\n';
+						var ListString = '';
+						var totalMoney = 0;
+						var totalNumber = 0;
+						checkList.forEach(function(value, key){
+							var money = parseFloat(value.checkMoney).toFixed(2);
+							var number = parseInt(value.checkQuantity);
+							var ticketName = value.name;
+							totalMoney = parseFloat(totalMoney*1 + money*1).toFixed(2);
+							if(ticketName != '活动票' && ticketName != '年票'){
+								totalNumber += number;
+								if(ticketName == '成人票'){
+									totalNumber -= activeList[2].checkQuantity;
+									number -= activeList[2].checkQuantity;
+									money -= activeList[2].checkMoney;
+									totalNumber -= activeList[3].checkQuantity;
+									number -= activeList[3].checkQuantity;
+									money -= activeList[3].checkMoney;
+									totalNumber -= activeList[4].checkQuantity;
+									number -= activeList[4].checkQuantity;
+									money -= activeList[4].checkMoney;
+									totalNumber -= activeList[5].checkQuantity;
+									number -= activeList[5].checkQuantity;
+									money -= activeList[5].checkMoney;
+									totalNumber -= activeList[6].checkQuantity;
+									number -= activeList[6].checkQuantity;
+									money -= activeList[6].checkMoney;
+								}
+								ListString += ticketName + '：' + number + '人 ' + parseFloat(money).toFixed(2) +'元\n';	
+							}
+						})
+						activeList.forEach(function(value, key){
+							var money = parseFloat(value.checkMoney);
+							var number = parseInt(value.checkQuantity);
+							var ticketName = value.name;
+							totalNumber += number;
+							ListString += ticketName + '：' + number + '人 ' + money +'元\n';
+						})
+						
+						var nowHour = nowDate.getHours();
+						if(nowHour == 10){
+							outPeopleNumber = parseInt(totalNumber * 0.18);
+						}else if(nowHour == 11){
+							outPeopleNumber = parseInt(totalNumber * 0.27);
+						}else if(nowHour == 12){
+							outPeopleNumber = parseInt(totalNumber * 0.39);
+						}else if(nowHour == 13){
+							outPeopleNumber = parseInt(totalNumber * 0.5);
+						}else if(nowHour == 14){
+							outPeopleNumber = parseInt(totalNumber * 0.58);
+						}else if(nowHour == 15){
+							outPeopleNumber = parseInt(totalNumber * 0.69);
+						}else if(nowHour == 16){
+							outPeopleNumber = parseInt(totalNumber * 0.77);
+						}else if(nowHour == 17){
+							outPeopleNumber = parseInt(totalNumber * 0.87);
+						}else if(nowHour == 18){
+							outPeopleNumber = parseInt(totalNumber * 0.94);
+						}
+						
+						var inPeople = parseInt(totalNumber) - outPeopleNumber;
+						inPeople = inPeople > 0?inPeople:0;
+						var noInPeople;
+						if(yyPeopleNumber > totalNumber){
+							noInPeople = parseInt(yyPeopleNumber) - parseInt(totalNumber);
+						}else{
+							yyPeopleNumber = totalNumber;
+							noInPeople = 0;
+						}
+						noInPeople = noInPeople > 0? noInPeople:0;
+						botString += '总入园人数：' + totalNumber + '人\n';
+						botString += '在园人数：' + inPeople + '人\n';
+						botString += '出园人数：' + outPeopleNumber + '人\n';
+						botString += '总预约数：' + yyPeopleNumber + '人\n';
+						botString += '未入园：' + noInPeople + '人\n';
+						botString += '总金额：' + totalMoney + '元\n';
 						botString += '--------------------\n';
 						botString += ListString;
 						try{
@@ -160,59 +320,88 @@ function getActiveTicketsInfo(success){
 					checkMoney: 0
 				},
 				{
+					name: '368元露营套票',
+					checkQuantity: 0,
+					checkMoney: 0
+				},
+				{
+					name: '298元露营套票',
+					checkQuantity: 0,
+					checkMoney: 0
+				},
+				{
+					name: '598元露营套票',
+					checkQuantity: 0,
+					checkMoney: 0
+				},
+				{
+					name: '668元露营套票',
+					checkQuantity: 0,
+					checkMoney: 0
+				},
+				{
+					name: '1368元露营套票',
+					checkQuantity: 0,
+					checkMoney: 0
+				},
+				{
+					name: '专享主题套票',
+					checkQuantity: 0,
+					checkMoney: 0
+				},
+				{
 					name: '鲜花港赏花卡',
-					checkQuantity: 0,
-					checkMoney: 0
-				},
-				{
-					name: '抖音专属票',
-					checkQuantity: 0,
-					checkMoney: 0
-				},
-				{
-					name: '人保预约票',
 					checkQuantity: 0,
 					checkMoney: 0
 				}
 			];
-			let dyNumber = 0;
-			let dyMoney = 0;
+			
 			let npNumber = 0;
 			let npMoney = 0;
-			let rbNumber = 0;
-			let rbMoney = 0;
 			res.data.forEach(function(value, key){
 				if(value.name.indexOf('鲜花港赏花卡') != -1){
-					activeTicketList[1].checkQuantity = value.checkQuantity;
-					activeTicketList[1].checkMoney = value.checkMoney;
+					activeTicketList[7].checkQuantity = value.checkQuantity;
+					activeTicketList[7].checkMoney = value.checkMoney;
 				}
 				
-				if(value.name.indexOf('抖音') != -1){
-					dyNumber += value.checkQuantity*1;
-					dyMoney += value.checkMoney*1;
-				}
-				
-				if(value.name == '乐活卡预约通道' || value.name == '畅享卡预约通道'){
+				if(value.name == '乐活卡预约通道' || value.name == '畅享卡预约通道' || value.name.indexOf('京津冀一卡通') != -1 || value.name.indexOf('京津冀年票') != -1){
 					npNumber += value.checkQuantity*1;
 					npMoney += value.checkMoney*1;
 				}
 				
-				if(value.name == '人保预约票'){
-					rbNumber += value.checkQuantity*1;
-					rbMoney += value.checkMoney*1;
+				if(value.name.indexOf('368元露营套票') != -1){
+					activeTicketList[1].checkQuantity += value.checkQuantity*1;
+					activeTicketList[1].checkMoney = parseFloat(activeTicketList[1].checkMoney*1 + value.checkMoney*1).toFixed(2);
+				}
+				
+				if(value.name.indexOf('298元露营套票') != -1){
+					activeTicketList[2].checkQuantity += value.checkQuantity*1;
+					activeTicketList[2].checkMoney = parseFloat(activeTicketList[2].checkMoney*1 + value.checkMoney*1).toFixed(2);
+				}
+				
+				if(value.name.indexOf('598元露营套票') != -1){
+					activeTicketList[3].checkQuantity += value.checkQuantity*1;
+					activeTicketList[3].checkMoney = parseFloat(activeTicketList[3].checkMoney*1 + value.checkMoney*1).toFixed(2);
+				}
+				
+				if(value.name.indexOf('668元露营套票') != -1){
+					activeTicketList[4].checkQuantity += value.checkQuantity*1;
+					activeTicketList[4].checkMoney = parseFloat(activeTicketList[4].checkMoney*1 + value.checkMoney*1).toFixed(2);
+				}
+				
+				if(value.name.indexOf('1368元露营套票') != -1){
+					activeTicketList[5].checkQuantity += value.checkQuantity*1;
+					activeTicketList[5].checkMoney = parseFloat(activeTicketList[5].checkMoney*1 + value.checkMoney*1).toFixed(2);
+				}
+				
+				if(value.name.indexOf('中秋') != -1 || value.name.indexOf('专享票') != -1){
+					activeTicketList[6].checkQuantity += value.checkQuantity*1;
+					activeTicketList[6].checkMoney = parseFloat(activeTicketList[6].checkMoney*1 + value.checkMoney*1).toFixed(2);
 				}
 			})
 			// 年票
 			activeTicketList[0].checkQuantity = npNumber;
 			activeTicketList[0].checkMoney = npMoney;
-			
-			// 抖音专属票
-			activeTicketList[2].checkQuantity = dyNumber;
-			activeTicketList[2].checkMoney = dyMoney;
-			
-			// 人保预约票
-			activeTicketList[3].checkQuantity = rbNumber;
-			activeTicketList[3].checkMoney = rbMoney;
 			
 			success(activeTicketList);
 		})
@@ -866,5 +1055,6 @@ module.exports = {
 	getNewPeopleInfo, 
 	getBxjnhInfo,
 	getXqIncome,
-	getBsxmIncome
+	getBsxmIncome,
+	getPeopleMoneyInfo
 };

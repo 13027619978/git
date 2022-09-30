@@ -9,12 +9,6 @@ let path = require('path');
 
 
 router.get('/getDayInPeople', async function(req1, res1){
-	console.log(querystring.stringify({
-		access_token: '6a3d1c3a-1738-42f2-9f57-f4ec70bedf72',
-		appId: 'MRJ_ed1e658db20e40febf50bba423fdb057',
-		start: '2021-04-02',
-		end: '2021-04-02'
-	}));
 	const options = {
 		hostname: host,
 		path: '/api/v2/multipleInstance/traffic/day',
@@ -37,6 +31,36 @@ router.get('/getDayInPeople', async function(req1, res1){
 		end: '2021-04-02'
 	}));
 	req.end();
+})
+
+// 获取打开次数
+router.get('/getOpenCount', async function(req, res){
+	fs.readFile(path.resolve(__dirname, './jsonData/xhgCount.json'), 'utf8', function(err, data){
+		if(err){
+		    return console.error(err);
+		}
+		data = JSON.parse(data);
+		let openNumber = data.openNumber;
+		openNumber += 1;
+		let jsonData = {
+			openNumber: openNumber
+		}
+		fs.writeFile(path.resolve(__dirname, './jsonData/xhgCount.json'), JSON.stringify(jsonData),function(err){
+			if(err){
+				console.error(err);
+				res.send({
+					"code": "fail",
+					"message": "获取失败，请稍后再试"
+				});
+				return;
+			}
+			res.send({
+				"code": "success",
+				"message": "获取成功",
+				"openNumber": openNumber
+			})
+		})
+	})
 })
 
 // 鲜花港3000二维码
@@ -205,7 +229,7 @@ router.get('/addTicket', async function(req, res){
 	})
 })
 
-// 鲜花港10000序列号
+// 鲜花港赏花卡套票
 router.get('/getXhgNp', async function(req, res){
 	fs.readFile(path.resolve(__dirname, './jsonData/xhgNpList.json'), 'utf8', function(err, data){
 		if(err){
@@ -293,14 +317,6 @@ router.get('/checkXhgNp', async function(req, res){
 	});
 })
 
-// 数字补0
-function padding2(num) {
-    if((num + "").length >= 5) {
-    	return num;
-    }
-    return padding2("0" + num)
-}
-
 router.get('/addXhgNp', async function(req, res){
 	fs.readFile(path.resolve(__dirname, './jsonData/xhgNpList.json'), 'utf8', function(err, data){
 		if(err){
@@ -308,7 +324,7 @@ router.get('/addXhgNp', async function(req, res){
 		}
 		data = JSON.parse(data);
 		var ticketList = data;
-		for(var i = 0; i < 20000; i++){
+		for(var i = 50000; i < 50050; i++){
 			var ticketItem = {};
 			ticketItem.code = padding2(i+1);
 			ticketItem.password = randomPassword();
@@ -333,6 +349,137 @@ router.get('/addXhgNp', async function(req, res){
 		})
 	})
 })
+
+
+// 鲜花港赏花卡
+router.get('/getXhgShk', async function(req, res){
+	fs.readFile(path.resolve(__dirname, './jsonData/xhgShk.json'), 'utf8', function(err, data){
+		if(err){
+	        return console.error(err);
+		}
+		var ticketList = JSON.parse(data);
+		res.send(ticketList);
+	})
+})
+
+router.get('/checkXhgShk', async function(req, res){
+	let code = req.query.code;
+	let password = req.query.password;
+	if(!password || !code){
+		res.send({
+			"code": "fail",
+			"message": "数据不能为空"
+		});
+	}
+	fs.readFile(path.resolve(__dirname, './jsonData/xhgShk.json'), 'utf8', function(err, data){
+		if(err){
+	        return console.error(err);
+		}
+		var ticketList = JSON.parse(data);
+		var codeItem = {};
+		var codeKey;
+		ticketList.forEach(function(value, key){
+			if(value.code == code){
+				codeItem = value;
+				codeKey = key;
+			}
+		})
+		
+		if(codeItem.code){
+			if(codeItem.password == password){
+				if(codeItem.useTime){
+					res.send({
+						"code": "fail",
+						"message": "序列号已使用"
+					});
+				}else{
+					var nowDate = new Date();
+					var nowYear = nowDate.getFullYear();
+					var nowMonth = nowDate.getMonth() + 1;
+					nowMonth = nowMonth>9?nowMonth:'0'+nowMonth;
+					var nowDay = nowDate.getDate();
+					nowDay = nowDay>9?nowDay:'0'+nowDay;
+					var nowHour = nowDate.getHours();
+					nowHour = nowHour>9?nowHour:'0'+nowHour;
+					var nowMinute = nowDate.getMinutes();
+					nowMinute = nowMinute>9?nowMinute:'0'+nowMinute;
+					var nowSeconds = nowDate.getSeconds();
+					nowSeconds = nowSeconds>9?nowSeconds:'0'+nowSeconds;
+					var nowTime = nowYear + '-' + nowMonth + '-' + nowDay + ' ' + nowHour + ':' + nowMinute + ':' + nowSeconds;
+					ticketList[codeKey].useTime = nowTime;
+					var jsonData = ticketList;
+					fs.writeFile(path.resolve(__dirname, './jsonData/xhgShk.json'), JSON.stringify(jsonData),function(err){
+						if(err){
+							console.error(err);
+							res.send({
+								"code": "fail",
+								"message": "异常错误，核销失败"
+							});
+							return;
+						}
+						res.send({
+							code: "success",
+							message: "验证成功"
+						})
+						return;
+					})
+				}
+			}else{
+				res.send({
+					"code": "fail",
+					"message": "序列号密码错误"
+				});
+			}
+		}else{
+			res.send({
+				"code": "fail",
+				"message": "序列号密码错误"
+			});
+		}
+	});
+})
+
+router.get('/addXhgShk', async function(req, res){
+	fs.readFile(path.resolve(__dirname, './jsonData/xhgShk.json'), 'utf8', function(err, data){
+		if(err){
+	        return console.error(err);
+		}
+		data = JSON.parse(data);
+		var ticketList = data;
+		for(var i = 0; i < 10000; i++){
+			var ticketItem = {};
+			ticketItem.code = padding2(i+1);
+			ticketItem.password = randomPassword();
+			ticketList.push(ticketItem);
+		}
+		
+		var jsonData = ticketList;
+		
+		fs.writeFile(path.resolve(__dirname, './jsonData/xhgShk.json'), JSON.stringify(jsonData),function(err){
+			if(err){
+				console.error(err);
+				res.send({
+					"code": "fail",
+					"message": "异常错误，添加失败"
+				});
+				return;
+			}
+			res.send({
+				msg: '添加成功',
+				code: 'success'
+			});
+		})
+	})
+})
+
+
+// 数字补0
+function padding2(num) {
+    if((num + "").length >= 5) {
+    	return num;
+    }
+    return padding2("0" + num)
+}
 
 router.get('/getToken', async function(req, res){
 	fs.readFile(path.resolve(__dirname, './jsonData/xhgToken.json'), 'utf8', function(err, data){
@@ -429,7 +576,7 @@ function randomWord(tokenList){
 function randomPassword(){
     var str = "",
         range = 6,
-        arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+        arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
  
     // 随机产生
     for(var i=0; i<range; i++){

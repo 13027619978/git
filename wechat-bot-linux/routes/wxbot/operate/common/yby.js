@@ -416,6 +416,26 @@ function getCheckTicketInfo(enterpriseCode, ticketGroupNum, room){
 			name: '园博园学生门票(美团）-下午票',
 			checkMoney: 0,
 			checkQuantity: 0
+		},
+		{
+			name: '园博园预约（上午）',
+			checkMoney: 0,
+			checkQuantity: 0
+		},
+		{
+			name: '园博园预约（下午）',
+			checkMoney: 0,
+			checkQuantity: 0
+		},
+		{
+			name: '爱上丰台预约（上午）',
+			checkMoney: 0,
+			checkQuantity: 0
+		},
+		{
+			name: '爱上丰台预约（下午）',
+			checkMoney: 0,
+			checkQuantity: 0
 		}
 	]
 	let options = {
@@ -455,17 +475,23 @@ function getCheckTicketInfo(enterpriseCode, ticketGroupNum, room){
 				var money = parseFloat(value.checkMoney);
 				var number = parseInt(value.checkQuantity);
 				var ticketName = value.name;
-				totalMoney += money;
-				totalNumber += number;
+				if(ticketName.indexOf('年票') == -1){
+					totalMoney += money;
+					totalNumber += number;
+				}
 				if(ticketName == '政策性免票'){
 					ticketList[0].checkMoney = money;
 					ticketList[0].checkQuantity = number;
 				}else if(ticketName == '普通年票'){
-					ticketList[1].checkMoney = money;
-					ticketList[1].checkQuantity = number;
+					// ticketList[1].checkMoney = money;
+					// ticketList[1].checkQuantity = number;
+					ticketList[1].checkMoney = 0;
+					ticketList[1].checkQuantity = 0;
 				}else if(ticketName == '权益年票'){
-					ticketList[2].checkMoney = money;
-					ticketList[2].checkQuantity = number;
+					// ticketList[2].checkMoney = money;
+					// ticketList[2].checkQuantity = number;
+					ticketList[2].checkMoney = 0;
+					ticketList[2].checkQuantity = 0;
 				}else if(ticketName == '全价票'){
 					ticketList[3].checkMoney = money;
 					ticketList[3].checkQuantity = number;
@@ -493,6 +519,18 @@ function getCheckTicketInfo(enterpriseCode, ticketGroupNum, room){
 				}else if(ticketName == '园博园学生门票(美团）-下午票'){
 					ticketList[11].checkMoney = money;
 					ticketList[11].checkQuantity = number;
+				}else if(ticketName == '爱上丰台预约（上午）'){
+					ticketList[14].checkMoney = parseInt(money);
+					ticketList[14].checkQuantity = parseInt(number);
+				}else if(ticketName == '园博园预约（上午）'){
+					ticketList[12].checkMoney = parseInt(money);
+					ticketList[12].checkQuantity = parseInt(number);
+				}else if(ticketName == '爱上丰台预约（下午）'){
+					ticketList[15].checkMoney = parseInt(money);
+					ticketList[15].checkQuantity = parseInt(number);
+				}else if(ticketName == '园博园预约（下午）'){
+					ticketList[13].checkMoney = parseInt(money);
+					ticketList[13].checkQuantity = parseInt(number);
 				}else{
 					ticketList.push({
 						name: ticketName,
@@ -505,7 +543,9 @@ function getCheckTicketInfo(enterpriseCode, ticketGroupNum, room){
 			botString += '总检票：' + totalNumber + '张\n';
 			botString += '总检票金额：' + parseFloat(totalMoney).toFixed(2) + '元\n';
 			ticketList.forEach(function(value, key){
-				botString += value.name + '：' + value.checkQuantity + '张 ' + value.checkMoney + '元\n';
+				if(value.checkQuantity != '0'){
+					botString += value.name + '：' + value.checkQuantity + '张 ' + value.checkMoney + '元\n';
+				}
 			})
 			room.say(botString);
 		});

@@ -5,6 +5,7 @@ const axios = require('axios');
 
 
 router.get('/GetParkingFlowReport', async function(req1, res1) {
+	let parkId = req1.query.parkId;
 	let nowDate = new Date();
 	let nowYear = nowDate.getFullYear();
 	let nowMonth = nowDate.getMonth() + 1;
@@ -13,7 +14,7 @@ router.get('/GetParkingFlowReport', async function(req1, res1) {
 	nowDay = nowDay>9?nowDay:'0'+nowDay;
 	let tsString = new Date().getTime();
 	let params = {
-		"parkId": 1208,
+		"parkId": parkId,
 		"serviceCode": "getParkingFlowReport",
 		"ts": tsString,
 		"reqId": tsString,
@@ -22,8 +23,8 @@ router.get('/GetParkingFlowReport', async function(req1, res1) {
 	}
 	
 	let requertParams = {
-		"appId": "10685",
-		"parkId": 1208,
+		"appId": "11806",
+		"parkId": parkId,
 		"serviceCode": "getParkingFlowReport",
 		"ts": tsString,
 		"reqId": tsString,
@@ -51,6 +52,7 @@ router.get('/GetParkingFlowReport', async function(req1, res1) {
 })
 
 router.get('/GetFreeSpaceNum', async function(req1, res1) {
+	let parkId = req1.query.parkId;
 	let nowDate = new Date();
 	let nowYear = nowDate.getFullYear();
 	let nowMonth = nowDate.getMonth() + 1;
@@ -59,7 +61,7 @@ router.get('/GetFreeSpaceNum', async function(req1, res1) {
 	nowDay = nowDay>9?nowDay:'0'+nowDay;
 	let tsString = new Date().getTime();
 	let params = {
-		"parkId": 1208,
+		"parkId": parkId,
 		"serviceCode": "getFreeSpaceNum",
 		"ts": tsString,
 		"reqId": tsString,
@@ -67,8 +69,8 @@ router.get('/GetFreeSpaceNum', async function(req1, res1) {
 	}
 	
 	let requertParams = {
-		"appId": "10685",
-		"parkId": 1208,
+		"appId": "11806",
+		"parkId": parkId,
 		"serviceCode": "getFreeSpaceNum",
 		"ts": tsString,
 		"reqId": tsString,
@@ -111,7 +113,7 @@ function sort_ascii(obj) {
 	//去除两侧字符串
 	let char = '&'
 	str = str.replace(new RegExp('^\\' + char + '+|\\' + char + '+$', 'g'), '');
-	str += '&f82e3b547cae43b1b041a05d673f8fd0'
+	str += '&b48ebdb018324876a35233e733d2794f'
 	return str;
 }
 

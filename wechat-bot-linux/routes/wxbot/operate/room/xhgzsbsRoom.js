@@ -1,6 +1,8 @@
 var wechat = require('../mybot.js');
 const https = require('https');
 const host = "iot.smart-ideas.com.cn";
+const boss = require('../common/boss.js');
+const xhg = require('../common/xhg.js');
 
 async function xhgzsbsRoomDeal(msg){
 	const content = msg.text();
@@ -14,38 +16,65 @@ async function xhgzsbsRoomDeal(msg){
 		fromName = contact.name();
 	}
 	if(msg.type() == wechat.bot.Message.Type.Text){
-		//使用方法
+		// //使用方法
+		// if(content == '使用方法'){
+		// 	room.say("机器人使用方法:\n----------\n1)鲜花港报数\n2)鲜花港核销报数\n3)鲜花港微信上账统计\n4)xxxx-xx-xx鲜花港核销报数\n----------")
+		// }
+		
+		// // 报数
+		// if(content == '鲜花港报数'){
+		// 	getXhgInfo(host, room);
+		// }
+		
+		// // 鲜花港核销报数
+		// if(content == '鲜花港核销报数'){
+		// 	getXhghxInfo(host, room);
+		// }
+		
+		// // 鲜花港微信上账统计
+		// if(content == '鲜花港微信上账统计'){
+		// 	getWxInfo('iotsmart',host, room);
+		// }
+		
+		// // 鲜花港核销报数
+		// if(content.indexOf('鲜花港核销报数') != -1 && content.indexOf('-') != -1){
+		// 	var dateString = content.split('鲜花港核销报数')[0];
+		// 	var year = dateString.split('-')[0];
+		// 	var month = dateString.split('-')[1];
+		// 	month = parseInt(month);
+		// 	month = month>9?month:'0'+month;
+		// 	var day = dateString.split('-')[2];
+		// 	day = parseInt(day);
+		// 	day = day>9?day:'0'+day;
+		// 	dateString = year + '-' + month + '-' + day;
+		// 	getXhgInfoByDate(host, room, dateString);
+		// }
 		if(content == '使用方法'){
-			room.say("机器人使用方法:\n----------\n1)鲜花港报数\n2)鲜花港核销报数\n3)鲜花港微信上账统计\n4)xxxx-xx-xx鲜花港核销报数\n----------")
+			room.say("机器人使用方法:\n----------\n1)鲜花港预约报数\n2)鲜花港核销报数\n3)蝶馆预约报数\n4)蝶馆核销报数\n----------");
 		}
 		
-		// 报数
-		if(content == '鲜花港报数'){
-			getXhgInfo(host, room);
+		if(content == '鲜花港预约报数'){
+			var enterpriseCode = 'TgsEpcXhg';
+			var ticketGroupNum = 'TGN20210628140233051';
+			boss.getBossYYInfo(enterpriseCode, ticketGroupNum, room);
 		}
 		
-		// 鲜花港核销报数
 		if(content == '鲜花港核销报数'){
-			getXhghxInfo(host, room);
+			var enterpriseCode = 'TgsEpcXhg';
+			var ticketGroupNum = 'TGN20210628140233051';
+			xhg.getPeopleInfo(enterpriseCode, ticketGroupNum, room);
 		}
 		
-		// 鲜花港微信上账统计
-		if(content == '鲜花港微信上账统计'){
-			getWxInfo('iotsmart',host, room);
+		if(content == '蝶馆预约报数'){
+			var enterpriseCode = 'TgsEpcXhg';
+			var ticketGroupNum = 'TGN20210629121602397';
+			boss.getBossYYInfo(enterpriseCode, ticketGroupNum, room);
 		}
 		
-		// 鲜花港核销报数
-		if(content.indexOf('鲜花港核销报数') != -1 && content.indexOf('-') != -1){
-			var dateString = content.split('鲜花港核销报数')[0];
-			var year = dateString.split('-')[0];
-			var month = dateString.split('-')[1];
-			month = parseInt(month);
-			month = month>9?month:'0'+month;
-			var day = dateString.split('-')[2];
-			day = parseInt(day);
-			day = day>9?day:'0'+day;
-			dateString = year + '-' + month + '-' + day;
-			getXhgInfoByDate(host, room, dateString);
+		if(content == '蝶馆核销报数'){
+			var enterpriseCode = 'TgsEpcXhg';
+			var ticketGroupNum = 'TGN20210629121602397';
+			xhg.getPeopleInfo(enterpriseCode, ticketGroupNum, room);
 		}
 	}
 };

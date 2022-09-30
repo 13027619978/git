@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta http-equiv="Expires" content="0">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-control" content="no-cache">
+		<meta http-equiv="Cache" content="no-cache">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/index.css?v=200">
+		<style type="text/css">
+			.layui-layer-btn .layui-layer-btn0.disabled{
+				background-color: #ddd;
+				color: #666;
+				border: 1px solid #ddd;
+			}
+			.ticketView{
+				padding: 0;
+			}
+			
+			.ticketTimeView{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background-color: #f5f5f5;
+			}
+			.ticketTimeContent{
+				width: 100%;
+				border-radius: 5px;
+			}
+			.ticketTimeContent>div{
+				padding: 5px 10px;
+				margin-bottom: 10px;
+				background-color: #fff;
+				box-shadow: 0 0 5px #ddd;
+			}
+			.ticketTimeTitle{
+				font-size: 14px;
+				font-weight: bold;
+				text-align: center;
+				line-height: 45px;
+				color: #333;
+				border-bottom: 1px solid #ddd;
+			}
+			.ticketTimeList{
+				padding: 0;
+				height: 60px;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+			.ticketTimeItem{
+				width: 49%;
+				line-height: 35px;
+				border: 1px solid #D0D0D0;
+				color: #333;
+				font-size: 13px;
+				border-radius: 3px;
+				margin: 5px 0;
+				background-color: #fff;
+				text-align: center;
+			}
+			.ticketTimeItem.active{
+				background-color: #00B3FD;
+				color: #fff;
+				border-color: #00B3FD;
+			}
+			.ticketTimeItem.disabled{
+				background-color: #F2F2F2;
+				color: #666;
+				border-color: #E2E2E2;
+			}
+			.ticketTimeContent .btnView{
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+				padding: 0 10px;
+				background-color: #f5f5f5;
+			}
+			.btnView a{
+				display: block;
+				width: 100%;
+				text-align: center;
+				line-height: 40px;
+				width: 100%;
+				background-color: #00B3FD;
+				color: #fff;
+				border-radius: 5px;
+				box-shadow: 0 0 5px #ddd;
+			}
+			.chooseTitle{
+				font-size: 14px;
+				color: #333;
+				font-weight: bold;
+				line-height: 25px;
+				padding-left: 25px;
+				background: url(img/rl-icon.png) no-repeat left center;
+				background-size: 17px 17px;
+			}
+			.chooseTitle.sj{
+				background: url(img/sj-icon.png) no-repeat left center;
+				background-size: 20px 20px;
+			}
+			.ticketTimeContent input{
+				width: 120px;
+				height: 35px;
+				border: 1px solid #ddd;
+				border-radius: 3px;
+				text-align: center;
+				margin-top: 5px;
+				font-size: 14px;
+				color: #333;
+			}
+			.timeList{
+				width: 100%;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				flex-wrap: wrap;
+			}
+			.timeItem{
+				width: 24%;
+				height: 55px;
+				border: 1px solid #ddd;
+				border-radius: 3px;
+				text-align: center;
+				margin: 2px 0;
+				font-size: 12px;
+				color: #333;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				flex-wrap: wrap;
+				align-items: center;
+			}
+			.timeItem font{
+				color: red;
+				font-size: 12px;
+			}
+			.timeItem.active{
+				background-color: #00B3FD;
+				color: #fff;
+				border-color: #00B3FD;
+			}
+			.timeItem.active font{
+				color: #fff;
+			}
+			.timeItem.disabled{
+				background-color: #F2F2F2;
+				color: #666;
+				border-color: #E2E2E2;
+			}
+		</style>
+		<title>预约</title>
+	</head>
+	<body>
+		<div class="container">
+			<!-- 景区名称 -->
+			<div class="scenicInfo">
+				<p class="scenicName"></p>
+				<div class="scenicDesc maxHeight">
+					<div class="descContent">
+						
+					</div>
+					<a class="allBtn" href="javascript:;" onclick="showAll(this)">展开全部</a>
+				</div>
+			</div>
+			
+			<!-- 通知 -->
+			<div class="noticeView">
+				<p class="noticeText"><font class="ticketStatus">开园</font>预约</p>
+			</div>
+			
+			<!-- 门票列表 -->
+			<div class="ticketView">
+				<!-- <p class="ticketTile">预约</p> -->
+				<!-- 时间段选择 -->
+				<div class="ticketTimeView">
+					<div class="ticketTimeContent">
+						<div class="timeView">
+							<p class="chooseTitle">请选择日期</p>
+							<div class="timeList">
+								
+							</div>
+						</div>
+						<div>
+							<p class="chooseTitle sj">请选择时间</p>
+							<div class="ticketTimeList">
+								<div class="ticketTimeItem" onclick="ticketTimeSelect(this, /2c9141f4837d22bc018386e286df5b7e/)">上午</p></div>
+								<div class="ticketTimeItem" onclick="ticketTimeSelect(this, /2c9141f4837d22bc018386e506c15c77/)">下午</p></div>
+							</div>
+						</div>
+						<div class="btnView">
+							<a onclick="sureClick()" href="javascript:;">确定预约</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="moreView">
+			<img src="img/more-icon.png" >
+			向下滑动查看更多
+		</div>
+		
+		
+		
+		<!-- tabbar -->
+		<div class="tabbar">
+			<a class="homeBtn active" href="javascript:;">首页</a>
+			<a class="userBtn" href="ybyyyOrder.html">我的</a>
+		</div>
+		
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/md5.js?v=1.0.0"></script>
+		<script src="js/encrypt.js?v=1.0.2"></script>
+		<script src="js/jweixin-1.0.0.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/laydate.js"></script>
+		<script src="js/app5.js?v=1.0.4"></script>
+		<script type="text/javascript">
+			let currentId;
+			let visitDate;
+			$(function(){
+				var enterpriseCode = app.getCookie('enterpriseCode');
+				var ticketGroupNum = app.getCookie('ticketGroupNum');
+				
+				app.wxUserInfo(function(){
+					layer.load(2);
+					getSaleInfoList(enterpriseCode, ticketGroupNum);
+					
+					// 国庆期间修改
+					if(enterpriseCode == 'TgsEpcYby' || enterpriseCode == 'TgsEpcBgslgy'){
+						$('.noticeText').html(
+							'<font class="ticketStatus">开园</font>预约'
+						)
+						$('.ticketTile').text('预约');
+						document.getElementsByTagName("title")[0].innerText='预约'
+					}
+					// 国庆期间修改
+					
+					// let nowDate = new Date().getTime();
+					// let min = 0;
+					// let max = '2022-10-07';
+					// if(nowDate < new Date('2022/10/01 23:59:59')){
+					// 	nowDate = new Date('2022/10/01');
+					// 	min = '2022-10-01';
+					// }else if(nowDate > new Date('2022/10/01 23:59:59') && nowDate < new Date('2022/10/07 23:59:59')){
+					// 	nowDate = new Date();
+					// }else{
+					// 	nowDate = new Date();
+					// 	max = 7;
+					// }
+					
+					// // 初始化时间插件
+					// laydate.render({
+					// 	elem: '.timeSelectBtn' ,//指定元素
+					// 	min: min,
+					// 	max: max,
+					// 	value: nowDate,
+					// 	done: function(value, date, endDate){
+							
+					// 	}
+					// })
+					for(var i = 0; i < 8; i++){
+						let nowTime = new Date().getTime();
+						let nowHour = new Date().getHours();
+						let btnTime = nowTime + 60*60*24*1000*i;
+						let btnString = getDateString(btnTime);
+						if(i<7){
+							if(i==0){
+								if(nowHour < 18){
+									$('.timeList').append(
+										'<a class="timeItem active" href="javascript:;" onclick="timeClick(this)">'+ btnString +'</a>'
+									)
+									visitDate = btnString.split('</br>')[0];
+									if(nowHour > 12){
+										$('.ticketTimeItem').eq(0).attr('onclick', '').addClass('disabled');
+									}
+								}else{
+									$('.timeList').append(
+										'<a class="timeItem disabled" href="javascript:;">'+ btnString +'</a>'
+									)
+								}
+							}else{
+								if(i == 1){
+									if(nowHour > 18){
+										visitDate = btnString.split('</br>')[0];
+										$('.timeList').append(
+											'<a class="timeItem active" href="javascript:;" onclick="timeClick(this)">'+ btnString +'</a>'
+										)
+									}else{
+										$('.timeList').append(
+											'<a class="timeItem" href="javascript:;" onclick="timeClick(this)">'+ btnString +'</a>'
+										)
+									}
+								}else{
+									$('.timeList').append(
+										'<a class="timeItem" href="javascript:;" onclick="timeClick(this)">'+ btnString +'</a>'
+									)
+								}
+							}
+						}else{
+							$('.timeList').append(
+								'<a class="timeItem disabled" href="javascript:;" >'+ btnString +'</a>'
+							)
+						}
+					}
+				});
+				
+				
+			})
+			
+			function getDateString(time){
+				let currDate = new Date(time);
+				let currYear = currDate.getFullYear();
+				let currMonth = currDate.getMonth() + 1;
+				currMonth = currMonth>9?currMonth:'0'+currMonth;
+				let currDay = currDate.getDate();
+				currDay = currDay>9?currDay:'0'+currDay;
+				let week = currDate.getDay();
+				if(week == 0){
+					week = '星期日';
+				}else if(week == 1){
+					week = '星期一';
+				}else if(week == 2){
+					week = '星期二';
+				}else if(week == 3){
+					week = '星期三';
+				}else if(week == 4){
+					week = '星期四';
+				}else if(week == 5){
+					week = '星期五';
+				}else if(week == 6){
+					week = '星期六';
+				}
+				return currYear + '-' + currMonth + '-' + currDay + '</br><font>' + week + '</font>';
+			}
+			
+			function timeClick(that){
+				$(that).addClass('active').siblings().removeClass('active');
+				visitDate = $(that).text().split('星期')[0];
+				var nowHour = new Date().getHours();
+				let nowDateTime = new Date().getTime();
+				let selectDateTime = new Date(visitDate.replace(/-/, '/').replace(/-/, '/') + ' 00:00:00');
+				if(nowDateTime > selectDateTime){
+					if(nowHour > 12){
+						$('.ticketTimeItem').eq(0).attr('onclick', '').addClass('disabled');
+					}else{
+						$('.ticketTimeItem').eq(0).attr('onclick', 'ticketTimeSelect(this, /2c9141f4837d22bc018386e286df5b7e/)').removeClass('disabled');
+						$('.ticketTimeItem').eq(1).attr('onclick', 'ticketTimeSelect(this, /2c9141f4837d22bc018386e506c15c77/)').removeClass('disabled');
+					}
+				}else{
+					$('.ticketTimeItem').eq(0).attr('onclick', 'ticketTimeSelect(this, /2c9141f4837d22bc018386e286df5b7e/)').removeClass('disabled');
+					$('.ticketTimeItem').eq(1).attr('onclick', 'ticketTimeSelect(this, /2c9141f4837d22bc018386e506c15c77/)').removeClass('disabled');
+				}
+			}
+			
+			function sureClick(){
+				app.setCookie('visitDate', visitDate);
+				if(!currentId){
+					layer.alert('请选择时间');
+					return;
+				}
+				window.location.href = 'ybyyyTicket.html?ticketInfoId=' + currentId;
+			}
+			
+			function cancelClick(){
+				$('.ticketTimeView').hide();
+			}
+			
+			function yyClick(){
+				$('.ticketTimeView').css({
+					'display': 'flex'
+				});
+			}
+			
+			
+			function ticketTimeSelect(that, ticketInfoId){
+				currentId = ticketInfoId;
+				$(that).addClass('active').siblings().removeClass('active');
+			}
+			
+			
+			// 是否需要滑动
+			var scroll = false;
+			
+			function isAgreeChange(){
+				console.log()
+				if($('.isAgree').prop("checked")){
+					$('.layui-layer-btn0').removeClass('disabled');
+				}else{
+					$('.layui-layer-btn0').addClass('disabled');
+				}
+			}
+			
+			// 获取web产品售卖列表
+			function getSaleInfoList(enterpriseCode, ticketGroupNum){
+				app.encryptGetAjax('ticketInfo/encrypt/getSalesList', {
+					enterpriseCode: enterpriseCode,
+					ticketGroupNum: ticketGroupNum,
+					ticketSalesChannelsNum: 'WEB'
+				}, function(res){
+					if(res.code == '10000'){
+						layer.closeAll();
+						// 园博园提示
+						if(enterpriseCode == 'TgsEpcYby'){
+							var noticeString = '<p style="height:300px;overflow-y:auto;">尊敬的游客朋友们：<br>';
+							noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font style="color:red;font-weight:bold;">入园须持72小时内核酸阴性证明。</font><br>';
+							noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当前仍处在疫情防控时期，为了您与他人的健康和游览安全，请您认真阅读以下内容：<br>';
+							noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一、本人承诺：近期身体健康，无发热、咳嗽等异常情况；无流行病学接触史；无中高风险地区14天以内旅居史；无境外回国隔离不满21天的情况；72小时内核酸检测阴性。<br>';
+							noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;二、请提前1天以上在“北京园博园见证精彩”微信公众号进行实名预约，并按照预约时段来园，凭入园预约码进园。入园门区为：2号门，3号门，6号门。<br>';
+							noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;三、入园时请配合测温验码，出示北京健康宝绿码。请随身携带、科学佩戴口罩，参观游览时请保持1米以上社交距离。遇限流游览时，请有序排队，配合工作人员管理。<br>';
+							noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;四、谢绝持红码、黄码的游客入园，谢绝有14天内中高风险地区旅居使人员和入境未满21天人员入园。<br>';
+							noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;五、请遵守公园各项管理规定，不携带除轮椅、婴儿手推车和儿童脚踏手推车之外的其他种类轮制器械、电动平衡车、电动玩具车、电动行李箱以及各种渔具、风筝和无人飞行器入园。<br>';
+							noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;六、根据《北京市控制吸烟条例》要求，园博园全面禁烟，您在园内参观游览时请勿吸烟，并提醒他人不要吸烟。<br>';
+							noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;七、请遵守《北京市生活垃圾管理条例》，分类投放生活垃圾。<br>';
+							noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;八、请看护好随身携带的物品，谨防丢失或被盗。<br>';
+							noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;九、咨询电话：63915561<br>';
+							noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;感谢您的理解与配合。</p>';
+							noticeString += '<label style="display: flex;justify-content: flex-end;align-items: center;font-size: 14px;color: #333;padding: 5px;" for="isAgree"><input style="width: 20px;height: 20px;margin-right: 10px;" id="isAgree" class="isAgree" type="checkbox" onchange="isAgreeChange()">我已阅读</label>';
+							layer.open({
+								content: noticeString,
+								btn: ['前往预约'],
+								closeBtn: 0,
+								title: '温馨提示',
+								success: function(){
+									$('.layui-layer-btn0').addClass('disabled');
+								},
+								btn1: function(){
+									if($('.isAgree').prop("checked")){
+										layer.closeAll();
+									}else{
+										return false;
+									}
+								}
+							});
+							$('.layui-layer-title').css({
+								'text-align': 'center',
+								'padding': '0'
+							});
+						}
+						if(res.data.popStatus == '0'){
+							layer.alert(res.data.popContent);
+						}
+						var scenicData = res.data;
+						$('.scenicName').text(scenicData.groupName);
+						$('.scenicDesc .descContent').html(scenicData.mark);
+						if(!scenicData.mark){
+							$('.scenicDesc').hide();
+						}
+						var saleInfoList = scenicData.ticketSalesInfoList;
+						saleInfoList.forEach(function(value, key){
+							var nowDate = new Date().getTime();
+							var salesStartDate = value.buyRules.salesStartDate;
+							salesStartDate = salesStartDate.replace(/-/, '/').replace(/-/, '/');
+							salesStartDate = new Date(salesStartDate + ' 00:00:00').getTime();
+							
+							var ticketItem = '<div class="ticketItem">' +
+							'<div class="itemLeft">' +
+							'<p class="ticketName">'+ value.ticketName +'<font class="ticketType">'+ value.categoryName +'</font></p>' +
+							'<div class="ticketDesc"></div>';
+							ticketItem += '</div>' +
+							'<div class="itemRight">' +
+							'<p class="ticketPrice">'+ value.settlePrice +'元</p>';
+							// 判断开始售票时间
+							if(salesStartDate <= nowDate){
+								ticketItem += '<a class="buyBtn" href="javascript:;" onclick="ticketClick(/'+ value.ticketInfoId +'/)">立即预定</a>';
+							}else{
+								ticketItem += '<a class="buyBtn disabled" href="javascript:;">立即预定</a>';
+							}
+							ticketItem += '</div></div>';
+							// $('.ticketList').append(ticketItem);
+							// $('.ticketDesc').eq(key).html(value.description);
+							
+							// 国庆期间修改
+							if(enterpriseCode == 'TgsEpcYby' || enterpriseCode == 'TgsEpcBgslgy'){
+								$('.ticketType').hide();
+							}
+							// 国庆期间修改
+						})
+			
+						if($('.container').height() + 61 > window.screen.height){
+							scroll = true;
+							$('.moreView').css({
+								'display': 'flex'
+							})
+						}
+					}else if(res.code == '40002'){
+						layer.closeAll();
+						var scenicData = res.data;
+						$('.scenicDesc').removeClass('maxHeight').css({'padding-bottom': 0});
+						// if(scenicData.popStatus == '0'){
+						// 	layer.alert(scenicData.popContent);
+						// }
+						$('.scenicName').text(scenicData.groupName);
+						$('.scenicDesc').text(scenicData.tipContent);
+						$('.noticeText').html('<font class="ticketStatus">闭园</font>' + res.message);
+						var saleInfoList = scenicData.ticketSalesInfoList;
+						saleInfoList.forEach(function(value, key){
+							var nowDate = new Date().getTime();
+							var effectStartDate = value.effectStartDate;
+							effectStartDate = effectStartDate.replace(/-/, '/').replace(/-/, '/');
+							effectStartDate = new Date(effectStartDate + ' 00:00:00').getTime();
+							var ticketItem = '<div class="ticketItem">' +
+							'<div class="itemLeft">' +
+							'<p class="ticketName">'+ value.ticketName +'<font class="ticketType">'+ value.categoryName +'</font></p>' +
+							'<p class="ticketDesc">'+ value.description +'</p>' +
+							'<p class="checkTime">检票时间：'+ value.checkRules.checkStartTime +'-'+ value.checkRules.checkEndTime +'</p>' +
+							'<p class="effectTime">售票日期：'+ value.effectStartDate +'至'+ value.effectEndDate +'</p>' +
+							'</div>' +
+							'<div class="itemRight">' +
+							'<p class="ticketPrice">'+ value.settlePrice +'元</p>';
+							// 判断开始售票时间
+							ticketItem += '<a class="buyBtn disabled" href="javascript:;">立即预定</a>';
+							ticketItem += '</div></div>';
+							$('.ticketList').append(ticketItem);
+						})
+					}else{
+						layer.closeAll();
+						layer.msg(res.msg);
+					}
+				})
+			}
+			
+			// 屏幕滑动
+			$(window).scroll(function(){
+				if(scroll){
+					$('.moreView').css({
+						'display': 'none'
+					})
+				}
+			})
+			
+			// 点击购票
+			function ticketClick(ticketInfoId){
+				console.log(ticketInfoId);
+				var enterpriseCode = app.getCookie('enterpriseCode');
+				if(app.getCookie('ticketGroupNum') != 'TGN20220831183429283' && ticketInfoId != '/2c9141f4837d22bc018386e286df5b7e/' && ticketInfoId != '/2c9141f4837d22bc018386e506c15c77/'){
+					// 北京园博园
+					var noticeString1 = '<p style="height:300px;overflow-y:auto;">尊敬的游客朋友们：<br>';
+					noticeString1 += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为贯彻落实北京市创建国家森林城市总体规划，坚持以人民为中心，将更多的绿色生态空间回馈百姓，真正做到还绿于民，加快推进创建国家森林城市各项工作。北京园博园将于2022年8月1日启动“创森惠民”主题活动，现将相关情况公告如下：<br>';
+					noticeString1 += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自8月1日起每日面向社会公众发放5000张创森惠民优惠票，游客可通过扫描下方二维码或微信搜索“丰台创森”公众号，点击活动公告文章或“门票预约”按钮，按程序进行实名登记预约后取得二维码门票，按照预约日期在园博园2、3、6号门区扫码检票入园。<br>';
+					noticeString1 += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;游客凭身份证进行预约，当日有效，请您按照预约时间到园游览，鉴于目前仍属疫情期间，按照北京市统一规定，公园按照75%限流，请您遵守园区防疫规定，有序入园。<br>';
+					noticeString1 += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;谢谢您的支持，祝您游园愉快！<br>';
+					layer.open({
+						content: noticeString1,
+						closeBtn: 0,
+						btn: ['我去预约惠民优惠票', '我已知悉, 仍要购票'],
+						title: '北京园博园创森惠民活动公告',
+						yes: function(index,layero){
+							window.location.href = 'https://mp.weixin.qq.com/s/VZ5tZG7IWHVYpzfHxJwkVw';
+						},
+						btn2: function(index,layero){
+							window.location.href = 'ticket.html?ticketInfoId=' + ticketInfoId;
+						}
+					})
+				}else{
+					window.location.href = 'ticket.html?ticketInfoId=' + ticketInfoId;
+				}
+			}
+			
+			// 展开全部
+			function showAll(that){
+				$('.scenicDesc').toggleClass('maxHeight');
+				if($('.scenicDesc').hasClass('maxHeight')){
+					$(that).text('展开全部');
+				}else{
+					$(that).text('收起全部');
+				}
+				
+			}
+			
+			// 展开全部票种介绍
+			function showAllDesc(that){
+				$(that).parent().find('.ticketDesc').toggleClass('maxHeight');
+				$(that).toggleClass('close');
+				if($(that).parent().find('.ticketDesc').hasClass('maxHeight')){
+					$(that).html('<p>展开全部</p>');
+				}else{
+					$(that).html('<p>收起全部</p>');
+				}
+				
+			}
+			
+		</script>
+	</body>
+</html>
