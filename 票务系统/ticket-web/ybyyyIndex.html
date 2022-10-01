@@ -266,6 +266,7 @@
 					for(var i = 0; i < 8; i++){
 						let nowTime = new Date().getTime();
 						let nowHour = new Date().getHours();
+						let nowMinutes = new Date().getMinutes();
 						let btnTime = nowTime + 60*60*24*1000*i;
 						let btnString = getDateString(btnTime);
 						if(i<7){
@@ -302,9 +303,23 @@
 								}
 							}
 						}else{
-							$('.timeList').append(
-								'<a class="timeItem disabled" href="javascript:;" >'+ btnString +'</a>'
-							)
+							if(nowHour < 17){
+								$('.timeList').append(
+									'<a class="timeItem disabled" href="javascript:;" >'+ btnString +'</a>'
+								)
+							}else if(nowHour == 17 && nowMinutes >= 30){
+								$('.timeList').append(
+									'<a class="timeItem" href="javascript:;" onclick="timeClick(this)">'+ btnString +'</a>'
+								)
+							}else if(nowHour == 17 && nowMinutes < 30){
+								$('.timeList').append(
+									'<a class="timeItem disabled" href="javascript:;" >'+ btnString +'</a>'
+								)
+							}else if(nowHour > 17){
+								$('.timeList').append(
+									'<a class="timeItem" href="javascript:;" onclick="timeClick(this)">'+ btnString +'</a>'
+								)
+							}
 						}
 					}
 				});

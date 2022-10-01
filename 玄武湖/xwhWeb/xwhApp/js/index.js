@@ -69,9 +69,9 @@ function scanClick(){
 
 function getDeviceType(deviceType, openid, qrCode){
 	switch (qrCode){
-		case "1230030":
-			qrCode = '1230021';
-		break;
+		// case "1230030":
+		// 	qrCode = '1230021';
+		// break;
 		
 		case "1230021":
 			qrCode = '1230022';
