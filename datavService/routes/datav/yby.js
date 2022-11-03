@@ -1812,15 +1812,46 @@ function getCheckTicketNumber(enterpriseCode, ticketGroupNum, success){
 	var searchEdate = encodeURI(eDate);
 	let options = {
 		hostname: bossHost,
-		path: '/ticketApi/orderView/getCheck?enterpriseCode=TgsEpcYby&ticketGroupNum=TGN20201210095942945',
+		path: '/ticketApi/robotCollection/check/name/get?enterpriseCode=TgsEpcYby&ticketGroupNum=TGN20201210095942945&checkStartTime=' + searchSdate + '&checkEndTime=' + searchEdate,
 		method: 'GET'
 	};
 	
+	var buffers = [];
+	var nread = 0;
 	const req = http.request(options, (res) => {
 		res.on('data', (d) => {
-			var res = JSON.parse(d.toString());
-			success(res[0].value);
+			buffers.push(d);
+			nread += d.length;
 		});
+		
+		res.on('end', () => {
+			var buffer = null;
+			switch(buffers.length) {
+				case 0: buffer = new Buffer(0);
+					break;
+				case 1: buffer = buffers[0];
+					break;
+				default:
+					buffer = new Buffer(nread);
+					for (var i = 0, pos = 0, l = buffers.length; i < l; i++) {
+						var chunk = buffers[i];
+						chunk.copy(buffer, pos);
+						pos += chunk.length;
+					}
+				break;
+			}
+			var res = JSON.parse(buffer.toString());
+			var checkList = res.data;
+			var totalNumber = 0;
+			checkList.forEach(function(value, key){
+				var number = parseInt(value.checkQuantity);
+				var ticketName = value.name;
+				if(ticketName.indexOf('年票') == -1){
+					totalNumber += number;
+				}
+			})
+			success(totalNumber);
+		})
 	});
 	
 	req.end();

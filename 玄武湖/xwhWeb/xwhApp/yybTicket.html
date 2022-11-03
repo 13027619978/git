@@ -47,11 +47,11 @@
 							<div class="dateView">
 								<p>日期</p>
 								<div class="dateList">
-									<div class="timeBtn btn1" href="javascript:;" onclick="selectDate(this, 1)">2022-10-01</div>
+									<!-- <div class="timeBtn btn1" href="javascript:;" onclick="selectDate(this, 1)">2022-10-01</div>
 									<div class="timeBtn btn2" href="javascript:;" onclick="selectDate(this, 2)">2022-10-02</div>
-									<div class="timeBtn btn3" href="javascript:;" onclick="selectDate(this, 3)">2022-10-03</div>
-									<div class="timeBtn btn3" href="javascript:;" onclick="selectDate(this, 4)">2022-10-04</div>
-									<div class="timeBtn btn3" href="javascript:;" onclick="selectDate(this, 5)">2022-10-05</div>
+									<div class="timeBtn btn3" href="javascript:;" onclick="selectDate(this, 3)">2022-10-03</div> -->
+									<div class="timeBtn btn3" href="javascript:;" onclick="selectDate(this, 4)">2022-10-21</div>
+									<div class="timeBtn btn3" href="javascript:;" onclick="selectDate(this, 5)">2022-10-22</div>
 								</div>
 							</div>
 							
@@ -59,7 +59,7 @@
 								<p>场次</p>
 								<div class="dateList">
 									<div class="timeBtn" href="javascript:;" onclick="selectTime(this, 1)">18:00-19:00</div>
-									<div class="timeBtn" href="javascript:;" onclick="selectTime(this, 2)">19:30-20:30</div>
+									<!-- <div class="timeBtn" href="javascript:;" onclick="selectTime(this, 2)">19:30-20:30</div> -->
 								</div>
 							</div>
 							
@@ -240,8 +240,14 @@
 					res.data.forEach(function(value,key){
 						let kcItem = value.total - value.sell;
 						kcItem = kcItem>0?kcItem:0;
-						if(date == '2022-09-23' || date == '2022-09-25'){
+						if(date == '2022-10-05'){
 							kcItem = 0;
+						}
+						if(date == '2022-10-04'){
+							if(key == 0){
+								kcItem = kcItem - 20;
+								kcItem = kcItem>0?kcItem:0;
+							}
 						}
 						kcList.push(kcItem);
 					})

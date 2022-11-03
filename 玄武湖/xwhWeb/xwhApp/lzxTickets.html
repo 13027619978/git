@@ -41,8 +41,8 @@
 								<p>日期</p>
 								<div class="dateList rqList">
 									<div class="timeBtn" onclick="selectTime(this, 13)">2022-10-01 14:00 库存：0</div>
-									<div class="timeBtn" onclick="selectTime(this, 13)" style="margin-top: 10px;">2022-10-02 14:00 库存：0</div>
-									<div class="timeBtn" onclick="selectTime(this, 13)" style="margin-top: 10px;">2022-10-03 14:00 库存：0</div>
+									<div class="timeBtn" onclick="cancle()" style="margin-top: 10px;">2022-10-02 14:00 库存：0</div>
+									<div class="timeBtn" onclick="cancle()" style="margin-top: 10px;">2022-10-03 14:00 库存：0</div>
 								</div>
 							</div>
 							
@@ -160,6 +160,11 @@
 			let sunTime;
 			let oneTime;
 			let timeTxt;
+			
+			function cancle(){
+				layer.alert('当前时间已约满，请选择其他时间');
+			}
+			
 			$(function(){
 				var nowWeek = new Date().getDay();
 				nowWeek = nowWeek==0?7:nowWeek;
@@ -225,7 +230,7 @@
 						if(value.sessionId == '13'){
 							let satLast = value.total - value.sell;
 							satLast = satLast>0?satLast:0;
-							$('.timeBtn').eq(1).text('2022-10-02 14:00 库存：' + satLast)
+							$('.timeBtn').eq(1).text('2022-10-02 14:00 库存：' + 0)
 						}
 					})
 					
@@ -244,7 +249,7 @@
 						if(value.sessionId == '13'){
 							let satLast = value.total - value.sell;
 							satLast = satLast>0?satLast:0;
-							$('.timeBtn').eq(2).text('2022-10-03 14:00 库存：' + satLast)
+							$('.timeBtn').eq(2).text('2022-10-03 14:00 库存：' + 0)
 						}
 					})
 					

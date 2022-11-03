@@ -145,8 +145,7 @@ function getTicketsIncome(room){
 			})
 			
 			var botString = '******园博园报数******\n时间段：\n' + decodeURI(startDate) + '\n至\n' + decodeURI(endDate);
-			botString += '\n门票收入：' + totalMoney + '元';
-			botString += '\n购票张数：' + totalNumber;
+			botString += '\n总预约人数：' + totalNumber;
 			
 			const options1 = {
 				hostname: 'boss.smart-ideas.com.cn',
@@ -163,6 +162,79 @@ function getTicketsIncome(room){
 					})
 					botString += '\n总入园人数：' + totalInPeople;
 					botString += '\n瞬时最大承载：' + parseInt(parseInt(totalInPeople) * 0.7);
+					if(totalMoney > 0){
+						botString += '\n活动票收入：' + totalMoney + '元';
+					}
+					try{
+						room.say(botString);
+					}catch(e){
+						
+					}
+			    });
+			});
+			
+			req1.on('error', (e) => {
+			  console.error(`problem with request: ${e.message}`);
+			});
+			
+			req1.end();
+	    });
+	});
+	
+	req.on('error', (e) => {
+	  console.error(`problem with request: ${e.message}`);
+	});
+	
+	req.end();
+}
+
+// 获取门票及瞬时承载量收入
+function getTicketsIncome1(room){
+	var startDate = encodeURI('2022-10-06 10:00:00');
+	var endDate = encodeURI('2022-10-07 10:00:00');
+	var enterpriseCode = 'TgsEpcYby';
+	var ticketGroupNum = 'TGN20201210095942945';
+	const options = {
+		hostname: 'boss.smart-ideas.com.cn',
+		path: '/ticketApi/robotCollection/check/salesChannel/get?ticketSalesChannelsNum=WEB&enterpriseCode=' + enterpriseCode + '&ticketGroupNum=' + ticketGroupNum + '&checkStartTime='+startDate+'&checkEndTime='+endDate,
+		method: 'GET'
+	};
+	const req = https.request(options, (res) => {
+	    res.on('data', (d) => {
+			var jsonData = JSON.parse(d.toString());
+			var checkList = jsonData.data;
+			var totalMoney = 0;
+			var totalNumber = 0;
+			checkList.forEach(function(value, key){
+				if(value.name != '年票'){
+					var money = parseFloat(value.checkMoney);
+					totalMoney += money;
+				}
+				var number = parseInt(value.checkQuantity);
+				totalNumber += number;
+			})
+			
+			var botString = '******园博园报数******\n时间段：\n' + decodeURI(startDate) + '\n至\n' + decodeURI(endDate);
+			botString += '\n总预约人数：' + totalNumber;
+			
+			const options1 = {
+				hostname: 'boss.smart-ideas.com.cn',
+				path: '/ticketApi/robotCollection/brakeData/get?enterpriseCode=' + enterpriseCode + '&ticketGroupNum=' + ticketGroupNum + '&startTime=' + startDate + '&endTime=' + endDate,
+				method: 'GET'
+			};
+			const req1 = https.request(options1, (res1) => {
+			    res1.on('data', (d1) => {
+					var res1 = JSON.parse(d1.toString());
+					var brakeList = res1.data;
+					var totalInPeople = 0;
+					brakeList.forEach(function(value, key){
+						totalInPeople += parseInt(value.inTotal);
+					})
+					botString += '\n总入园人数：' + totalInPeople;
+					botString += '\n瞬时最大承载：' + parseInt(parseInt(totalInPeople) * 0.7);
+					if(totalMoney > 0){
+						botString += '\n活动票收入：' + totalMoney + '元';
+					}
 					try{
 						room.say(botString);
 					}catch(e){
@@ -540,11 +612,18 @@ function getCheckTicketInfo(enterpriseCode, ticketGroupNum, room){
 				}
 			})
 			var botString = '*****园博园核销报数*****\n日期:'+eDate +'\n';
-			botString += '总检票：' + totalNumber + '张\n';
-			botString += '总检票金额：' + parseFloat(totalMoney).toFixed(2) + '元\n';
+			botString += '总入园人数：' + totalNumber + '人\n';
+			if(totalMoney > 0){
+				botString += '活动票收入：' + parseFloat(totalMoney).toFixed(2) + '元\n';
+			}
+			
 			ticketList.forEach(function(value, key){
 				if(value.checkQuantity != '0'){
-					botString += value.name + '：' + value.checkQuantity + '张 ' + value.checkMoney + '元\n';
+					if(value.checkMoney == '0'){
+						botString += value.name + '：' + value.checkQuantity + '人\n';
+					}else{
+						botString += value.name + '：' + value.checkQuantity + '人 ' + value.checkMoney + '元\n';
+					}
 				}
 			})
 			room.say(botString);
@@ -558,4 +637,4 @@ function getCheckTicketInfo(enterpriseCode, ticketGroupNum, room){
 	req.end();
 }
 
-module.exports = {getBikePeopleInfo, getTicketsIncome, getPosInfo, writeTotalPeople, getYbyOtaInfo, getCheckTicketInfo};
+module.exports = {getBikePeopleInfo, getTicketsIncome, getPosInfo, writeTotalPeople, getYbyOtaInfo, getCheckTicketInfo, getTicketsIncome1};

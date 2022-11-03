@@ -58,7 +58,7 @@ function getCheckTicketNumberInfo(room){
 function getYYInfo(room){
 	options = {
 		hostname: host,
-		path: '/ticketApi/orderView/getAppointment?enterpriseCode=TgsEpcYby&ticketGroupNum=TGN20201210095942945&ticketInfoIds=2c9141f4824450b20182484a387922a9&ticketInfoIds=2c9141f481fcbf7e0182426503051325',
+		path: '/ticketApi/orderView/getAppointment?enterpriseCode=TgsEpcYby&ticketGroupNum=TGN20201210095942945&ticketInfoIds=2c9141f4837d22bc0183830b9ccc15dd&ticketInfoIds=2c9141f481fcbf7e0182426503051325',
 		method: 'GET'
 	};
 	

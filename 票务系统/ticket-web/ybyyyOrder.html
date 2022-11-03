@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/order.css?v=10">
-		<title>我的订单</title>
+		<title>我的预约</title>
 	</head>
 	<body>
 		<div class="container">
@@ -84,19 +84,11 @@
 										ywShow = 'none';
 									}
 								}else{
-									checkStatus = '退票成功';
+									checkStatus = '取消成功';
 									className = 'red';
 								}
 								
 								var categoryName = value.categoryName;
-								
-								if(app.getCookie('enterpriseCode') == 'TgsEpcFhl' && value.ticketName.indexOf('全价+') != -1){
-									categoryName = '多人票';
-								}
-								
-								if(app.getCookie('enterpriseCode') == 'TgsEpcXsslgy'){
-									categoryName = '';
-								}
 								
 								var orderItem = '<div class="orderItem" onclick="orderClick(/'+ value.ticketOrderId +'/)">' +
 										'<div class="ticketName">' +
@@ -107,7 +99,7 @@
 											'<p class="time">订单编号：'+ value.orderNum +'</p>' +
 										'</div>' +
 										'<div class="timeView">' +
-											'<p class="time">购买张数：'+ value.buyQuantity +'</p>' +
+											'<p class="time">预约张数：'+ value.buyQuantity +'</p>' +
 										'</div>' +
 										'<div class="timeView" style="display:'+ ywShow +';">' +
 											'<p class="time">游玩时间：'+ value.visitDate +'</p>' +

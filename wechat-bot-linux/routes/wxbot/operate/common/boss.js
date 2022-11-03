@@ -803,7 +803,13 @@ function getCheckTicketNumber(enterpriseCode, ticketGroupNum, success){
 			checkList.forEach(function(value, key){
 				var money = parseFloat(value.checkMoney);
 				var number = parseInt(value.checkQuantity);
-				totalNumber += number;
+				if(enterpriseCode == 'TgsEpcYby'){
+					if(value.name.indexOf('年票') == -1){
+						totalNumber += number;
+					}
+				}else{
+					totalNumber += number;
+				}
 			})
 			success(totalNumber);
 		});

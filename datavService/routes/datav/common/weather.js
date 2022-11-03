@@ -26,7 +26,6 @@ function WeatherInfo() {
 function getWeatherInfoPicUrl(dayweather){
 	var picUrl;
 	if(dayweather != null && dayweather != ''){
-		// picUrl = settings.weatherConfig.weatherPicUrl + weatherPicObj[dayweather];
 		if(dayweather != '晴' && dayweather != '少云' && dayweather != '阴' && dayweather != '中雨' && dayweather != '暴雨' && dayweather != '阵雨' && dayweather != '多云' && dayweather != '晴间多云' && dayweather != '小雨' && dayweather != '大雨' && dayweather != '雷阵雨' && dayweather != '小雪' && dayweather != '中雪' && dayweather != '大雪' && dayweather != '暴雪' && dayweather != '雨夹雪'){
 			picUrl = 'http://smart-ideas.com.cn/ico2/' + weatherPicObj['其他'];
 		}else{
@@ -57,7 +56,17 @@ function getDataVWeatherJson(jsonBody){
 router.get('/v1/weatherInfo', async function(req, res, next) {
   if(req.query.city != null && req.query.city != ''){
   	var body =  await myhttp.myHttpGet(settings.weatherConfig.gaodeWeatherUrl+req.query.city);
-	// console.log(settings.weatherConfig.gaodeWeatherUrl);
+  	var dataVWeatherJson = getDataVWeatherJson(JSON.parse(body));
+  	res.send(dataVWeatherJson);
+  }else{
+  	console.log('err');
+  	res.send('err');
+  }
+});
+
+router.get('/v2/weatherInfo', async function(req, res, next) {
+  if(req.query.city != null && req.query.city != ''){
+  	var body =  await myhttp.myHttpGet(settings.weatherConfig.gaodeWeatherUrl+req.query.city);
   	var dataVWeatherJson = getDataVWeatherJson(JSON.parse(body));
   	res.send(dataVWeatherJson);
   }else{

@@ -17,6 +17,9 @@ var xwhpark = require('./datav/xwhpark.js');
 var fhl = require('./datav/fhl.js');
 // 测试
 var test = require('./datav/test.js');
+
+// 身份证
+var idCard = require('./datav/idCard.js');
 var router = express.Router(); 
 
 router.use('/yby',yby);
@@ -36,4 +39,5 @@ router.use('/sch',sch);
 router.use('/test',test);
 router.use('/xwhpark',xwhpark);
 router.use('/fhl',fhl);
+router.use('/idCard',idCard);
 module.exports = router;

@@ -1,68 +1,59 @@
 {
-	"weatherList": [
-		{
-			"date": "01-13",
-			"picUrl": "",
-			"temperature": "",
-			"weather": "",
-			"wind": "",
-			"windpower": ""
-		},
-		{
-			"date": "01-14",
-			"picUrl": "",
-			"temperature": "",
-			"weather": "",
-			"wind": "",
-			"windpower": ""
-		},
-		{
-			"date": "01-15",
-			"picUrl": "",
-			"temperature": "",
-			"weather": "",
-			"wind": "",
-			"windpower": ""
-		},
-		{
-			"date": "01-16",
-			"picUrl": "",
-			"temperature": "",
-			"weather": "",
-			"wind": "",
-			"windpower": ""
-		},
-		{
-			"date": "01-17",
-			"picUrl": "",
-			"temperature": "",
-			"weather": "",
-			"wind": "",
-			"windpower": ""
-		},
-		{
-			"date": "01-18",
-			"picUrl": "",
-			"temperature": "",
-			"weather": "",
-			"wind": "",
-			"windpower": ""
-		},
-		{
-			"date": "01-19",
-			"picUrl": "",
-			"temperature": "",
-			"weather": "",
-			"wind": "",
-			"windpower": ""
-		},
-		{
-			"date": "01-20",
-			"picUrl": "http://smart-ideas.com.cn/ico2/b11.png",
-			"temperature": "-5~-2℃",
-			"weather": "小雪",
-			"wind": "南",
-			"windpower": "≤3"
-		}
-	]
+	"weatherList": [{
+		"date": "07-03",
+		"picUrl": "http://smart-ideas.com.cn/ico2/b4.png",
+		"temperature": "22~29℃",
+		"weather": "雷阵雨",
+		"wind": "南",
+		"windpower": "≤3"
+	}, {
+		"date": "07-11",
+		"picUrl": "http://smart-ideas.com.cn/ico2/b3.png",
+		"temperature": "20~28℃",
+		"weather": "阵雨",
+		"wind": "东南",
+		"windpower": "≤3"
+	}, {
+		"date": "08-13",
+		"picUrl": "http://smart-ideas.com.cn/ico2/b1.png",
+		"temperature": "24~33℃",
+		"weather": "多云",
+		"wind": "东北",
+		"windpower": "≤3"
+	}, {
+		"date": "09-12",
+		"picUrl": "http://smart-ideas.com.cn/ico2/b0.png",
+		"temperature": "20~32℃",
+		"weather": "晴",
+		"wind": "南",
+		"windpower": "≤3"
+	}, {
+		"date": "09-21",
+		"picUrl": "http://smart-ideas.com.cn/ico2/b0.png",
+		"temperature": "15~27℃",
+		"weather": "晴",
+		"wind": "西南",
+		"windpower": "≤3"
+	}, {
+		"date": "09-23",
+		"picUrl": "http://smart-ideas.com.cn/ico2/b0.png",
+		"temperature": "10~25℃",
+		"weather": "晴",
+		"wind": "西北",
+		"windpower": "≤3"
+	}, {
+		"date": "10-08",
+		"picUrl": "http://smart-ideas.com.cn/ico2/b7.png",
+		"temperature": "9~19℃",
+		"weather": "小雨",
+		"wind": "南",
+		"windpower": "≤3"
+	}, {
+		"date": "10-11",
+		"picUrl": "http://smart-ideas.com.cn/ico2/b0.png",
+		"temperature": "6~19℃",
+		"weather": "晴",
+		"wind": "西南",
+		"windpower": "≤3"
+	}]
 }

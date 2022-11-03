@@ -5,13 +5,134 @@ var https = require('https');
 var host = 'hd.smart-ideas.com.cn';
 const fs = require('fs');
 let path = require('path');
+const schedule = require('node-schedule');
+const axios = require('axios');
 
-router.get('/getDeviceShipLeaseInfo', async function(req, res) {
-	var leaseArr = [];
-	res.send(leaseArr);
-});
+schedule.scheduleJob('0 * * * * *', async function(){
+	// 写入玄武湖天气
+	fs.readFile(path.resolve(__dirname, './jsonData/xwhLastWeather.json'), 'utf8', function(err, data){
+		if(err){
+	        return console.error(err);
+		}
+		data = JSON.parse(data);
+		let weatherList = data.weatherList;
+		let nowMonth = new Date().getMonth() + 1;
+		nowMonth = nowMonth>9?nowMonth:'0'+nowMonth;
+		let nowDay = new Date().getDate();
+		nowDay = nowDay>9?nowDay:'0'+nowDay;
+		let nowDate = nowMonth + '-' + nowDay;
+		if(weatherList.length > 0 && weatherList[weatherList.length - 1].date != nowDate){
+			getWeatherInfo(function(nowWeather){
+				nowWeather = nowWeather[0];
+				let weatherItem = {
+					date: nowDate,
+					picUrl: nowWeather.picUrl,
+					temperature: nowWeather.temperature,
+					weather: nowWeather.weather,
+					wind: nowWeather.wind,
+					windpower: nowWeather.windpower
+				}
+				weatherList.push(weatherItem);
+				fs.writeFile(path.resolve(__dirname, './jsonData/xwhLastWeather.json'), JSON.stringify({
+					weatherList: weatherList
+				}),function(err){
+					if(err){
+						console.error(err);
+						return;
+					}
+				})
+			});
+		}else{
+			getWeatherInfo(function(nowWeather){
+				nowWeather = nowWeather[0];
+				let weatherItem = {
+					date: nowDate,
+					picUrl: nowWeather.picUrl,
+					temperature: nowWeather.temperature,
+					weather: nowWeather.weather,
+					wind: nowWeather.wind,
+					windpower: nowWeather.windpower
+				}
+				if(weatherList.length > 0 && weatherList[weatherList.length - 1].weather != weatherItem.weather){
+					weatherList[weatherList.length - 1] = weatherItem;
+					fs.writeFile(path.resolve(__dirname, './jsonData/xwhLastWeather.json'), JSON.stringify({
+						weatherList: weatherList
+					}),function(err){
+						if(err){
+							console.error(err);
+							return;
+						}
+					})
+				}
+			});
+		}
+	})
+	
+	// 写入玄武湖客流量
+	fs.readFile(path.resolve(__dirname, './jsonData/xwhInPeople.json'), 'utf8', function(err, data){
+		if(err){
+	        return console.error(err);
+		}
+		data = JSON.parse(data);
+		let peopleList = data.peopleList;
+		let nowMonth = new Date().getMonth() + 1;
+		nowMonth = nowMonth>9?nowMonth:'0'+nowMonth;
+		let nowDay = new Date().getDate();
+		nowDay = nowDay>9?nowDay:'0'+nowDay;
+		let nowDate = nowMonth + '-' + nowDay;
+		
+		axios.get('http://mcenter.d.smart-ideas.com.cn/prod-api/ddk/xwh/visitor')
+			.then(function(res){
+				 let resData = escape(res.data.vis);
+				 resData = JSON.parse(unescape(resData));
+				 let visitorList = resData.data.list;
+				 let outTotal = 0;
+				 let inTotal = 0;
+				 visitorList.forEach(function(value, key){
+					 inTotal += value.flowInNum;
+					 outTotal += value.flowOutNum;
+				 })
+				 if(peopleList[peopleList.length - 1].date != nowDate){
+					 let peopleItem = {
+						 date: nowDate,
+						 inTotal: inTotal,
+						 outTotal: outTotal
+					 }
+					 peopleList.push(peopleItem);
+				 }else{
+					 peopleList[peopleList.length - 1].inTotal = inTotal;
+					 peopleList[peopleList.length - 1].outTotal = outTotal;
+				 }
+				 
+				 fs.writeFile(path.resolve(__dirname, './jsonData/xwhInPeople.json'), JSON.stringify({
+				 	peopleList: peopleList
+				 }),function(err){
+				 	if(err){
+				 		console.error(err);
+				 		return;
+				 	}
+				 })
+			})
+			.catch(function(err){
+				console.log(err);
+			})
+	})
+})
+
+// 获取七日客流量
+router.get('/getInPeopleInfo', async function(req, res){
+	fs.readFile(path.resolve(__dirname, './jsonData/xwhInPeople.json'), 'utf8', function(err, data){
+		if(err){
+	        return console.error(err);
+		}
+		data = JSON.parse(data);
+		let peopleList = data;
+		res.send(peopleList);
+	})
+})
 
 
+// 获取所有码头退款信息
 router.get('/getDeviceShipRefundInfo', async function(req, res) {
 	var leaseArr = [];
 	getBoatRefundInfo('f57419d544e741838fb789056f63ee80', function(res1) {
@@ -1958,6 +2079,57 @@ router.get('/getMinOutline', async function(req, res) {
 		})
 	})
 })
+
+router.get('/getLastWeather', async function(req, res){
+	fs.readFile(path.resolve(__dirname, './jsonData/xwhLastWeather.json'), 'utf8', function(err, data){
+		if(err){
+	        return console.error(err);
+		}
+		data = JSON.parse(data);
+		let weatherList = data.weatherList;
+		res.send(weatherList);
+	})
+})
+
+function getWeatherInfo(success){
+	const options = {
+		hostname: 'node.smart-ideas.com.cn',
+		port: '3001',
+		path: '/datav/common/weather/v1/weatherInfo?city=110106',
+		method: 'GET'
+	};
+	
+	var buffers = [];
+	var nread = 0;
+	const req = http.request(options, (res1) => {
+		res1.on('data', (d) => {
+			buffers.push(d);
+			nread += d.length;
+		});
+		
+		res1.on('end', () => {
+			var buffer = null;
+			switch(buffers.length) {
+				case 0: buffer = new Buffer(0);
+					break;
+				case 1: buffer = buffers[0];
+					break;
+				default:
+					buffer = new Buffer(nread);
+					for (var i = 0, pos = 0, l = buffers.length; i < l; i++) {
+						var chunk = buffers[i];
+						chunk.copy(buffer, pos);
+						pos += chunk.length;
+					}
+				break;
+			}
+			var res1 = JSON.parse(buffer.toString());
+			success(res1);
+		})
+	});
+	
+	req.end();
+}
 
 // 获取数组中最小值
 function getMinItem(mtList) {

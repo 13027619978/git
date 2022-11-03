@@ -145,6 +145,72 @@ router.get('/writeAccount',async function(req, res){
 	}
 });
 
+// 获取门票概率信息
+router.get('/getTicketInfo', async function(req, res){
+	let path = require('path');
+	fs.readFile(path.resolve(__dirname, './jsonData/ticketProbability.json'), 'utf8', function(err, data){
+		if(err){
+			console.error(err);
+			res.send({
+				"success": "fail",
+				"msg": "查询失败"
+			});
+			return;
+		}
+		data = JSON.parse(data);
+		var ybyTicket = data.ybyTicket;  // 同程
+		var fhlTicket = data.fhlTicket;  // 测试
+		var ymyTicket = data.ymyTicket;  // 暂无
+		var yjTicket = data.yjTicket;  // 暂无
+		var ticketArr = [
+			{
+				name: 'yby',
+				ticket: ybyTicket
+			},
+			{
+				name: 'ymy',
+				ticket: ymyTicket
+			},
+			{
+				name: 'fhl',
+				ticket: fhlTicket
+			},
+			{
+				name: 'yj',
+				ticket: yjTicket
+			}
+		]
+		var ticketNumber = Math.floor(Math.random() * (100 - 0)) + 0;
+		var ticketItem = {};
+		if(ticketNumber < parseInt(ticketArr[0].ticket)){
+			ticketItem = ticketArr[0];
+		}else if(parseInt(ticketArr[0].ticket) <= ticketNumber && ticketNumber < parseInt(ticketArr[0].ticket) + parseInt(ticketArr[1].ticket)){
+			ticketItem = ticketArr[1];
+		}else if(parseInt(ticketArr[0].ticket) + parseInt(ticketArr[1].ticket) <= ticketNumber && ticketNumber < parseInt(ticketArr[0].ticket) + parseInt(ticketArr[1].ticket) + parseInt(ticketArr[2].ticket)){
+			ticketItem = ticketArr[2];
+		}else if(parseInt(ticketArr[0].ticket) + parseInt(ticketArr[1].ticket) + parseInt(ticketArr[2].ticket) <= ticketNumber && ticketNumber < parseInt(ticketArr[0].ticket) + parseInt(ticketArr[1].ticket) + parseInt(ticketArr[2].ticket) + parseInt(ticketArr[3].ticket)){
+			ticketItem = ticketArr[3];
+		}
+		let url = '';
+		if(ticketItem.name == 'yby'){
+			// 同程
+			url = 'http://boss.smart-ideas.com.cn/xhgTicketProbability/tc.html';
+		}else if(ticketItem.name == 'fhl'){
+			// 测试
+			url = 'https://boss.smart-ideas.com.cn/ticket-web?enterpriseCode=TgsEpcXhg&ticketGroupNum=TGN20210628140233051';
+		}else if(ticketItem.name == 'ymy'){
+			// 测试
+			url = 'http://boss.smart-ideas.com.cn/xhgTicketProbability/yj.html';
+		}
+		
+		res.redirect(url);
+		// res.send({
+		// 	"success": "true",
+		// 	"msg": "查询成功",
+		// 	"data": url
+		// })
+	})
+})
 
 // 获取门票概率信息
 router.get('/getTicketProbability', async function(req, res){

@@ -1281,7 +1281,7 @@ function scheduleStart(){
 				yby.getCheckTicketInfo('TgsEpcYby', 'TGN20201210095942945', ybybsRoom);
 				boss.getBossYYInfo('TgsEpcYby', 'TGN20201210095942945', ybybsRoom);
 				// yby.getYbyOtaInfo(ybybsRoom);
-				if(parseInt(hour) == 11){
+				if(parseInt(hour) == 11 || parseInt(hour) == 14){
 					yby.getTicketsIncome(ybybsRoom);
 				}
 				

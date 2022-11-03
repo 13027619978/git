@@ -4,6 +4,8 @@ const host = "hd.smart-ideas.com.cn";
 const xwh = require('../common/xwh.js');
 const xhg = require('../common/xhg.js');
 const fhl = require('../common/fhl.js');
+const yby = require('../common/yby.js');
+const boss = require('../common/boss.js');
 
 
 async function testRoomDeal(msg){
@@ -18,6 +20,10 @@ async function testRoomDeal(msg){
 		fromName = contact.name();
 	}
 	if(msg.type() == wechat.bot.Message.Type.Text){
+		if(content == '园博园报数'){
+			yby.getTicketsIncome1(room);
+		}
+		
 		if(content == '凤凰岭京津冀报数'){
 			fhl.getJJJInfo(room);
 		}

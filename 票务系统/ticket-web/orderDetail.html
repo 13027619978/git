@@ -26,7 +26,7 @@
 				</div>
 				<div class="ticketView">
 					<div class="ticketNumber checkItem">
-						<p class="desc">检票次数：</p>
+						<p class="desc checkNumber">检票次数：</p>
 						<p class="checkQuantity"></p>
 					</div>
 					<div class="ticketTime">
@@ -85,7 +85,7 @@
 				
 				<!-- 检票详情 -->
 				<div class="checkView">
-					<a class="detailBtn" href="javascript:;" onclick="detailClick(this)"><p>查看检票详情</p><img src="img/down_icon.png" ></a>
+					<a class="detailBtn" href="javascript:;" onclick="detailClick(this)"><p class="checkDetail">查看检票详情</p><img src="img/down_icon.png" ></a>
 					<div class="checkList list">
 						<p class="noData">--暂无检票信息--</p>
 						<!-- <div class="check">
@@ -146,7 +146,12 @@
 				var ticketId = app.getQueryString('ticketId').split('/')[1];
 				
 				if(app.getCookie('enterpriseCode') == 'TgsEpcYby'){
-					$('.mpDetail').text('查看预约详情')
+					$('.mpDetail').text('查看预约详情');
+					$('.checkDetail').text('查看入园详情');
+					$('.checkNumber').text('入园次数');
+					$('.refundBtn').text('取消预约');
+					$('.homeBtn').text('继续预约');
+					$('.noData').text('无入园信息');
 				}
 				
 				var openid = app.getCookie('openid');
@@ -159,6 +164,9 @@
 					console.log(res);
 					if(res.success){
 						var orderInfo = res.data;
+						if(orderInfo.totalPrice == 0){
+							$('.priceView').hide();
+						}
 						$('.price').text('￥' + orderInfo.totalPrice);
 						$('.checkQuantity').text(orderInfo.checkQuantity);
 						$('.visitDate').text(orderInfo.visitDate);
@@ -271,7 +279,7 @@
 								ticketView = '<div class="ticket">' +
 									'<p class="ticketName">'+ value.groupName +'</p>' +
 									'<div class="ticketInfo">' +
-										'<p class="desc">检票次数：</p>' +
+										'<p class="desc">入园次数：</p>' +
 										'<p>'+ value.checkQuantity +'</p>' +
 									'</div>' +
 									'<div class="ticketInfo">' +
@@ -279,7 +287,7 @@
 										'<p>'+ value.restCheckQuantity +'</p>' +
 									'</div>' +
 									'<div class="ticketInfo">' +
-										'<p class="desc">检票时间：</p>' +
+										'<p class="desc">入园时间：</p>' +
 										'<p>'+ value.checkStartTime + '至' + value.checkEndTime +'</p>' +
 									'</div>' +
 								'</div>';
@@ -315,9 +323,9 @@
 							height: 150
 						});
 						if(app.getCookie('enterpriseCode') == 'TgsEpcYby'){
-							if(new Date().getMonth() + 1 == 10 && new Date().getDate() < 8){
-								$('.ybyImgView').css({'display': 'flex'});
-							}
+							// if(new Date().getMonth() + 1 == 10 && new Date().getDate() < 8){
+							// 	$('.ybyImgView').css({'display': 'flex'});
+							// }
 							if(orderInfo.categoryName == '年票'){
 								$('.checkItem').hide();
 								$('.headPic').show();
@@ -415,29 +423,57 @@
 						if(checkList.length > 0){
 							checkList.forEach(function(value, key){
 								var checkType;
-								if(value.checkWay == 'brake'){
-									checkType = '闸机检票';
-								}else if(value.checkWay == 'pos'){
-									checkType = 'POS检票';
+								
+								if(app.getCookie('enterpriseCode') == 'TgsEpcYby'){
+									if(value.checkWay == 'brake'){
+										checkType = '闸机入园';
+									}else if(value.checkWay == 'pos'){
+										checkType = 'POS入园';
+									}else{
+										checkType = '管理员入园';
+									}
+									$('.checkList').append(
+										'<div class="check">' +
+											'<div class="checkInfo">' +
+												'<p class="desc">入园方式：</p>' +
+												'<p>'+ checkType +'</p>' +
+											'</div>' +
+											'<div class="checkInfo">' +
+												'<p class="desc">入园次数：</p>' +
+												'<p>'+ value.checkQuantity +'</p>' +
+											'</div>' +
+											'<div class="checkInfo">' +
+												'<p class="desc">入园时间：</p>' +
+												'<p>'+ value.checkTime +'</p>' +
+											'</div>' +
+										'</div>'
+									)
 								}else{
-									checkType = '管理员检票';
+									if(value.checkWay == 'brake'){
+										checkType = '闸机检票';
+									}else if(value.checkWay == 'pos'){
+										checkType = 'POS检票';
+									}else{
+										checkType = '管理员检票';
+									}
+									$('.checkList').append(
+										'<div class="check">' +
+											'<div class="checkInfo">' +
+												'<p class="desc">检票方式：</p>' +
+												'<p>'+ checkType +'</p>' +
+											'</div>' +
+											'<div class="checkInfo">' +
+												'<p class="desc">检票次数：</p>' +
+												'<p>'+ value.checkQuantity +'</p>' +
+											'</div>' +
+											'<div class="checkInfo">' +
+												'<p class="desc">检票时间：</p>' +
+												'<p>'+ value.checkTime +'</p>' +
+											'</div>' +
+										'</div>'
+									)
 								}
-								$('.checkList').append(
-									'<div class="check">' +
-										'<div class="checkInfo">' +
-											'<p class="desc">检票方式：</p>' +
-											'<p>'+ checkType +'</p>' +
-										'</div>' +
-										'<div class="checkInfo">' +
-											'<p class="desc">检票次数：</p>' +
-											'<p>'+ value.checkQuantity +'</p>' +
-										'</div>' +
-										'<div class="checkInfo">' +
-											'<p class="desc">检票时间：</p>' +
-											'<p>'+ value.checkTime +'</p>' +
-										'</div>' +
-									'</div>'
-								)
+								
 							})
 						}else{
 							$('.noData').show();
@@ -482,7 +518,11 @@
 			function refundClick(totalPrice){
 				var ticketOrderId = app.getQueryString('ticketId').split('/')[1];
 				layer.load(2);
-				layer.confirm('是否确认申请退票。', {
+				let refundTxt = '是否确认申请退票';
+				if(app.getCookie('enterpriseCode') == 'TgsEpcYby'){
+					refundTxt = '是否确认取消预约';
+				}
+				layer.confirm(refundTxt, {
 				    btn: ['确认','取消'],
 				    yes: function(){
 						layer.load(2);

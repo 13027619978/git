@@ -88,6 +88,20 @@
 								</div>
 							</div>
 							
+							<div class="ywrView">
+								<p>游玩人信息</p>
+								<div class="ywrInfo">
+									<div class="ywrItem">
+										<p>姓名：</p>
+										<input class="userName" type="text" placeholder="请输入游玩人姓名">
+									</div>
+									<div class="ywrItem">
+										<p>手机号：</p>
+										<input class="phone" type="number" placeholder="请输入游玩人手机号">
+									</div>
+								</div>
+							</div>
+							
 							<div class="numberView">
 								<p>数量</p>
 								<div class="number">
@@ -381,6 +395,16 @@
 				var ticketsNumber = $('.num').val();
 				var price = getTotalPrice(ticketsNumber);
 				var openid = app.getCookie('openid');
+				var userName = $('.userName').val();
+				var phone = $('.phone').val();
+				if(phone.length != 11){
+					layer.alert('请先输入正确的手机号');
+					return;
+				}
+				if(!userName){
+					layer.alert('请先输入联系人姓名');
+					return;
+				}
 				if(kc == 0 || !kc){
 					layer.alert('当前库存不足，请选择其他时间预约');
 					return;
@@ -426,6 +450,8 @@
 					totalMoney: price,
 					type: ticketsType,
 					visitDate: visitDate,
+					userName: userName,
+					phone: phone,
 					sessionId: sessionId
 				};
 				wxPay(params, that);

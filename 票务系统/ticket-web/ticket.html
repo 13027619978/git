@@ -10,6 +10,11 @@
 		<link rel="stylesheet" href="./css/cropper.min.css">
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/ticket.css?V=1.0.0">
+		<style type="text/css">
+			.fhlView{
+				display: none;
+			}
+		</style>
 		<title>提交订单</title>
 	</head>
 	<body>
@@ -97,6 +102,24 @@
 					</div> -->
 				</div>
 			</div>
+			
+			<div class="yqView fhlView">
+				<div class="radioItem">
+					<div>7天内是否有京外旅居史</div>
+					<div class="radioView">
+						<label for="lxs1"><input type="radio" id="lxs1" name="lxs" value="0">是</label>
+						<label for="lxs2"><input type="radio" id="lxs2" name="lxs" value="1">否</label>
+					</div>
+				</div>
+				<div class="radioItem">
+					<div>72小时内核酸检测结果是否阳性</div>
+					<div class="radioView">
+						<label for="sfyx1"><input type="radio" id="sfyx1" name="sfyx" value="0">是</label>
+						<label for="sfyx2"><input type="radio" id="sfyx2" name="sfyx" value="1">否</label>
+					</div>
+				</div>
+			</div>
+			
 			
 			<!-- 疫情防控 -->
 			<div class="yqView">
@@ -276,6 +299,7 @@
 					// 隐藏购票须知
 					$('.noticeView').hide();
 					$('.yqView').hide();
+					$('.fhlView').show();
 					$('.fhlSelect').append(
 						'<option value ="0">7:00-10:00</option>' +
 						'<option value ="0">10:00-12:00</option>' +
@@ -997,6 +1021,27 @@
 							return;
 						}
 					}
+				}else{
+					// 疫情防控
+					var lxs = $('input[name="lxs"]:checked').val();
+					var sfyx = $('input[name="sfyx"]:checked').val();
+					console.log(lxs);
+					if(lxs && sfyx){
+						if(lxs == '0' || sfyx == '0'){
+							layer.alert('建议您向社区报到并进行相关隔离防护, 谢谢您的配合');
+							return;
+						}
+					}else{
+						if(!lxs){
+							layer.alert('请确认您是否有7天内京外旅居史');
+							return;
+						}
+						if(!sfyx){
+							layer.alert('请确认您72小时内核酸检测结果是否阳性');
+							return;
+						}
+					}
+					
 				}
 				
 				// 禁用支付按钮

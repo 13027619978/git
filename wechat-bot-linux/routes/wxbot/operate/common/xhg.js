@@ -369,7 +369,7 @@ function getActiveTicketsInfo(success){
 					npMoney += value.checkMoney*1;
 				}
 				
-				if(value.name.indexOf('368元露营套票') != -1){
+				if(value.name == '368元露营套票'){
 					activeTicketList[1].checkQuantity += value.checkQuantity*1;
 					activeTicketList[1].checkMoney = parseFloat(activeTicketList[1].checkMoney*1 + value.checkMoney*1).toFixed(2);
 				}
