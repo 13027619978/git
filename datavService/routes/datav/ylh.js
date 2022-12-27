@@ -260,7 +260,7 @@ let path = require('path');
 // 		}
 // 		data = JSON.parse(data);
 // 		var ticketList = data;
-// 		for(var i = 0; i < 1000; i++){
+// 		for(var i = 0; i < 2000; i++){
 // 			var ticketItem = {};
 // 			ticketItem.password = randomPassword();
 // 			ticketList.push(ticketItem);

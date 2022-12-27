@@ -287,7 +287,7 @@
 .itemInfo .imgView p{
 	font-size: 14px;
 	color: #D3D4D3;
-	flex: 0 0 115px;
+	flex: 0 0 165px;
 	 text-align: left;
 }
 .itemInfo .imgView img{
@@ -301,6 +301,27 @@
 	bottom: 0;
 	top: 0;
 	opacity: 0;
+}
+.itemInfo .smCode{
+	padding-left: 20px;
+	text-align: center;
+}
+.itemInfo>input{
+	height: 35px;
+	flex: 1;
+	border: none;
+}
+.itemInfo a{
+	display: block;
+	flex: 0 0 130px;
+	line-height: 35px;
+	background-color: #00B3FD;
+	color: #fff;
+	text-align: center;
+}
+.itemInfo .smBtn.disabled{
+	color: #666;
+	background-color: #ddd;
 }
 
 /* 在线支付 */

@@ -199,7 +199,7 @@ router.get('/getTicketInfo', async function(req, res){
 			// 测试
 			url = 'https://boss.smart-ideas.com.cn/ticket-web?enterpriseCode=TgsEpcXhg&ticketGroupNum=TGN20210628140233051';
 		}else if(ticketItem.name == 'ymy'){
-			// 测试
+			// 宇嘉
 			url = 'http://boss.smart-ideas.com.cn/xhgTicketProbability/yj.html';
 		}
 		

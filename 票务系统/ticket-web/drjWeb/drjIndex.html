@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta http-equiv="Expires" content="0">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-control" content="no-cache">
+		<meta http-equiv="Cache" content="no-cache">
+		<link rel="stylesheet" href="../css/swiper.min.css">
+		<link rel="stylesheet" href="../css/reset.css">
+		<style type="text/css">
+			.container{
+				background: url(../img/drjImg/index-bg.jpg) no-repeat top #f9f4ea;
+				background-size: 100% auto;
+				width: 100%;
+				height: 100vh;
+			}
+			.title{
+				text-align: center;
+				color: #fffeee;
+				font-size: 16px;
+				letter-spacing: 3px;
+				padding: 25px 0 20px 0;
+			}
+			
+			.bannerView{
+				padding: 0 10px;
+			}
+			.swiper-container {
+			    width: 100%;
+			    height: 175px;
+				border-radius: 5px;
+				overflow: hidden;
+			}  
+			.swiper-wrapper{
+				width: 100%;
+			}
+			.swiper-wrapper img{
+				width: 100%;
+				height: 100%;
+			}
+			
+			.content{
+				padding: 0 10px;
+			}
+			.listView{
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+				background-color: #fff;
+				padding: 10px 0;
+				margin-top: 10px;
+				border-radius: 5px;
+			}
+			.listView a{
+				display: block;
+				width: 16%;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				font-size: 12px;
+				color: #333;
+			}
+			.listView a img{
+				width: 53px;
+				margin-bottom: 5px;
+			}
+			
+			.imgView{
+				background-color: #fff;
+				margin-top: 10px;
+				border-radius: 5px;
+				padding: 5px;
+			}
+			.imgList{
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+			}
+			.imgList a{
+				display: block;
+				line-height: 25px;
+				padding: 0 10px;
+				font-size: 13px;
+				color: #616161;
+			}
+			.imgList a.active{
+				color: red;
+			}
+			.imgContent{
+				padding: 0 10px;
+				margin: 5px 0;
+			}
+			.imgView img{
+				width: 100%;
+			}
+			
+			.noticeView{
+				margin-top: 10px;
+				border-top: 1px solid #d4d2d0;
+				border-bottom: 1px solid #d4d2d0;
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+				background-color: #fff;
+				padding: 10px 0;
+			}
+			.noticeIcon{
+				width: 30px;
+				padding: 0 5px;
+			}
+			.noticeIcon img{
+				width: 100%;
+			}
+			.noticeBox{
+				flex: 1;
+				overflow: hidden;
+				margin-right: 6px;
+			}
+			.noticeContent{
+				word-break: keep-all;
+				white-space: nowrap;
+				font-size: 12px;
+				animation: runAnimate 10s linear infinite both;
+				animation-duration: 20.5537s;
+				animation-play-state: running;
+				padding-left: 100%;
+				display: flex;
+				flex-direction: row;
+				flex-wrap: nowrap;
+			}
+
+			@keyframes runAnimate{
+				0%{
+					transform: translateZ(0);
+				}
+				100%{
+					transform: translate3d(-100%,0,0);
+				}
+			}
+			
+			.swiper-pagination-bullet-active{
+				background-color: hsla(0,0%,100%,.8);
+			}
+			
+		</style>
+		<title>狄仁杰文化公园</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="topView">
+				<div class="title">
+					狄仁杰文化公园<br>狄梁公祠+狄公故居
+				</div>
+				<div class="bannerView">
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide">
+								<img src="../img/drjImg/banner1.jpg" >
+							</div>
+							<div class="swiper-slide">
+								<img src="../img/drjImg/banner2.jpg" >
+							</div>
+						</div>
+						<div class="swiper-pagination">
+							
+						</div>
+					</div>
+				</div>
+				
+				<div class="noticeView">
+					<span class="noticeIcon"><img src="../img/drjImg/notice-icon.png" ></span>
+					<div class="noticeBox">
+						<div class="noticeContent">
+							<span>公园有序恢复开放，请各位游客朋友全程自觉佩戴口罩并与他人保持安全游览距离。感谢您的配合，祝您参观愉快!</span>
+						</div>
+					</div>
+				</div>
+				
+				<div class="content">
+					<div class="listView">
+						<a href="javascript:;" class="buyTicket" onclick="yyClick()">
+							<img src="../img/drjImg/index-icon-1.d92a572c.png" >
+							<p>个人预约</p>
+						</a>
+						<a href="drjtd.html" class="buyTicket">
+							<img src="../img/drjImg/index-icon-2.2a4c21f9.png" >
+							<p>团队预约</p>
+						</a>
+						<a href="drjzg.html">
+							<img src="../img/drjImg/index-icon-3.5f489878.png" >
+							<p>展馆通知</p>
+						</a>
+						<a href="drjjq.html">
+							<img src="../img/drjImg/index-icon-4.fc5aba85.png" >
+							<p>景区介绍</p>
+						</a>
+					</div>
+					
+					<div class="imgView">
+						<div class="imgList">
+							<a class="active" href="javascript:;" onclick="tabClick(1, this)">狄梁公祠</a>
+							<a href="javascript:;" onclick="tabClick(2, this)">狄公故居</a>
+						</div>
+						<div class="imgContent">
+							<img src="../img/drjImg/banner3.jpg" >
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script src="../js/jquery-2.1.4.min.js"></script>
+		<script src="../js/swiper.min.js"></script>
+		<script src="../layer/layer.js"></script>
+		<script src="../js/app.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				app.wxUserInfo(function(){
+					$('.noticeContent').width($('.noticeBox span').width());
+				});
+			})
+			
+			function yyClick(){
+				app.getAjax('ticketInfo/getSalesList', {
+					enterpriseCode: app.getCookie('enterpriseCode'),
+					ticketGroupNum: app.getCookie('ticketGroupNum'),
+					ticketSalesChannelsNum: 'WEB'
+				}, function(res){
+					layer.closeAll();
+					if(res.code == '10000'){
+						window.location.href = 'drjTicket.html';
+					}else if(res.code == '40002'){
+						layer.alert('公园受疫情影响闭园闭馆中，给您带来的不便敬请谅解。');
+					}else{
+						layer.msg(res.msg);
+					}
+				})
+			}
+			
+			var mySwiper = new Swiper ('.swiper-container', {
+				loop: true, // 循环模式选项
+				autoplay: {
+					delay: 3000
+				},
+				pagination: {
+				  el: ".swiper-pagination",
+				}
+			})
+				
+			function tabClick(tab, that){
+				$(that).addClass('active').siblings().removeClass('active');
+				if(tab == 1){
+					$('.imgContent img').attr('src', '../img/drjImg/banner3.jpg');
+				}else{
+					$('.imgContent img').attr('src', '../img/drjImg/banner4.jpg');
+				}
+			}
+		</script>
+	</body>
+</html>

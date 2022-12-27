@@ -1,6 +1,8 @@
 var express=require('express');
 var router = express.Router();
 var wechat = require('./wxbot/operate/mybot.js');
+
+
 router.get('/sendMsg', async function(req,res){
 	var name = req.query.name;
 	var phone = req.query.phone;

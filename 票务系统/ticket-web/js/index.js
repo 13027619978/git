@@ -119,6 +119,8 @@ function getSaleInfoList(enterpriseCode, ticketGroupNum){
 			if(!scenicData.mark){
 				$('.scenicDesc').hide();
 			}
+			// 节假日
+			var holiday = ['12-24', '12-25', '12-31', '1-1', '1-2', '1-7', '1-8', '1-14', '1-15', '1-21', '1-22', '1-23', '1-24', '1-25', '1-26', '1-27', '2-4', '2-5', '2-11', '2-12', '2-18', '2-19', '2-25', '2-26', '3-4', '3-5', '3-11', '3-12', '3-18', '3-19', '3-25', '3-26', '4-1', '4-2', '4-5', '4-8', '4-9'];
 			var saleInfoList = scenicData.ticketSalesInfoList;
 			saleInfoList.forEach(function(value, key){
 				var nowDate = new Date().getTime();
@@ -132,7 +134,6 @@ function getSaleInfoList(enterpriseCode, ticketGroupNum){
 					var nowMonth = new Date().getMonth() + 1;
 					var nowDay = new Date().getDate();
 					var nowTime = nowMonth + '-' + nowDay;
-					var holiday = [];
 					var door = app.getCookie('door');
 					if(holiday.indexOf(nowTime) != -1){
 						if(ticketName.indexOf('节假日') != -1){
@@ -211,7 +212,6 @@ function getSaleInfoList(enterpriseCode, ticketGroupNum){
 								}else if(door == 7){
 									if(value.ticketName.indexOf('七号') != -1){
 										$('.ticketList').append(ticketItem);
-										console.log('123');
 									}
 								}else if(door == 8){
 									if(value.ticketName.indexOf('八号') != -1){
@@ -417,8 +417,6 @@ function getSaleInfoList(enterpriseCode, ticketGroupNum){
 					ticketItem += '</div></div>';
 					
 					$('.ticketList').append(ticketItem);
-					// $('.ticketList').append(ticketItem);
-					// $('.ticketDesc').eq(key).html(value.description);
 				}else{
 					var ticketItem = '<div class="ticketItem">' +
 					'<div class="itemLeft">' +

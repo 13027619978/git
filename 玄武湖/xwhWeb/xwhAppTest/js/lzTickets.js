@@ -12,9 +12,9 @@ $(function(){
 	var nextSun = 7;
 	if(nowWeek == 6){
 		if(nowHour == 17 && nowMinutes >= 30){
-			$('.timeBtn').eq(0).attr('onclick', 'unChoose()').addClass('disabled');
+			$('.timeBtn').eq(0).attr('onclick', 'closeClick()').addClass('disabled');
 		}else if(nowHour > 17){
-			$('.timeBtn').eq(0).attr('onclick', 'unChoose()').addClass('disabled');
+			$('.timeBtn').eq(0).attr('onclick', 'closeClick()').addClass('disabled');
 		}
 	}
 	if(nowWeek == 7 && nowHour >= 17){
@@ -27,7 +27,7 @@ $(function(){
 		}else{
 			
 		}
-		// $('.timeBtn').attr('onclick', 'unChoose()').addClass('disabled');
+		// $('.timeBtn').attr('onclick', 'closeClick()').addClass('disabled');
 		
 	}
 	var nowDateNum = new Date().getTime();
@@ -48,10 +48,10 @@ $(function(){
 		$('.timeBtn').eq(0).text(satTime +' 16:00-17:30 库存：' + satLast)
 		$('.timeBtn').eq(1).text(sunTime +' 16:00-17:30 库存：' + sunLast)
 		if(satLast == 0){
-			$('.timeBtn').eq(0).attr('onclick', 'unChoose()').addClass('disabled');
+			$('.timeBtn').eq(0).attr('onclick', 'closeClick()').addClass('disabled');
 		}
 		if(sunLast == 0){
-			$('.timeBtn').eq(1).attr('onclick', 'unChoose()').addClass('disabled');
+			$('.timeBtn').eq(1).attr('onclick', 'closeClick()').addClass('disabled');
 		}
 	})
 	
@@ -73,7 +73,7 @@ function getDateString(time){
 	return yearString + '-' + monthString + '-' + dayString;
 }
 
-function unChoose(){
+function closeClick(){
 	layer.alert('无法选择当前场次');
 }
 

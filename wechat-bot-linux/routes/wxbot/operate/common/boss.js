@@ -299,7 +299,7 @@ function getBossYYInfo(enterpriseCode, ticketGroupNum, room){
 			var totalNumber = 0;
 			checkList.forEach(function(value, key){
 				if(enterpriseCode == 'TgsEpcSh'){
-					if(new Date(value.appointDate) <= new Date('2022-02-03')){
+					if(new Date(value.appointDate) <= new Date('2023-03-03')){
 						botString += value.appointDate + '：' + value.appointQuantity + '人\n';
 					}
 				}else{
@@ -1318,6 +1318,8 @@ function getParkName(enterpriseCode, ticketGroupNum){
 		parkName = '水上公园';
 	}else if(enterpriseCode == 'TgsEpcBgslgy'){
 		parkName = '北宫森林公园';
+	}else if(enterpriseCode == 'TgsEpcBxyyz'){
+		parkName = '紫竹院';
 	}
 	return parkName;
 }

@@ -92,14 +92,27 @@ router.get('/getOutPeopleInfo', async function(reqon, res){
 						break;
 					}
 					var res1 = JSON.parse(buffer.toString());
-					var qhIn = res1.content[1].out;
-					var hhIn = res1.content[0].out;
-					var qhOut = res1.content[1].in - qhIn;
-					qhOut = qhOut>0?qhOut:0;
-					var hhOut = res1.content[0].in - hhIn;
-					hhOut = hhOut>0?hhOut:0;
-					var qhsjOut = res1.content[1].in;
-					var hhsjOut = res1.content[0].in;
+					console.log(res1);
+					var qhIn;
+					var hhIn;
+					var qhOut;
+					var hhOut;
+					var qhsjOut;
+					var hhsjOut;
+					res1.content.forEach(function(value, key){
+						if(value.instanceTitle == '前海'){
+							qhIn = value.in;
+							qhOut = value.out - value.in;
+							qhOut = qhOut>0?qhOut:0;
+							qhsjOut = value.out;
+						}
+						if(value.instanceTitle == '后海'){
+							hhIn = value.in;
+							hhOut = value.out - value.in;
+							hhOut = hhOut>0?hhOut:0;
+							hhsjOut = value.out;
+						}
+					})
 					fs.readFile(path.resolve(__dirname, './jsonData/schOutCount.json'), 'utf8', function(err, data){
 						if(err){
 					        return console.error(err);
@@ -128,7 +141,6 @@ router.get('/getOutPeopleInfo', async function(reqon, res){
 			req.end();
 		})
 	}catch(e){
-		console.log(e);
 		res.send({
 			qhOut: 0,
 			hhOut: 0,
@@ -335,11 +347,17 @@ router.get('/writeIcePeople', async function (req, res){
 	let currDate = encodeURI(nowYear + '-' + nowMonth + '-' + nowDay + ' ' + nowHour + ':' + nowMinutes + ':' + nowSeconds);
 	let dateString = nowYear + '-' + nowMonth + '-' + nowDay + ' ' + nowHour + ':' + nowMinutes + ':' + nowSeconds;
 	try{
-		getTotalPeopleInfo(function(totalIn){
-			getTotalOutPeopleInfo(function(totalOut){
+		getTotalPeopleInfo(function(totalIn, qhIn, hhIn, shIn){
+			getTotalOutPeopleInfo(function(totalOut, qhOut, hhOut, shOut){
 				let nowIcePeople = parseInt(totalIn) - parseInt(totalOut);
 				console.log(nowIcePeople);
 				nowIcePeople = nowIcePeople>0?nowIcePeople:0;
+				let qhNow = qhIn - qhOut;
+				qhNow = qhNow>0?qhNow:0;
+				let hhNow = hhIn - hhOut;
+				hhNow = hhNow>0?hhNow:0;
+				let shNow = shIn - shOut;
+				shNow = shNow>0?shNow:0;
 				fs.readFile(path.resolve(__dirname, './jsonData/schIcePeople.json'), 'utf8', function(err, data){
 					if(err){
 				        return console.error(err);
@@ -348,40 +366,110 @@ router.get('/writeIcePeople', async function (req, res){
 					let icePeople = data.value;
 					let oldDate = data.date.split(' ')[0];
 					let nowDateString = nowYear + '-' + nowMonth + '-' + nowDay;
-					if(nowIcePeople > icePeople || oldDate != nowDateString){
-						fs.writeFile(path.resolve(__dirname, './jsonData/schIcePeople.json'), JSON.stringify({
+					let qhValue = data.qhValue;
+					qhValue = qhValue?qhValue:0;
+					let hhValue = data.hhValue;
+					hhValue = hhValue?hhValue:0;
+					let shValue = data.shValue;
+					shValue = shValue?shValue:0;
+					
+					let jsonData = {};
+					if(oldDate != nowDateString){
+						jsonData = {
 							value: nowIcePeople,
-							date: dateString
-						}),function(err){
-							if(err){
-								console.error(err);
-								res.send({
-									"success": "fail",
-									"msg": "修改失败"
-								});
-								return;
-							}
-							res.send({
-								success: 'true',
-								msg: '修改成功',
-								data: {
-									value: nowIcePeople,
-									date: dateString
-								}
-							})
-						})
+							date: dateString,
+							qhValue: qhNow,
+							hhValue: hhNow,
+							shValue: shNow
+						}
 					}else{
+						qhNow = qhNow>qhValue?qhNow:qhValue;
+						hhNow = hhNow>hhValue?hhNow:hhValue;
+						shNow = shNow>shValue?shNow:shValue;
+						jsonData = {
+							value: nowIcePeople,
+							date: dateString,
+							qhValue: qhNow,
+							hhValue: hhNow,
+							shValue: shNow
+						}
+					}
+					
+					fs.writeFile(path.resolve(__dirname, './jsonData/schIcePeople.json'), JSON.stringify(jsonData),function(err){
+						if(err){
+							console.error(err);
+							res.send({
+								"success": "fail",
+								"msg": "修改失败"
+							});
+							return;
+						}
 						res.send({
 							success: 'true',
-							msg: '无需修改',
-							data: data
+							msg: '修改成功',
+							data: jsonData
 						})
-					}
+					})
 				})
 			})
 		})
 	}catch(e){
 		
+	}
+})
+
+// 获取门票概率信息
+router.get('/getTicketProbability', async function(req, res){
+	let path = require('path');
+	fs.readFile(path.resolve(__dirname, './jsonData/schProbability.json'), 'utf8', function(err, data){
+		if(err){
+			console.error(err);
+			res.send({
+				"success": "fail",
+				"msg": "查询失败"
+			});
+			return;
+		}
+		data = JSON.parse(data);
+		res.send({
+			"success": "true",
+			"msg": "查询成功",
+			"data": data
+		})
+	})
+})
+
+// 记录门票概率信息
+router.get('/writeTicketProbability', async function(req, res){
+	let tcTicket = req.query.tc;
+	let csTicket = req.query.cs;
+	if(tcTicket && csTicket){
+		let path = require('path');
+		let jsonData = {
+			tc: tcTicket,
+			cs: csTicket
+		}
+		fs.writeFile(path.resolve(__dirname, './jsonData/schProbability.json'), JSON.stringify(jsonData),function(err){
+			if(err){
+				console.error(err);
+				res.send({
+					"success": "fail",
+					"msg": "添加失败"
+				});
+				return;
+			}
+			res.send({
+				"success": "true",
+				"msg": "添加成功"
+			})
+			
+		})
+	}else{
+		res.send({
+			success: 'fail',
+			msg: '参数错误！',
+			data: {}
+		});
 	}
 })
 
@@ -403,7 +491,7 @@ function getTotalPeopleInfo(success){
 		let endDate = encodeURI(nowYear + '-' + nowMonth + '-' + nowDay + ' ' + nowHour + ':' + nowMinutes + ':' + nowSeconds);
 		const options = {
 			hostname: 'boss.smart-ideas.com.cn',
-			path: '/ticketApi/robotCollection/brakeData/get?enterpriseCode=TgsEpcSh&ticketGroupNum=TGN20211223142734998&startTime='+ startDate +'&endTime=' + endDate,
+			path: '/ticketApi/robotCollection/check/name/get?enterpriseCode=TgsEpcSh&ticketGroupNum=TGN20211223142734998&checkStartTime='+ startDate +'&checkEndTime=' + endDate,
 			method: 'GET'
 		};
 		
@@ -413,10 +501,22 @@ function getTotalPeopleInfo(success){
 				console.log(res);
 				let dataList = res.data;
 				let totalNumber = 0;
+				let qhIn = 0;
+				let hhIn = 0;
+				let shIn = 0;
 				dataList.forEach(function(value, key){
-					totalNumber += parseInt(value.inTotal);
+					totalNumber += parseInt(value.checkQuantity);
+					if(value.name.indexOf('前海') != -1){
+						qhIn += parseInt(value.checkQuantity);
+					}
+					if(value.name.indexOf('后海') != -1){
+						hhIn += parseInt(value.checkQuantity);
+					}
+					if(value.name.indexOf('速滑') != -1){
+						shIn += parseInt(value.checkQuantity);
+					}
 				})
-				success(totalNumber);
+				success(totalNumber, qhIn, hhIn, shIn);
 			});
 		});
 		
@@ -463,8 +563,9 @@ function getTotalOutPeopleInfo(success){
 				let res = JSON.parse(buffer.toString());
 				let qhOut = res.qhOut?res.qhOut:0;
 				let hhOut = res.hhOut?res.hhOut:0;
-				let totalOutPeople = parseInt(qhOut) + parseInt(hhOut);
-				success(totalOutPeople);
+				let shOut = res.shOut?res.shOut:0;
+				let totalOutPeople = parseInt(qhOut) + parseInt(hhOut) + parseInt(shOut);
+				success(totalOutPeople, qhOut, hhOut, shOut);
 			})
 		});
 		

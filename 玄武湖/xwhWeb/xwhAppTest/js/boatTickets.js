@@ -3,7 +3,7 @@ $(function(){
 	if(app.getQueryString('openid')){
 		app.setCookie('openid', app.getQueryString('openid'));
 	}
-	$('.num').val(1);
+	$('.num').val(0);
 	ticketsType = app.getQueryString('type');
 	if(ticketsType == '0'){
 		ticketsType = 1;
@@ -29,8 +29,6 @@ $(function(){
 	}else if(ticketsType == '17'){
 		ticketsType = 17;
 		$('.singlePrice').text('50元/张');
-		$('.shopPrice p').text('¥50');
-		$('.price font').text('50');
 	}
 })
 
@@ -47,7 +45,7 @@ function add(that){
 
 function sub(that){
 	var ticketsNumber = parseInt($(that).parent().find('input').val());
-	if(ticketsNumber > 1){
+	if(ticketsNumber > 0){
 		ticketsNumber -= 1;
 		$(that).parent().find('input').val(ticketsNumber);
 	}

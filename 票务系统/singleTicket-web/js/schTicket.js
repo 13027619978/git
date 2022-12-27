@@ -227,13 +227,13 @@ function addVisitor(){
 // 在线支付
 function payClick(){
 	// 疫情防控
-	var lxs =$('input[name="lxs"]:checked').val();
-	var jcs =$('input[name="jcs"]:checked').val();
+	// var lxs =$('input[name="lxs"]:checked').val();
+	// var jcs =$('input[name="jcs"]:checked').val();
 	
-	if(lxs == '0' || jcs == '0'){
-		layer.alert('请确认您是否存在中高风险地区旅行史和新冠检测阳性人员接触史');
-		return;
-	}
+	// if(lxs == '0' || jcs == '0'){
+	// 	layer.alert('请确认您是否存在中高风险地区旅行史和新冠检测阳性人员接触史');
+	// 	return;
+	// }
 	// 禁用支付按钮
 	$('.payBtn').attr('onclick', '');
 	

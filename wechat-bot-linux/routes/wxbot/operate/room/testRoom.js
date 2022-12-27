@@ -1,13 +1,11 @@
 var wechat = require('../mybot.js');
-const http = require('http');
-const host = "hd.smart-ideas.com.cn";
-const xwh = require('../common/xwh.js');
-const xhg = require('../common/xhg.js');
-const fhl = require('../common/fhl.js');
-const yby = require('../common/yby.js');
-const boss = require('../common/boss.js');
+const http = require('https');
+const host = "lease.smart-ideas.com.cn";
+const fs = require('fs');
 
-
+/********************/
+/***** 南湖自行车 *******/
+/********************/
 async function testRoomDeal(msg){
 	const content = msg.text();
 	const contact = msg.talker();
@@ -20,94 +18,112 @@ async function testRoomDeal(msg){
 		fromName = contact.name();
 	}
 	if(msg.type() == wechat.bot.Message.Type.Text){
-		if(content == '园博园报数'){
-			yby.getTicketsIncome1(room);
-		}
-		
-		if(content == '凤凰岭京津冀报数'){
-			fhl.getJJJInfo(room);
-		}
-		if(content == '玄武湖报数'){
-			xwh.getxwhInfo(host, room);
-		}
 		if(content == '使用方法'){
+			const roomTopic = await room.topic();
 			var botString = '机器人使用方法:\n----------\n';
-			botString += '1)查询设备通信通道\n';
-			botString += '2)切换sim\n';
-			botString += '3)切换mqtt';
+			botString += '1)车号xxx开锁\n';
+			botString += '2)手机号xxx按时间退款\n';
+			botString += '3)手机号xxx全额退款\n';
+			botString += '4)手机号xxx退款xxx\n';
+			botString += '5)车号xxx按时间退款\n';
+			botString += '6)车号xxx全额退款\n';
+			botString += '7)车号xxx退款xxx\n';
+			botString += '8)车号xxx报修\n';
+			botString += '9)车号xxx启用\n';
+			botString += '10)车号xxx查手机\n';
+			botString += '11)车号xxx已结订单退款xxx\n';
+			botString += '12)手机号xxx已结订单退款xxx\n';
 			room.say(botString);
 		}
 		
-		if(content == '鲜花港全平台报数'){
-			var enterpriseCode = 'TgsEpcXhg';
-			var ticketGroupNum = 'TGN20210628140233051';
-			xhg.getPeopleMoneyInfo(enterpriseCode, ticketGroupNum, room);
+		if(content.indexOf('车号') != -1 && content.indexOf('开锁') != -1){
+			var code = content.split('车号')[1].split('开锁')[0];
+			if(isNumber(code)){
+				sendCommand('open', host, room, code, contact);
+			}
 		}
 		
-		if(content == '查询设备通信通道'){
-			const options = {
-				hostname: host,
-				path: '/xwhpark/command/getSwitch',
-				method: 'GET'
-			};
-			
-			const req = http.request(options, (res) => {
-				res.on('data', (d) => {
-					var res = JSON.parse(d.toString());
-					room.say('当前设备通信通道:' + res.data + '\n' + res.msg);
-				});
-			});
-			
-			req.on('error', (e) => {
-			  console.error(`problem with request: ${e.message}`);
-			});
-			
-			req.end();
+		if(content.indexOf('手机号') != -1 && content.indexOf('按时间退款') != -1){
+			var phone = content.split('手机号')[1].split('按时间退款')[0];
+			if(isNumber(phone)){
+				refund(host, room, 1, phone, 1, 0, contact);
+			}
 		}
 		
-		if(content == '切换sim'){
-			const options = {
-				hostname: host,
-				path: '/xwhpark/command/switch?type=sim',
-				method: 'GET'
-			};
-			
-			const req = http.request(options, (res) => {
-				res.on('data', (d) => {
-					console.log(d);
-					var res = JSON.parse(d.toString());
-					room.say(res.msg);
-				});
-			});
-			
-			req.on('error', (e) => {
-			  console.error(`problem with request: ${e.message}`);
-			});
-			
-			req.end();
+		if(content.indexOf('手机号') != -1 && content.indexOf('全额退款') != -1){
+			var phone = content.split('手机号')[1].split('全额退款')[0];
+			if(isNumber(phone)){
+				refund(host, room, 1, phone, 2, 0, contact);
+			}
 		}
 		
-		if(content == '切换mqtt'){
-			const options = {
-				hostname: host,
-				path: '/xwhpark/command/switch?type=mqtt',
-				method: 'GET'
-			};
-			
-			const req = http.request(options, (res) => {
-				res.on('data', (d) => {
-					console.log(d);
-					var res = JSON.parse(d.toString());
-					room.say(res.msg);
-				});
-			});
-			
-			req.on('error', (e) => {
-			  console.error(`problem with request: ${e.message}`);
-			});
-			
-			req.end();
+		if(content.indexOf('手机号') != -1 && content.indexOf('退款') != -1 && content.indexOf('按时间') == -1 && content.indexOf('全额') == -1){
+			var phone = content.split('手机号')[1].split('退款')[0];
+			var money = content.split('退款')[1];
+			if(isNumber(phone) && isNumber(money)){
+				refund(host, room, 1, phone, 3, money, contact);
+			}
 		}
+		
+		if(content.indexOf('车号') != -1 && content.indexOf('按时间退款') != -1){
+			var code = content.split('车号')[1].split('按时间退款')[0];
+			if(isNumber(code)){
+				refund(host, room, 2, code, 1, 0, contact);
+			}
+		}
+		
+		if(content.indexOf('车号') != -1 && content.indexOf('全额退款') != -1){
+			var code = content.split('车号')[1].split('全额退款')[0];
+			if(isNumber(code)){
+				refund(host, room, 2, code, 2, 0, contact);
+			}
+		}
+		
+		if(content.indexOf('车号') != -1 && content.indexOf('退款') != -1 && content.indexOf('按时间') == -1 && content.indexOf('全额') == -1){
+			var code = content.split('车号')[1].split('退款')[0];
+			var money = content.split('退款')[1];
+			if(isNumber(code) && isNumber(money)){
+				refund(host, room, 2, code, 3, money, contact);
+			}
+		}
+		
+		if(content.indexOf('车号') != -1 && content.indexOf('报修') != -1){
+			var code = content.split('车号')[1].split('报修')[0];
+			if(isNumber(code)){
+				updateStatus(2, host, room, code, contact);
+			}
+		}
+		
+		if(content.indexOf('车号') != -1 && content.indexOf('启用') != -1){
+			var code = content.split('车号')[1].split('启用')[0];
+			if(isNumber(code)){
+				updateStatus(0, host, room, code, contact);
+			}
+		}
+		
+		if(content.indexOf('车号') != -1 && content.indexOf('查手机') != -1){
+			var code = content.split('车号')[1].split('查手机')[0];
+			if(isNumber(code)){
+				getLastedPhone(host, room, code, contact);
+			}
+		}	
+		
+		if(content.indexOf('车号') != -1 && content.indexOf('已结订单退款') != -1){
+			var code = content.split('车号')[1].split('已结订单退款')[0];
+			var money = content.split('已结订单退款')[1];
+			if(isNumber(code) && isNumber(money)){
+				refund(host, room, 2, code, 4, money, contact);
+			}
+		}	
+		
+		if (content.indexOf('手机号') != -1 && content.indexOf('已结订单退款') != -1) {
+			var phone = content.split('手机号')[1].split('已结订单退款')[0];
+			var money = content.split('已结订单退款')[1];
+			if (isNumber(phone) && isNumber(money)) {
+				refund(host, room, 1, phone, 4, money, contact);
+			}
+		}
+		
 	}else if(msg.type() == wechat.bot.Message.Type.Video){
 		console.log('~~~~~~~~~~视频消息~~~~~~~~~');
 
@@ -121,5 +137,175 @@ async function testRoomDeal(msg){
 		console.log('~~~~~~~~其它类型消息~~~~~~~');
 	}
 }
+
+// 完成救援
+function completeRescue(host, room, code, contact){
+	const options = {
+		hostname: host,
+		path: '/nhpark/deviceRobot/removeRescue?deviceSn='+ code,
+		method: 'GET'
+	};
+	
+	const req = http.request(options, (res) => {
+	    res.on('data', (d) => {
+			console.log(d);
+			var res = JSON.parse(d.toString());
+			room.say('\n车号:' + code + '\n' + res.msg);
+	    });
+	});
+	
+	req.on('error', (e) => {
+	  console.error(`problem with request: ${e.message}`);
+	});
+	
+	req.end();
+}
+
+function isNumber(val) {
+    var regPos = /^\d+(\.\d+)?$/; //非负浮点数
+    var regNeg = /^(-(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*)))$/; //负浮点数
+    if(regPos.test(val) || regNeg.test(val)) {
+    	return true;
+    } else {
+    	return false;
+    }
+}
+
+// 电瓶车&自行车开关锁
+function sendCommand(type, host, room, code, contact){
+	const options = {
+		hostname: host,
+		path: '/nhpark/deviceRobot/sendCommand?deviceSn='+ code +'&type=' + type,
+		method: 'GET'
+	};
+	
+	const req = http.request(options, (res) => {
+	  res.on('data', (d) => {
+	  	console.log(d);
+	    var res = JSON.parse(d.toString());
+		room.say('\n车号:' + code + '\n' + res.msg);
+		// if(type == 'open'){
+		// 	let path = require('path');
+		// 	fs.readFile(path.resolve(__dirname, '../jsonData/nhOpen.json'), 'utf8', function(err, data){
+		// 		if(err){
+		// 			return console.error(err);
+		// 		}
+		// 		data = JSON.parse(data);
+		// 		var bikeOpen = parseInt(data.bikeOpen);
+		// 		var boatOpen = parseInt(data.boatOpen);
+		// 		bikeOpen += 1;
+		// 		var nhData = {
+		// 			"boatOpen": boatOpen,
+		// 			"bikeOpen": bikeOpen
+		// 		};
+		// 		fs.writeFile(path.resolve(__dirname, '../jsonData/nhOpen.json'), JSON.stringify(nhData),function(err){
+		// 			if(err){
+		// 				console.error(err);
+		// 				return;
+		// 			}
+		// 		})
+		// 	})
+		// }
+	  });
+	});
+	
+	req.on('error', (e) => {
+	  console.error(`problem with request: ${e.message}`);
+	});
+	
+	req.end();
+}
+
+// 电瓶车|自行车报修或者启用
+function updateStatus(status, host, room, code, contact){
+	const options = {
+		hostname: host,
+		path: '/nhpark/deviceRobot/updateStatus?deviceSn='+ code +'&status=' + status,
+		method: 'GET'
+	};
+	
+	const req = http.request(options, (res) => {
+	  res.on('data', (d) => {
+	  	console.log(d);
+	    var res = JSON.parse(d.toString());
+	    room.say('\n车号:' + code + '\n' + res.msg);
+	  });
+	});
+	
+	req.on('error', (e) => {
+	  console.error(`problem with request: ${e.message}`);
+	});
+	
+	req.end();
+}
+
+// 电瓶车|自行车查询手机号
+function getLastedPhone(host, room, code, contact){
+	const options = {
+		hostname: host,
+		path: '/nhpark/deviceRefundRobot/getLastedPhone?deviceSn='+ code,
+		method: 'GET'
+	};
+	
+	const req = http.request(options, (res) => {
+	  res.on('data', (d) => {
+	  	console.log(d);
+	    var res = JSON.parse(d.toString());
+	    room.say('\n' + res.msg + '\n车号：' + code + '\n最后订单手机号：' + res.data);
+	  });
+	});
+	
+	req.on('error', (e) => {
+	  console.error(`problem with request: ${e.message}`);
+	});
+	
+	req.end();
+}
+
+// 电瓶车|自行车租赁退款
+function refund(host, room, refundType, refundValue, refundWall, refundMoney, contact){
+	var data;
+	if(refundWall == '1' || refundWall == '2'){
+		data = {
+			refundType: refundType,
+			refundValue: refundValue,
+			refundWall: refundWall,
+			type: 'bike'
+		}
+	}else{
+		data = {
+			refundType: refundType,
+			refundValue: refundValue,
+			refundWall: refundWall,
+			refundMoney: refundMoney
+		}
+	}
+	
+	console.log(JSON.stringify(data));
+	
+	const options = {
+		hostname: host,
+		path: '/nhpark/deviceRefundRobot/refund',
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	};
+	
+	const req = http.request(options, (res) => {
+	  res.on('data', (d) => {
+	    var res = JSON.parse(d.toString());
+		console.log(res);
+		room.say(res.msg);
+	  });
+	});
+	
+	req.write(JSON.stringify(data));
+	req.on('error', (e) => {
+	  console.error(`problem with request: ${e.message}`);
+	});
+	req.end();
+}
+
 
 module.exports = {testRoomDeal};

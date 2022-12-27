@@ -80,7 +80,7 @@
 			</div>
 			
 			<!-- 疫情防控 -->
-			<div class="yqView">
+			<!-- <div class="yqView">
 				<div class="radioItem">
 					<div>14天内是否有中高风险地区旅行史</div>
 					<div class="radioView">
@@ -95,7 +95,7 @@
 						<label for="jcs2"><input type="radio" id="jcs2" name="jcs" value="1">否</label>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			
 			<!-- 价格合计 -->
 			<div class="priceView">
@@ -287,6 +287,13 @@
 					$('.fhlTime').hide();
 					$('.subBtn').hide();
 					$('.addBtn').hide();
+				}
+				
+				// 凤凰岭合约年票
+				if(ticketInfoId == '2c9141f484a761f60184a7892d9d00e5'){
+					window.location.replace('https://boss.smart-ideas.com.cn/singleTicket-web/fhlNp.html?ticketId=2c9141f484a761f60184a7892d9d00e5&ticketGroupNum=TGN20201228152933458&enterpriseCode=TgsEpcFhl')
+				}else if(ticketInfoId == '2c9141f484a761f60184bc4b44e217b4'){
+					window.location.replace('https://boss.smart-ideas.com.cn/singleTicket-web/fhlNp.html?ticketId=2c9141f484a761f60184bc4b44e217b4&ticketGroupNum=TGN20201228152933458&enterpriseCode=TgsEpcFhl')
 				}
 				
 				app.wxUserInfo(function(){
@@ -502,6 +509,7 @@
 						}
 						
 						visitorInfo += '</div>';
+						
 										
 						$('.noticeText').append('<p>1.有效日期：'+ ticketInfo.effectStartDate +'至'+ ticketInfo.effectEndDate +'</p>');
 						if(enterpriseCode == 'TgsEpcFhl' && ticketGroupNum == 'TGN20201228152933458'){
@@ -803,6 +811,10 @@
 				}
 				
 				if(app.getCookie('enterpriseCode') == 'TgsEpcFhl'){
+					if(ticketInfoId == '2c9141f4843dea76018450beb02f10d7'){
+						layer.alert('VIP票仅支持领取链接领取，请检查链接是否正确');
+						return;
+					}
 					if(!$('.timeSelectBtn').text()){
 						layer.alert('此优惠票仅限在工作日使用, 请您选择其他日期');
 						return;
@@ -815,24 +827,24 @@
 				}
 				
 				// 疫情防控
-				var lxs =$('input[name="lxs"]:checked').val();
-				var jcs =$('input[name="jcs"]:checked').val();
+				// var lxs =$('input[name="lxs"]:checked').val();
+				// var jcs =$('input[name="jcs"]:checked').val();
 				
-				// 用户免输入信息
-				if(ticketInfoIdList.indexOf(ticketInfoId) != -1){
-					lxs = '1';
-					jcs = '1';
-				}
+				// // 用户免输入信息
+				// if(ticketInfoIdList.indexOf(ticketInfoId) != -1){
+				// 	lxs = '1';
+				// 	jcs = '1';
+				// }
 				
-				if(lxs && jcs){
-					if(lxs == '0' || jcs == '0'){
-						layer.alert('建议您向社区报到并进行相关隔离防护, 谢谢您的配合');
-						return;
-					}
-				}else{
-					layer.alert('请确认您是否存在中高风险地区旅行史和新冠检测阳性人员接触史');
-					return;
-				}
+				// if(lxs && jcs){
+				// 	if(lxs == '0' || jcs == '0'){
+				// 		layer.alert('建议您向社区报到并进行相关隔离防护, 谢谢您的配合');
+				// 		return;
+				// 	}
+				// }else{
+				// 	layer.alert('请确认您是否存在中高风险地区旅行史和新冠检测阳性人员接触史');
+				// 	return;
+				// }
 				
 				// 上午场下午场
 				var yyTime;

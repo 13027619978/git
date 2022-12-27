@@ -94,7 +94,7 @@ function getSaleInfo(enterpriseCode, ticketGroupNum, ticketInfoId){
 					$('.ticketNameTxt').html(value.ticketName);
 					$('.ticketDesc').html(value.description);
 					$('.checkTime').text('检票时间：'+value.checkRules.checkStartTime+'-'+value.checkRules.checkEndTime);
-					$('.ticketPrice').text(value.ticketName.split('（')[1].split('）')[0]);
+					$('.ticketPrice').text(value.ticketName.split('（')[1].split('）')[0]).split(')')[0];
 					$('.priceText').text(value.settlePrice + '元');
 					if(parseFloat(value.settlePrice) == 0){
 						$('.payBtn').text('在线预约');

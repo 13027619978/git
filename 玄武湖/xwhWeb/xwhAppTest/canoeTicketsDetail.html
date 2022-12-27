@@ -6,11 +6,36 @@
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/orderDetail.css?v=20">
 		<style type="text/css">
+			.container{
+				padding-bottom: 55px;
+			}
 			.content .deviceType{
 				font-size: 16px;
 			}
 			.content .nameTxt{
 				text-align: right;
+			}
+			.refundView{
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				padding: 10px;
+			}
+			.refundView a{
+				display: block;
+				width: 100%;
+				text-align: center;
+				line-height: 35px;
+				border-radius: 5px;
+				background-color: #fff;
+				box-shadow: 0 0 5px #ddd;
+				font-size: 13px;
+				color: #333;
+			}
+			.refundView a.disabled{
+				background-color: #ddd;
+				color: #666;
 			}
 		</style>
 		<title>皮划艇订单</title>
@@ -43,14 +68,14 @@
 		<script src="js/app.js"></script>
 		<script src="js/jquery.qrcode.min.js"></script>
 		<script type="text/javascript">
+			var orderId = app.getQueryString('orderId');
+			
 			$(function(){
-				var orderId = app.getQueryString('orderId');
 				getOrderInfo(orderId);
 				$('.qrcodeView').hide();
 			})
 			
 			function getOrderInfo(orderId){
-				$('.refundView').hide();
 				app.getAjax('canoeOrder/getByPayId', {
 					payId: orderId
 				}, function(res){
@@ -78,6 +103,9 @@
 							break;
 							case 6:
 								ticketName = '七夕皮划艇套票 ';
+							break;
+							case 7:
+								ticketName = '水上运动三人票 ';
 							break;
 						}
 						$('.deviceType').text(ticketName);
@@ -116,17 +144,6 @@
 					}else{
 						layer.alert(res.msg);
 					}
-				})
-			}
-			
-			function refundClick(orderCode){
-				orderCode = orderCode.toString().split('/')[1];
-				app.getAjax('deviceLoopApp/refund', {
-					orderCode: orderCode
-				}, function(res){
-					layer.alert(res.msg);
-					var orderId = app.getQueryString('orderId');
-					getOrderInfo(orderId);
 				})
 			}
 			

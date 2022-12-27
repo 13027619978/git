@@ -99,7 +99,7 @@
 			</div>
 			
 			<!-- 疫情防控 -->
-			<div class="yqView">
+			<!-- <div class="yqView">
 				<div class="radioItem">
 					<div>是否有7天内境内外风险地区旅行史情况</div>
 					<div class="radioView">
@@ -128,7 +128,7 @@
 						<label for="sfyx2"><input type="radio" id="sfyx2" name="sfyx" value="1">否</label>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			
 			<!-- 价格合计 -->
 			<div class="priceView">
@@ -742,32 +742,32 @@
 				}
 				
 				// 疫情防控
-				var lxs =$('input[name="lxs"]:checked').val();
-				var jcs =$('input[name="jcs"]:checked').val();
-				var ljs =$('input[name="ljs"]:checked').val();
+				// var lxs =$('input[name="lxs"]:checked').val();
+				// var jcs =$('input[name="jcs"]:checked').val();
+				// var ljs =$('input[name="ljs"]:checked').val();
 				
-				if(lxs && jcs && ljs){
-					if(lxs == '0' || jcs == '0' || ljs == '0'){
-						layer.alert('建议您向社区报到并进行相关隔离防护, 谢谢您的配合');
-						return;
-					}
-				}else{
-					layer.alert('请确认您是否存在中高风险地区旅行史和新冠检测阳性人员接触史');
-					return;
-				}
+				// if(lxs && jcs && ljs){
+				// 	if(lxs == '0' || jcs == '0' || ljs == '0'){
+				// 		layer.alert('建议您向社区报到并进行相关隔离防护, 谢谢您的配合');
+				// 		return;
+				// 	}
+				// }else{
+				// 	layer.alert('请确认您是否存在中高风险地区旅行史和新冠检测阳性人员接触史');
+				// 	return;
+				// }
 				
-				if(app.getCookie('enterpriseCode') == 'TgsEpcYby'){
-					var sfyx =$('input[name="sfyx"]:checked').val();
-					if(sfyx){
-						if(sfyx == '0'){
-							layer.alert('建议您向社区报到并进行相关隔离防护, 谢谢您的配合');
-							return;
-						}
-					}else{
-						layer.alert('请确认您是否存在中高风险地区旅行史和新冠检测阳性人员接触史');
-						return;
-					}
-				}
+				// if(app.getCookie('enterpriseCode') == 'TgsEpcYby'){
+				// 	var sfyx =$('input[name="sfyx"]:checked').val();
+				// 	if(sfyx){
+				// 		if(sfyx == '0'){
+				// 			layer.alert('建议您向社区报到并进行相关隔离防护, 谢谢您的配合');
+				// 			return;
+				// 		}
+				// 	}else{
+				// 		layer.alert('请确认您是否存在中高风险地区旅行史和新冠检测阳性人员接触史');
+				// 		return;
+				// 	}
+				// }
 				
 				// 禁用支付按钮
 				$('.payBtn').attr('onclick', '');

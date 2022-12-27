@@ -159,7 +159,7 @@
 								<p class="itemTitle">多次票</p>
 								<p class="ticketTitle">票价：40元/6次</p>
 								<p>购票须知</p>
-								<p class="flashing" style="font-size: 17px;font-weight: bold;position: absolute;top: 100px;">国庆假期内环交通线40元环线票暂停营运，敬请谅解。</p>
+								<!-- <p class="flashing" style="font-size: 17px;font-weight: bold;position: absolute;top: 100px;">国庆假期内环交通线40元环线票暂停营运，敬请谅解。</p> -->
 								<p>1. 票价40元/人/6次，换乘站必须下车</p>
 								<p>2. 车辆每15分钟一班车</p>
 								<p>3. 一票限一人使用</p>
@@ -254,10 +254,10 @@
 				
 				// 获取天气信息
 				$.ajax({
-				    url:'https://restapi.amap.com/v3/weather/weatherInfo?key=773c4e4c196eb78e21f220e7e14160d2&extensions=all&city=320100',
+				    url:'http://xwhykt.smart-ideas.com.cn/prod-api/api/weather/alicity/forecast15days?cityId=284833',
 				    type:"GET",
 				    success:function(data){
-						$('.weatherTxt').text('今日 ' + data.forecasts[0].casts[0].dayweather  + ' ' + data.forecasts[0].casts[0].nighttemp + '~' + data.forecasts[0].casts[0].daytemp + '℃')
+						$('.weatherTxt').text('今日 ' + data.data.data.forecast[0].conditionDay  + ' ' + data.data.data.forecast[0].tempNight + '~' + data.data.data.forecast[0].tempDay + '℃')
 				    }
 				});
 				

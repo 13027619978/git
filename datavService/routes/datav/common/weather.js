@@ -53,7 +53,7 @@ function getDataVWeatherJson(jsonBody){
 }
 
 
-router.get('/v1/weatherInfo', async function(req, res, next) {
+router.get('/v2/weatherInfo', async function(req, res, next) {
   if(req.query.city != null && req.query.city != ''){
   	var body =  await myhttp.myHttpGet(settings.weatherConfig.gaodeWeatherUrl+req.query.city);
   	var dataVWeatherJson = getDataVWeatherJson(JSON.parse(body));
@@ -64,10 +64,42 @@ router.get('/v1/weatherInfo', async function(req, res, next) {
   }
 });
 
-router.get('/v2/weatherInfo', async function(req, res, next) {
+function getDataVWeatherV2Json(jsonBody){
+	var weatherInfos = new Array();
+	for (var i = 0; i < 4; i++) {
+		var weatherInfo = new WeatherInfo();  	
+  		weatherInfo.date = (i === 0) ? "今日" : new Date(jsonBody.data.data.forecast[i].predictDate.replace(/-/,"/")).Format('MM月dd日');
+  		weatherInfo.picUrl = getWeatherInfoPicUrl(jsonBody.data.data.forecast[i].conditionDay);
+  		weatherInfo.weather = jsonBody.data.data.forecast[i].conditionDay;
+  		weatherInfo.temperature = jsonBody.data.data.forecast[i].tempNight + '~'+ jsonBody.data.data.forecast[i].tempDay + '℃';
+		weatherInfo.wind = jsonBody.data.data.forecast[i].windDirDay.split('风')[0];
+		weatherInfo.windpower = jsonBody.data.data.forecast[i].windLevelDay;
+		weatherInfos[i] = weatherInfo;
+	}
+	return weatherInfos;
+}
+
+router.get('/v1/weatherInfo', async function(req, res, next) {
   if(req.query.city != null && req.query.city != ''){
-  	var body =  await myhttp.myHttpGet(settings.weatherConfig.gaodeWeatherUrl+req.query.city);
-  	var dataVWeatherJson = getDataVWeatherJson(JSON.parse(body));
+	  let cityId = req.query.city;
+	  if(cityId.substr(0,3) == '110'){
+		  // 北京
+		  cityId = 2;
+	  }else if(cityId.substr(0,3) == '130'){
+		  // 河北
+		  cityId = 1761;
+	  }else if(cityId.substr(0,3) == '320'){
+		  // 南京
+		  cityId = 284833;
+	  }else if(cityId.substr(0,3) == '210'){
+		  // 徐州
+		  cityId = 1071;
+	  }else if(cityId.substr(0,3) == '330'){
+		  // 嘉兴
+		  cityId = 1233;
+	  }
+  	var body =  await myhttp.myHttpGet('http://xwhykt.smart-ideas.com.cn/prod-api/api/weather/alicity/forecast15days?cityId='+cityId);
+  	var dataVWeatherJson = getDataVWeatherV2Json(JSON.parse(body));
   	res.send(dataVWeatherJson);
   }else{
   	console.log('err');

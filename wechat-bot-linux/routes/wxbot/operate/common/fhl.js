@@ -201,7 +201,7 @@ function getCheckTicketInfo(enterpriseCode, ticketGroupNum, room, ticketSalesCha
 				var number = parseInt(value.checkQuantity);
 				var ticketName = value.name;
 				totalNumber += number;
-				if(ticketName != '凤凰岭2022年票'){
+				if(ticketName.indexOf('年票') == -1){
 					totalMoney += money;
 					ListString += ticketName + '：' + number + '张   ' + money.toFixed(2) + '元\n';
 				}else{
@@ -282,7 +282,7 @@ function getBossInfo(enterpriseCode, ticketGroupNum, room, state){
 						var money1 = parseFloat(value.checkMoney);
 						var number1 = parseInt(value.checkQuantity);
 						var ticketName = value.name;
-						if(ticketName == '凤凰岭2022年票'){
+						if(ticketName.indexOf('年票') != -1){
 							npTotal += number1;
 							npTotalMoney += money1;
 						}

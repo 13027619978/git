@@ -125,12 +125,24 @@
 				font-weight: bold;
 				letter-spacing: 2px;
 			}
+			
+			.descView{
+				position: absolute;
+				top: 136vw;
+				left: 6vw;
+				width: 514px;
+				font-size: 12px;
+				line-height: 20px;
+				color: #000;
+				transform: scale(.55);
+				transform-origin: 0 0;
+			}
 		</style>
 		<title>订单详情</title>
 	</head>
 	<body>
 		<div class="container">
-			<img class="bgImg" src="img/fhlDetailBg.jpg" >
+			<img class="bgImg" src="img/fhlNpBg.jpg" >
 			<div class="imgView">
 				<img class="headImg" src="" >
 			</div>
@@ -143,6 +155,19 @@
 			</div>
 			<p class="ticketNum"></p>
 			<p class="useTime"></p>
+			
+			<div class="descView">
+				<p>1.本票只限本人使用，每日限使用一次。</p>
+				<p>2.本票一经售出，视同认可使用规则，不退换，逾期作废，请妥善保管使用。</p>
+				<p>3.在凤凰岭景区开园时间段内，请主动出示本票并接受扫码验证入园。持票入园前，请认真阅读凤凰岭景区游客须知和公共安全细则。</p>
+				<p>4.凤凰岭景区闭园期间，本票暂停使用。</p>
+				<p>5.在景区内请遵守旅游文明行为公约，文明游园并在景区指定线路上游览，严禁野外用火，严禁攀爬野儿。</p>
+				<p>6.本票不含保险，山区游览请注意安全，遵照各类安全提示，严禁奔跑追逐打闹。</p>
+				<p class="visitDate">7.本票有效期为2022年1月1日--2022年12月31日。</p>
+				<p>8.本票最终解释权归北京凤凰岭景区所有。</p>
+				<p>9.咨询服务电话:62455933</p>
+			</div>
+			
 			<a class="qyBtn" href="javascript:;" onclick="showqy()">查看年卡权益</a>
 		</div>
 		
@@ -163,13 +188,104 @@
 		<script src="js/encrypt.js?v=1.0.1"></script>
 		<script src="js/app4.js?v=1.0.1"></script>
 		<script src="js/jquery.qrcode.min.js"></script>
-		<script src="js/fhlDetail1.js?v=1.0.10"></script>
 		<script type="text/javascript">
 			$(function(){
+				let descScale = parseFloat(window.screen.width * 0.88 / 514).toFixed(2);
+				$('.descView').css({
+					'transform': 'scale('+descScale+')'
+				})
 				let nowYear = new Date().getFullYear();
 				let nowMonth = new Date().getMonth()+1;
 				$('.hoverTxt').text(nowYear + '年' + nowMonth + '月');
+				var ticketId = app.getQueryString('ticketId').split('/')[1];
+				var openid = app.getCookie('openid');
+				// 年票头像
+				app.encryptGetAjax('order/encrypt/getDetailListByOpenId', {
+					openId: openid,
+					enterpriseCode: app.getCookie('enterpriseCode'),
+					ticketGroupNum: app.getCookie('ticketGroupNum')
+				}, function(res){
+					let orderList = res.data;
+					orderList.forEach(function(value, key){
+						if(ticketId == value.ticketOrderId){
+							$('.headImg').attr('src', value.headPicUrl);
+						}
+					})
+				})
+				
+				// 年票详情
+				app.encryptGetAjax('order/encrypt/getDetailsById', {
+					ticketOrderId: ticketId
+				}, function(res){
+					console.log(res);
+					if(res.success){
+						var orderInfo = res.data;
+						if(orderInfo.visitEndDate.indexOf('2022') != -1){
+							$('.bgImg').attr('src', 'img/fhlNp2022Bg.jpg');
+						}else{
+							$('.bgImg').attr('src', 'img/fhlNp2023Bg.jpg');
+						}
+						var nowDate = new Date(new Date().getTime() + 60000 * 10);
+						var nowYear = nowDate.getFullYear();
+						var nowMonth = nowDate.getMonth() + 1;
+						nowMonth = nowMonth>9?nowMonth:'0'+nowMonth;
+						var nowDay = nowDate.getDate();
+						nowDay = nowDay>9?nowDay:'0'+nowDay;
+						var nowHour = nowDate.getHours();
+						nowHour = nowHour>9?nowHour:'0'+nowHour;
+						var nowMinute = nowDate.getMinutes();
+						nowMinute = nowMinute>9?nowMinute:'0'+nowMinute;
+						var nowSeconds = nowDate.getSeconds();
+						nowSeconds = nowSeconds>9?nowSeconds:'0'+nowSeconds;
+						$('.ticketNum').text('票号：' + orderInfo.checkCode);
+						$('.useTime').text('二维码有效时间：' + nowYear + '-' + nowMonth + '-' + nowDay + ' ' + nowHour + ':' + nowMinute + ':' + nowSeconds);
+						$('.qrcode').qrcode({
+							text: orderInfo.checkCode + '?time=' + new Date().getTime(),
+							background: '#fff',
+							foreground: '#000',
+							width: 148,
+							height: 148
+						});
+						$('.qrcodeImg img').attr('src', document.getElementsByClassName('qrcode')[0].getElementsByTagName('canvas')[0].toDataURL("image/png"));
+						$('.qyImg img').attr('src', document.getElementsByClassName('qrcode')[0].getElementsByTagName('canvas')[0].toDataURL("image/png"));
+						let visitDate = orderInfo.visitDate.split('-')[0]+'年'+orderInfo.visitDate.split('-')[1]+'月'+orderInfo.visitDate.split('-')[2]+'日';
+						let visitEndDate = orderInfo.visitEndDate.split('-')[0]+'年'+orderInfo.visitEndDate.split('-')[1]+'月'+orderInfo.visitEndDate.split('-')[2]+'日';
+						$('.visitDate').text('7.本票有效期为'+visitDate+'--'+visitEndDate+'。')
+						app.getAjax('orderEquity/query', {
+							qr: orderInfo.checkCode,
+							equityCode: 1
+						}, function(res){
+							console.log(res);
+							if(res.success){
+								if(res.data.useState == '0'){
+									$('.qyBtn').show();
+									if(!app.getCookie('hoverShow')){
+										$('.hoverView').show();
+									}
+								}
+							}
+						})
+					}else{
+						layer.alert(res.message);
+					}
+				});
+				
 			})
+			
+			function closeClick(){
+				$('.hoverView').hide();
+				app.setCookie('hoverShow', true);
+			}
+			
+			function showqy(){
+				$('.hoverView').show();
+			}
+			
+			
+			function homeClick(){
+				window.location.replace('index.html?openid=' + app.getCookie('openid'));
+			}
+			
 		</script>
 	</body>
 </html>

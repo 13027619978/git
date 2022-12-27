@@ -39,6 +39,10 @@ const sch = require('./common/sch.js');
 const xtyby = require('./common/xtyby.js');
 // 园博园创森
 const ybycs = require('./common/ybycs.js');
+// 温榆河
+const wyh = require('./common/wyh.js');
+// 南海子
+const nhz = require('./common/nhz.js');
 
 // 运营预警
 var warningString = '';
@@ -1191,12 +1195,6 @@ function scheduleStart(){
 		 	}
     	}
     });
-    
-    scheduleJob_55 = schedule.scheduleJob('0 55 * * * *', async function(){
-    	if(wechat.bot.logonoff()){
-				
-    	}
-    });
 	
 	scheduleJob_One = schedule.scheduleJob('0 1 * * * *', async function(){
 		var nowDate = new Date();
@@ -1345,15 +1343,14 @@ function scheduleStart(){
 					}
 				})	
 			}
-		
-			// 什刹海报数
-			// if(parseInt(hour) == 12 || parseInt(hour) == 17 || parseInt(hour) == 19 || parseInt(hour) == 21){
-			// 	const schbszRoom = await wechat.bot.Room.find({topic: "什刹海报数组"});
-			// 	// boss.getTicketInfo('TgsEpcSch', 'TGN20201214115631115', 'WEB', schbszRoom);
-			// 	// boss.getTicketInfo('TgsEpcSch', 'TGN20201214175748615', 'WEB', schbszRoom);
-			// 	boss.getBossInfo('TgsEpcSch', 'TGN20201214115631115', schbszRoom);
-			// 	boss.getBossInfo('TgsEpcSch', 'TGN20201214175748615', schbszRoom);
-			// }
+			
+			// 温榆河报数
+			if(parseInt(hour) == 12 || parseInt(hour) == 18){
+				const wyhbszRoom = await wechat.bot.Room.find({topic: "温榆河门票"});
+				wyh.getCheckTicketInfo('TgsEpcHty', 'TGN20211223142858166', wyhbszRoom, 'TC');
+				const nhzbszRoom = await wechat.bot.Room.find({topic: "南海子公园票务"});
+				nhz.getCheckTicketInfo('TgsEpcSy', 'TGN20221219120936423', nhzbszRoom, 'TC');
+			}
 		}
     });
 	
@@ -1373,13 +1370,9 @@ function scheduleStart(){
 			const xhgpwdxqRoom = await wechat.bot.Room.find({topic: "鲜花港票务对象群"});
 			boss.getBossInfo('TgsEpcXhg', 'TGN20210628140233051', xhgpwdxqRoom);
 			boss.getTicketInfo('TgsEpcXhg', 'TGN20210628140233051', 'WEB', xhgpwdxqRoom);
-			// boss.getBossInfo('TgsEpcXhg', 'TGN20210629121602397', xhgpwdxqRoom, 1);
 			boss.getTicketInfo('TgsEpcXhg', 'TGN20210629121602397', 'WEB', xhgpwdxqRoom);
 			xhg.getBxjnhInfo(xhgpwdxqRoom);
 			xhg.getPeopleMoneyInfo('TgsEpcXhg','TGN20210628140233051',xhgpwdxqRoom);
-			// xhg.getXqIncome(xhgpwdxqRoom);
-			// boss.getBossInfo('TgsEpcXhg', 'TGN20211210160317254', xhgpwdxqRoom, 1);
-			// xhg.getBsxmIncome(xhgpwdxqRoom);
 		}
 	})
 	
@@ -1719,12 +1712,10 @@ function scheduleStart(){
 		var hour = new Date().getHours();
 		if(parseInt(hour) == 11 || parseInt(hour) == 16 || parseInt(hour) == 19){
 			const schbszRoom = await wechat.bot.Room.find({topic: "三海运营报数组"});
-			var enterpriseCode = 'TgsEpcSh';
-			var ticketGroupNum = 'TGN20211223142734998';
-			// sch.getCheckTicketInfo(enterpriseCode, ticketGroupNum, schbszRoom);
-			// boss.getBossYYInfo(enterpriseCode, ticketGroupNum, schbszRoom);
+			sch.getCheckTicketInfo('TgsEpcSh', 'TGN20211223142734998', schbszRoom);
+			boss.getBossYYInfo('TgsEpcSh', 'TGN20211223142734998', schbszRoom);
 			sch.getPosIncome(schbszRoom);
-			// sch.getLeaseInfo(schbszRoom);
+			sch.getLeaseInfo(schbszRoom);
 		}
 	})
 	
@@ -1739,30 +1730,26 @@ function scheduleStart(){
 	
 	schedule.scheduleJob('40 * * * * *', async function(){
 		// 什刹海记录峰值
-		// let hour = new Date().getHours();
-		// let minutes = new Date().getMinutes();
-		// if(hour >= 11 && hour < 16){
-		// 	if(hour == 15 && minutes > 30){
+		let hour = new Date().getHours();
+		let minutes = new Date().getMinutes();
+		if(hour >= 8 && hour < 16){
+			if(minutes % 5 == 0){
+				const options = {
+					hostname: 'node.smart-ideas.com.cn',
+					port: '3001',
+					path: '/datav/sch/writeIcePeople',
+					method: 'GET'
+				};
 				
-		// 	}else{
-		// 		if(minutes % 5 == 0){
-		// 			const options = {
-		// 				hostname: 'node.smart-ideas.com.cn',
-		// 				port: '3001',
-		// 				path: '/datav/sch/writeIcePeople',
-		// 				method: 'GET'
-		// 			};
-					
-		// 			const req = http.request(options, (res1) => {
-		// 				res1.on('data', (d) => {
-							
-		// 				});
-		// 			});
-					
-		// 			req.end();
-		// 		}
-		// 	}
-		// }
+				const req = http.request(options, (res1) => {
+					res1.on('data', (d) => {
+						
+					});
+				});
+				
+				req.end();
+			}
+		}
 	})
 	
 	//  scheduleJob21_31 = schedule.scheduleJob({hour: 21, minute: 31}, async function(){

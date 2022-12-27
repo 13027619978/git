@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css">
+		<title>门票跳转设置</title>
+		<style type="text/css">
+			.container{
+				width: 100%;
+				height: 100vh;
+				background-color: #55aaff;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.content{
+				width: 90%;
+				background-color: #fff;
+				border-radius: 10px;
+				box-shadow: 0 0 5px #ddd;
+				padding: 10px 20px;
+			}
+			.title{
+				text-align: center;
+				font-size: 18px;
+				font-weight: bold;
+				color: #333;
+				line-height: 50px;
+			}
+			.ticketItem{
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+				font-size: 14px;
+				color: #333;
+				margin-bottom: 10px;
+				position: relative;
+			}
+			.ticketItem .percent{
+				position: absolute;
+				right: 0;
+				top: 0;
+			}
+			.ticketItem p{
+				flex:  0 0 75px;
+				text-align: right;
+				padding-right: 10px;
+				line-height: 35px;
+			}
+			.ticketItem input{
+				flex: 1;
+				height: 35px;
+				border: 1px solid #ddd;
+				border-radius: 5px;
+				outline: none;
+				padding: 0 10px;
+			}
+			.subBtn{
+				display: block;
+				width: 100%;
+				background-color: #55AAFF;
+				color: #fff;
+				line-height: 35px;
+				border-radius: 5px;
+				text-align: center;
+				font-size: 14px;
+				margin: 10px 0;
+			}
+			.statusView{
+				margin: 20px 0;
+			}
+			.radioView{
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+			}
+			.radioView label{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 50%;
+			}
+			.radioView label input{
+				margin-left: 10px;
+			}
+			.statusView>input{
+				width: 100%;
+				height: 35px;
+				border: 1px solid #ddd;
+				border-radius: 5px;
+				outline: none;
+				padding: 0 10px;
+				margin: 10px 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="content">
+				<p class="title">门票设置</p>
+				<div class="ticketList">
+					
+				</div>
+				
+				<div class="statusView">
+					<div class="radioView">
+						<label for="kq">启用<input id="kq" name="status" type="radio" value="1"></label>
+						<label for="gb">禁用<input id="gb" name="status" type="radio" value="2"></label>
+					</div>
+					<input class="jyy" type="text" placeholder="请输入禁用提示语">
+				</div>
+				
+				<a class="subBtn" href="javascript:;" onclick="subClick()">确认提交</a>
+			</div>
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script src="js/app.js?v=1.0.0"></script>
+		<script type="text/javascript">
+			let code = app.getQueryString('code');
+			let ticktList = [];
+			let scenicId;
+			$(function(){
+				app.getAjax('ticketApi/jump/details/get?code=' + code, {}, function(res){
+					console.log(res);
+					let list = res.data.list;
+					ticktList = list;
+					$('.title').text(res.data.urlName);
+					$('.jyy').val(res.data.remark);
+					scenicId = res.data.id;
+					if(res.data.status == '1'){
+						$('#kq').prop("checked", "checked");
+					}else{
+						$('#gb').prop("checked", "checked");
+					}
+					list.forEach(function(value,key){
+						$('.ticketList').append(
+							'<div class="ticketItem">'+
+								'<p>'+value.name+'</p>'+
+								'<input class="ticket'+key+'" type="number" value="'+value.weight+'">'+
+								'<p class="percent">%</p>'+
+							'</div>'
+						)
+					})
+				})
+			})
+			
+			function subClick(){
+				layer.load('1');
+				let totalBl = 0;
+				let status = $('input[name="status"]:checked').val();
+				let remark = $('.jyy').val();
+				ticktList.forEach(function(value, key){
+					totalBl += parseInt($('.ticket' + key).val());
+				})
+				if(totalBl != 100){
+					layer.alert('总数之和非等于100');
+					return;
+				}
+				ticktList.forEach(function(value, key){
+					value.weight = $('.ticket' + key).val();
+				})
+				
+				app.postAjax('ticketApi/jump/details/save', {
+					list: ticktList
+				}, function(res){
+					app.postAjax('ticketApi/jump/editStatus', {
+						status: status,
+						remark: remark,
+						id: scenicId
+					}, function(res){
+						layer.closeAll();
+						layer.alert(res.message);
+					})
+				})
+			}
+		</script>
+	</body>
+</html>

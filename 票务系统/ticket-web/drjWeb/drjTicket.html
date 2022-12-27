@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta http-equiv="Expires" content="0">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-control" content="no-cache">
+		<meta http-equiv="Cache" content="no-cache">
+		<link rel="stylesheet" href="../css/swiper.min.css">
+		<link rel="stylesheet" href="../css/reset.css">
+		<style type="text/css">
+			.container{
+				width: 100%;
+				min-height: 100vh;
+				background-color: #f9f4ea;
+			}
+			.title{
+				height: 13vh;
+				text-align: center;
+				color: #fffeee;
+				font-size: 16px;
+				letter-spacing: 3px;
+				padding: 25px 0 20px 0;
+				background: url(../img/drjImg/bg.jpg) top no-repeat #f9f4ea;
+				background-size: 100% 100%;
+				position: relative;
+			}
+			.content{
+				padding: 10px;
+			}
+			.detailView{
+				background-color: #fff;
+				border-radius: 5px;
+				padding: 10px;
+			}
+			.checkView{
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+				font-size: 13px;
+				color: #333;
+			}
+			.checkView input{
+				margin-right: 10px;
+				height: 30px;
+			}
+			.yyBtn{
+				display: block;
+				width: 100%;
+				text-align: center;
+				background-color: #b30101;
+				color: #fff;
+				border-radius: 5px;
+				font-size: 15px;
+				line-height: 40px;
+				margin-top: 10px;
+				border: 1px solid #b30101;
+			}
+			.yyBtn.disabled{
+				border: 1px solid #8D8D8D;
+				background-color: #DDDDDD;
+				color: #8D8D8D;
+			}
+		</style>
+		<title>狄仁杰文化公园</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="topView">
+				<div class="title">
+					狄仁杰文化公园<br>狄梁公祠+狄公故居
+				</div>
+				<div class="content">
+					<div class="detailView">
+						<p style="padding: 12px 0;text-align: center;color: #b30101;font-size: 18px;letter-spacing: 3px;">温馨提示</p>
+						<p style="margin-bottom: 5px;font-size: 12px;line-height: 1.8;">尊敬的市民、游客朋友们：</p>
+						<p style="text-indent: 2em;margin-bottom: 5px;font-size: 12px;line-height: 1.8;">为加强游园秩序管控，保障游客安全、健康游园，狄仁杰文化公园实行实名网络预约购票入园。</p>
+						<p style="text-indent: 2em;margin-bottom: 5px;font-size: 12px;line-height: 1.8;">游客入园需全程佩戴口罩，自觉保持间距。</p>
+						<p style="text-indent: 2em;margin-bottom: 5px;font-size: 12px;line-height: 1.8;">公园展馆开放时间为：周二至周日9:00—16:30，周一闭馆。</p>
+						<p style="text-indent: 2em;margin-bottom: 5px;font-size: 12px;line-height: 1.8;">公园开放时间为：每日6:00-22:00（5月~9月），6:30-21:00（10月~次年4月）。</p>
+						<p style="text-indent: 2em;margin-bottom: 5px;font-size: 12px;line-height: 1.8;">公园咨询电话：0351-7041579</p>
+						<label class="checkView">
+							<input class="sure" type="checkbox" onchange="sureChange()">
+							我已阅读
+						</label>
+						<a class="yyBtn disabled" href="javascript:;" onclick="">开始预约</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script src="../js/jquery-2.1.4.min.js"></script>
+		<script src="../js/swiper.min.js"></script>
+		<script src="../layer/layer.js"></script>
+		<script src="../js/app.js"></script>
+		<script type="text/javascript">
+			function sureChange(){
+				if($('.sure').prop("checked")){
+					$('.yyBtn').removeClass('disabled').attr('onclick', 'buyClick()');
+				}else{
+					$('.yyBtn').addClass('disabled').attr('onclick', '');
+				}
+			}
+			
+			function buyClick(){
+				if(app.getCookie('openid')){
+					window.location.replace('https://boss.smart-ideas.com.cn/ticket-web?openid=' + app.getCookie('openid'));
+				}else{
+					layer.alert('获取参数失败，请重新进入预约页面');
+				}
+			}
+		</script>
+	</body>
+</html>

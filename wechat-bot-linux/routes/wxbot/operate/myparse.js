@@ -2,7 +2,7 @@ var wechat = require('./mybot.js');
 var events = require('events');
 var eventEmitter = new events.EventEmitter()
 
-eventEmitter.setMaxListeners(79);
+eventEmitter.setMaxListeners(85);
 
 /**************************************************/
 /****************** 家长群代码 **********************/
@@ -427,9 +427,55 @@ async function ybycsbszRoom(msg){
 	ybycsbszRoomEven.ybycsbszRoomDeal(msg);
 }
 
-eventEmitter.on('ybycsbszRoom', ybycsbszRoom);
+/******************** 紫竹院运营报数组 *************************/
+var zzybszRoomEven = require('./room/zzybszRoom.js');
+async function zzybszRoom(msg){
+	zzybszRoomEven.zzybszRoomDeal(msg);
+}
 
+/******************** 紫竹院运营服务组 *************************/
+var zzyfwzRoomEven = require('./room/zzyfwzRoom.js');
+async function zzyfwzRoom(msg){
+	zzyfwzRoomEven.zzyfwzRoomDeal(msg);
+}
+
+/******************** 颐和园运营报数组 *************************/
+var yhybszRoomEven = require('./room/yhybszRoom.js');
+async function yhybszRoom(msg){
+	yhybszRoomEven.yhybszRoomDeal(msg);
+}
+
+/******************** 颐和园运营服务组 *************************/
+var yhyfwzRoomEven = require('./room/yhyfwzRoom.js');
+async function yhyfwzRoom(msg){
+	yhyfwzRoomEven.yhyfwzRoomDeal(msg);
+}
+
+//******************** 温榆河报数组 *************************/
+var wyhbszRoomEven = require('./room/wyhbszRoom.js');
+async function wyhbszRoom(msg){
+	wyhbszRoomEven.wyhbszRoomDeal(msg);
+}
+
+//******************** 温榆河报数组 *************************/
+var nhzbszRoomEven = require('./room/nhzbszRoom.js');
+async function nhzbszRoom(msg){
+	nhzbszRoomEven.nhzbszRoomDeal(msg);
+}
+
+// 冰场
+eventEmitter.on('yhyfwzRoom', yhyfwzRoom);
+eventEmitter.on('yhybszRoom', yhybszRoom);
+eventEmitter.on('zzyfwzRoom', zzyfwzRoom);
+eventEmitter.on('zzybszRoom', zzybszRoom);
+eventEmitter.on('wyhbszRoom', wyhbszRoom);
+eventEmitter.on('nhzbszRoom', nhzbszRoom);
+// 冰场
+
+
+eventEmitter.on('ybycsbszRoom', ybycsbszRoom);
 eventEmitter.on('bgslgybszRoom', bgslgybszRoom);
+
 
 eventEmitter.on('schoolRoom', onSchoolRoom);
 eventEmitter.on('goldRoom', goldRoom);

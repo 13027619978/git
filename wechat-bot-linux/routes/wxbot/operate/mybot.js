@@ -65,7 +65,7 @@ const qsmxRoomTopic = {
 	QSMX_XWHDPCBSZ_ROOM: "玄武湖电瓶车报数组",
 	QSMX_DRJGY_ROOM: "狄仁杰文化园预约服务组",
 	QSMX_SCHBSZ_ROOM: "三海运营报数组",
-	QSMX_SCHOTA_ROOM: "三海游船商品",
+	QSMX_SCHOTA_ROOM: "三海冰场票务",
 	QSMX_NHZXC_ROOM: "唐山南湖自行车客服组",
 	QSMX_NHZJC_ROOM: "唐山南湖自驾船客服组",
 	QSMX_NHZJCBSZ_ROOM: "唐山南湖游船报数组",
@@ -83,8 +83,11 @@ const qsmxRoomTopic = {
 	QSMX_XTYBYZXC_ROOM: "邢台园博园自行车客服组",
 	QSMX_XTYBYBSZ_ROOM: "邢台园博园智慧交通报数组",
 	QSMX_BGSLGYBSZ_ROOM: "北宫森林公园报数组",
-	QSMX_YBYCSBSZ_ROOM: "园博园创森报数组"
-	
+	QSMX_YBYCSBSZ_ROOM: "园博园创森报数组",
+	QSMX_BJZZYBSZ_ROOM: "紫竹院运营报数组",
+	QSMX_BJZZYFWZ_ROOM: "紫竹院运营服务组",
+	QSMX_WYHBSZ_ROOM: "温榆河门票",
+	QSMX_NHZBSZ_ROOM: "南海子公园票务"
 };
 
 function onScan (qrcode, status) {
@@ -339,6 +342,24 @@ async function onMessage (msg) {
 		}else if(roomTopic == qsmxRoomTopic.QSMX_YBYCSBSZ_ROOM){
 			// 园博园创森报数组
 			eventsParse.eventEmitter.emit('ybycsbszRoom', msg);
+		}else if(roomTopic == qsmxRoomTopic.QSMX_BJZZYBSZ_ROOM){
+			// 紫竹院运营报数组
+			eventsParse.eventEmitter.emit('zzybszRoom', msg);
+		}else if(roomTopic == qsmxRoomTopic.QSMX_BJZZYFWZ_ROOM){
+			// 紫竹院运营服务组
+			eventsParse.eventEmitter.emit('zzyfwzRoom', msg);
+		}else if(roomTopic == qsmxRoomTopic.QSMX_BJYHYBSZ_ROOM){
+			// 颐和园运营报数组
+			eventsParse.eventEmitter.emit('zzybszRoom', msg);
+		}else if(roomTopic == qsmxRoomTopic.QSMX_BJYHYFWZ_ROOM){
+			// 颐和园运营服务组
+			eventsParse.eventEmitter.emit('zzyfwzRoom', msg);
+		}else if(roomTopic == qsmxRoomTopic.QSMX_WYHBSZ_ROOM){
+			// 温榆河报数组
+			eventsParse.eventEmitter.emit('wyhbszRoom', msg);
+		}else if(roomTopic == qsmxRoomTopic.QSMX_NHZBSZ_ROOM){
+			// 南海子报数组
+			eventsParse.eventEmitter.emit('nhzbszRoom', msg);
 		}
 	}else{
 		console.log(`Message not in room:Content:${content},Contact:${contact.name()}`)

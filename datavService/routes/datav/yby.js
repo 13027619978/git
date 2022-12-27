@@ -194,6 +194,38 @@ const visitorBeijing = [
 	{"lng": 117.121383,"lat": 40.140701,"info": "平谷区20人"}
 ];
 
+router.get('/setUrl', function(req,res){
+	let url = req.query.url;
+	if(url){
+		let xqzUrl = {
+			url: url
+		}
+		fs.writeFile(path.resolve(__dirname, './jsonData/ybyxqz.json'), JSON.stringify(xqzUrl),function(err){
+		    if(err){
+		        console.error(err);
+		    }
+			res.send({
+				success: 'success',
+				msg: '添加成功'
+			})
+		})
+	}else{
+		res.send({
+			success: 'fail',
+			msg: '请先输入直播地址'
+		});
+	}
+})
+
+router.get('/getUrl', function(req,res){
+	fs.readFile(path.resolve(__dirname, './jsonData/ybyxqz.json'), 'utf8', function(err, data){
+	    if(err){
+	        console.error(err);
+	    }
+		res.send(JSON.parse(data));
+	})
+})
+
 // 获取自行车使用率
 router.get('/getBikeUseInfo',function(req1,res1){
 	const options = {

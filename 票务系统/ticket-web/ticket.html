@@ -103,7 +103,7 @@
 				</div>
 			</div>
 			
-			<div class="yqView fhlView">
+			<!-- <div class="yqView fhlView">
 				<div class="radioItem">
 					<div>7天内是否有京外旅居史</div>
 					<div class="radioView">
@@ -112,17 +112,17 @@
 					</div>
 				</div>
 				<div class="radioItem">
-					<div>72小时内核酸检测结果是否阳性</div>
+					<div>48小时内核酸检测结果是否阳性</div>
 					<div class="radioView">
 						<label for="sfyx1"><input type="radio" id="sfyx1" name="sfyx" value="0">是</label>
 						<label for="sfyx2"><input type="radio" id="sfyx2" name="sfyx" value="1">否</label>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			
 			
 			<!-- 疫情防控 -->
-			<div class="yqView">
+			<!-- <div class="yqView">
 				<div class="radioItem">
 					<div>14天内是否有中高风险地区旅行史</div>
 					<div class="radioView">
@@ -144,7 +144,7 @@
 						<label for="sfyx2"><input type="radio" id="sfyx2" name="sfyx" value="1">否</label>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			
 			<!-- 价格合计 -->
 			<div class="priceView">
@@ -185,11 +185,11 @@
 		<!-- 凤凰岭购票须知 -->
 		<div class="fhlNoticeView">
 			<p class="fhlNoticeTitle">北京凤凰岭景区游览须知</p>
-			<p>1、北京凤凰岭景区实行限量、预约、错峰游园，根据每日最大承载量的75%上限，当在园游客量接近限流标准时，景区将适时启动限流措施，请主动配合管理人员疏导。</p>
-			<p style="color: red;">2、已预约、购票的游客请严格按照预约来园时段向工作人员出示72小时内核酸检测阴性证明、扫描“北京健康宝”未见异常、购票二维码方可入园。</p>
+			<p>1、北京凤凰岭景区实行限量、预约、错峰游园，根据每日最大承载量的50%上限，当在园游客量接近限流标准时，景区将适时启动限流措施，请主动配合管理人员疏导。</p>
+			<p>2、已预约、购票的游客请按照预约来园时段凭购票二维码验证入园。</p>
 			<p>3、景区实行实名制分时段网络预约购票、限量有序无接触入园措施，入园游客（含中、小学生）需提前实名制预约购票；游览当日，凭预约二维码验码入园。</p>
 			<p>4、港澳台游客及外籍游客，需凭港、澳、台通行证或护照等有效证件提前实名预约。</p>
-			<p>5、请无法提供北京健康宝状态但符合有关年龄标准的老年人或儿童到门区“志愿服务点”，由景区工作人员助查获取健康状态。使用现金购票游客请到传统通道购买。</p>
+			<p>5、使用现金购票游客请到传统通道购买。</p>
 			<p>6、请按照正规路线参观游览，禁止攀爬野山及进入未开发路段。</p>
 			<p>7、进入景区须佩戴口罩，有序入园，保持1米以上安全距离。</p>
 			<p>8、入园时间：7:00-17:00，闭园时间：17:00。</p>
@@ -201,7 +201,7 @@
 		<div class="fhlNoticeView fhlFreeNoticeView">
 			<p class="fhlNoticeTitle">北京凤凰岭景区免费游园预约须知</p>
 			<p>1、免费游园时间</p>
-			<p>北京凤凰岭景区2021年2月11日至2月17日免费开放，实行限量、预约、错峰游园。根据每日最大承载量的75%上限，当在园游客量接近限流标准时，景区将适时启动限流措施，请主动配合管理人员疏导。</p>
+			<p>北京凤凰岭景区2021年2月11日至2月17日免费开放，实行限量、预约、错峰游园。根据每日最大承载量的50%上限，当在园游客量接近限流标准时，景区将适时启动限流措施，请主动配合管理人员疏导。</p>
 			<p>2、请提前使用北京健康宝扫码</p>
 			<p>所有游客预约前须使用北京健康宝扫码，本人健康宝显示“未见异常”的游客可预约，北京健康宝未能显示“未见异常”游客不可预约。</p>
 			<img src="img/fhljkb.jpg">
@@ -289,7 +289,7 @@
 				}
 				if(enterpriseCode == 'TgsEpcFhl'){
 					$('.fhlTime').show();
-					if(ticketInfoId == '2c9141f47cc6cdc4017cda59fc283bb8'){
+					if(ticketInfoId == '2c9141f47cc6cdc4017cda59fc283bb8' || ticketInfoId == '2c9141f484a761f60184bc4b44e217b4'){
 						$('.fhlTime').hide();
 						$('.subBtn').hide();
 						$('.addBtn').hide();
@@ -299,7 +299,7 @@
 					// 隐藏购票须知
 					$('.noticeView').hide();
 					$('.yqView').hide();
-					$('.fhlView').show();
+					// $('.fhlView').show();
 					$('.fhlSelect').append(
 						'<option value ="0">7:00-10:00</option>' +
 						'<option value ="0">10:00-12:00</option>' +
@@ -996,52 +996,50 @@
 				
 				if(app.getCookie('enterpriseCode') != 'TgsEpcFhl'){
 					// 疫情防控
-					var lxs =$('input[name="lxs"]:checked').val();
-					var jcs =$('input[name="jcs"]:checked').val();
+					// var lxs =$('input[name="lxs"]:checked').val();
+					// var jcs =$('input[name="jcs"]:checked').val();
 					
-					if(lxs && jcs){
-						if(lxs == '0' || jcs == '0'){
-							layer.alert('建议您向社区报到并进行相关隔离防护, 谢谢您的配合');
-							return;
-						}
-					}else{
-						layer.alert('请确认您是否存在中高风险地区旅行史和新冠检测阳性人员接触史');
-						return;
-					}
+					// if(lxs && jcs){
+					// 	if(lxs == '0' || jcs == '0'){
+					// 		layer.alert('建议您向社区报到并进行相关隔离防护, 谢谢您的配合');
+					// 		return;
+					// 	}
+					// }else{
+					// 	layer.alert('请确认您是否存在中高风险地区旅行史和新冠检测阳性人员接触史');
+					// 	return;
+					// }
 					
-					if(app.getCookie('enterpriseCode') == 'TgsEpcYby'){
-						var sfyx =$('input[name="sfyx"]:checked').val();
-						if(sfyx){
-							if(sfyx == '0'){
-								layer.alert('建议您向社区报到并进行相关隔离防护, 谢谢您的配合');
-								return;
-							}
-						}else{
-							layer.alert('请确认您是否存在中高风险地区旅行史和新冠检测阳性人员接触史');
-							return;
-						}
-					}
+					// if(app.getCookie('enterpriseCode') == 'TgsEpcYby'){
+					// 	var sfyx =$('input[name="sfyx"]:checked').val();
+					// 	if(sfyx){
+					// 		if(sfyx == '0'){
+					// 			layer.alert('建议您向社区报到并进行相关隔离防护, 谢谢您的配合');
+					// 			return;
+					// 		}
+					// 	}else{
+					// 		layer.alert('请确认您是否存在中高风险地区旅行史和新冠检测阳性人员接触史');
+					// 		return;
+					// 	}
+					// }
 				}else{
-					// 疫情防控
-					var lxs = $('input[name="lxs"]:checked').val();
-					var sfyx = $('input[name="sfyx"]:checked').val();
-					console.log(lxs);
-					if(lxs && sfyx){
-						if(lxs == '0' || sfyx == '0'){
-							layer.alert('建议您向社区报到并进行相关隔离防护, 谢谢您的配合');
-							return;
-						}
-					}else{
-						if(!lxs){
-							layer.alert('请确认您是否有7天内京外旅居史');
-							return;
-						}
-						if(!sfyx){
-							layer.alert('请确认您72小时内核酸检测结果是否阳性');
-							return;
-						}
-					}
-					
+					// 凤凰岭疫情防控
+					// var lxs = $('input[name="lxs"]:checked').val();
+					// var sfyx = $('input[name="sfyx"]:checked').val();
+					// if(lxs && sfyx){
+					// 	if(lxs == '0' || sfyx == '0'){
+					// 		layer.alert('建议您向社区报到并进行相关隔离防护, 谢谢您的配合');
+					// 		return;
+					// 	}
+					// }else{
+					// 	if(!lxs){
+					// 		layer.alert('请确认您是否有7天内京外旅居史');
+					// 		return;
+					// 	}
+					// 	if(!sfyx){
+					// 		layer.alert('请确认您72小时内核酸检测结果是否阳性');
+					// 		return;
+					// 	}
+					// }
 				}
 				
 				// 禁用支付按钮

@@ -151,6 +151,12 @@
 				color: #666;
 				border-color: #E2E2E2;
 			}
+			
+			.btnView a.disabled{
+				background-color: #F2F2F2;
+				color: #666;
+				border-color: #E2E2E2;
+			}
 		</style>
 		<title>预约</title>
 	</head>
@@ -184,7 +190,7 @@
 								
 							</div>
 						</div>
-						<div>
+						<div class="dateView">
 							<p class="chooseTitle sj">请选择时间</p>
 							<div class="ticketTimeList">
 								<div class="ticketTimeItem" onclick="ticketTimeSelect(this, /2c9141f4837d22bc018386e286df5b7e/)">上午</p></div>
@@ -276,7 +282,7 @@
 										'<a class="timeItem active" href="javascript:;" onclick="timeClick(this)">'+ btnString +'</a>'
 									)
 									visitDate = btnString.split('</br>')[0];
-									if(nowHour > 12){
+									if(nowHour > 11){
 										$('.ticketTimeItem').eq(0).attr('onclick', '').addClass('disabled');
 									}
 								}else{
@@ -375,7 +381,7 @@
 				let nowDateTime = new Date().getTime();
 				let selectDateTime = new Date(visitDate.replace(/-/, '/').replace(/-/, '/') + ' 00:00:00');
 				if(nowDateTime > selectDateTime){
-					if(nowHour > 12){
+					if(nowHour > 11){
 						$('.ticketTimeItem').eq(0).attr('onclick', '').addClass('disabled');
 					}else{
 						$('.ticketTimeItem').eq(0).attr('onclick', 'ticketTimeSelect(this, /2c9141f4837d22bc018386e286df5b7e/)').removeClass('disabled');
@@ -451,37 +457,34 @@
 									}
 								});
 							}else{
-								var noticeString = '<p style="height:300px;overflow-y:auto;">尊敬的游客朋友们：<br>';
-								noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font style="color:red;font-weight:bold;">根据市区疫情防控工作要求，凡有境内外7天风险地区旅居史人员，为了您和他人的健康，谢绝入园。</font><br>';
-								noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font style="color:red;font-weight:bold;">入园须持72小时内核酸阴性证明。</font><br>';
-								noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当前仍处在疫情防控时期，为了您与他人的健康和游览安全，请您认真阅读以下内容：<br>';
-								noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一、本人承诺：近期身体健康，无发热、咳嗽等异常情况；无流行病学接触史；无中高风险地区14天以内旅居史；无境外回国隔离不满21天的情况；72小时内核酸检测阴性。<br>';
-								noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;二、请提前1天以上在“北京园博园见证精彩”微信公众号进行实名预约，并按照预约时段来园，凭入园预约码进园。入园门区为：2号门，3号门，6号门。<br>';
-								noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;三、入园时请配合测温验码，出示北京健康宝绿码。请随身携带、科学佩戴口罩，参观游览时请保持1米以上社交距离。遇限流游览时，请有序排队，配合工作人员管理。<br>';
-								noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;四、谢绝持红码、黄码的游客入园，谢绝有14天内中高风险地区旅居使人员和入境未满21天人员入园。<br>';
-								noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;五、请遵守公园各项管理规定，不携带除轮椅、婴儿手推车和儿童脚踏手推车之外的其他种类轮制器械、电动平衡车、电动玩具车、电动行李箱以及各种渔具、风筝和无人飞行器入园。<br>';
-								noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;六、根据《北京市控制吸烟条例》要求，园博园全面禁烟，您在园内参观游览时请勿吸烟，并提醒他人不要吸烟。<br>';
-								noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;七、请遵守《北京市生活垃圾管理条例》，分类投放生活垃圾。<br>';
-								noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;八、请看护好随身携带的物品，谨防丢失或被盗。<br>';
-								noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;九、咨询电话：63915561<br>';
-								noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;感谢您的理解与配合。</p>';
-								noticeString += '<label style="display: flex;justify-content: flex-end;align-items: center;font-size: 14px;color: #333;padding: 5px;" for="isAgree"><input style="width: 20px;height: 20px;margin-right: 10px;" id="isAgree" class="isAgree" type="checkbox" onchange="isAgreeChange()">我已阅读</label>';
-								layer.open({
-									content: noticeString,
-									btn: ['前往预约'],
-									closeBtn: 0,
-									title: '温馨提示',
-									success: function(){
-										$('.layui-layer-btn0').addClass('disabled');
-									},
-									btn1: function(){
-										if($('.isAgree').prop("checked")){
-											layer.closeAll();
-										}else{
-											return false;
-										}
-									}
-								});
+								// var noticeString = '<p style="height:300px;overflow-y:auto;">尊敬的游客朋友们：<br>';
+								// noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为了您与他人的健康和游览安全，请您认真阅读以下内容：<br>';
+								// noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一、请提前1天以上在“北京园博园见证精彩”微信公众号进行实名预约，并按照预约时段来园，凭入园预约码进园。入园门区为：2号门，3号门，6号门。<br>';
+								// noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;二、入园时请配合测温验码，出示北京健康宝绿码。请随身携带、科学佩戴口罩，参观游览时请保持1米以上社交距离。遇限流游览时，请有序排队，配合工作人员管理。<br>';
+								// noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;三、谢绝持红码、黄码的游客入园，谢绝有14天内中高风险地区旅居使人员和入境未满21天人员入园。<br>';
+								// noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;四、请遵守公园各项管理规定，不携带除轮椅、婴儿手推车和儿童脚踏手推车之外的其他种类轮制器械、电动平衡车、电动玩具车、电动行李箱以及各种渔具、风筝和无人飞行器入园。<br>';
+								// noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;五、根据《北京市控制吸烟条例》要求，园博园全面禁烟，您在园内参观游览时请勿吸烟，并提醒他人不要吸烟。<br>';
+								// noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;六、请遵守《北京市生活垃圾管理条例》，分类投放生活垃圾。<br>';
+								// noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;七、请看护好随身携带的物品，谨防丢失或被盗。<br>';
+								// noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;八、咨询电话：63915561<br>';
+								// noticeString += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;感谢您的理解与配合。</p>';
+								// noticeString += '<label style="display: flex;justify-content: flex-end;align-items: center;font-size: 14px;color: #333;padding: 5px;" for="isAgree"><input style="width: 20px;height: 20px;margin-right: 10px;" id="isAgree" class="isAgree" type="checkbox" onchange="isAgreeChange()">我已阅读</label>';
+								// layer.open({
+								// 	content: noticeString,
+								// 	btn: ['前往预约'],
+								// 	closeBtn: 0,
+								// 	title: '温馨提示',
+								// 	success: function(){
+								// 		$('.layui-layer-btn0').addClass('disabled');
+								// 	},
+								// 	btn1: function(){
+								// 		if($('.isAgree').prop("checked")){
+								// 			layer.closeAll();
+								// 		}else{
+								// 			return false;
+								// 		}
+								// 	}
+								// });
 							}
 							
 							$('.layui-layer-title').css({
@@ -545,6 +548,10 @@
 						$('.scenicName').text(scenicData.groupName);
 						$('.scenicDesc').text(scenicData.tipContent);
 						$('.noticeText').html('<font class="ticketStatus">闭园</font>' + res.message);
+						layer.alert('北京园博园即日起暂停开放。给您带来的不便，敬请谅解！感谢您的理解和支持！');
+						$('.btnView a').addClass('disabled').attr('onclick', '').text('暂停预约');
+						$('.timeView').hide();
+						$('.dateView').hide();
 						var saleInfoList = scenicData.ticketSalesInfoList;
 						saleInfoList.forEach(function(value, key){
 							var nowDate = new Date().getTime();

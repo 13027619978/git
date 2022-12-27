@@ -267,6 +267,7 @@ function isNumber(val) {
 
 // 电瓶船&自行车开关锁
 function sendCommand(type, host, room, code, contact, flag) {
+	console.log('开锁++++++++++++++++++++++++++++++++++++++++')
 	const options = {
 		hostname: host,
 		path: '/xwhpark/deviceRobot/sendShipCommand?deviceSn=' + code + '&type=' + type,
@@ -275,9 +276,8 @@ function sendCommand(type, host, room, code, contact, flag) {
 
 	const req = http.request(options, (res) => {
 		res.on('data', (d) => {
-			console.log(d);
 			var res = JSON.parse(d.toString());
-
+			console.log(res);
 			if (flag == true) {
 				room.say('\n船号:' + code + '\n' + res.msg);
 				if (type == 'open') {

@@ -43,7 +43,6 @@ router.get('/GetParkingFlowReport', async function(req1, res1) {
 			}
 		})
 		.then(function(res) {
-			console.log(res.data);
 			res1.send(res.data);
 		})
 		.catch(function(err) {
@@ -88,7 +87,6 @@ router.get('/GetFreeSpaceNum', async function(req1, res1) {
 			}
 		})
 		.then(function(res) {
-			console.log(res.data);
 			res1.send(res.data);
 		})
 		.catch(function(err) {

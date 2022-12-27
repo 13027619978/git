@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="css/reset.css?v=10">
+		<link rel="stylesheet" href="css/whxRoute.css?v=10">
+		<title></title>
+	</head>
+	<body>
+		<div class="hoverView">
+			
+		</div>
+		<div class="container">
+			<div class="fullScreen">
+				<div class="topView">
+					<div class="weatherView">
+						<!-- <p class="weatherTxt"></p> -->
+						<img src="img/logo.png" >
+					</div>
+					<div class="titleView">
+						<p>玄武湖观光车智慧运营系统</p>
+					</div>
+					<div class="timeView">
+						<p class="dateTxt"></p>
+						<p class="weatherTxt"></p>
+					</div>
+				</div>
+				<div class="content">
+					<div class="content-left">
+						<!-- 购票流程 -->
+						<div class="progress">
+							<p class="siteNameTitle">当前站点：水岸听风</p>
+							<div class="nextCar" style="display: none;">
+								<p>下班车：预计0分钟0空位</p>
+							</div>
+						</div>
+						
+						<div class="lineView">
+							<!-- 路线 -->
+							<div class="lineList">
+								<div class="lineItem">
+									<p class="lineTitle">环线</p>
+									<!-- <div class="leftMap">
+										<img src="img/map1.png" >
+									</div> -->
+									<!-- <span class="icon"></span> -->
+									<div class="routeView">
+										<div>
+											<p class="routeTitle">观光小火车</p>
+											<p class="routeSecondTitle">单向行驶</p>
+										</div>
+										<div class="routeContent">
+											
+											<div class="routeDetail">
+												<span class="line"></span>
+												<div class="siteList nhx">
+													<img class="jtIcon" src="img/right-icon.png" >
+													<img class="jtIcon" src="img/right-icon.png" >
+													<img class="jtIcon" src="img/left-icon.png" >
+													<img class="jtIcon" src="img/left-icon.png" >
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName"></p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">玄武门</p>
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName"></p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">解放门</p>
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName"></p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">太平堤</p>
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName"></p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">十里长堤</p>
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName green">当前位置</p>
+															<img src="img/currSite.png" >
+															<p class="siteName green">长岸听风</p>
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName"></p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">翠洲门</p>
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName"></p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">南京站（南）站</p>
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName"></p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">和平门</p>
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName"></p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">和平门湿地</p>
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName"></p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">后湖印月</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<!-- 路线 -->
+							<div class="lineList qly">
+								<div class="lineItem">
+									<!-- <p class="lineTitle">情侣园环线</p> -->
+									<!-- <div class="leftMap">
+										<img src="img/map1.png" >
+									</div> -->
+									<!-- <span class="icon"></span> -->
+									<div class="routeView">
+										<div>
+											<p class="routeTitle">电动观光车</p>
+											<p class="routeSecondTitle">单向行驶</p>
+										</div>
+										<div class="routeContent">
+											<!-- <div class="nextCar">
+												<p></p>
+											</div> -->
+											<div class="routeDetail">
+												<span class="line"></span>
+												<div class="siteList">
+													<img class="jtIcon" src="img/right-icon1.png" >
+													<img class="jtIcon" src="img/right-icon1.png" >
+													<img class="jtIcon" src="img/right-icon1.png" >
+													<img class="jtIcon" src="img/left-icon1.png" >
+													<img class="jtIcon" src="img/left-icon1.png" >
+													<img class="jtIcon" src="img/left-icon1.png" >
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName">当前位置</p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">玄武门</p>
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName"></p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">环洲</p>
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName"></p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">梁洲</p>
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName"></p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">翠洲</p>
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName"></p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">樱洲</p>
+														</div>
+													</div>
+													<div class="siteItem">
+														<div class="site">
+															<p class="siteName"></p>
+															<img src="img/site-unSelect.png" >
+															<p class="siteName">菱洲</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- 购票 -->
+						<div class="ticketView">
+							<div class="ticketItem">
+								<p class="itemTitle">观光小火车</p>
+								<p class="ticketTitle">票价：50元/人</p>
+								<p>购票须知</p>
+								<p>1. 身高1.1米以下儿童可免费乘坐观光车（不占座），身高1.1米及以上需购票乘车。</p>
+								<p>2. 车辆整点,半点发车, 间隔15分钟左右</p>
+								<p>3. 出于对安全乘车考虑，每位成人只可携带1名身高1.1米以下儿童免费乘车。</p>
+								<p>4. 营运时间: 9:00至16:00</p>
+								<p>服务电话：025-83615961</p>
+							</div>
+							<div class="ticketItem">
+								<p class="itemTitle">电动观光车</p>
+								<p class="ticketTitle">票价：30元/人</p>
+								<p>购票须知</p>
+								<p>1. 身高1.1米以下儿童可免费乘坐观光车（不占座），身高1.1米及以上需购票乘车。</p>
+								<p>2. 车辆整点,半点发车, 间隔15分钟左右</p>
+								<p>3. 出于对安全乘车考虑，每位成人只可携带1名身高1.1米以下儿童免费乘车。</p>
+								<p>4. 本线路为一站式游览优惠线路，中途不下车。</p>
+								<p>5. 乘车时间：9:00-17:00</p>
+								<p>投诉电话：025-83615961</p>
+							</div>
+						</div>
+					</div>
+				
+					<div class="content-right">
+						<div class="right-top">
+							<div class="salesList">
+							</div>
+							<div class="mapView">
+								<p class="mapTitle">地图</p>
+								<!-- <div id="container"></div> -->
+								<div class="mapImg">
+									<img src="img/whxMapImg.jpg" >
+								</div>
+							</div>
+							<!-- <div class="callView">
+								<img src="img/callBg.png" >
+							</div> -->
+						</div>
+						<!-- <div class="adView">
+							<img src="" >
+						</div> -->
+					</div>
+				
+					<p class="bottomTitle">身高1.1米以下儿童可免费乘坐观光车（不占座），身高1.1米及以上需购票乘车。出于对安全乘车的考虑，每名成人只可携带1名身高1.1米以下儿童免费乘车。</p>
+				</div>
+				
+			</div>
+			
+			<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=c1b024a249b04326f11894fd0e35041d"></script>
+			<script src="js/jquery.min.js"></script>
+			<script src="js/app.js"></script>
+			<script type="text/javascript">
+				var scale =  window.innerHeight / ($('.fullScreen').height() + 20);
+				$('.fullScreen').css({
+					'transform': 'scaleY(.96)'
+				})
+				
+				// 获取天气信息
+				$.ajax({
+				    url:'http://xwhykt.smart-ideas.com.cn/prod-api/api/weather/alicity/forecast15days?cityId=284833',
+				    type:"GET",
+				    success:function(data){
+						$('.weatherTxt').text('今日 ' + data.data.data.forecast[0].conditionDay  + ' ' + data.data.data.forecast[0].tempNight + '~' + data.data.data.forecast[0].tempDay + '℃')
+				    }
+				});
+				
+				// 当前显示购票列表
+				var currList = [];
+				// 初始化时间
+				setInterval(function(){
+					var year = new Date().getFullYear();
+					var month = new Date().getMonth() + 1;
+					month = month<10?'0'+month:month;
+					var day = new Date().getDate();
+					day = day<10?'0'+day:day;
+					var hour = new Date().getHours();
+					hour = hour<10?'0'+hour:hour;
+					var minutes = new Date().getMinutes();
+					minutes = minutes<10?'0'+minutes:minutes;
+					var seconds = new Date().getSeconds();
+					seconds = seconds<10?'0'+seconds:seconds;
+					$('.dateTxt').text(year+'/'+month+'/'+day+' '+hour+':'+minutes+':'+seconds);
+					
+					var startDate = new Date(new Date().getTime() - (60*1000));
+					var startYear = startDate.getFullYear();
+					var startMonth = startDate.getMonth() + 1;
+					startMonth = startMonth<10?'0'+startMonth:startMonth;
+					var startDay = startDate.getDate();
+					startDay = startDay<10?'0'+startDay:startDay;
+					var startHour = startDate.getHours();
+					startHour = startHour<10?'0'+startHour:startHour;
+					var startMinutes = startDate.getMinutes();
+					startMinutes = startMinutes<10?'0'+startMinutes:startMinutes;
+					var startSeconds = startDate.getSeconds();
+					startSeconds = startSeconds<10?'0'+startSeconds:startSeconds;
+					var startDateString = startYear + '-' + startMonth + '-' + startDay + ' ' + startHour + ':' + startMinutes + ':' + startSeconds;
+					var endDateString = year+'-'+month+'-'+day+' '+hour+':'+minutes+':'+seconds
+					
+					
+					if(seconds % 10 == 0 || seconds == 0){
+						app.getAjax('/loopDataV/getDeviceBatterySaleInfo?startDate=' + startDateString + '&endDate=' + endDateString,{}, function(res){
+							var salesList = res;
+							var newList = [];
+							salesList.forEach(function(value, key){
+								var hasItem = false;
+								newList.forEach(function(item, itemKey){
+									if(item.createDate == value.createDate && item.siteName == value.siteName && value.ticketName == item.ticketName){
+										item.buyQuantity = parseInt(item.buyQuantity) + 1;
+										hasItem = true;
+									}
+								})
+								if(!hasItem){
+									newList.push(value);
+								}
+							})
+							newList.sort(function(a, b) {
+							  return b.createDate < a.createDate ? 1 : -1
+							})
+							console.log(newList);
+							if(currList.length == 0){
+								currList = newList;
+								newList.forEach(function(value, key){
+									$('.salesList').append(
+										'<div class="salesItem">' +
+											value.createDate.split(' ')[1] + '购买' + value.ticketName +'<p>x'+ value.buyQuantity +'</p>' +
+										'</div>'
+									);
+								})
+								$('.salesList').animate({ scrollTop: ($('.salesItem').length - 6) * 45}, 2000);
+							}else{
+								newList.forEach(function(value, key){
+									var hasItem = false;
+									currList.forEach(function(item, itemKey){
+										if(value.createDate == item.createDate){
+											hasItem = true;
+										}
+									})
+									if(!hasItem){
+										currList.push(value);
+										$('.salesList').append(
+											'<div class="salesItem">' +
+												value.createDate.split(' ')[1] + '购买' + value.ticketName +'<p>x'+ value.buyQuantity +'</p>' +
+											'</div>'
+										);
+									}
+								})
+								$('.salesList').animate({ scrollTop: ($('.salesItem').length - 6) * 45}, 2000);
+							}
+							console.log(currList);
+						})
+						
+					}
+				}, 1000);
+				
+				
+				function initMap(map){
+					app.getAjax('/batteryDataView/getLocation', {}, function(res){
+						var resLength = 0;
+						resLength += res.length;
+						var markers = [];
+						if(res.length > 0){
+							res.forEach(function(value, key){
+								var lnglat = value.location;
+								var icon = new AMap.Icon({
+								    size: new AMap.Size(15, 45),    // 图标尺寸
+								    image: './img/dpcIcon.png',  // Icon的图像
+								    imageOffset: new AMap.Pixel(0, 25),  // 图像相对展示区域的偏移量，适于雪碧图等
+								    imageSize: new AMap.Size(15, 15)   // 根据所设置的大小拉伸或压缩图片
+								});
+								// 创建点实例
+								var lng = lnglat.split(',')[0];
+								var lat = lnglat.split(',')[1];
+								var gps = [lng, lat];
+								new AMap.convertFrom(gps, 'gps', function (status, result) {
+								  if (result.info === 'ok') {
+								    var lnglats = result.locations;
+									var marker = new AMap.Marker({
+									    position: new AMap.LngLat(lnglats[0].lng, lnglats[0].lat),
+									    icon: icon
+									});
+									markers.push(marker);
+								  }
+								});
+							})
+							var myInter = setInterval(function(){
+								if(markers.length == resLength){
+									map.clearMap();
+									// 创建覆盖物群组，并将 marker 传给 OverlayGroup
+									overlayGroups = new AMap.OverlayGroup(markers);
+									map.add(overlayGroups);
+									clearInterval(myInter);
+								}
+							}, 100);
+						}
+					})
+				}
+				
+			</script>
+		</div>
+	</body>
+</html>

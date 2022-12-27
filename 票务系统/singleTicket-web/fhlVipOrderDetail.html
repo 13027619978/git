@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/reset.css">
+		<style type="text/css">
+			.container{
+				width: 100%;
+			}
+			.bgImg{
+				width: 100%;
+			}
+			.imgView{
+				width: 34.6%;
+				height: 46.3vw;
+				position: absolute;
+				left: 56%;
+				top: 21.4vw;
+				overflow: hidden;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background-color: #000;
+			}
+			.imgView img{
+				height: 100%;
+			}
+			.qrcodeImg{
+				position: absolute;
+				top: 85vw;
+				left: 50%;
+				margin-left: -18%;
+				width: 36%;
+				height: 36.5vw;
+				background-color: #000;
+			}
+			.qrcodeImg img{
+				width: 100%;
+				height: 100%;
+			}
+			.ticketNum, .useTime{
+				position: absolute;
+				left: 0;
+				top: 123vw;
+				font-size: 13px;
+				color: #333;
+				text-align: center;
+				width: 100%;
+			}
+			.useTime{
+				top: 127vw;
+			}
+			.qyBtn{
+				position: fixed;
+				bottom: 1%;
+				left: 50%;
+				margin-left: -75px;
+				display: block;
+				width: 150px;
+				line-height: 35px;
+				text-align: center;
+				color: #fff;
+				text-align: center;
+				border-radius: 10px;
+				font-size: 12px;
+				color: #fff;
+				background-color: #009688;
+			}
+			
+			.hoverView{
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: rgba(0,0,0,.5);
+				display: none;
+			}
+			.hoverContent{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 100%;
+				height: 100%;
+			}
+			.djqView{
+				width: 90%;
+				position: relative;
+			}
+			.djqView img{
+				width: 100%;
+			}
+			.djqView .closeBtn{
+				position: absolute;
+				right: 0;
+				top: 0;
+				background-color: #fff;
+				display: block;
+				width: 35px;
+				height: 35px;
+				border-radius: 50%;
+				text-align: center;
+				line-height: 25px;
+				color: #333;
+				border: 4px solid #009688;
+			}
+			.qyImg{
+				position: absolute;
+				top: 37.5%;
+				left: 27vw;
+			}
+			.qyImg img{
+				width: 35.5vw;
+			}
+			.qyBtn{
+				display: none;
+			}
+			.hoverTxt{
+				position: absolute;
+				right: 6%;
+				bottom: 30.5%;
+				font-size: 16px;
+				color: #fff;
+				font-weight: bold;
+				letter-spacing: 2px;
+			}
+		</style>
+		<title>订单详情</title>
+	</head>
+	<body>
+		<div class="container">
+			<img class="bgImg" src="img/fhlDetailBg.jpg" >
+			<div class="imgView">
+				<img class="headImg" src="" >
+			</div>
+			<div class="qrcode" style="display: none;">
+				
+			</div>
+			<div class="qrcodeImg">
+				<img src="" >
+				
+			</div>
+			<p class="ticketNum"></p>
+			<p class="useTime"></p>
+			<a class="qyBtn" href="javascript:;" onclick="showqy()">查看年卡权益</a>
+		</div>
+		
+		<!-- <div class="hoverView">
+			<div class="hoverContent">
+				<div class="djqView">
+					<p class="hoverTxt"></p>
+					<img src="img/fhlDjq.png" >
+					<a class="closeBtn" href="javascript:;" onclick="closeClick()">x</a>
+					<div class="qyImg">
+						<img src="" >
+					</div>
+				</div>
+			</div>
+		</div> -->
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/jquery.qrcode.min.js"></script>
+		<script src="layer/layer.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				var ticketId = app.getQueryString('ticketId').split('/')[1];
+				var openid = app.getCookie('openid');
+				app.getAjax('order/getDetailsById', {
+					ticketOrderId: ticketId
+				}, function(res){
+					console.log(res);
+					if(res.success){
+						var orderInfo = res.data;
+						var nowDate = new Date(new Date().getTime() + 60000 * 10);
+						var nowYear = nowDate.getFullYear();
+						var nowMonth = nowDate.getMonth() + 1;
+						nowMonth = nowMonth>9?nowMonth:'0'+nowMonth;
+						var nowDay = nowDate.getDate();
+						nowDay = nowDay>9?nowDay:'0'+nowDay;
+						var nowHour = nowDate.getHours();
+						nowHour = nowHour>9?nowHour:'0'+nowHour;
+						var nowMinute = nowDate.getMinutes();
+						nowMinute = nowMinute>9?nowMinute:'0'+nowMinute;
+						var nowSeconds = nowDate.getSeconds();
+						nowSeconds = nowSeconds>9?nowSeconds:'0'+nowSeconds;
+						$('.ticketNum').text('票号：' + orderInfo.checkCode);
+						$('.useTime').text('二维码有效时间：' + nowYear + '-' + nowMonth + '-' + nowDay + ' ' + nowHour + ':' + nowMinute + ':' + nowSeconds);
+						$('.headImg').attr('src', app.getCookie('headPicUrl'));
+						$('.qrcode').qrcode({
+							text: orderInfo.checkCode + '?time=' + new Date().getTime(),
+							background: '#fff',
+							foreground: '#000',
+							width: 148,
+							height: 148
+						});
+						$('.qrcodeImg img').attr('src', document.getElementsByClassName('qrcode')[0].getElementsByTagName('canvas')[0].toDataURL("image/png"));
+						$('.qyImg img').attr('src', document.getElementsByClassName('qrcode')[0].getElementsByTagName('canvas')[0].toDataURL("image/png"));
+						app.getAjax('orderEquity/query', {
+							qr: orderInfo.checkCode,
+							equityCode: 1
+						}, function(res){
+							console.log(res);
+							if(res.success){
+								if(res.data.useState == '0'){
+									$('.qyBtn').show();
+									if(!app.getCookie('hoverShow')){
+										$('.hoverView').show();
+									}
+								}
+							}
+						})
+					}else{
+						layer.alert(res.message);
+					}
+				});
+				
+			})
+			
+			function closeClick(){
+				$('.hoverView').hide();
+				app.setCookie('hoverShow', true);
+			}
+			
+			function showqy(){
+				$('.hoverView').show();
+			}
+			
+			
+			function homeClick(){
+				window.location.replace('index.html?openid=' + app.getCookie('openid'));
+			}
+			
+			
+		</script>
+	</body>
+</html>
+

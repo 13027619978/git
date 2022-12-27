@@ -5,10 +5,61 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/order.css">
+		<style type="text/css">
+			.container{
+				padding-top: 50px;
+			}
+			.tabView{
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+				background-color: #fff;
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+			}
+			.tabView a{
+				font-size: 14px;
+				color: #333;
+				flex: 1;
+				text-align: center;
+				line-height: 40px;
+			}
+			.tabView a.active{
+				color: #ff5500;
+				border-bottom: 3px solid #ff5500;
+			}
+			.refundView{
+				width: 100%;
+				display: flex;
+				justify-content: flex-end;
+				align-items: center;
+				background-color: #fff;
+				padding: 5px;
+				border-top: 1px solid #ddd;
+			}
+			.refundView a{
+				display: block;
+				border: 1px solid #98a19d;
+				border-radius: 5px;
+				line-height: 25px;
+				width: 75px;
+				font-size: 13px;
+				text-align: center;
+				background: #fff;
+				padding: 0;
+				color: #98a19d;
+			}
+		</style>
 		<title>摆渡船订单</title>
 	</head>
 	<body>
 		<div class="container">
+			<div class="tabView">
+				<a class="active" href="javascript:;" onclick="tabClick(1, this)">未使用</a>
+				<a href="javascript:;" onclick="tabClick(2, this)">已使用</a>
+			</div>
 			<ul class="orderList">
 				<li class="orderItem">
 					<!-- <a href="javascript:;">
@@ -24,6 +75,125 @@
 		<script src="js/jquery.min.js"></script>
 		<script src="layer/layer.js"></script>
 		<script src="js/app.js"></script>
-		<script src="js/boatTicketsOrder.js?v=1.0.0"></script>
+		<script type="text/javascript">
+			function tabClick(type, that){
+				$(that).addClass('active').siblings().removeClass('active');
+				getOrderInfo(type);
+			}
+			
+			function getOrderInfo(type){
+				layer.load('1');
+				$('.orderList').html('');
+				$('.noData').hide();
+				var openid = app.getCookie('openid');
+				app.getAjax('deviceLoopApp/getListByOpenId', {
+					openId: openid
+				}, function(res){
+					console.log(res);
+					layer.closeAll();
+					if(res.code == 'SUCCESS'){
+						var orderList = res.data;
+						orderList.forEach(function(value, key){
+							if(type == 1){
+								if(value.type != '16' && value.type != '15' && value.type != '18' && value.type != '21'){
+									if(value.payStatus == '1' && value.totalNumber == value.restNumber){
+										$('.orderList').append(
+											'<li class="orderItem">'+
+												'<a href="javascript:;" onclick="orderClick(\''+value.id+'\')">'+
+													'<p>支付金额：<font class="depositTxt">'+value.totalMoney+'元</font></p>'+
+													'<p>购票数量：<font class="numbers">'+value.totalNumber+'</font></p>'+
+													'<p>订单时间：<font class="dateTxt">'+value.createDate+'</font></p>'+
+												'</a>'+
+												'<div class="refundView">' +
+													'<a href="javascript:;" onclick="refundClick(\''+value.id+'\')">申请退票</a>' +
+												'</div>' +
+											'</li>'
+										)
+									}
+								}
+								
+							}
+							if(type == 2){
+								if(value.type != '16' && value.type != '15' && value.type != '18' && value.type != '21'){
+									if(value.payStatus != '1' || value.totalNumber != value.restNumber){
+										$('.orderList').append(
+											'<li class="orderItem">'+
+												'<a href="javascript:;" onclick="orderClick(\''+value.id+'\')">'+
+													'<p>支付金额：<font class="depositTxt">'+value.totalMoney+'元</font></p>'+
+													'<p>购票数量：<font class="numbers">'+value.totalNumber+'</font></p>'+
+													'<p>订单时间：<font class="dateTxt">'+value.createDate+'</font></p>'+
+												'</a>'+
+												'<div class="refundView">' +
+													'<a href="javascript:;" onclick="shClick()">申请售后</a>' +
+												'</div>' +
+											'</li>'
+										)
+									}
+								}
+							}
+						})
+						if($('.orderItem').length == 0){
+							$('.noData').show();
+						}
+					}else{
+						layer.alert(res.msg);
+					}
+				})
+			}
+			
+			// 售后
+			function shClick(){
+				layer.alert('售后客服电话：025-57717414');
+			}
+			
+			$(function(){
+				getOrderInfo('1');
+			})
+			
+			function refundClick(orderId){
+				if(orderId.indexOf('/') != -1){
+					orderId = orderId.toString().split('/')[1];
+				}
+				app.getAjax('deviceLoopApp/getByDeviceLoopId', {
+					deviceLoopId: orderId
+				}, function(res){
+					var orderStatus = res.data.payStatus;
+					var orderCode = res.data.orderCode;
+					if(res.data.totalNumber == res.data.restNumber && res.data.payStatus == '1'){
+						layer.confirm('是否确认申请退票。', {
+						    btn: ['确认','取消'],
+						    yes: function(){
+								layer.load(2);
+								app.getAjax('deviceLoopApp/refundByWeb', {
+									orderCode: orderCode
+								}, function(res){
+									if(res.code == 'FAIL'){
+										layer.closeAll();
+										layer.alert(res.msg);
+									}else{
+										layer.closeAll();
+										layer.alert(res.msg);
+										getOrderInfo('1');
+									}
+								})
+							},
+							btn2: function(){
+								layer.closeAll();
+							}
+						})
+					}else{
+						layer.alert('该票已使用或无法退款，请联系客服人员', {
+							yes: function(){
+								getOrderInfo('1');
+							}
+						});
+					}
+				})
+			}
+			
+			function orderClick(orderId){
+				window.location.href = "boatTicketsDetail.html?orderId=" + orderId;
+			}
+		</script>
 	</body>
 </html>

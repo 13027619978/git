@@ -216,13 +216,22 @@
 						<div class="price"><div>¥65-180<p class="sells">已售：0</p></div><font>点击购票</font></div>
 					</div>
 				</a>
+				<a href="javascript:;" onclick="btnClick(6)">
+					<div class="imgView">
+						<img src="img/snx1.jpg" >
+					</div>
+					<div class="priceView">
+						<p>2022观鸟线</p>
+						<div class="price"><div>¥80-160<p class="sells">已售：0</p></div><font>点击购票</font></div>
+					</div>
+				</a>
 				<a href="javascript:;" onclick="btnClick(4)">
 					<div class="imgView">
 						<img src="img/wx/wx4.jpg" >
 					</div>
 					<div class="priceView">
 						<p>东南湖画舫游览</p>
-						<div class="price"><div>¥30-198<p class="sells">已售：0</p></div><font>点击购票</font></div>
+						<div class="price"><div>¥30-568<p class="sells">已售：0</p></div><font>点击购票</font></div>
 					</div>
 				</a>
 				<a href="javascript:;" onclick="btnClick(2)">
@@ -317,18 +326,23 @@
 					    success:function(res){
 							// 画舫票
 							let hfTotal = 0;
+							// 观鸟线
+							let gnxTotal = 0;
 					    	res.data.forEach(function(value, key){
 					    		if(value.id == 18){
-					    			$('.price').eq(2).find('.sells').text('已售：' + value.number);
-					    		}else if(value.id == 17){
 					    			$('.price').eq(3).find('.sells').text('已售：' + value.number);
+					    		}else if(value.id == 17){
+					    			$('.price').eq(4).find('.sells').text('已售：' + value.number);
 					    		}else if(value.id == 19 || value.id == 20){
 									hfTotal += parseInt(value.number);
 					    		}else if(value.id == 21){
-									$('.price').eq(4).find('.sells').text('已售：' + value.number);
-					    		}
+									$('.price').eq(5).find('.sells').text('已售：' + value.number);
+					    		}else if(value.id == 23 || value.id == 24 || value.id == 25){
+									gnxTotal += parseInt(value.number);
+								}
 					    	})
-							$('.price').eq(1).find('.sells').text('已售：' + hfTotal);
+							$('.price').eq(2).find('.sells').text('已售：' + hfTotal);
+							$('.price').eq(1).find('.sells').text('已售：' + gnxTotal);
 					    }
 					});
 				});
@@ -356,6 +370,8 @@
 					window.location.href = 'http://hd.smart-ideas.com.cn/xwhWeb/xwhAppTest/xyTicket.html?openid=' + app.getCookie('openid') + '&ticketType=7'
 				}else if(btnType == 5){
 					window.location.href = 'http://hd.smart-ideas.com.cn/xwhWeb/xwhAppTest/yybTicket.html?openid=' + app.getCookie('openid') + '&ticketType=21'
+				}else if(btnType == 6){
+					window.location.href = 'http://hd.smart-ideas.com.cn/xwhWeb/xwhAppTest/snxTickets.html?openid=' + app.getCookie('openid') + '&ticketType=23'
 				}
 			}
 		</script>

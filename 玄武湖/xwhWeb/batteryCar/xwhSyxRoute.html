@@ -208,10 +208,10 @@
 				
 				// 获取天气信息
 				$.ajax({
-				    url:'https://restapi.amap.com/v3/weather/weatherInfo?key=773c4e4c196eb78e21f220e7e14160d2&extensions=all&city=320100',
+				    url:'http://xwhykt.smart-ideas.com.cn/prod-api/api/weather/alicity/forecast15days?cityId=284833',
 				    type:"GET",
 				    success:function(data){
-						$('.weatherTxt').text('今日 ' + data.forecasts[0].casts[0].dayweather  + ' ' + data.forecasts[0].casts[0].nighttemp + '~' + data.forecasts[0].casts[0].daytemp + '℃')
+						$('.weatherTxt').text('今日 ' + data.data.data.forecast[0].conditionDay  + ' ' + data.data.data.forecast[0].tempNight + '~' + data.data.data.forecast[0].tempDay + '℃')
 				    }
 				});
 				

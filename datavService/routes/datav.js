@@ -20,8 +20,12 @@ var test = require('./datav/test.js');
 
 // 身份证
 var idCard = require('./datav/idCard.js');
+
+// 紫竹院
+var zzy = require('./datav/zzy.js');
 var router = express.Router(); 
 
+router.use('/zzy',zzy);
 router.use('/yby',yby);
 router.use('/ymy',ymy);
 router.use('/qsmx',qsmx);

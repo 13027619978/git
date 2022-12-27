@@ -11,15 +11,14 @@ $(function(){
 		$('.num').val(1);
 	}
 	if(ticketType == 5){
-		$('.typeItem').eq(5).addClass('active').siblings().removeClass('active');
+		$("#ticketType3").prop("checked",true);
+		$('.timeView').show();
 	}else if(ticketType == 4){
-		$('.typeItem').eq(4).addClass('active').siblings().removeClass('active');
+		$("#ticketType4").prop("checked",true);
 	}else if(ticketType == 1){
-		$('.typeItem').eq(2).addClass('active').siblings().removeClass('active');
+		$("#ticketType1").prop("checked",true);
 	}else if(ticketType == 2){
-		$('.typeItem').eq(3).addClass('active').siblings().removeClass('active');
-	}else if(ticketType == 6){
-		$('.typeItem').eq(1).addClass('active').siblings().removeClass('active');
+		$("#ticketType2").prop("checked",true);
 	}
 	
 	getTotalPrice();

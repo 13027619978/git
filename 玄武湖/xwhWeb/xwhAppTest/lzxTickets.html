@@ -3,6 +3,10 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta http-equiv="Expires" content="0">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-control" content="no-cache">
+		<meta http-equiv="Cache" content="no-cache">
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/gzhTickets.css">
 		<style type="text/css">
@@ -19,7 +23,7 @@
 			<!-- 购买界面 -->
 			<div class="shopView">
 				<div class="shopContent">
-					<a class="closeBtn" href="javascript:;" onclick="closeClick()">
+					<a class="closeBtn" href="javascript:;" onclick="hideClick()">
 						<img src="img/close.png" >
 					</a>
 					<div class="shopContentView">
@@ -28,16 +32,17 @@
 								<img src="img/lz/lz4.jpg">
 							</div>
 							<div class="shopPrice">
-								<p>¥120</p>
+								<p>¥150</p>
 							</div>
 						</div>
 						
 						<div class="ggContent">
 							<div class="dateView">
 								<p>日期</p>
-								<div class="dateList">
-									<div class="timeBtn" onclick="selectTime(this, 1)"></div>
-									<div class="timeBtn" onclick="selectTime(this, 2)" style="margin-top: 10px;"></div>
+								<div class="dateList rqList">
+									<div class="timeBtn" onclick="selectTime(this, 13)">2022-10-01 14:00 库存：0</div>
+									<div class="timeBtn" onclick="cancle()" style="margin-top: 10px;">2022-10-02 14:00 库存：0</div>
+									<div class="timeBtn" onclick="cancle()" style="margin-top: 10px;">2022-10-03 14:00 库存：0</div>
 								</div>
 							</div>
 							
@@ -77,8 +82,8 @@
 			</div>
 			<div class="buyInfo">
 				<div class="ticketView">
-					<p>2022玄武湖全民龙舟体验活动</p>
-					<p class="price">¥<font>120</font></p>
+					<p>龙舟亲子优惠体验</p>
+					<p class="price">¥<font>150</font></p>
 				</div>
 				
 				<div class="chooseView">
@@ -102,10 +107,13 @@
 				<p style="display: inline-block;background-color: yellow;color: red;margin: 10px 0;">武湖全民龙舟体验活动招募中</p>
 				<p>对于大部分人来说，龙舟赛虽然精彩热闹，但受于场地和参与人数的限制，很难真正参与其中。不过，机会来了！这个端午假期，玄武湖全民龙舟体验活动正在招募中！面向广大市民、游客，在专业教练的指导下，竞舟湖上，感受浓浓的节日氛围！</p>
 				<img src="img/lz/lz4.jpg" >
-				<p>活动时间：每周六/日 16:00-17:30</p>
+				<!-- <p>活动时间：每周六/日 16:00-17:30</p> -->
+				<!-- <p>活动启动条件：报名满10人即可成团，上限人数51人。儿童要求1.3米以上且需家长陪同，均按全票收费。</p> -->
+				<!-- <p>活动价格：120元/人</p> -->
+				<p>活动时间：10月1日-10月3日下午14:00</p>
 				<p>活动地点：玄武湖水上运动基地（阳光码头）</p>
-				<p>活动启动条件：报名满10人即可成团，上限人数51人。儿童要求1.3米以上且需家长陪同，均按全票收费。</p>
-				<p>活动价格：120元/人</p>
+				<p>活动人数：每场32组家庭。</p>
+				<p>活动价格：一大一小150元，一大为60岁以下成年人，一小为7岁以上未成年人。</p>
 				<p>费用包含：教练员、救生衣、手机防水套。</p>
 				<p>其他条件：自备衣服一套</p>
 				<img src="img/lz/lz4.jpg" >
@@ -144,13 +152,251 @@
 		<script src="js/jquery.min.js"></script>
 		<script src="layer/layer.js"></script>
 		<script src="js/app.js?v=1.0.0"></script>
-		<script src="js/lzTickets.js?v=1.0.10"></script>
 		<script type="text/javascript">
+			var ticketsType = 18;
+			var singlePrice = 150;
+			let timeValue;
+			let satTime;
+			let sunTime;
+			let oneTime;
+			let timeTxt;
+			
+			function cancle(){
+				layer.alert('当前时间已约满，请选择其他时间');
+			}
+			
+			$(function(){
+				var nowWeek = new Date().getDay();
+				nowWeek = nowWeek==0?7:nowWeek;
+				var nowHour = new Date().getHours();
+				var nowMinutes = new Date().getMinutes();
+				var nextSat = 6;
+				var nextSun = 7;
+				var nextOne = 8;
+				if(nowWeek == 6){
+					if(nowHour == 17 && nowMinutes >= 30){
+						$('.timeBtn').eq(0).attr('onclick', 'closeClick()').addClass('disabled');
+					}else if(nowHour > 17){
+						$('.timeBtn').eq(0).attr('onclick', 'closeClick()').addClass('disabled');
+					}
+				}
+				if(nowWeek == 7 && nowHour >= 17){
+					if(nowHour == 17 && nowMinutes >= 30){
+						nextSat = 13;
+						nextSun = 14;
+					}else if(nowHour > 17){
+						nextSat = 13;
+						nextSun = 14;
+					}
+				}
+				if(nowWeek == 1 && nowHour >= 17){
+					
+				}
+				var nowDateNum = new Date().getTime();
+				var satDateNum = (nextSat - nowWeek) * 60 * 60 * 24 * 1000 + nowDateNum;
+				var sunDateNum = (nextSun - nowWeek) * 60 * 60 * 24 * 1000 + nowDateNum;
+				var oneDateNum = (nextOne - nowWeek) * 60 * 60 * 24 * 1000 + nowDateNum;
+				var satDate = new Date(satDateNum);
+				var sunDate = new Date(sunDateNum);
+				var oneDate = new Date(oneDateNum);
+				satTime = '2022-10-01';
+				sunTime = '2022-10-02';
+				oneTime = '2022-10-03';
+				
+				app.getAjax('deviceLoopApp/getTicketSessionStock', {
+					ticketId: 18,
+					visitDate: '2022-10-01'
+				}, function(res){
+					res.data.forEach(function(value, key){
+						if(value.sessionId == '13'){
+							let satLast = value.total - value.sell;
+							satLast = satLast>0?satLast:0;
+							$('.timeBtn').eq(0).text('2022-10-01 14:00 库存：' + satLast)
+						}
+					})
+					
+					let nowDate = new Date().getTime();
+					let btnDate = new Date($('.timeBtn').eq(0).text().split(' 14:00')[0].replace(/-/, '/').replace(/-/, '/') + ' 23:59:59').getTime();
+					if(nowDate > btnDate){
+						$('.timeBtn').eq(0).hide();
+					}
+				})
+				
+				app.getAjax('deviceLoopApp/getTicketSessionStock', {
+					ticketId: 18,
+					visitDate: '2022-10-02'
+				}, function(res){
+					res.data.forEach(function(value, key){
+						if(value.sessionId == '13'){
+							let satLast = value.total - value.sell;
+							satLast = satLast>0?satLast:0;
+							$('.timeBtn').eq(1).text('2022-10-02 14:00 库存：' + 0)
+						}
+					})
+					
+					let nowDate = new Date().getTime();
+					let btnDate = new Date($('.timeBtn').eq(1).text().split(' 14:00')[0].replace(/-/, '/').replace(/-/, '/') + ' 23:59:59').getTime();
+					if(nowDate > btnDate){
+						$('.timeBtn').eq(1).hide();
+					}
+				})
+				
+				app.getAjax('deviceLoopApp/getTicketSessionStock', {
+					ticketId: 18,
+					visitDate: '2022-10-03'
+				}, function(res){
+					res.data.forEach(function(value, key){
+						if(value.sessionId == '13'){
+							let satLast = value.total - value.sell;
+							satLast = satLast>0?satLast:0;
+							$('.timeBtn').eq(2).text('2022-10-03 14:00 库存：' + 0)
+						}
+					})
+					
+					let nowDate = new Date().getTime();
+					let btnDate = new Date($('.timeBtn').eq(2).text().split(' 14:00')[0].replace(/-/, '/').replace(/-/, '/') + ' 23:59:59').getTime();
+					if(nowDate > btnDate){
+						$('.timeBtn').eq(2).hide();
+					}
+				})
+				
+				
+				if(app.getQueryString('openid')){
+					app.setCookie('openid', app.getQueryString('openid'));
+				}
+				$('.num').val(1);
+				getTotalPrice(1)
+			})
+			
+			// 获取日期
+			function getDateString(time){
+				let dateString = new Date(time);
+				let yearString = dateString.getFullYear();
+				let monthString = dateString.getMonth() + 1;
+				monthString = monthString > 9 ? monthString : '0' + monthString;
+				let dayString = dateString.getDate();
+				dayString = dayString > 9 ? dayString : '0' + dayString;
+				return yearString + '-' + monthString + '-' + dayString;
+			}
+			
+			function closeClick(){
+				layer.alert('无法选择当前场次');
+			}
+			
+			function add(that){
+				var ticketsNumber = parseInt($(that).parent().find('input').val());
+				if(ticketsNumber > 19){
+					layer.alert('单次最多购买20张');
+					return;
+				}
+				ticketsNumber += 1;
+				$(that).parent().find('input').val(ticketsNumber);
+				getTotalPrice(ticketsNumber);
+			}
+			
+			function sub(that){
+				var ticketsNumber = parseInt($(that).parent().find('input').val());
+				if(ticketsNumber > 1){
+					ticketsNumber -= 1;
+					$(that).parent().find('input').val(ticketsNumber);
+				}
+				getTotalPrice(ticketsNumber);
+			}
+			
+			function selectTime(that, timeId){
+				$(that).addClass('active').siblings().removeClass('active');
+				timeValue = timeId;
+				timeTxt = $(that).text().split(' 14:00')[0];
+			}
+			
+			function getTotalPrice(ticketsNumber){
+				var totalPrice = ticketsNumber * singlePrice;
+				$('.totalPrice').text(totalPrice.toFixed(2));
+				return totalPrice;
+			}
+			
+			function buyClick(that){
+				var ticketsNumber = $('.num').val();
+				var price = getTotalPrice(ticketsNumber);
+				var openid = app.getCookie('openid');
+				var userName = $('.userName').val();
+				var phone = $('.phone').val();
+				var visitDate;
+				if(ticketsNumber == 0){
+					layer.alert('请先选择购票数量');
+					return;
+				}
+				if(phone.length != 11){
+					layer.alert('请先输入正确的手机号');
+					return;
+				}
+				if(!userName){
+					layer.alert('请先输入联系人姓名');
+					return;
+				}
+				if(!timeValue){
+					layer.alert('请先选择场次时间');
+					return;
+				}
+				$(that).attr('onclick', '');
+				visitDate = timeTxt;
+				var params = {
+					openId: openid,
+					totalNumber: ticketsNumber,
+					totalMoney: price,
+					type: ticketsType,
+					userName: userName,
+					phone: phone,
+					sessionId: timeValue,
+					visitDate: visitDate
+				};
+				console.log(params);
+				// 微信支付
+				wxPay(params, that);
+			}
+			
+			function wxPay(params, that){
+				app.getAjax('deviceLoopApp/getWebPayInfo', params, function(res){
+					if(res.code == 'SUCCESS'){
+						var orderId = res.data.orderId;
+						if(res.data.res){
+							var res_o = JSON.parse(res.data.res);
+							WeixinJSBridge.invoke(
+								'getBrandWCPayRequest', {
+							       "appId":res_o.appId,     //公众号名称，由商户传入
+							       "timeStamp":res_o.timeStamp,  //时间戳，自1970年以来的秒数
+							       "nonceStr":res_o.nonceStr, //随机串
+							       "package":res_o.package,
+							       "signType":res_o.signType,//微信签名方式：
+							       "paySign":res_o.paySign //微信签名
+								},
+								function(res){
+									if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+										$(that).attr('onclick', 'buyClick()');
+										window.location.replace("lzxTicketsOrderDetail.html?orderId=" + orderId);
+									}else{
+										//取消禁用购买按钮
+							      		$(that).attr('onclick', 'buyClick(this)');
+									}
+								}
+							);
+						}else{
+							$(that).attr('onclick', 'buyClick()');
+							window.location.replace("lzxTicketsOrderDetail.html?orderId=" + orderId);
+						}
+					}else{
+						layer.alert(res.msg);
+						//取消禁用购买按钮
+						$(that).attr('onclick', 'buyClick(this)');
+					}
+				})
+			}
+			
 			function showClick(){
 				$('.shopView').show();
 			}
 			
-			function closeClick(){
+			function hideClick(){
 				$('.shopView').hide();
 			}
 		</script>
