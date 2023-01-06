@@ -43,6 +43,19 @@ const ybycs = require('./common/ybycs.js');
 const wyh = require('./common/wyh.js');
 // 南海子
 const nhz = require('./common/nhz.js');
+// 东方总
+const dfz = require('./common/dfz.js');
+// 紫竹院冰场
+const zzy = require('./common/zzy.js');
+// 圆明园冰场
+const ymy = require('./common/ymy.js');
+// 颐和园冰场
+const yhy = require('./common/yhy.js');
+// 陶然亭冰场
+const trt = require('./common/trt.js');
+// 宇嘉内测
+const yjnc = require('./common/yjnc.js');
+
 
 // 运营预警
 var warningString = '';
@@ -1229,6 +1242,7 @@ function scheduleStart(){
 			boss.getBossYYInfo('TgsEpcFhl', 'TGN20201228152933458', fhlbszRoom);
 			fhl.getBossInfo('TgsEpcFhl', 'TGN20201228152933458', fhlbszRoom);
 			boss.getAllTicketsBuyInfo('TgsEpcFhl', 'TGN20201228152933458', fhlbszRoom);
+			fhl.getBxYYInfo(fhlbszRoom);
 		}
 	});
 	
@@ -1343,14 +1357,6 @@ function scheduleStart(){
 					}
 				})	
 			}
-			
-			// 温榆河报数
-			if(parseInt(hour) == 12 || parseInt(hour) == 18){
-				const wyhbszRoom = await wechat.bot.Room.find({topic: "温榆河门票"});
-				wyh.getCheckTicketInfo('TgsEpcHty', 'TGN20211223142858166', wyhbszRoom, 'TC');
-				const nhzbszRoom = await wechat.bot.Room.find({topic: "南海子公园票务"});
-				nhz.getCheckTicketInfo('TgsEpcSy', 'TGN20221219120936423', nhzbszRoom, 'TC');
-			}
 		}
     });
 	
@@ -1364,6 +1370,7 @@ function scheduleStart(){
 			xhg.getPeopleInfo('TgsEpcXhg', 'TGN20210628140233051', xhgzypwbszRoom);
 			boss.getBossYYInfo('TgsEpcXhg', 'TGN20210628140233051', xhgzypwbszRoom);
 			boss.getBossYYInfo('TgsEpcXhg', 'TGN20210629121602397', xhgzypwbszRoom);
+			xhg.getXcCheckPeopleInfo(xhgzypwbszRoom);
 		}
 		if(parseInt(hour) >= 9 && parseInt(hour) <= 18){
 			// 鲜花港票务对象群
@@ -1373,6 +1380,8 @@ function scheduleStart(){
 			boss.getTicketInfo('TgsEpcXhg', 'TGN20210629121602397', 'WEB', xhgpwdxqRoom);
 			xhg.getBxjnhInfo(xhgpwdxqRoom);
 			xhg.getPeopleMoneyInfo('TgsEpcXhg','TGN20210628140233051',xhgpwdxqRoom);
+			xhg.getXcCheckInfo(xhgpwdxqRoom);
+			xhg.getBsxmIncome(xhgpwdxqRoom);
 		}
 	})
 	
@@ -1411,6 +1420,8 @@ function scheduleStart(){
 			boss.getTicketInfo('TgsEpcYmy', 'TGN20201125101904070', 'MINI', zjsbszRoom);
 			boss.getBossYYInfo('TgsEpcYmy', 'TGN20201125101904070', zjsbszRoom);
 		}
+		
+		
 	})
 	
 	// 野鸭湖、玄武湖、雁栖湖
@@ -1425,7 +1436,6 @@ function scheduleStart(){
 			const yyhbszRoom = await wechat.bot.Room.find({topic: "野鸭湖自行车报数组"});
 			yyh.getyyhInfo('lease.smart-ideas.com.cn',yyhbszRoom);
 		}
-		
 		
 		if(parseInt(hour) >= 9 && parseInt(hour) < 21){
 			const xwhdpcbszRoom = await wechat.bot.Room.find({topic: "玄武湖电瓶车报数组"});
@@ -1461,6 +1471,21 @@ function scheduleStart(){
 			// const nhzjcbszRoom = await wechat.bot.Room.find({topic: "唐山南湖游船报数组"});
 			// nh.getIncome(nhzjcbszRoom, 'ship');
 		}
+		
+		// 冰场报数
+		if(parseInt(hour) == 12 || parseInt(hour) == 18){
+			const wyhbszRoom = await wechat.bot.Room.find({topic: "温榆河门票"});
+			wyh.getCheckTicketInfo('TgsEpcHty', 'TGN20211223142858166', wyhbszRoom, 'TC');
+			
+			const nhzbszRoom = await wechat.bot.Room.find({topic: "南海子公园票务"});
+			nhz.getCheckTicketInfo('TgsEpcSy', 'TGN20221219120936423', nhzbszRoom, 'TC');
+			
+			const schbszRoom = await wechat.bot.Room.find({topic: "三海运营报数组"});
+			sch.getCheckTicketInfo('TgsEpcSh', 'TGN20211223142734998', schbszRoom);
+			boss.getBossYYInfo('TgsEpcSh', 'TGN20211223142734998', schbszRoom);
+			sch.getPosIncome(schbszRoom);
+			sch.getLeaseInfo(schbszRoom);
+		}
 	})
 	
 	schedule.scheduleJob('16 0 * * * *', async function(){
@@ -1470,7 +1495,21 @@ function scheduleStart(){
 			const nhdpcbszRoom = await wechat.bot.Room.find({topic: "唐山南湖电瓶车报数组"});
 			nh.getIncome(nhdpcbszRoom, 'battery');
 		}
+		
+		// 冰场报数
+		if(parseInt(hour) == 12 || parseInt(hour) == 18){
+			const dfzbszRoom = await wechat.bot.Room.find({topic: "东方总的报数群"});
+			dfz.getCheckTicketInfo('TgsEpcHty','TGN20221219133840067',dfzbszRoom,'TC');
+			dfz.getCheckTicketInfo('TgsEpcHty','TGN20211223142858166',dfzbszRoom,'TC');
+			dfz.getCheckTicketInfo('TgsEpcHty','TGN20221219114138804',dfzbszRoom,'TC');
+			dfz.getCheckTicketInfo('TgsEpcSy','TGN20221219120936423',dfzbszRoom,'TC');
+			
+			const zzybszRoom = await wechat.bot.Room.find({topic: "紫竹院冰场报数组"});
+			zzy.getCheckTicketInfo('TgsEpcBxyyz', 'TGN20221205175851713', zzybszRoom, 'TC');
+			zzy.getLeaseInfo(zzybszRoom);
+		}
 	})
+	
 	
 	schedule.scheduleJob('18 0 * * * *', async function(){
 		var hour = new Date().getHours();
@@ -1479,6 +1518,14 @@ function scheduleStart(){
 			getymyInfo('api.smart-ideas.com.cn', ymybszRoom);
 			boss.getTicketInfo('TgsEpcYmy', 'TGN20201125101904070', 'MINI', ymybszRoom);
 			boss.getBossYYInfo('TgsEpcYmy', 'TGN20201125101904070', ymybszRoom);
+		}
+		
+		// 冰场报数
+		if(parseInt(hour) == 12 || parseInt(hour) == 18){
+			const ymybxbszRoom = await wechat.bot.Room.find({topic: "圆明园冰雪报数组"});
+			ymy.getCheckTicketInfo('TgsEpcBxyyz', 'TGN20221222182428544', ymybxbszRoom, 'TC');
+			ymy.getCheckTicketInfo('TgsEpcBxyyz', 'TGN20221227164251217', ymybxbszRoom, 'TC');
+			ymy.getLeaseInfo(ymybxbszRoom);
 		}
 	})
 	
@@ -1504,6 +1551,19 @@ function scheduleStart(){
 			const ybytyRoom = await wechat.bot.Room.find({topic: "北京园博园数据通用群（预约数）"});
 			yby.getCheckTicketInfo('TgsEpcYby', 'TGN20201210095942945', ybytyRoom);
 			boss.getBossYYInfo('TgsEpcYby', 'TGN20201210095942945', ybytyRoom);
+		}
+		
+		// 冰场报数
+		if(parseInt(hour) == 12 || parseInt(hour) == 18){
+			const yhybxbszRoom = await wechat.bot.Room.find({topic: "颐和园冰场报数组"});
+			yhy.getCheckTicketInfo(yhybxbszRoom);
+		}
+		
+		// 冰场报数
+		if(parseInt(hour) >= 9 && parseInt(hour) <= 18){
+			const trtbxbszRoom = await wechat.bot.Room.find({topic: "陶然亭冰场报数组"});
+			trt.getCheckTicketInfo(trtbxbszRoom);
+			boss.getBossYYInfo('TgsEpcHlldga', 'TGN20221220141005129', trtbxbszRoom);
 		}
 		
 		// 水上公园雪世界报数组
@@ -1535,6 +1595,27 @@ function scheduleStart(){
 		if(parseInt(hour) == 18){
 			const yqhbszRoom = await wechat.bot.Room.find({topic: "雁栖湖报数组"});
 			yqh.getOpenNumber('api.smart-ideas.com.cn',yqhbszRoom);
+		}
+	})
+	
+	schedule.scheduleJob('26 0 * * * *', async function(){
+		var hour = new Date().getHours();
+		if(parseInt(hour) == 12 || parseInt(hour) == 18){
+			const yjncbszRoom = await wechat.bot.Room.find({topic: "宇嘉内测群"});
+			yjnc.getCheckTotal(yjncbszRoom);
+		}
+	})
+	
+	schedule.scheduleJob('28 0 * * * *', async function(){
+		var hour = new Date().getHours();
+		const zzyglcbszRoom = await wechat.bot.Room.find({topic: "紫竹院管理处报数组(冰雪)"});
+		if(parseInt(hour) == 12 || parseInt(hour) == 18){
+			zzy.getYYInfoByTime(zzyglcbszRoom);
+			boss.getBossYYInfo('TgsEpcZzy', 'TGN20221219143307761', zzyglcbszRoom);
+		}
+		
+		if(9<=parseInt(hour) && parseInt(hour) <= 18){
+			zzy.getTimeCheckInfo(zzyglcbszRoom);
 		}
 	})
 	
@@ -1583,7 +1664,15 @@ function scheduleStart(){
 					yby.getTicketsIncome(ybybsRoom);
 				}
 			}
+			
+			// 冰场报数
+			if(parseInt(hour) == 12 || parseInt(hour) == 17 || parseInt(hour) == 18){
+				const bhbcbszRoom = await wechat.bot.Room.find({topic: "北海冰场报数组"});
+				bh.getCheckTicketInfo('TgsEpcYqy', 'TGN20221220115005693', bhbcbszRoom, 'TC');
+				bh.getYYInfoByTime(bhbcbszRoom);
+			}
     	}
+		
     });
 	
 	schedule.scheduleJob('2 30 * * * *', async function(){
@@ -1595,6 +1684,7 @@ function scheduleStart(){
 			boss.getCheckTicketInfo('TgsEpcFhl', 'TGN20201228152933458', fhlbszRoom);
 			boss.getAllTicketsBuyInfo('TgsEpcFhl', 'TGN20201228152933458', fhlbszRoom);
 			fhl.getJJJInfo(fhlbszRoom);
+			fhl.getBxYYInfo(fhlbszRoom);
 		}
 	})
 	
@@ -1705,17 +1795,6 @@ function scheduleStart(){
 			setTimeout(function(){
 				getDeviceIncome(searchSdate, searchEdate, xhgyyRoom, sdate, edate);
 			}, 3000);
-		}
-	})
-	
-	schedule.scheduleJob('16 30 * * * *', async function(){
-		var hour = new Date().getHours();
-		if(parseInt(hour) == 11 || parseInt(hour) == 16 || parseInt(hour) == 19){
-			const schbszRoom = await wechat.bot.Room.find({topic: "三海运营报数组"});
-			sch.getCheckTicketInfo('TgsEpcSh', 'TGN20211223142734998', schbszRoom);
-			boss.getBossYYInfo('TgsEpcSh', 'TGN20211223142734998', schbszRoom);
-			sch.getPosIncome(schbszRoom);
-			sch.getLeaseInfo(schbszRoom);
 		}
 	})
 	

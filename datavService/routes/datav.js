@@ -23,8 +23,12 @@ var idCard = require('./datav/idCard.js');
 
 // 紫竹院
 var zzy = require('./datav/zzy.js');
+
+// 颐和园
+var yhy = require('./datav/yhy.js');
 var router = express.Router(); 
 
+router.use('/yhy',yhy);
 router.use('/zzy',zzy);
 router.use('/yby',yby);
 router.use('/ymy',ymy);

@@ -2,7 +2,6 @@ app = {
 	root:"https://boss.smart-ideas.com.cn/ticketApi/",
 	
 	wxUserInfo:function(success){
-		
 		var enterpriseCode = app.getQueryString('enterpriseCode');
 		var ticketGroupNum = app.getQueryString('ticketGroupNum');
 		var ticketId = app.getQueryString('ticketId');
@@ -24,6 +23,7 @@ app = {
 			app.setCookie('ticketGroupNum', ticketGroupNum);
 			app.setCookie('ticketId', ticketId);
 		}
+		
 		// 什刹海门号
 		var door = app.getQueryString('door');
 		if(door){

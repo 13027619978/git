@@ -18,7 +18,11 @@ async function xhgzypwbszRoomDeal(msg){
 	
 	if(msg.type() == wechat.bot.Message.Type.Text){
 		if(content == '使用方法'){
-			room.say("机器人使用方法:\n----------\n1)鲜花港预约报数\n2)鲜花港核销报数\n3)蝶馆预约报数\n4)蝶馆核销报数\n----------");
+			room.say("机器人使用方法:\n----------\n1)鲜花港预约报数\n2)鲜花港核销报数\n3)蝶馆预约报数\n4)蝶馆核销报数\n5)鲜花港雪场核销报数\n----------");
+		}
+		
+		if(content == '鲜花港雪场核销报数'){
+			xhg.getXcCheckPeopleInfo(room);
 		}
 		
 		if(content == '鲜花港预约报数'){
@@ -44,6 +48,7 @@ async function xhgzypwbszRoomDeal(msg){
 			var ticketGroupNum = 'TGN20210629121602397';
 			xhg.getPeopleInfo(enterpriseCode, ticketGroupNum, room);
 		}
+		
 		
 	}else if(msg.type() == wechat.bot.Message.Type.Video){
 		console.log('~~~~~~~~~~视频消息~~~~~~~~~');

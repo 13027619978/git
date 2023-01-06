@@ -67,10 +67,14 @@ router.get('/getPeopleInfo', async function(req1,res1){
 		
 		const req = http.request(options, (res) => {
 			res.on('data', (d) => {
-				if(isJSON(d.toString())){
-					var res = JSON.parse(d.toString());
-					res1.send(res);
-				}
+				console.log(d);
+				res1.send(d);
+				// if(isJSON(d.toString())){
+				// 	var res = JSON.parse(d.toString());
+				// 	res1.send(res);
+				// }else{
+				// 	res1.send('err');
+				// }
 			});
 		});
 		

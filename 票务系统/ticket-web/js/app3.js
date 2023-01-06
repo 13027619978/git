@@ -5,6 +5,7 @@ app = {
 		var enterpriseCode = app.getQueryString('enterpriseCode');
 		var ticketGroupNum = app.getQueryString('ticketGroupNum');
 		var fhlNp = app.getQueryString('fhlNp');
+		var fhlBx = app.getQueryString('fhlBx');
 		var ybyNp60 = app.getQueryString('ybyNp60');
 		var ybyNp120 = app.getQueryString('ybyNp120');
 		var fhl = app.getQueryString('fhl');
@@ -17,6 +18,8 @@ app = {
 			if(!fhl){
 				if(fhlNp){
 					window.location.href = 'fhlIndex.html?enterpriseCode=' + enterpriseCode + '&ticketGroupNum=' + ticketGroupNum + '&fhlNp=' + fhlNp + '&fhl=1';
+				}else if(fhlBx){
+					window.location.href = 'fhlIndex.html?enterpriseCode=' + enterpriseCode + '&ticketGroupNum=' + ticketGroupNum + '&fhlBx=1&fhl=1';
 				}else{
 					window.location.href = 'fhlIndex.html?enterpriseCode=' + enterpriseCode + '&ticketGroupNum=' + ticketGroupNum + '&fhl=1';
 				}
@@ -64,6 +67,11 @@ app = {
 					app.setCookie('fhlNp', fhlNp);
 				}else{
 					app.clearCookie('fhlNp');
+				}
+				if(fhlBx){
+					app.setCookie('fhlBx', fhlBx);
+				}else{
+					app.clearCookie('fhlBx');
 				}
 				if(app.getQueryString('gzh')){
 					app.setCookie('gzh', app.getQueryString('gzh'));

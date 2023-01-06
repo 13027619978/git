@@ -1,6 +1,67 @@
 const http = require('http');
 const host = "api.smart-ideas.com.cn";
 const fs = require('fs');
+const axios = require('axios');
+
+// 获取上下午预约报数
+function getYYInfoByTime(room){
+	let swList = '2c9141f4852d444a01852dab8cac0342';
+	let xwList = '2c9141f4852d444a01852ddc4a3d04d5';
+	var nowDate = new Date();
+	var year = nowDate.getFullYear();
+	var month = nowDate.getMonth()+1;
+	month = month>9?month:'0'+month;
+	var day = nowDate.getDate();
+	day = day>9?day:'0'+day;
+	var hour = nowDate.getHours();
+	hour = hour>9?hour:'0'+hour;
+	var minutes = nowDate.getMinutes();
+	minutes = minutes>9?minutes:'0'+minutes;
+	var seconds = nowDate.getSeconds();
+	seconds = seconds>9?seconds:'0'+seconds;
+	var sDate = year + '-' + month + '-' + day;
+	var searchSdate = encodeURI(sDate);
+	var endDate = new Date(new Date(sDate + ' 00:00:00').getTime() + (1000*60*60*24*7));
+	var eYear = endDate.getFullYear();
+	var eMonth = endDate.getMonth() + 1;
+	eMonth = eMonth>9?eMonth:'0'+eMonth;
+	var eDay = endDate.getDate();
+	eDay = eDay>9?eDay:'0'+eDay;
+	var eDate = eYear + '-' + eMonth + '-' + eDay;
+	var searchEdate = encodeURI(eDate);
+	var botDate = year + '-' + month + '-' + day + ' ' + hour + ':' + minutes + ':' + seconds;
+	let yyList = [];
+	axios.get('https://boss.smart-ideas.com.cn/ticketApi/robotCollection/appoint/get?enterpriseCode=TgsEpcYqy&ticketGroupNum=TGN20221220115005693&startTime='+ searchSdate +'&endTime='+ searchEdate +'&ticketInfoId=' + swList)
+		.then(function(res){
+			let checkList = res.data.data;
+			var botString = '*****北海冰场预约报数*****\n日期:'+botDate+'\n';
+			checkList.forEach(function(value, key){
+				let yyItem = {};
+				yyItem.sw = value.appointQuantity;
+				yyList.push(yyItem)
+			})
+			axios.get('https://boss.smart-ideas.com.cn/ticketApi/robotCollection/appoint/get?enterpriseCode=TgsEpcYqy&ticketGroupNum=TGN20221220115005693&startTime='+ searchSdate +'&endTime='+ searchEdate +'&ticketInfoId=' + xwList)
+				.then(function(res){
+					let checkList = res.data.data;
+					let timeList = [];
+					checkList.forEach(function(value, key){
+						yyList[key].xw = value.appointQuantity;
+						timeList.push(value.appointDate);
+					})
+					yyList.forEach(function(value, key){
+						botString += timeList[key] + '上午：' + value.sw + '人\n';
+						botString += timeList[key] + '下午：' + value.xw + '人\n';
+					})
+					room.say(botString);
+				})
+				.catch(function(err){
+					console.log(err);
+				})
+		})
+		.catch(function(err){
+			console.log(err);
+		})
+}
 
 function getbhInfo(host, room){
 	var nowDate = new Date();
@@ -188,4 +249,5 @@ function getCheckTicketInfo(enterpriseCode, ticketGroupNum, room, ticketSalesCha
 	req.end();
 }
 
-module.exports = {getbhInfo, getOpenNumber, getCheckTicketInfo};
+
+module.exports = {getbhInfo, getOpenNumber, getCheckTicketInfo, getYYInfoByTime};

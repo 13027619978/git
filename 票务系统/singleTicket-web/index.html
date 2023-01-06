@@ -289,13 +289,6 @@
 					$('.addBtn').hide();
 				}
 				
-				// 凤凰岭合约年票
-				if(ticketInfoId == '2c9141f484a761f60184a7892d9d00e5'){
-					window.location.replace('https://boss.smart-ideas.com.cn/singleTicket-web/fhlNp.html?ticketId=2c9141f484a761f60184a7892d9d00e5&ticketGroupNum=TGN20201228152933458&enterpriseCode=TgsEpcFhl')
-				}else if(ticketInfoId == '2c9141f484a761f60184bc4b44e217b4'){
-					window.location.replace('https://boss.smart-ideas.com.cn/singleTicket-web/fhlNp.html?ticketId=2c9141f484a761f60184bc4b44e217b4&ticketGroupNum=TGN20201228152933458&enterpriseCode=TgsEpcFhl')
-				}
-				
 				app.wxUserInfo(function(){
 					layer.load(2);
 					if(enterpriseCode == 'TgsEpcYby' && ticketGroupNum == 'TGN20201210095942945' && ticketInfoId == '2c9141f4776c370d01777ac477af6852'){
@@ -309,6 +302,11 @@
 						if(window.location.href.indexOf('https://') != -1){
 							window.location.replace('http://' + window.location.href.split('https://')[1]);
 						}
+					}
+					// 凤凰岭合约年票
+					if(ticketInfoId == '2c9141f484a761f60184a7892d9d00e5' || ticketInfoId == '2c9141f484a761f60184bc4b44e217b4' || ticketInfoId == '2c9141f4855e2dd501856b6a756c5ac3'){
+						app.setCookie('ticketId', ticketInfoId);
+						window.location.replace('https://boss.smart-ideas.com.cn/singleTicket-web/fhlNp.html?ticketId='+ ticketInfoId +'&ticketGroupNum=TGN20201228152933458&enterpriseCode=TgsEpcFhl')
 					}
 					getSaleInfo(enterpriseCode, ticketGroupNum, ticketInfoId);
 				});

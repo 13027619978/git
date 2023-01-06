@@ -65,7 +65,7 @@ const qsmxRoomTopic = {
 	QSMX_XWHDPCBSZ_ROOM: "玄武湖电瓶车报数组",
 	QSMX_DRJGY_ROOM: "狄仁杰文化园预约服务组",
 	QSMX_SCHBSZ_ROOM: "三海运营报数组",
-	QSMX_SCHOTA_ROOM: "三海冰场票务",
+	QSMX_SCHOTA_ROOM: "三海冰场票务（什刹海冰场）",
 	QSMX_NHZXC_ROOM: "唐山南湖自行车客服组",
 	QSMX_NHZJC_ROOM: "唐山南湖自驾船客服组",
 	QSMX_NHZJCBSZ_ROOM: "唐山南湖游船报数组",
@@ -84,10 +84,18 @@ const qsmxRoomTopic = {
 	QSMX_XTYBYBSZ_ROOM: "邢台园博园智慧交通报数组",
 	QSMX_BGSLGYBSZ_ROOM: "北宫森林公园报数组",
 	QSMX_YBYCSBSZ_ROOM: "园博园创森报数组",
-	QSMX_BJZZYBSZ_ROOM: "紫竹院运营报数组",
-	QSMX_BJZZYFWZ_ROOM: "紫竹院运营服务组",
+	QSMX_BJZZYBSZ_ROOM: "紫竹院冰场报数组",
+	QSMX_BJZZYFWZ_ROOM: "紫竹院冰场支撑组",
 	QSMX_WYHBSZ_ROOM: "温榆河门票",
-	QSMX_NHZBSZ_ROOM: "南海子公园票务"
+	QSMX_NHZBSZ_ROOM: "南海子公园票务",
+	QSMX_DFZBSZ_ROOM: "东方总的报数群",
+	QSMX_BHBCBSZ_ROOM: "北海冰场报数组",
+	QSMX_YMYBXBSZ_ROOM: "圆明园冰雪报数组",
+	QSMX_YMYBXZCZ_ROOM: "圆明园冰雪支撑组",
+	QSMX_TRTBSZ_ROOM: "陶然亭冰场报数组",
+	QSMX_YHYBSZ_ROOM: "颐和园冰场报数组",
+	QSMX_YJNCBSZ_ROOM: "宇嘉内测群",
+	QSMX_ZZYGLCBSZ_ROOM: "紫竹院管理处报数组(冰雪)"
 };
 
 function onScan (qrcode, status) {
@@ -112,7 +120,7 @@ function onLogout(user) {
 async function onMessage (msg) {
 	if(msg.self()){
 		return;
-	}	
+	}
 	const content = msg.text();
 	const contact = msg.talker();
 	const room = msg.room();
@@ -348,18 +356,36 @@ async function onMessage (msg) {
 		}else if(roomTopic == qsmxRoomTopic.QSMX_BJZZYFWZ_ROOM){
 			// 紫竹院运营服务组
 			eventsParse.eventEmitter.emit('zzyfwzRoom', msg);
-		}else if(roomTopic == qsmxRoomTopic.QSMX_BJYHYBSZ_ROOM){
-			// 颐和园运营报数组
-			eventsParse.eventEmitter.emit('zzybszRoom', msg);
-		}else if(roomTopic == qsmxRoomTopic.QSMX_BJYHYFWZ_ROOM){
-			// 颐和园运营服务组
-			eventsParse.eventEmitter.emit('zzyfwzRoom', msg);
 		}else if(roomTopic == qsmxRoomTopic.QSMX_WYHBSZ_ROOM){
 			// 温榆河报数组
 			eventsParse.eventEmitter.emit('wyhbszRoom', msg);
 		}else if(roomTopic == qsmxRoomTopic.QSMX_NHZBSZ_ROOM){
 			// 南海子报数组
 			eventsParse.eventEmitter.emit('nhzbszRoom', msg);
+		}else if(roomTopic == qsmxRoomTopic.QSMX_DFZBSZ_ROOM){
+			// 东方总报数组
+			eventsParse.eventEmitter.emit('dfzbszRoom', msg);
+		}else if(roomTopic == qsmxRoomTopic.QSMX_BHBCBSZ_ROOM){
+			// 北海冰场报数组
+			eventsParse.eventEmitter.emit('bhbcbszRoom', msg);
+		}else if(roomTopic == qsmxRoomTopic.QSMX_YMYBXBSZ_ROOM){
+			// 圆明园冰雪报数组
+			eventsParse.eventEmitter.emit('ymybxbszRoom', msg);
+		}else if(roomTopic == qsmxRoomTopic.QSMX_YMYBXZCZ_ROOM){
+			// 圆明园冰雪支撑组
+			eventsParse.eventEmitter.emit('ymybxzczRoom', msg);
+		}else if(roomTopic == qsmxRoomTopic.QSMX_YHYBSZ_ROOM){
+			// 颐和园冰场报数组
+			eventsParse.eventEmitter.emit('yhybszRoom', msg);
+		}else if(roomTopic == qsmxRoomTopic.QSMX_TRTBSZ_ROOM){
+			// 陶然亭冰场报数组
+			eventsParse.eventEmitter.emit('trtbszRoom', msg);
+		}else if(roomTopic == qsmxRoomTopic.QSMX_YJNCBSZ_ROOM){
+			// 宇嘉内测群
+			eventsParse.eventEmitter.emit('yjncbszRoom', msg);
+		}else if(roomTopic == qsmxRoomTopic.QSMX_ZZYGLCBSZ_ROOM){
+			// 紫竹院管理处报数组(冰雪)
+			eventsParse.eventEmitter.emit('zzyglcbszRoom', msg);
 		}
 	}else{
 		console.log(`Message not in room:Content:${content},Contact:${contact.name()}`)

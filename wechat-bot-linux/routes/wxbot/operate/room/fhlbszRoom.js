@@ -26,9 +26,20 @@ async function fhlbszRoomDeal(msg){
 			botString += '\n6)新系统微信核销报数';
 			botString += '\n7)凤凰岭上账统计';
 			botString += '\n8)凤凰岭京津冀核销报数';
+			botString += '\n9)凤凰岭冰雪票预约报数';
 			botString += '\n----------';
 			
 			room.say(botString);
+		}
+		
+		if(content == '凤凰岭冰雪票预约报数'){
+			fhl.getBxYYInfo(room);
+		}
+		
+		if(content == '凤凰岭冰雪票核销报数'){
+			var enterpriseCode = 'TgsEpcFhl';
+			var ticketGroupNum = 'TGN20201228175937887';
+			boss.getCheckTicketInfo(enterpriseCode, ticketGroupNum, room);
 		}
 		
 		if(content == '凤凰岭京津冀核销报数'){

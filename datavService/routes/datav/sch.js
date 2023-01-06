@@ -50,6 +50,58 @@ router.get('/writeCount', async function(req, res){
 	}
 })
 
+router.post('/getPeopleInfo', async function(req, res){
+	let body = req.body;
+  	console.log(body);
+	let nowDate = new Date();
+	let nowYear = nowDate.getFullYear();
+	let nowMonth = nowDate.getMonth()+1;
+	let nowDay = nowDate.getDate();
+	let nowDateString = nowYear + '-' + nowMonth + '-' + nowDay;
+	fs.readFile(path.resolve(__dirname, './jsonData/schEnter.json'), 'utf8', function(err, data){
+		if(err){
+	        return console.error(err);
+		}
+		data = JSON.parse(data);
+		if(data.date != nowDateString){
+			data.date = nowDateString;
+			if(body.Devicename == 'qianhai02'){
+				data.data.forEach(function(value, key){
+					if(value.name == '前海'){
+						value.enter = body.SumEnter;
+						value.exit = body.SumExit;
+					}
+				})
+			}
+		}else{
+			if(body.Devicename == '前海'){
+				data.data.forEach(function(value, key){
+					if(value.name == '前海'){
+						if(value.enter > body.SumEnter){
+							value.enter += parseInt(body.SumEnter);
+							value.exit += parseInt(body.SumExit);
+						}else{
+							value.enter = body.SumEnter;
+							value.exit = body.SumExit;
+						}
+					}
+				})
+			}
+		}
+		fs.writeFile(path.resolve(__dirname, './jsonData/schEnter.json'), JSON.stringify(data),function(err){
+			if(err){
+				console.error(err);
+				res.send({
+					"success": "fail",
+					"msg": "修改失败"
+				});
+				return;
+			}
+			res.status(200).send({msg:'成功'})
+		})
+	})
+})
+
 router.get('/getOutPeopleInfo', async function(reqon, res){
 	try{
 		var nowDate = new Date();
@@ -102,33 +154,54 @@ router.get('/getOutPeopleInfo', async function(reqon, res){
 					res1.content.forEach(function(value, key){
 						if(value.instanceTitle == '前海'){
 							qhIn = value.in;
-							qhOut = value.out - value.in;
+							qhOut = value.out;
 							qhOut = qhOut>0?qhOut:0;
 							qhsjOut = value.out;
 						}
 						if(value.instanceTitle == '后海'){
 							hhIn = value.in;
-							hhOut = value.out - value.in;
+							hhOut = value.out;
 							hhOut = hhOut>0?hhOut:0;
 							hhsjOut = value.out;
 						}
 					})
-					fs.readFile(path.resolve(__dirname, './jsonData/schOutCount.json'), 'utf8', function(err, data){
+					fs.readFile(path.resolve(__dirname, './jsonData/schEnter.json'), 'utf8', function(err, data){
 						if(err){
 					        return console.error(err);
 						}
 						data = JSON.parse(data);
-						var qhOut1 = qhOut * data.count;
-						var hhOut1 = hhOut * data.hhcount;
-						res.send({
-							qhOut: parseInt(qhOut1),
-							hhOut: parseInt(hhOut1),
-							qhsjOut: qhsjOut,
-							hhsjOut: hhsjOut,
-							qhsjIn: qhIn,
-							hhsjIn: hhIn
+						data.data.forEach(function(value, key){
+							let enter = parseInt(value.enter);
+							let exit = parseInt(value.exit);
+							if(value.name == '前海'){
+								qhIn += enter;
+								qhsjOut += exit;
+								qhOut += exit;
+							}
+							if(value.name == '后海'){
+								hhIn += enter;
+								hhsjOut += exit;
+								hhOut += exit;
+							}
+						})
+						fs.readFile(path.resolve(__dirname, './jsonData/schOutCount.json'), 'utf8', function(err, data1){
+							if(err){
+						        return console.error(err);
+							}
+							data1 = JSON.parse(data1);
+							var qhOut1 = qhOut * data1.count;
+							var hhOut1 = hhOut * data1.hhcount;
+							res.send({
+								qhOut: parseInt(qhOut1),
+								hhOut: parseInt(hhOut1),
+								qhsjOut: qhsjOut,
+								hhsjOut: hhsjOut,
+								qhsjIn: qhIn,
+								hhsjIn: hhIn
+							})
 						})
 					})
+					
 				})
 			});
 			

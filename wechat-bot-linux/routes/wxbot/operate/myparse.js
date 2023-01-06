@@ -2,7 +2,7 @@ var wechat = require('./mybot.js');
 var events = require('events');
 var eventEmitter = new events.EventEmitter()
 
-eventEmitter.setMaxListeners(85);
+eventEmitter.setMaxListeners(89);
 
 /**************************************************/
 /****************** 家长群代码 **********************/
@@ -439,18 +439,6 @@ async function zzyfwzRoom(msg){
 	zzyfwzRoomEven.zzyfwzRoomDeal(msg);
 }
 
-/******************** 颐和园运营报数组 *************************/
-var yhybszRoomEven = require('./room/yhybszRoom.js');
-async function yhybszRoom(msg){
-	yhybszRoomEven.yhybszRoomDeal(msg);
-}
-
-/******************** 颐和园运营服务组 *************************/
-var yhyfwzRoomEven = require('./room/yhyfwzRoom.js');
-async function yhyfwzRoom(msg){
-	yhyfwzRoomEven.yhyfwzRoomDeal(msg);
-}
-
 //******************** 温榆河报数组 *************************/
 var wyhbszRoomEven = require('./room/wyhbszRoom.js');
 async function wyhbszRoom(msg){
@@ -463,13 +451,67 @@ async function nhzbszRoom(msg){
 	nhzbszRoomEven.nhzbszRoomDeal(msg);
 }
 
+//******************** 东方总报数组 *************************/
+var dfzbszRoomEven = require('./room/dfzbszRoom.js');
+async function dfzbszRoom(msg){
+	dfzbszRoomEven.dfzbszRoomDeal(msg);
+}
+
+//******************** 北海冰场报数组 *************************/
+var bhbcbszRoomEven = require('./room/bhbcbszRoom.js');
+async function bhbcbszRoom(msg){
+	bhbcbszRoomEven.bhbcbszRoomDeal(msg);
+}
+
+//******************** 圆明园冰雪报数组 *************************/
+var ymybxbszRoomEven = require('./room/ymybxbszRoom.js');
+async function ymybxbszRoom(msg){
+	ymybxbszRoomEven.ymybxbszRoomDeal(msg);
+}
+
+//******************** 圆明园冰雪支撑组 *************************/
+var ymybxzczRoomEven = require('./room/ymybxzczRoom.js');
+async function ymybxzczRoom(msg){
+	ymybxzczRoomEven.ymybxzczRoomDeal(msg);
+}
+
+/******************** 颐和园冰场报数组 *************************/
+var yhybszRoomEven = require('./room/yhybszRoom.js');
+async function yhybszRoom(msg){
+	yhybszRoomEven.yhybszRoomDeal(msg);
+}
+
+/******************** 陶然亭冰场报数组 *************************/
+var trtbszRoomEven = require('./room/trtbszRoom.js');
+async function trtbszRoom(msg){
+	trtbszRoomEven.trtbszRoomDeal(msg);
+}
+
+/******************** 宇嘉内测报数组 *************************/
+var yjncbszRoomEven = require('./room/yjncbszRoom.js');
+async function yjncbszRoom(msg){
+	yjncbszRoomEven.yjncbszRoomDeal(msg);
+}
+
+/******************** 紫竹院管理处报数组(冰雪) *************************/
+var zzyglcbszRoomEven = require('./room/zzyglcbszRoom.js');
+async function zzyglcbszRoom(msg){
+	zzyglcbszRoomEven.zzyglcbszRoomDeal(msg);
+}
+
 // 冰场
-eventEmitter.on('yhyfwzRoom', yhyfwzRoom);
+eventEmitter.on('zzyglcbszRoom', zzyglcbszRoom);
+eventEmitter.on('yjncbszRoom', yjncbszRoom);
+eventEmitter.on('trtbszRoom', trtbszRoom);
 eventEmitter.on('yhybszRoom', yhybszRoom);
+eventEmitter.on('ymybxbszRoom', ymybxbszRoom);
+eventEmitter.on('ymybxzczRoom', ymybxzczRoom);
+eventEmitter.on('bhbcbszRoom', bhbcbszRoom);
 eventEmitter.on('zzyfwzRoom', zzyfwzRoom);
 eventEmitter.on('zzybszRoom', zzybszRoom);
 eventEmitter.on('wyhbszRoom', wyhbszRoom);
 eventEmitter.on('nhzbszRoom', nhzbszRoom);
+eventEmitter.on('dfzbszRoom', dfzbszRoom);
 // 冰场
 
 

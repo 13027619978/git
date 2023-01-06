@@ -1,5 +1,6 @@
 const http = require('https');
 const host = "boss.smart-ideas.com.cn";
+const axios = require('axios');
 
 // 渠道票种核销报数
 function getTicketInfo(enterpriseCode, ticketGroupNum, ticketSalesChannelsNum, room){
@@ -1113,7 +1114,6 @@ function getTicketBuyInfoByTime(enterpriseCode, ticketGroupNum, categoryCode, ro
 	req.end();
 }
 
-
 function getYbySgTicketBuyInfoByTime(room, botString, startDate){
 	var nowDate = new Date();
 	var nowMonth = nowDate.getMonth() + 1;
@@ -1276,7 +1276,6 @@ function getAllTicketsBuyInfo(enterpriseCode, ticketGroupNum, room){
 	req.end();
 }
 
-
 // 根据编号获取景区名称
 function getParkName(enterpriseCode, ticketGroupNum){
 	var parkName;
@@ -1302,6 +1301,8 @@ function getParkName(enterpriseCode, ticketGroupNum){
 		parkName = '什刹海三海';
 	}else if(enterpriseCode == 'TgsEpcFhl' && ticketGroupNum == 'TGN20201228152933458'){
 		parkName = '凤凰岭';
+	}else if(enterpriseCode == 'TgsEpcFhl' && ticketGroupNum == 'TGN20201228175937887'){
+		parkName = '凤凰岭冰雪票';
 	}else if(enterpriseCode == 'TgsEpcYby' && ticketGroupNum == 'TGN20201210095942945'){
 		parkName = '北京园博园';
 	}else if(enterpriseCode == 'TgsEpcYby' && ticketGroupNum == 'TGN20210923092123006'){
@@ -1318,12 +1319,17 @@ function getParkName(enterpriseCode, ticketGroupNum){
 		parkName = '水上公园';
 	}else if(enterpriseCode == 'TgsEpcBgslgy'){
 		parkName = '北宫森林公园';
-	}else if(enterpriseCode == 'TgsEpcBxyyz'){
-		parkName = '紫竹院';
+	}else if(enterpriseCode == 'TgsEpcBxyyz' && ticketGroupNum == 'TGN20221205175851713'){
+		parkName = '紫竹院冰场';
+	}else if(enterpriseCode == 'TgsEpcZzy' && ticketGroupNum == 'TGN20221219143307761'){
+		parkName = '紫竹院雪场';
+	}else if(enterpriseCode == 'TgsEpcYqy' && ticketGroupNum == 'TGN20221220115005693'){
+		parkName = '北海冰场';
+	}else if(enterpriseCode == 'TgsEpcHlldga' && ticketGroupNum == 'TGN20221220141005129'){
+		parkName = '陶然亭冰场';
 	}
 	return parkName;
 }
-
 
 
 module.exports = {

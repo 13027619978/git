@@ -222,8 +222,10 @@
 						var orderInfo = res.data;
 						if(orderInfo.visitEndDate.indexOf('2022') != -1){
 							$('.bgImg').attr('src', 'img/fhlNp2022Bg.jpg');
-						}else{
+						}else if(orderInfo.visitEndDate.indexOf('2023') != -1){
 							$('.bgImg').attr('src', 'img/fhlNp2023Bg.jpg');
+						}else{
+							$('.bgImg').attr('src', 'img/fhlNpBg.jpg');
 						}
 						var nowDate = new Date(new Date().getTime() + 60000 * 10);
 						var nowYear = nowDate.getFullYear();

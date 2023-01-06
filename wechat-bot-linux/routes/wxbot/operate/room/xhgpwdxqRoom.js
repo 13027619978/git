@@ -18,7 +18,11 @@ async function xhgpwdxqRoomDeal(msg){
 	
 	if(msg.type() == wechat.bot.Message.Type.Text){
 		if(content == '使用方法'){
-			room.say("机器人使用方法:\n----------\n1)鲜花港渠道报数\n2)鲜花港微信端报数\n3)蝶馆渠道报数\n4)蝶馆微信端报数\n5)冰雪嘉年华微信端报数\n6)冰雪嘉年华渠道报数\n7)鲜花港雪圈报数\n8)鲜花港雪地项目报数\n9)鲜花港全平台报数\n----------");
+			room.say("机器人使用方法:\n----------\n1)鲜花港渠道报数\n2)鲜花港微信端报数\n3)蝶馆渠道报数\n4)蝶馆微信端报数\n5)冰雪嘉年华微信端报数\n6)冰雪嘉年华渠道报数\n7)鲜花港雪圈报数\n8)鲜花港雪地项目报数\n9)鲜花港全平台报数\n10)鲜花港雪场核销报数\n----------");
+		}
+		
+		if(content == '鲜花港雪场核销报数'){
+			xhg.getXcCheckInfo(room);
 		}
 		
 		if(content == '鲜花港渠道报数'){
@@ -45,14 +49,14 @@ async function xhgpwdxqRoomDeal(msg){
 			boss.getTicketInfo(enterpriseCode, ticketGroupNum, 'WEB', room);
 		}
 		
-		if(content == '微信端报数'){
-			xhg.getBxjnhInfo(room);
-		}
-		
 		if(content == '冰雪嘉年华渠道报数'){
 			var enterpriseCode = 'TgsEpcXhg';
 			var ticketGroupNum = 'TGN20211210160317254';
 			boss.getBossInfo(enterpriseCode, ticketGroupNum, room, 1);
+		}
+		
+		if(content == '冰雪嘉年华微信端报数'){
+			xhg.getBxjnhInfo(room);
 		}
 		
 		if(content == '鲜花港雪圈报数'){

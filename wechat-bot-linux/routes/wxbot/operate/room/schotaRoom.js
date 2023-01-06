@@ -15,7 +15,8 @@ async function schotaRoomDeal(msg){
 	if(msg.type() == wechat.bot.Message.Type.Text){
 		//使用方法
 		if(content == '使用方法'){
-			room.say("机器人使用方法:\n----------\n1)订单号xxx退款xxx\n2)流水号xxx退款xxx\n3)pos流水号xxx退款xxx\n----------");
+			// room.say("机器人使用方法:\n----------\n1)订单号xxx退款xxx\n2)流水号xxx退款xxx\n3)pos流水号xxx退款xxx\n----------");
+			room.say("机器人使用方法:\n----------\n1)订单号xxx退款xxx\n----------");
 		}
 		
 		if(content.indexOf('订单号') != -1 && content.indexOf('退款') != -1){
@@ -30,7 +31,8 @@ async function schotaRoomDeal(msg){
 			let orderCode = content.split('流水号')[1].split('退款')[0];
 			let refundMoney = content.split('流水号')[1].split('退款')[1];
 			if(isNumber(refundMoney)){
-				sch.refund(orderCode, refundMoney, room);
+				room.say('请使用：\n订单号xxx退款xxx');
+				// sch.refund(orderCode, refundMoney, room);
 			}
 		}
 		
@@ -38,7 +40,8 @@ async function schotaRoomDeal(msg){
 			let orderCode = content.split('pos流水号')[1].split('退款')[0];
 			let refundMoney = content.split('pos流水号')[1].split('退款')[1];
 			if(isNumber(refundMoney)){
-				sch.posRefund(orderCode, refundMoney, room);
+				room.say('请使用：\n订单号xxx退款xxx');
+				// sch.posRefund(orderCode, refundMoney, room);
 			}
 		}
 	}

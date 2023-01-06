@@ -3,6 +3,10 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta http-equiv="Expires" content="0">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-control" content="no-cache">
+		<meta http-equiv="Cache" content="no-cache">
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/fhlIndex.css?v=40">
 		<style type="text/css">
@@ -138,7 +142,7 @@
 		<script src="js/jweixin-1.0.0.js"></script>
 		<script src="js/jquery.qrcode.min.js"></script>
 		<script src="layer/layer.js"></script>
-		<script src="js/app3.js?v=1.0.0"></script>
+		<script src="js/app3.js?v=1.0.2"></script>
 		<script type="text/javascript">
 			$(function(){
 				let nowYear = new Date().getFullYear();
@@ -245,11 +249,40 @@
 									if(salesStartDate <= nowDate){
 										ticketItem += '<div class="buyBtn">立即预订</div>';
 									}else{
-										ticketItem += '<div class="buyBtn disabled">立即预定</div>';
+										ticketItem += '<div class="buyBtn disabled">立即预订</div>';
 									}		
 									ticketItem += '</div></a>';
 									$('.ticketList').append(ticketItem);
-									$('.ticketDesc').eq(key).html('<p>即买即用，每日限本人使用一次</p><p>年票有效期至2023年12月31日</p><p>购买前请您仔细阅读使用说明</p><p class="icon">如已购买，请在右下角“我的”里面查找您所购买的年票</p>');
+									$('.ticketDesc').eq(key).html('<p>即买即用，每日限本人使用一次</p><p>自购买之日起365天内有效</p><p>购买前请您仔细阅读使用说明</p><p class="icon">如已购买，请在右下角“我的”里面查找您所购买的年票</p>');
+								}
+							}else if(app.getCookie('fhlBx')){
+								if(categoryName == '套票' && value.ticketName.indexOf('冰雪乐园') != -1){
+									var buyClick = 'ticketClick(/'+ value.ticketInfoId +'/)';
+									if(salesStartDate > nowDate){
+										buyClick = '';
+									}
+									var ticketItem = '<a href="javascript:;" class="ticketItem" onclick="'+ buyClick +'">' +
+										'<div class="itemLeft">' + 
+											'<div class="leftTxt">' +
+												'<p class="ticketName">'+ value.ticketName +'</p>' +
+												'<div class="ticketDesc">' +
+												'</div>' +
+											'</div>' +
+										'</div>' +
+										'<div class="itemRight">' +
+											'<p class="ticketPrice"><font>￥</font>'+ value.settlePrice +'</p>';
+									// 判断开始售票时间
+									if(salesStartDate <= nowDate){
+										ticketItem += '<div class="buyBtn">立即预订</div>';
+									}else{
+										ticketItem += '<div class="buyBtn disabled">立即预订</div>';
+									}		
+									ticketItem += '</div></a>';
+									$('.ticketList').append(ticketItem);
+									$('.ticketDesc').eq(0).html('<p>成人票</p>');
+									if(value.ticketInfoId == '2c9141f476a897de0176a8d1a5910051' || value.ticketInfoId == '2c9141f476a897de0176a8cf57d6004a'){
+										$('.ticketDesc').eq(0).html('<p>1、1米以上儿童须购买全价票。</p><a href="javascript:;" onclick="readClick(/'+ value.ticketInfoId +'/)">具体范围参照公示</a>');
+									}
 								}
 							}else{
 								if(categoryName == '年票'){
@@ -272,11 +305,11 @@
 									if(salesStartDate <= nowDate){
 										ticketItem += '<div class="buyBtn">立即预订</div>';
 									}else{
-										ticketItem += '<div class="buyBtn disabled">立即预定</div>';
+										ticketItem += '<div class="buyBtn disabled">立即预订</div>';
 									}		
 									ticketItem += '</div></a>';
 									$('.ticketList').append(ticketItem);
-									$('.ticketDesc').eq(key).html('<p>即买即用，每日限本人使用一次</p><p>年票有效期至2023年12月31日</p><p>购买前请您仔细阅读使用说明</p><p class="icon">如已购买，请在右下角“我的”里面查找您所购买的年票</p>');
+									$('.ticketDesc').eq(key).html('<p>即买即用，每日限本人使用一次</p><p>自购买之日起365天内有效</p><p>购买前请您仔细阅读使用说明</p><p class="icon">如已购买，请在右下角“我的”里面查找您所购买的年票</p>');
 								}else if(categoryName == '优惠票'){
 									var buyClick = 'ticketClick(/'+ value.ticketInfoId +'/)';
 									if(salesStartDate > nowDate){
@@ -296,7 +329,7 @@
 									if(salesStartDate <= nowDate){
 										ticketItem += '<div class="buyBtn">立即预订</div>';
 									}else{
-										ticketItem += '<div class="buyBtn disabled">立即预定</div>';
+										ticketItem += '<div class="buyBtn disabled">立即预订</div>';
 									}		
 									ticketItem += '</div></div>';
 									$('.ticketList').append(ticketItem);
@@ -323,7 +356,7 @@
 									if(salesStartDate <= nowDate){
 										ticketItem += '<div class="buyBtn">立即预订</div>';
 									}else{
-										ticketItem += '<div class="buyBtn disabled">立即预定</div>';
+										ticketItem += '<div class="buyBtn disabled">立即预订</div>';
 									}		
 									ticketItem += '</div></div>';
 									$('.ticketList').append(ticketItem);
@@ -348,7 +381,7 @@
 									if(salesStartDate <= nowDate){
 										ticketItem += '<div class="buyBtn" >立即预订</div>';
 									}else{
-										ticketItem += '<div class="buyBtn disabled">立即预定</div>';
+										ticketItem += '<div class="buyBtn disabled">立即预订</div>';
 									}		
 									ticketItem += '</div></a>';
 									$('.ticketList').append(ticketItem);
@@ -376,7 +409,7 @@
 									if(salesStartDate <= nowDate){
 										ticketItem += '<div class="buyBtn">立即预订</div>';
 									}else{
-										ticketItem += '<div class="buyBtn disabled">立即预定</div>';
+										ticketItem += '<div class="buyBtn disabled">立即预订</div>';
 									}		
 									ticketItem += '</div></a>';
 									$('.ticketList').append(ticketItem);
@@ -416,7 +449,7 @@
 							'<div class="itemRight">' +
 							'<p class="ticketPrice">'+ value.settlePrice +'元</p>';
 							// 判断开始售票时间
-							ticketItem += '<a class="buyBtn disabled" href="javascript:;">立即预定</a>';
+							ticketItem += '<a class="buyBtn disabled" href="javascript:;">立即预订</a>';
 							ticketItem += '</div></div>';
 							$('.ticketList').append(ticketItem);
 							$('.noticeText').html('<font class="ticketStatus">闭园</font>' + res.message);
@@ -436,16 +469,15 @@
 					var noticeString = '<p>1、1米以上儿童须购买全价票。<br>';
 					noticeString += '2、购买此门票方可进入冰雪乐园。<br>';
 					noticeString += '3、出冰雪乐园后再进园须重新购票。<br>';
-					noticeString += '4、入园时间：9：00-16：30。<br>';
-					noticeString += '5、请科学佩戴口罩，不扎堆不聚集，保持安全距离。<br>';
-					noticeString += '6、老人、孕妇或高血压、心脏病等不宜参加冰雪运动者，谢绝入内。<br>';
-					noticeString += '7、请遵守园内安全提示，听从工作人员指挥。<br>';
-					noticeString += '8、场地内为冰雪地面，请注意防滑。<p>';
+					noticeString += '4、开放时间：9：00-16：30。<br>';
+					noticeString += '5、老人、孕妇或高血压、心脏病等不宜参加冰雪运动者，谢绝入内。<br>';
+					noticeString += '6、请遵守园内安全提示，听从工作人员指挥。<br>';
+					noticeString += '7、场地内为冰雪地面，请注意防滑。<p>';
 					layer.open({
 						content: noticeString,
 						btn: ['我已阅读，前往购票'],
 						closeBtn: 0,
-						title: '购票须知'
+						title: '冰雪乐园购票须知'
 					});
 				}else{
 					var noticeString = '<p>北京凤凰岭景区门票优惠办法：<br>';

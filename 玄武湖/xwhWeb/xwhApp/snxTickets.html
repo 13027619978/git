@@ -66,16 +66,11 @@
 									<div class="timeBtn btn2" href="javascript:;" onclick="selectDate(this, 2)"></div>
 									<div class="timeBtn btn3" href="javascript:;" onclick="selectDate(this, 3)"></div>
 									<div class="timeBtn btn4" href="javascript:;" onclick="selectDate(this, 4)"></div>
+									<div class="timeBtn btn5" href="javascript:;" onclick="selectDate(this, 5)"></div>
+									<div class="timeBtn btn6" href="javascript:;" onclick="selectDate(this, 6)"></div>
 								</div>
 							</div>
 							
-							<!-- <div class="dateView">
-								<p>班次</p>
-								<div class="dateList">
-									<div class="timeBtn" href="javascript:;" onclick="selectTime(this, 1)">10:30（玄武门假山环洲码头）</div>
-									<div class="timeBtn" href="javascript:;" onclick="selectTime(this, 2)">14:30（玄武门北码头）</div>
-								</div>
-							</div> -->
 							
 							<div class="ywrView">
 								<p>游玩人信息</p>
@@ -154,6 +149,7 @@
 			let kcList = [];
 			let btn1Time;
 			let btn2Time;
+			let btn3Time;
 			
 			$(function(){
 				if(app.getQueryString('openid')){
@@ -212,8 +208,10 @@
 				bcValue = type;
 				if(type == 1 || type == 2){
 					visitDate = btn1Time;
-				}else{
+				}else if(type == 3 || type == 4){
 					visitDate = btn2Time;
+				}else{
+					visitDate = btn3Time;
 				}
 				console.log(visitDate);
 				getkcInfo(visitDate, ticketsType, kc);
@@ -245,13 +243,20 @@
 			
 				btn1Time = getDateString(btn1Date);
 				btn2Time = getDateString(btn2Date);
+				btn3Time = '2023-01-02';
 				$('.btn1').text(btn1Time + ' 10:30（玄武门假山环洲码头）');
 				$('.btn2').text(btn1Time + ' 14:30（玄武门北码头）');
 				$('.btn3').text(btn2Time + ' 10:30（玄武门假山环洲码头）');
 				$('.btn4').text(btn2Time + ' 14:30（玄武门北码头）');
+				$('.btn5').text(btn3Time + ' 10:30（玄武门假山环洲码头）');
+				$('.btn6').text(btn3Time + ' 14:30（玄武门北码头）');
 				if(btn1 - nowWeek < 0){
 					$('.btn1').addClass('disabled').attr('onclick', 'noSale()');
 					$('.btn2').addClass('disabled').attr('onclick', 'noSale()');
+				}
+				if(new Date().getTime() - new Date('2023/01/02 14:30:00') > 0){
+					$('.btn5').hide();
+					$('.btn6').hide();
 				}
 			}
 			
@@ -281,6 +286,10 @@
 								sessionId = 18;
 							}else if(bcValue == '4'){
 								sessionId = 19;
+							}else if(bcValue == '5'){
+								sessionId = 28;
+							}else if(bcValue == '6'){
+								sessionId = 29;
 							}
 						}else if(ticketsType == '24'){
 							if(bcValue == '1'){
@@ -291,6 +300,10 @@
 								sessionId = 22;
 							}else if(bcValue == '4'){
 								sessionId = 23;
+							}else if(bcValue == '5'){
+								sessionId = 30;
+							}else if(bcValue == '6'){
+								sessionId = 31;
 							}
 						}else if(ticketsType == '25'){
 							if(bcValue == '1'){
@@ -301,6 +314,10 @@
 								sessionId = 26;
 							}else if(bcValue == '4'){
 								sessionId = 27;
+							}else if(bcValue == '5'){
+								sessionId = 32;
+							}else if(bcValue == '6'){
+								sessionId = 33;
 							}
 						}
 						if(sessionId == 16 || sessionId == 20 || sessionId == 24){
@@ -311,6 +328,10 @@
 							kc = kcList[2];
 						}else if(sessionId == 19 || sessionId == 23 || sessionId == 27){
 							kc = kcList[3];
+						}else if(sessionId == 28 || sessionId == 30 || sessionId == 32){
+							kc = kcList[4];
+						}else if(sessionId == 29 || sessionId == 31 || sessionId == 33){
+							kc = kcList[5];
 						}
 						$('.kcTxt').text('库存：'+kc);
 					})
@@ -389,6 +410,10 @@
 						sessionId = 18;
 					}else if(bcValue == '4'){
 						sessionId = 19;
+					}else if(bcValue == '5'){
+						sessionId = 28;
+					}else if(bcValue == '6'){
+						sessionId = 29;
 					}
 				}else if(ticketsType == '24'){
 					if(bcValue == '1'){
@@ -399,6 +424,10 @@
 						sessionId = 22;
 					}else if(bcValue == '4'){
 						sessionId = 23;
+					}else if(bcValue == '5'){
+						sessionId = 30;
+					}else if(bcValue == '6'){
+						sessionId = 31;
 					}
 				}else if(ticketsType == '25'){
 					if(bcValue == '1'){
@@ -409,6 +438,10 @@
 						sessionId = 26;
 					}else if(bcValue == '4'){
 						sessionId = 27;
+					}else if(bcValue == '5'){
+						sessionId = 32;
+					}else if(bcValue == '6'){
+						sessionId = 33;
 					}
 				}
 				

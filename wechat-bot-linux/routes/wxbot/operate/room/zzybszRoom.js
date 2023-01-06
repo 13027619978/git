@@ -16,30 +16,26 @@ async function zzybszRoomDeal(msg){
 	if(msg.type() == wechat.bot.Message.Type.Text){
 		//使用方法
 		if(content == '使用方法'){
-			room.say("机器人使用方法:\n----------\n1)紫竹院核销报数\n2)紫竹院预约报数\n3)紫竹院租赁报数\n----------");
+			room.say("机器人使用方法:\n----------\n1)紫竹院核销报数\n2)紫竹院租赁报数\n----------");
 		}
 		
 		if(content == '紫竹院核销报数'){
-			var enterpriseCode = 'TgsEpcBxyyz';
-			var ticketGroupNum = 'TGN20221205175851713';
-			zzy.getCheckTicketInfo(enterpriseCode, ticketGroupNum, room);
+			zzy.getCheckTicketInfo('TgsEpcBxyyz', 'TGN20221205175851713', room, 'TC');
 			
 		}
-
-		if(content == '紫竹院预约报数'){
-			var enterpriseCode = 'TgsEpcBxyyz';
-			var ticketGroupNum = 'TGN20221205175851713';
-			boss.getBossYYInfo(enterpriseCode, ticketGroupNum, room);
-			
-		}
-		
-		// if(content == '紫竹院点位报数'){
-		// 	zzy.getPosIncome(room);
-		// }
 		
 		if(content == '紫竹院租赁报数'){
 			zzy.getLeaseInfo(room);
 		}
+
+		// if(content == '紫竹院预约报数'){
+		// 	var enterpriseCode = 'TgsEpcBxyyz';
+		// 	var ticketGroupNum = 'TGN20221205175851713';
+		// 	boss.getBossYYInfo(enterpriseCode, ticketGroupNum, room);
+			
+		// }
+		
+		
 	}
 };
 

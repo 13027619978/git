@@ -1,6 +1,7 @@
 const http = require('http');
 const host = "api.smart-ideas.com.cn";
 const fs = require('fs');
+const axios = require('axios');
 
 function getJJJInfo(room){
 	var nowDate = new Date();
@@ -329,9 +330,49 @@ function getBossInfo(enterpriseCode, ticketGroupNum, room, state){
 	req.end();
 }
 
+// 获取冰雪套票预约情况
+function getBxYYInfo(room){
+	var nowDate = new Date();
+	var year = nowDate.getFullYear();
+	var month = nowDate.getMonth()+1;
+	month = month>9?month:'0'+month;
+	var day = nowDate.getDate();
+	day = day>9?day:'0'+day;
+	var hour = nowDate.getHours();
+	hour = hour>9?hour:'0'+hour;
+	var minutes = nowDate.getMinutes();
+	minutes = minutes>9?minutes:'0'+minutes;
+	var seconds = nowDate.getSeconds();
+	seconds = seconds>9?seconds:'0'+seconds;
+	var sDate = year + '-' + month + '-' + day;
+	var searchSdate = encodeURI(sDate);
+	var endDate = new Date(new Date(sDate + ' 00:00:00').getTime() + (1000*60*60*24*7));
+	var eYear = endDate.getFullYear();
+	var eMonth = endDate.getMonth() + 1;
+	eMonth = eMonth>9?eMonth:'0'+eMonth;
+	var eDay = endDate.getDate();
+	eDay = eDay>9?eDay:'0'+eDay;
+	var eDate = eYear + '-' + eMonth + '-' + eDay;
+	var searchEdate = encodeURI(eDate);
+	var botDate = year + '-' + month + '-' + day + ' ' + hour + ':' + minutes + ':' + seconds; 
+	axios.get('https://boss.smart-ideas.com.cn/ticketApi/robotCollection/appoint/get?enterpriseCode=TgsEpcFhl&ticketGroupNum=TGN20201228152933458&startTime='+ searchSdate +'&endTime='+ searchEdate +'&ticketInfoId=2c9141f476a897de0176a8d1a5910051')
+		.then(function(res){
+			let checkList = res.data.data;
+			var botString = '*****凤凰岭冰雪套票预约报数*****\n日期:'+botDate +'\n';
+			checkList.forEach(function(value, key){
+				botString += value.appointDate + '：' + value.appointQuantity + '人\n';
+			})
+			room.say(botString);
+		})
+		.catch(function(err){
+			console.log(err);
+		})
+}
+
 module.exports = {
 	fhlGetHxInfo,
 	getCheckTicketInfo,
 	getBossInfo,
-	getJJJInfo
+	getJJJInfo,
+	getBxYYInfo
 }
